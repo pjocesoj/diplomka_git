@@ -1,6 +1,6 @@
 ﻿namespace HlavniUzel.Logika
 {
-    public class Class1
+    public class ValueDo
     {
 
     }
