@@ -2,7 +2,7 @@
 
 namespace HlavniUzel.Komunikace.Dto
 {
-    public class NodeInfoDto
+    public class EndPointDto
     {
         public HttpMethodEnum HTTP { get; set; }
         public string URL { get; set; } = "";
