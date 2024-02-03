@@ -4,6 +4,6 @@ namespace HlavniUzel.Komunikace.Interfaces
 {
     public interface INodeCommunication
     {
-        EndPointDto[] GetEndPoints();
+        Task<EndPointDto[]> GetEndPoints();
     }
 }
