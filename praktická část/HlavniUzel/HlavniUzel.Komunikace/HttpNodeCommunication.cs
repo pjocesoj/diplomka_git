@@ -2,6 +2,7 @@
 using HlavniUzel.Komunikace.Interfaces;
 using System.Text.Json;
 using System;
+using System.Net.Http.Json;
 
 namespace HlavniUzel.Komunikace
 {
@@ -19,6 +20,32 @@ namespace HlavniUzel.Komunikace
             try
             {
                 HttpResponseMessage response = await _httpClient.GetAsync(url);
+
+                string json = await response.Content.ReadAsStringAsync();
+                var ret = JsonSerializer.Deserialize<T>(json);
+                return ret;
+            }
+            catch (TaskCanceledException ex)
+            {
+                throw new Exception("timeout", ex);
+            }
+            catch (JsonException ex)
+            {
+                throw new Exception("JSON", ex);
+            }
+            catch (Exception ex)
+            {
+                var t = ex.GetType();
+                throw new Exception("unexpected error", ex);
+            }
+        }
+
+        private async Task<T?> postAsync<T>(string url, object data)
+        {
+            try
+            {
+                string body=JsonSerializer.Serialize(data);
+                HttpResponseMessage response = await _httpClient.PostAsync(url, new StringContent(body));
 
                 string json = await response.Content.ReadAsStringAsync();
                 var ret = JsonSerializer.Deserialize<T>(json);
@@ -60,6 +87,20 @@ namespace HlavniUzel.Komunikace
                 var t= await getAsync<Dto.temp.Values_temp?>(url);
                 return t;
                 //return await getAsync<ValuesDto>(url);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public async Task<string> SetValues(string endpoint)
+        {
+            string url = $"http://192.168.1.233/{endpoint}";
+            try
+            {
+                var arg = new ValuesDto() { Ints = new int[] {1,2 } };
+
+                return await getAsync<string>(url);
             }
             catch (Exception ex)
             {
