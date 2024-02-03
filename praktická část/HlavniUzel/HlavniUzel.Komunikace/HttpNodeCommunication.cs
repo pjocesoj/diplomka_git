@@ -48,6 +48,7 @@ namespace HlavniUzel.Komunikace
                 HttpResponseMessage response = await _httpClient.PostAsync(url, new StringContent(body));
 
                 string json = await response.Content.ReadAsStringAsync();
+                if (json == "ok") { return default(T);  }
                 var ret = JsonSerializer.Deserialize<T>(json);
                 return ret;
             }
@@ -93,14 +94,13 @@ namespace HlavniUzel.Komunikace
                 throw;
             }
         }
-        public async Task<string> SetValues(string endpoint)
+        public async Task<bool> SetValues(string endpoint,ValuesDto vals)
         {
             string url = $"http://192.168.1.233/{endpoint}";
             try
             {
-                var arg = new ValuesDto() { Ints = new int[] {1,2 } };
-
-                return await getAsync<string>(url);
+                var ret=await postAsync<bool>(url,vals);
+                return ret;
             }
             catch (Exception ex)
             {

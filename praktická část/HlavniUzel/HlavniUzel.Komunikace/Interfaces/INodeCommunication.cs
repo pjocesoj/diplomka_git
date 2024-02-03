@@ -6,5 +6,6 @@ namespace HlavniUzel.Komunikace.Interfaces
     {
         Task<EndPointDto[]> GetEndPoints();
         Task<ValuesDto?> GetValues(string endpoint);
+        Task<bool> SetValues(string endpoint, ValuesDto vals);
     }
 }
