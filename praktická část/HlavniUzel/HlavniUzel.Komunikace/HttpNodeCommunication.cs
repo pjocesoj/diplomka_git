@@ -48,7 +48,7 @@ namespace HlavniUzel.Komunikace
                 HttpResponseMessage response = await _httpClient.PostAsync(url, new StringContent(body));
 
                 string json = await response.Content.ReadAsStringAsync();
-                if (json == "ok") { return default(T);  }
+                if (json == "ok") { return (T)(object)true;  }//bool nemůže být přímo převeden
                 var ret = JsonSerializer.Deserialize<T>(json);
                 return ret;
             }
