@@ -1,6 +1,6 @@
 ﻿namespace HlavniUzel.Logika.Do
 {
-    public class valuesDo
+    public class ValuesDo
     {
         public ValueDo<int>[] Ints { get; set; }=new ValueDo<int>[0];
         public ValueDo<float>[] Floats { get; set; } = new ValueDo<float>[0];
