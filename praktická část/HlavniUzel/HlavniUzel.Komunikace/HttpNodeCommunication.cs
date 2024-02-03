@@ -14,16 +14,15 @@ namespace HlavniUzel.Komunikace
             _httpClient.Timeout = new TimeSpan(0, 0, 1);
         }
 
-        public async Task<EndPointDto[]> GetEndPoints()
+        private async Task<T?> getAsync<T>(string url)
         {
-            string url = "http://192.168.1.233/getInfo";
             try
             {
                 HttpResponseMessage response = await _httpClient.GetAsync(url);
 
                 string json = await response.Content.ReadAsStringAsync();
-                var ret = JsonSerializer.Deserialize<EndPointDto[]>(json);
-                return ret!;
+                var ret = JsonSerializer.Deserialize<T>(json);
+                return ret;
             }
             catch (TaskCanceledException ex)
             {
@@ -37,6 +36,32 @@ namespace HlavniUzel.Komunikace
             {
                 var t = ex.GetType();
                 throw new Exception("unexpected error", ex);
+            }
+        }
+
+        public async Task<EndPointDto[]> GetEndPoints()
+        {
+            string url = "http://192.168.1.233/getInfo";
+            try
+            {
+                return await getAsync<EndPointDto[]>(url);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<ValuesDto?> GetValues(string endpoint)
+        {
+            string url = $"http://192.168.1.233/{endpoint}";
+            try
+            {
+                return await getAsync<ValuesDto>(url);
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
     }
