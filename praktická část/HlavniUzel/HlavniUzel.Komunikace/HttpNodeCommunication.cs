@@ -57,7 +57,9 @@ namespace HlavniUzel.Komunikace
             string url = $"http://192.168.1.233/{endpoint}";
             try
             {
-                return await getAsync<ValuesDto>(url);
+                var t= await getAsync<Dto.temp.Values_temp?>(url);
+                return t;
+                //return await getAsync<ValuesDto>(url);
             }
             catch (Exception ex)
             {
