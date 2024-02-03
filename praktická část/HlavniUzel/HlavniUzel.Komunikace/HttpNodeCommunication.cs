@@ -29,10 +29,14 @@ namespace HlavniUzel.Komunikace
             {
                 throw new Exception("timeout", ex);
             }
+            catch (JsonException ex)
+            {
+                throw new Exception("JSON", ex);
+            }
             catch (Exception ex)
             {
                 var t = ex.GetType();
-                throw new Exception("HTTP failed", ex);
+                throw new Exception("unexpected error", ex);
             }
         }
     }
