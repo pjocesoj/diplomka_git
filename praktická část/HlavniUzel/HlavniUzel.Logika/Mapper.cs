@@ -4,7 +4,7 @@ using HlavniUzel.Logika.Do;
 
 namespace HlavniUzel.Logika
 {
-    public static class Convertor
+    public static class Mapper
     {
         public static EndPointDo Map(EndPointDto dto)
         {
@@ -25,6 +25,15 @@ namespace HlavniUzel.Logika
             }
 
             return ret;
+        }
+
+        public static ValuesDto Map(ValuesDo Do)
+        {
+            var i = Do.Ints.Select(x => x.Value).ToArray();
+            var f = Do.Floats.Select(x => x.Value).ToArray();
+            var b = Do.Bools.Select(x => x.Value).ToArray();
+
+            return new ValuesDto() { Ints = i, Floats = f, Bools = b };
         }
     }
 }
