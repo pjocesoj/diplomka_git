@@ -1,4 +1,5 @@
 ﻿using HlavniUzel.Extentions;
+using HlavniUzel.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Configuration;
@@ -17,6 +18,7 @@ namespace HlavniUzel
                  {
                      services.AddServices();
                      services.AddSingleton<MainWindow>();
+                     services.AddTransient<AddNodeWindow>();
                  })
                  .Build();
         }
@@ -29,6 +31,12 @@ namespace HlavniUzel
             startupForm.Show();
 
             base.OnStartup(e);
+        }
+
+        public void ShowWindow<T>()where T : Window
+        {
+            var Form = _host.Services.GetRequiredService<T>();
+            Form.Show();
         }
         protected override async void OnExit(ExitEventArgs e)
         {

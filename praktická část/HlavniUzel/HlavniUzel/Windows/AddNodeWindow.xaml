@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="139,80,0,0" VerticalAlignment="Top" Style="{StaticResource testLabel}"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="139,80,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Margin="200,84,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
