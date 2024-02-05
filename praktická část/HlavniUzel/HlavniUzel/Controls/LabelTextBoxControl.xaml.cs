@@ -18,20 +18,22 @@ using System.Windows.Shapes;
 namespace HlavniUzel.Controls
 {
 
-    public partial class LabelTexBox : UserControl
+    public partial class LabelTextBoxControl : UserControl
     {
-        public LabelTexBox()
+        public LabelTextBoxControl()
         {
             InitializeComponent();
             DataContext = this;
         }
 
+        #region label text
         public static readonly DependencyProperty LabelTextProperty =
-        DependencyProperty.Register(nameof(LabelText), typeof(string), typeof(LabelTexBox));
+        DependencyProperty.Register(nameof(LabelText), typeof(string), typeof(LabelTextBoxControl), new UIPropertyMetadata("???"));
         public string LabelText
         {
             get { return (string)GetValue(LabelTextProperty); }
             set { SetValue(LabelTextProperty, value); }
         }
+        #endregion
     }
 }
