@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:HlavniUzel.Controls"
         xmlns:local="clr-namespace:HlavniUzel.Windows"
         mc:Ignorable="d"
         Title="AddNodeWindow" Height="450" Width="400">
@@ -12,15 +13,20 @@
     </Window.Resources>
 
     <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-        </Grid>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="139,80,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="200,84,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <controls:LabelTexBox Grid.Column="1" Grid.Row="1"/>
 
     </Grid>
 </Window>
