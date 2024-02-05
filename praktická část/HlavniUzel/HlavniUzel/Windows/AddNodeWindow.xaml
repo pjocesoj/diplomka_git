@@ -26,7 +26,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <controls:LabelTexBox Grid.Column="1" Grid.Row="1"/>
+        <controls:LabelTexBox Grid.Column="1" Grid.Row="1"
+                              LabelText="IP"/>
 
     </Grid>
 </Window>

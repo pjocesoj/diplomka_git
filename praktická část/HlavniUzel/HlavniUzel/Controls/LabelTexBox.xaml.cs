@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +17,21 @@ using System.Windows.Shapes;
 
 namespace HlavniUzel.Controls
 {
-    /// <summary>
-    /// Interakční logika pro LabelTexBox.xaml
-    /// </summary>
+
     public partial class LabelTexBox : UserControl
     {
         public LabelTexBox()
         {
             InitializeComponent();
+            DataContext = this;
+        }
+
+        public static readonly DependencyProperty LabelTextProperty =
+        DependencyProperty.Register(nameof(LabelText), typeof(string), typeof(LabelTexBox));
+        public string LabelText
+        {
+            get { return (string)GetValue(LabelTextProperty); }
+            set { SetValue(LabelTextProperty, value); }
         }
     }
 }
