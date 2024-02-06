@@ -13,7 +13,7 @@ namespace HlavniUzel.Logika
         /// <summary>
         /// IP, COM port, ...
         /// </summary>
-        public string Address { get; set; }
+        public string Address { get; set; } = "";
 
         public EndPointDo[] EndPoints { get; set; }=new EndPointDo[0];
         public Node(INodeCommunication comm) 
