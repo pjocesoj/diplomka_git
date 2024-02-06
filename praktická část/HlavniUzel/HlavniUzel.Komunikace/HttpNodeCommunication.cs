@@ -39,7 +39,6 @@ namespace HlavniUzel.Komunikace
                 throw new Exception("unexpected error", ex);
             }
         }
-
         private async Task<T?> postAsync<T>(string url, object data)
         {
             try
@@ -67,6 +66,7 @@ namespace HlavniUzel.Komunikace
             }
         }
 
+
         public async Task<EndPointDto[]> GetEndPoints()
         {
             string url = "http://192.168.1.233/getInfo";
@@ -79,10 +79,9 @@ namespace HlavniUzel.Komunikace
                 throw;
             }
         }
-
         public async Task<ValuesDto?> GetValues(string endpoint)
         {
-            string url = $"http://192.168.1.233/{endpoint}";
+            string url = $"http://192.168.1.233{endpoint}";
             try
             {
                 var t= await getAsync<Dto.temp.Values_temp?>(url);
@@ -96,7 +95,7 @@ namespace HlavniUzel.Komunikace
         }
         public async Task<bool> SetValues(string endpoint,ValuesDto vals)
         {
-            string url = $"http://192.168.1.233/{endpoint}";
+            string url = $"http://192.168.1.233{endpoint}";
             try
             {
                 var ret=await postAsync<bool>(url,vals);
