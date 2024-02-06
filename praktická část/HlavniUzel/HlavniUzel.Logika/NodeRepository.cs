@@ -13,12 +13,15 @@
 
             try
             {
-                await node.GetEndPoints();
+                await node.GetEndPoints();   
+                await node.GetAllValues();
             }
             catch (Exception ex)
             {
                 throw;
             }
+            if (node.EndPoints.Length == 0) { throw new Exception("no endpoints"); }
+            Nodes.Add(node);
         }
     }
 }
