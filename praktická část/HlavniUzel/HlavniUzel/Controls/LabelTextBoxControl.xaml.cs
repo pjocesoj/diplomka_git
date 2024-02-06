@@ -23,7 +23,7 @@ namespace HlavniUzel.Controls
         public LabelTextBoxControl()
         {
             InitializeComponent();
-            DataContext = this;
+            label1.DataContext = this;
         }
 
         #region label text
@@ -33,6 +33,16 @@ namespace HlavniUzel.Controls
         {
             get { return (string)GetValue(LabelTextProperty); }
             set { SetValue(LabelTextProperty, value); }
+        }
+        #endregion
+
+        #region TextBox text
+        public static readonly DependencyProperty TextBoxTextProperty =
+        DependencyProperty.Register(nameof(TextBoxText), typeof(string), typeof(LabelTextBoxControl), new UIPropertyMetadata("???"));
+        public string TextBoxText
+        {
+            get { return (string)GetValue(TextBoxTextProperty); }
+            set { SetValue(TextBoxTextProperty, value); }
         }
         #endregion
     }

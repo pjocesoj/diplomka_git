@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HlavniUzel.Controls"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="50" d:DesignWidth="200">
     
     <Grid Grid.Column="1" Grid.Row="1" Background="Aqua">
@@ -15,12 +15,14 @@
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Content="{Binding LabelText}"                
+        <Label Content="{Binding LabelText}" 
+               x:Name="label1"
                Grid.Column="0"
                HorizontalAlignment="Right"
                VerticalAlignment="Center"/>
         <Border Grid.Column="1" Background="Lime"/>
-        <TextBox Text="TextBox"                    
+        <TextBox Text="{Binding TextBoxText}"
+                 x:Name="textBox1"
                  Grid.Column="2"
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Center"/>
