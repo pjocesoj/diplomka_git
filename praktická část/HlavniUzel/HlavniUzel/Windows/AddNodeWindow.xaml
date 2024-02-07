@@ -17,7 +17,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="30"/>
@@ -36,7 +36,9 @@
         <controls:LabelTextBoxControl Grid.Column="1" Grid.Row="3"
                       />
 
-        <Button Grid.Column="1" Grid.Row="5" Command="{Binding ButtonClickCommand}"/>
+        <Button Grid.Column="1" Grid.Row="5"
+                Content="add node"
+                Command="{Binding ButtonClickCommand}"/>
 
     </Grid>
 </Window>

@@ -28,7 +28,18 @@ namespace HlavniUzel.Controls
 
         #region label text
         public static readonly DependencyProperty LabelTextProperty =
-        DependencyProperty.Register(nameof(LabelText), typeof(string), typeof(LabelTextBoxControl), new UIPropertyMetadata("???"));
+        DependencyProperty.Register(nameof(LabelText), typeof(string), typeof(LabelTextBoxControl), new UIPropertyMetadata("???",LabelTextChangedCallback));
+        private static void LabelTextChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            LabelTextBoxControl control = (LabelTextBoxControl)d;
+            control.LabelText = (e.NewValue as string);
+
+            var context = control.label1.DataContext;
+            if (context != null)
+            {
+                control.label1.Content = control.LabelText;
+            }
+        }
         public string LabelText
         {
             get { return (string)GetValue(LabelTextProperty); }
