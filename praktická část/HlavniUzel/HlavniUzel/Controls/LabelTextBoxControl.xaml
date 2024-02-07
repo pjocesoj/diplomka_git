@@ -21,10 +21,18 @@
                HorizontalAlignment="Right"
                VerticalAlignment="Center"/>
         <Border Grid.Column="1" Background="Lime"/>
-        <TextBox Text="{Binding TextBoxText}"
+        <!--
+        <TextBox Text="{Binding TextBoxText, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}"
                  x:Name="textBox1"
                  Grid.Column="2"
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Center"/>
+        -->
+        <TextBox Text="-"
+         x:Name="textBox1"
+         TextChanged="textBox1_TextChanged"
+         Grid.Column="2"
+         HorizontalAlignment="Stretch"
+         VerticalAlignment="Center"/>
     </Grid>
 </UserControl>
