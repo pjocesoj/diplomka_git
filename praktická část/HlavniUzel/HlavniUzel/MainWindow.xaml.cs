@@ -24,7 +24,7 @@ namespace HlavniUzel
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            (App.Current as App).ShowWindow<AddNodeWindow>();
+            App.Current.ShowWindow<AddNodeWindow>();
         }
     }
 }

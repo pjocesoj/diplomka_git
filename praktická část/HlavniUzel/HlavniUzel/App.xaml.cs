@@ -10,6 +10,10 @@ namespace HlavniUzel
 {
     public partial class App : Application
     {
+        //? a ! použity jen abych umlčel warning
+        public static new App Current => _current!;
+        private static App? _current;
+
         private readonly IHost _host;
         public App()
         {
@@ -21,6 +25,8 @@ namespace HlavniUzel
                      services.AddTransient<AddNodeWindow>();
                  })
                  .Build();
+
+            _current = this;
         }
 
         protected override async void OnStartup(StartupEventArgs e)
@@ -33,7 +39,7 @@ namespace HlavniUzel
             base.OnStartup(e);
         }
 
-        public void ShowWindow<T>()where T : Window
+        public void ShowWindow<T>() where T : Window
         {
             var Form = _host.Services.GetRequiredService<T>();
             Form.Show();
@@ -46,7 +52,7 @@ namespace HlavniUzel
             }
 
             base.OnExit(e);
-        }
+        }        
     }
 
 }
