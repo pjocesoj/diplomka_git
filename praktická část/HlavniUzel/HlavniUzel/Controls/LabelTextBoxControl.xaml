@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="50" d:DesignWidth="200">
     
-    <Grid Grid.Column="1" Grid.Row="1" Background="Aqua">
+    <Grid Grid.Column="1" Grid.Row="1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>

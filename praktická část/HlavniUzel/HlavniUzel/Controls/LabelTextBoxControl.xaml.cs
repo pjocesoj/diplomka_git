@@ -36,26 +36,34 @@ namespace HlavniUzel.Controls
         }
         #endregion
 
+        bool _init = false;
+
         #region TextBox text
         public static readonly DependencyProperty TextBoxTextProperty =
         DependencyProperty.Register(nameof(TextBoxText), typeof(string), typeof(LabelTextBoxControl), new UIPropertyMetadata("???", TextBoxTextChangedCallback));
         private static void TextBoxTextChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             LabelTextBoxControl control = (LabelTextBoxControl)d;
-            control.TextBoxText = e.NewValue as string;
-            var a=control.textBox1.DataContext;
+            control.TextBoxText = (e.NewValue as string);
+
+            var context = control.textBox1.DataContext;
+            if (!control._init && context != null)
+            {
+                control._init = true;
+                control.textBox1.Text = control.TextBoxText;
+            }
         }
 
-    public string TextBoxText
+        public string TextBoxText
         {
             get { return (string)GetValue(TextBoxTextProperty); }
             set { SetValue(TextBoxTextProperty, value); }
         }
-        #endregion
 
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBoxText = textBox1.Text;
         }
+        #endregion
     }
 }

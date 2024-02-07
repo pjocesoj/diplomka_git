@@ -10,16 +10,21 @@ namespace HlavniUzel.ViewModels
         public NodeViewModel(Node node)
         {
             _node = node;
+
+            Name= _node.Name;
+            Adr = _node.Address;
         }
         [ObservableProperty]
-        private string _name="a";
-        //public string Name=>_node.Name;
+        private string _name="";
+
+        [ObservableProperty]
+        private string _adr = "";
 
         [RelayCommand]
         public async Task ButtonClick()
         {
-            string n = Name;
-            int a = 0;
+            _node.Name = Name;
+            _node.Address = Adr;
         }
     }
 }
