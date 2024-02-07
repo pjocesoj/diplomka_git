@@ -8,6 +8,7 @@ namespace HlavniUzel.Logika.Extentions
         {
             Komunikace.Extentions.ServicesExtention.Komunikace(services);
             services.AddTransient<Node>();
+            services.AddSingleton<NodeRepository>();
         }
     }
 }

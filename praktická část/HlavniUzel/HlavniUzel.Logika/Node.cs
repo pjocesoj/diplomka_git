@@ -1,4 +1,5 @@
 ﻿using HlavniUzel.Komunikace.Dto;
+using HlavniUzel.Komunikace.Enums;
 using HlavniUzel.Komunikace.Interfaces;
 using HlavniUzel.Logika.Do;
 
@@ -13,7 +14,7 @@ namespace HlavniUzel.Logika
         /// <summary>
         /// IP, COM port, ...
         /// </summary>
-        public string Address { get; set; }
+        public string Address { get; set; } = "";
 
         public EndPointDo[] EndPoints { get; set; }=new EndPointDo[0];
         public Node(INodeCommunication comm) 
@@ -46,6 +47,14 @@ namespace HlavniUzel.Logika
             for (int i = 0; i < EP.Bools.Count; i++)
             {
                 EP.Bools[i].Value = data.Bools[i];
+            }
+        }
+        public async Task GetAllValues()
+        {
+            var gets = Array.FindAll(EndPoints,(x => x.HTTP == HttpMethodEnum.GET));
+            foreach(var get in gets)
+            {
+                await GetValues(get);
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HlavniUzel.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,9 @@ namespace HlavniUzel.Windows
     /// </summary>
     public partial class AddNodeWindow : Window
     {
-        public AddNodeWindow()
+        public AddNodeWindow(NodeViewModel vm)
         {
+            DataContext = vm;
             InitializeComponent();
         }
     }
