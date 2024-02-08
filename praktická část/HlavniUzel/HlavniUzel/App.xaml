@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:HlavniUzel">
     <Application.Resources>
-         
+        <Style x:Key="testLabel" TargetType="Label">
+            <Setter Property="Background" Value="#62d0a6"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
     </Application.Resources>
 </Application>

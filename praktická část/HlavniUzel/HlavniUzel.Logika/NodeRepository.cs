@@ -1,4 +1,6 @@
-﻿namespace HlavniUzel.Logika
+﻿using HlavniUzel.Exceptions;
+
+namespace HlavniUzel.Logika
 {
     public class NodeRepository
     {
@@ -13,14 +15,14 @@
 
             try
             {
-                await node.GetEndPoints();   
+                await node.GetEndPoints();
                 await node.GetAllValues();
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            if (node.EndPoints.Length == 0) { throw new Exception("no endpoints"); }
+            catch (CommunicationException ex) { throw new CommunicationException("cant access node", ex); }
+            catch (InvalidDataException ex) { throw new InvalidDataException("cant read recaived data", ex); }
+            catch (Exception ex) { throw new Exception(ex.Message, ex); }
+
+            if (node.EndPoints.Length == 0) { throw new NoEndPointException("no endpoints"); }
             Nodes.Add(node);
         }
     }

@@ -1,4 +1,6 @@
 ﻿using HlavniUzel.Extentions;
+using HlavniUzel.ViewModels;
+using HlavniUzel.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Configuration;
@@ -9,6 +11,10 @@ namespace HlavniUzel
 {
     public partial class App : Application
     {
+        //? a ! použity jen abych umlčel warning
+        public static new App Current => _current!;
+        private static App? _current;
+
         private readonly IHost _host;
         public App()
         {
@@ -17,8 +23,12 @@ namespace HlavniUzel
                  {
                      services.AddServices();
                      services.AddSingleton<MainWindow>();
+                     services.AddTransient<AddNodeWindow>();
+                     services.AddTransient<NodeViewModel>();
                  })
                  .Build();
+
+            _current = this;
         }
 
         protected override async void OnStartup(StartupEventArgs e)
@@ -30,6 +40,12 @@ namespace HlavniUzel
 
             base.OnStartup(e);
         }
+
+        public void ShowWindow<T>() where T : Window
+        {
+            var Form = _host.Services.GetRequiredService<T>();
+            Form.Show();
+        }
         protected override async void OnExit(ExitEventArgs e)
         {
             using (_host)
@@ -38,7 +54,7 @@ namespace HlavniUzel
             }
 
             base.OnExit(e);
-        }
+        }        
     }
 
 }
