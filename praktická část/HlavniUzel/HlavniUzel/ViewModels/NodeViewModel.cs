@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using HlavniUzel.Logika;
 using System.Net;
+using System.Windows;
 
 namespace HlavniUzel.ViewModels
 {
@@ -18,7 +19,7 @@ namespace HlavniUzel.ViewModels
             Address = _node.Address;
         }
         [ObservableProperty]
-        private string _name="";
+        private string _name = "";
 
         [ObservableProperty]
         private string _address = "";
@@ -29,8 +30,14 @@ namespace HlavniUzel.ViewModels
             _node.Name = Name;
             _node.Address = Address;
 
-            await _repo.AddNode(_node);
-
+            try
+            {
+                await _repo.AddNode(_node);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
