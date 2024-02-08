@@ -30,11 +30,12 @@
         </Grid.ColumnDefinitions>
 
         <controls:LabelTextBoxControl Grid.Column="1" Grid.Row="1"
-                              LabelText="IP"
-                              TextBoxText="{Binding Address, Mode=TwoWay}"/>
+               LabelText="Name"
+               TextBoxText="{Binding Name, Mode=TwoWay}"/>
 
         <controls:LabelTextBoxControl Grid.Column="1" Grid.Row="3"
-                      />
+                LabelText="IP"
+                TextBoxText="{Binding Address, Mode=TwoWay}"/>
 
         <Button Grid.Column="1" Grid.Row="5"
                 Content="add node"
