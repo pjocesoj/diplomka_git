@@ -3,6 +3,7 @@ using HlavniUzel.Komunikace.Interfaces;
 using System.Text.Json;
 using System;
 using System.Net.Http.Json;
+using HlavniUzel.Exceptions;
 
 namespace HlavniUzel.Komunikace
 {
@@ -27,11 +28,11 @@ namespace HlavniUzel.Komunikace
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception("timeout", ex);
+                throw new CommunicationException("timeout", ex);
             }
             catch (JsonException ex)
             {
-                throw new Exception("JSON", ex);
+                throw new InvalidDataException("JSON", ex);
             }
             catch (Exception ex)
             {
@@ -53,11 +54,11 @@ namespace HlavniUzel.Komunikace
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception("timeout", ex);
+                throw new CommunicationException("timeout", ex);
             }
             catch (JsonException ex)
             {
-                throw new Exception("JSON", ex);
+                throw new InvalidDataException("JSON", ex);
             }
             catch (Exception ex)
             {
