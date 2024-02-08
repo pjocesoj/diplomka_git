@@ -24,12 +24,16 @@ namespace HlavniUzel.Logika
 
         public async Task GetEndPoints()
         {
-            var ep=await _comm.GetEndPoints();
-            if (ep != null) 
+            try
             {
-                var dos=ep.Select(x=>Mapper.Map(x)); 
-                EndPoints = dos.ToArray();
+                var ep = await _comm.GetEndPoints();
+                if (ep != null)
+                {
+                    var dos = ep.Select(x => Mapper.Map(x));
+                    EndPoints = dos.ToArray();
+                }
             }
+            catch { throw; }
         }
 
         public async Task GetValues(EndPointDo EP)

@@ -31,7 +31,7 @@
 
         <controls:LabelTextBoxControl Grid.Column="1" Grid.Row="1"
                               LabelText="IP"
-                              TextBoxText="{Binding Name, Mode=TwoWay}"/>
+                              TextBoxText="{Binding Address, Mode=TwoWay}"/>
 
         <controls:LabelTextBoxControl Grid.Column="1" Grid.Row="3"
                       />
