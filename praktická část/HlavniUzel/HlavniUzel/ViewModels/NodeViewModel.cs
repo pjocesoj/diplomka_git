@@ -24,6 +24,16 @@ namespace HlavniUzel.ViewModels
         [ObservableProperty]
         private string _address = "";
 
+        public List<EndPointViewModel> EndPoints 
+        {
+            get
+            {
+                var ret=new List<EndPointViewModel>();
+                foreach(var ep in _node.EndPoints) { ret.Add(new EndPointViewModel(ep)); }
+                return ret;
+            }
+        }
+
         [RelayCommand]
         public async Task ButtonClick()
         {
