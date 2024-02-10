@@ -38,7 +38,7 @@ namespace HlavniUzel.Logika
 
         public async Task GetValues(EndPointDo EP)
         {
-            ValuesDto data = await _comm.GetValues(EP.URL);
+            ValuesDto data = await _comm.GetValues(EP.Path);
 
             for (int i = 0; i < EP.Ints.Count; i++)
             {
@@ -55,16 +55,16 @@ namespace HlavniUzel.Logika
         }
         public async Task GetAllValues()
         {
-            var gets = Array.FindAll(EndPoints,(x => x.HTTP == HttpMethodEnum.GET));
+            var gets = Array.FindAll(EndPoints,(x => (x.Path as HttpEndPointPath).HttpMethod == HttpMethodEnum.GET));
             foreach(var get in gets)
             {
                 await GetValues(get);
             }
         }
 
-        public async Task SetValues(string url, ValuesDo newVals)
+        public async Task SetValues(EndPointPath path, ValuesDo newVals)
         {
-            bool ok=await _comm.SetValues(url,Mapper.Map(newVals));
+            bool ok=await _comm.SetValues(path,Mapper.Map(newVals));
         }
     }
 }

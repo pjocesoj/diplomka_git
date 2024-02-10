@@ -8,10 +8,11 @@ namespace HlavniUzel.Logika
     {
         public static EndPointDo Map(EndPointDto dto)
         {
-            var ret = new EndPointDo()
+            var ret = new EndPointDo();
+            ret.Path=new HttpEndPointPath()
             {
-                HTTP = dto.HTTP,
-                URL = dto.URL
+                HttpMethod = dto.HTTP,
+                Path = dto.URL
             };
 
             foreach (ValueDto val in dto.Vals)

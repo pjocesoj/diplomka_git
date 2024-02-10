@@ -5,7 +5,7 @@ namespace HlavniUzel.Komunikace.Interfaces
     public interface INodeCommunication
     {
         Task<EndPointDto[]> GetEndPoints();
-        Task<ValuesDto?> GetValues(string endpoint);
-        Task<bool> SetValues(string endpoint, ValuesDto vals);
+        Task<ValuesDto?> GetValues(EndPointPath path);
+        Task<bool> SetValues(EndPointPath path, ValuesDto vals);
     }
 }
