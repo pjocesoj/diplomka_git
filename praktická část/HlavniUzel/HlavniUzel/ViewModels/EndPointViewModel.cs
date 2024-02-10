@@ -3,7 +3,7 @@ using HlavniUzel.Logika.Do;
 
 namespace HlavniUzel.ViewModels
 {
-    public partial class EndPointViewModel:ObservableObject
+    public partial class EndPointViewModel : ObservableObject
     {
         private readonly EndPointDo _endPoint;
 
@@ -16,5 +16,16 @@ namespace HlavniUzel.ViewModels
 
         [ObservableProperty]
         private string _address = "";
+
+        public List<string> Values
+        {
+            get
+            {
+                var i = _endPoint.Ints.Select(x => x.ToStringShort());
+                var f = _endPoint.Flots.Select(x => x.ToStringShort());
+                var b = _endPoint.Bools.Select(x => x.ToStringShort());
+                return i.Concat(f).Concat(b).ToList();
+            }
+        }
     }
 }
