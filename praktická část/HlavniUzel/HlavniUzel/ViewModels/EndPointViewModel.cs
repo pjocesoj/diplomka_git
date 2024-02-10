@@ -11,7 +11,7 @@ namespace HlavniUzel.ViewModels
         {
             this._endPoint = endPoint;
 
-            Address = $"HTTP\n{endPoint.URL}";
+            Address = endPoint.Path.ToString();
         }
 
         [ObservableProperty]

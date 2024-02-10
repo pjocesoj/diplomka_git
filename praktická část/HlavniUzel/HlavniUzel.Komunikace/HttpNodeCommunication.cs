@@ -80,9 +80,9 @@ namespace HlavniUzel.Komunikace
                 throw;
             }
         }
-        public async Task<ValuesDto?> GetValues(string endpoint)
+        public async Task<ValuesDto?> GetValues(EndPointPath path)
         {
-            string url = $"http://192.168.1.233{endpoint}";
+            string url = $"http://192.168.1.233{path.Path}";
             try
             {
                 var t= await getAsync<Dto.temp.Values_temp?>(url);
@@ -94,9 +94,9 @@ namespace HlavniUzel.Komunikace
                 throw;
             }
         }
-        public async Task<bool> SetValues(string endpoint,ValuesDto vals)
+        public async Task<bool> SetValues(EndPointPath path, ValuesDto vals)
         {
-            string url = $"http://192.168.1.233{endpoint}";
+            string url = $"http://192.168.1.233{path.Path}";
             try
             {
                 var ret=await postAsync<bool>(url,vals);
