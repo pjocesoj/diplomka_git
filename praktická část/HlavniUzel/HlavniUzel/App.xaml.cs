@@ -23,8 +23,11 @@ namespace HlavniUzel
                  {
                      services.AddServices();
                      services.AddSingleton<MainWindow>();
+
                      services.AddTransient<AddNodeWindow>();
                      services.AddTransient<NodeViewModel>();
+
+                     services.AddTransient<NodeInfoWindow>();
                  })
                  .Build();
 
