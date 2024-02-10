@@ -11,7 +11,7 @@ namespace HlavniUzel.ViewModels
         {
             this._endPoint = endPoint;
 
-            Address = endPoint.URL;
+            Address = $"HTTP\n{endPoint.URL}";
         }
 
         [ObservableProperty]
