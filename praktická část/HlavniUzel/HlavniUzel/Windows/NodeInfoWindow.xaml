@@ -7,7 +7,7 @@
         xmlns:Controls="clr-namespace:HlavniUzel.Controls" x:Class="HlavniUzel.Windows.NodeInfoWindow"
         mc:Ignorable="d"
         Title="NodeInfoWindow" Height="450" Width="800">
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="60"/>
@@ -15,6 +15,11 @@
             <RowDefinition Height="5*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
+
+        <Label Content="{Binding Address}"
+                   HorizontalAlignment="Center"
+                   FontWeight="Bold"
+                   Grid.Column="1"/>
 
         <!--#region Name-->
         <Grid Grid.Row="1">
@@ -50,6 +55,7 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="5,0,5,0" />
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
