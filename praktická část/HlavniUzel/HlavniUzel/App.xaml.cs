@@ -15,6 +15,8 @@ namespace HlavniUzel
         public static new App Current => _current!;
         private static App? _current;
 
+        public static IServiceProvider Services { get { return Current._host.Services; } }
+
         private readonly IHost _host;
         public App()
         {
@@ -23,8 +25,11 @@ namespace HlavniUzel
                  {
                      services.AddServices();
                      services.AddSingleton<MainWindow>();
+
                      services.AddTransient<AddNodeWindow>();
                      services.AddTransient<NodeViewModel>();
+
+                     services.AddTransient<NodeInfoWindow>();
                  })
                  .Build();
 
@@ -41,10 +46,12 @@ namespace HlavniUzel
             base.OnStartup(e);
         }
 
-        public void ShowWindow<T>() where T : Window
+        public void ShowWindow<T>(object? viewModel=null) where T : Window
         {
             var Form = _host.Services.GetRequiredService<T>();
             Form.Show();
+
+            if (viewModel != null) { Form.DataContext = viewModel; }
         }
         protected override async void OnExit(ExitEventArgs e)
         {

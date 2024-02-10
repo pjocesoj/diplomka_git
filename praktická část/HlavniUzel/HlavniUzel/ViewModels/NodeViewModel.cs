@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HlavniUzel.Logika;
+using HlavniUzel.Windows;
 using System.Net;
 using System.Windows;
 
@@ -24,6 +25,16 @@ namespace HlavniUzel.ViewModels
         [ObservableProperty]
         private string _address = "";
 
+        public List<EndPointViewModel> EndPoints 
+        {
+            get
+            {
+                var ret=new List<EndPointViewModel>();
+                foreach(var ep in _node.EndPoints) { ret.Add(new EndPointViewModel(ep)); }
+                return ret;
+            }
+        }
+
         [RelayCommand]
         public async Task ButtonClick()
         {
@@ -33,6 +44,7 @@ namespace HlavniUzel.ViewModels
             try
             {
                 await _repo.AddNode(_node);
+                App.Current.ShowWindow<NodeInfoWindow>(this);
             }
             catch (Exception ex)
             {
