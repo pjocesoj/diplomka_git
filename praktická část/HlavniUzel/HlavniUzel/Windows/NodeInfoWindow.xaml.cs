@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HlavniUzel.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,11 @@ namespace HlavniUzel.Windows
     {
         public NodeInfoWindow()
         {
+            InitializeComponent();
+        }
+        public NodeInfoWindow(NodeViewModel vm)
+        {
+            DataContext = vm;
             InitializeComponent();
         }
     }

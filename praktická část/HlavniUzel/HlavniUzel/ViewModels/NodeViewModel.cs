@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HlavniUzel.Logika;
+using HlavniUzel.Windows;
 using System.Net;
 using System.Windows;
 
@@ -43,6 +44,7 @@ namespace HlavniUzel.ViewModels
             try
             {
                 await _repo.AddNode(_node);
+                App.Current.ShowWindow<NodeInfoWindow>(this);
             }
             catch (Exception ex)
             {
