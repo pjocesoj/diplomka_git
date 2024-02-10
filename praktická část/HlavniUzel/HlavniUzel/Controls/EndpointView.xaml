@@ -14,21 +14,22 @@
             </Grid.RowDefinitions>
 
             <Label Content="{Binding Address}"
-                   Grid.Row="0" HorizontalAlignment="Center"
-                   Background="Lime"/>
+                   Grid.Row="0" HorizontalAlignment="Center"/>
             <ListView ItemsSource="{Binding Values}" Grid.Row="1">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border BorderThickness="0" CornerRadius="5" Background="White" Padding="2">
-                            <TextBlock Text="{Binding .}" />
+                            <TextBlock Text="{Binding .}" /> <!-- . = this-->
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <!--#region styly-->
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     </Style>
                 </ListView.ItemContainerStyle>
+                <!--#endregion-->
             </ListView>
         </Grid>
     </Border>

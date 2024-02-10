@@ -40,5 +40,19 @@
         </Grid>
         <!--#endregion-->
 
+        <!--#region endpoints-->
+        <ListView ItemsSource="{Binding EndPoints}" Grid.Row="3">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Controls:EndpointView DataContext="{Binding .}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <!--#endregion-->
     </Grid>
 </Window>
