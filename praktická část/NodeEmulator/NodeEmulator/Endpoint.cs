@@ -2,6 +2,7 @@
 using HlavniUzel.Komunikace.Enums;
 using static System.Net.WebRequestMethods;
 using System.Security.Policy;
+using System.Collections;
 
 namespace NodeEmulator
 {
@@ -34,6 +35,17 @@ namespace NodeEmulator
             }
             Values= new ValuesDto()
             { Ints=i.ToArray() ,Floats=f.ToArray(),Bools=b.ToArray()};
+        }
+    
+        public IList getCollection(ValType valType) 
+        {
+            switch (valType)
+            {
+                case ValType.INT: return Values.Ints;
+                case ValType.FLOAT: return Values.Floats;
+                case ValType.BOOL: return Values.Bools;
+                default:return new object[0];
+            }
         }
     }
 }
