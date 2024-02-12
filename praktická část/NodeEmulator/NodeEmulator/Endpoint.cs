@@ -1,0 +1,37 @@
+﻿using HlavniUzel.Komunikace.Dto;
+using HlavniUzel.Komunikace.Enums;
+using static System.Net.WebRequestMethods;
+using System.Security.Policy;
+
+namespace NodeEmulator
+{
+    public class Endpoint
+    {
+        public EndPointDto Info { get; set; }
+
+        public ValuesDto Values { get; set; }
+
+        public Endpoint(HttpMethodEnum http, string url, ValueDto[] vals)
+        {
+            Info = new EndPointDto()
+            {
+                HTTP = http,
+                URL = url,
+                Vals = vals
+            };
+
+            List<int> i = new List<int>();
+            List<float> f = new List<float>();
+            List<bool> b = new List<bool>();
+            foreach (var v in vals)
+            {
+                switch (v.Type)
+                {
+                    case ValType.INT: i.Add(0); break;
+                    case ValType.FLOAT: f.Add(0.0f); break;
+                    case ValType.BOOL: b.Add(false); break;
+                }
+            }
+        }
+    }
+}

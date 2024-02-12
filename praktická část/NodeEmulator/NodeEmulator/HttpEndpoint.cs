@@ -7,8 +7,11 @@ namespace NodeEmulator
     public class HttpEndpoint
     {
         HttpListener _listener;
-        public void Start(int port,string endpoint)
+        object _response;
+        public void Start(int port,string endpoint, object obj)
         {
+            _response = obj;
+
             _listener = new HttpListener();
             _listener.Prefixes.Add($"http://localhost:{port}/{endpoint}/");
             _listener.Start();
@@ -24,8 +27,7 @@ namespace NodeEmulator
                 HttpListenerRequest request = context.Request;
                 HttpListenerResponse response = context.Response;
 
-                var myObject = new { Name = "John", Age = 30, City = "New York" };
-                var responseString = JsonSerializer.Serialize(myObject);
+                var responseString = JsonSerializer.Serialize(_response);
 
                 byte[] buffer = Encoding.UTF8.GetBytes(responseString);
                 response.ContentLength64 = buffer.Length;
