@@ -46,6 +46,7 @@ namespace HlavniUzel.ViewModels
                 await _repo.AddNode(_node);
                 App.Current.ShowWindow<NodeInfoWindow>(this);
             }
+            catch(ApplicationException ex) { throw new ApplicationException(ex.Message,ex); }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

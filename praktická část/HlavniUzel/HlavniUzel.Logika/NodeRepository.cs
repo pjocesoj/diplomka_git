@@ -18,6 +18,7 @@ namespace HlavniUzel.Logika
                 await node.GetEndPoints();
                 await node.GetAllValues();
             }
+            catch (ApplicationException ex) { throw new ApplicationException(ex.Message, ex); }
             catch (CommunicationException ex) { throw new CommunicationException("cant access node", ex); }
             catch (InvalidDataException ex) { throw new InvalidDataException("cant read recaived data", ex); }
             catch (Exception ex) { throw new Exception(ex.Message, ex); }

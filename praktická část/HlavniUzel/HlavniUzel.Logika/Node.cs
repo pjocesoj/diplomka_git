@@ -11,13 +11,23 @@ namespace HlavniUzel.Logika
 
         public string Name { get; set; } = "node";
 
+        private string _address;
         /// <summary>
         /// IP, COM port, ...
         /// </summary>
-        public string Address { get; set; } = "";
+        public string Address
+        {
+            get { return _address; }
+            set
+            {
+                _address = value;
+                //_comm.Init(_address);
+                _comm.Init("192.168.1.233");
+            }
+        }
 
-        public EndPointDo[] EndPoints { get; set; }=new EndPointDo[0];
-        public Node(INodeCommunication comm) 
+        public EndPointDo[] EndPoints { get; set; } = new EndPointDo[0];
+        public Node(INodeCommunication comm)
         {
             this._comm = comm;
         }
@@ -55,8 +65,8 @@ namespace HlavniUzel.Logika
         }
         public async Task GetAllValues()
         {
-            var gets = Array.FindAll(EndPoints,(x => (x.Path as HttpEndPointPath).HttpMethod == HttpMethodEnum.GET));
-            foreach(var get in gets)
+            var gets = Array.FindAll(EndPoints, (x => (x.Path as HttpEndPointPath).HttpMethod == HttpMethodEnum.GET));
+            foreach (var get in gets)
             {
                 await GetValues(get);
             }
@@ -64,7 +74,7 @@ namespace HlavniUzel.Logika
 
         public async Task SetValues(EndPointPath path, ValuesDo newVals)
         {
-            bool ok=await _comm.SetValues(path,Mapper.Map(newVals));
+            bool ok = await _comm.SetValues(path, Mapper.Map(newVals));
         }
     }
 }
