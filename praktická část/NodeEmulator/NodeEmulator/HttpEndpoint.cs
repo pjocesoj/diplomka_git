@@ -13,7 +13,7 @@ namespace NodeEmulator
             _response = obj;
 
             _listener = new HttpListener();
-            _listener.Prefixes.Add($"http://localhost:{port}/{endpoint}/");
+            _listener.Prefixes.Add($"http://localhost:{port}{endpoint}/");
             _listener.Start();
             Console.WriteLine("Listening...");
             _ = Task.Run(async() => { await Listen(); });

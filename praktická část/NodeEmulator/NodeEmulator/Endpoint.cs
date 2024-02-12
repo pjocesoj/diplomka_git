@@ -32,6 +32,8 @@ namespace NodeEmulator
                     case ValType.BOOL: b.Add(false); break;
                 }
             }
+            Values= new ValuesDto()
+            { Ints=i.ToArray() ,Floats=f.ToArray(),Bools=b.ToArray()};
         }
     }
 }

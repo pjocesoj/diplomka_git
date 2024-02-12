@@ -21,8 +21,8 @@ namespace HlavniUzel.Logika
             set
             {
                 _address = value;
-                //_comm.Init(_address);
-                _comm.Init("192.168.1.233");
+                _comm.Init(_address);
+                //_comm.Init("192.168.1.233");
             }
         }
 
