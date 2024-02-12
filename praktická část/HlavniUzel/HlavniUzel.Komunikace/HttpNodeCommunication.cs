@@ -9,15 +9,22 @@ namespace HlavniUzel.Komunikace
 {
     public class HttpNodeCommunication : INodeCommunication
     {
-        private readonly HttpClient _httpClient;
-        public HttpNodeCommunication()
+        private HttpClient _httpClient;
+
+        public string Address { get; private set; } = "";
+
+        public void Init(string address)
         {
             _httpClient = new HttpClient();
             _httpClient.Timeout = new TimeSpan(0, 0, 1);
+
+            Address=address;
         }
 
         private async Task<T?> getAsync<T>(string url)
         {
+            if (string.IsNullOrEmpty(Address)) { throw new ApplicationException("call Init to set address"); }
+
             try
             {
                 HttpResponseMessage response = await _httpClient.GetAsync(url);
@@ -42,6 +49,8 @@ namespace HlavniUzel.Komunikace
         }
         private async Task<T?> postAsync<T>(string url, object data)
         {
+            if (string.IsNullOrEmpty(Address)) { throw new ApplicationException("call Init to set address"); }
+
             try
             {
                 string body=JsonSerializer.Serialize(data);
@@ -70,7 +79,7 @@ namespace HlavniUzel.Komunikace
 
         public async Task<EndPointDto[]> GetEndPoints()
         {
-            string url = "http://192.168.1.233/getInfo";
+            string url = $"http://{Address}/getInfo";
             try
             {
                 return await getAsync<EndPointDto[]>(url);
@@ -82,7 +91,7 @@ namespace HlavniUzel.Komunikace
         }
         public async Task<ValuesDto?> GetValues(EndPointPath path)
         {
-            string url = $"http://192.168.1.233{path.Path}";
+            string url = $"http://{Address}{path.Path}";
             try
             {
                 var t= await getAsync<Dto.temp.Values_temp?>(url);
@@ -96,7 +105,7 @@ namespace HlavniUzel.Komunikace
         }
         public async Task<bool> SetValues(EndPointPath path, ValuesDto vals)
         {
-            string url = $"http://192.168.1.233{path.Path}";
+            string url = $"http://{Address}{path.Path}";
             try
             {
                 var ret=await postAsync<bool>(url,vals);
