@@ -11,6 +11,16 @@ namespace NodeEmulator
     public class ValueDo<T>: ValueDto
     {
         [JsonIgnore]
-        public T Value { get; set; }
+        public required T Value { get; set; }
+
+        public string ValueToString()
+        {
+            return Value.ToString();
+        }
+
+        public void ValueFromString(string src)
+        {
+            Value= (T)Convert.ChangeType(src, typeof(T));
+        }
     }
 }
