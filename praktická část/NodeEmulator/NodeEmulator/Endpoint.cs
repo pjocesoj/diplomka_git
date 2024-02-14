@@ -18,6 +18,12 @@ namespace NodeEmulator
                 URL = url,
                 Vals = vals
             };
+
+            foreach (var val in vals) 
+            {
+                //var wtf = (val as ValueDo);
+                //Values.Add(wtf.Value); 
+            }
         }
     }
 }
