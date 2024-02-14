@@ -100,11 +100,8 @@ namespace NodeEmulator
             {
                 if (control is TextBox tb)
                 {
-                    var val = (ValueDto)tb.Tag;
-                    if (val is ValueDo<int> childInt)
-                    {
-                        childInt.Value = Convert.ToInt32(tb.Text);
-                    }
+                    var val = (ValueDo)tb.Tag;
+                    val.ValueFromString(tb.Text);
                 }
             }
         }
