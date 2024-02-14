@@ -19,7 +19,7 @@ namespace NodeEmulator
             new HttpEndpoint().Start(8080, "/getInfo", list);
             foreach (var endpoint in _endpoints)
             {
-                new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.Values);
+                new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.SerializeValues);
                 createControls(endpoint);
             }
 
@@ -43,7 +43,7 @@ namespace NodeEmulator
 
             int top = name.Bottom + 5;
 
-            foreach (var val in ep.Info.Vals)
+            foreach (ValueDo val in ep.Info.Vals)
             {
                 #region val_type
                 Label val_type = new Label();
@@ -66,7 +66,7 @@ namespace NodeEmulator
 
                 #region val_name
                 TextBox val_val = new TextBox();
-                val_val.Text = ValueToString(val);
+                val_val.Text = val.ValueToString();
                 val_val.Tag = val;
                 val_val.Height = 25;
                 val_val.Left = 250;
@@ -96,14 +96,14 @@ namespace NodeEmulator
         {
             var panel = (sender as Button).Parent;
 
-            foreach(var control in panel.Controls)
+            foreach (var control in panel.Controls)
             {
-                if(control is TextBox tb) 
+                if (control is TextBox tb)
                 {
                     var val = (ValueDto)tb.Tag;
                     if (val is ValueDo<int> childInt)
                     {
-                        childInt.Value=Convert.ToInt32(tb.Text);
+                        childInt.Value = Convert.ToInt32(tb.Text);
                     }
                 }
             }
@@ -119,25 +119,6 @@ namespace NodeEmulator
                    new ValueDo<bool>() { Name = "d", Type = ValType.BOOL,Value=false }
          };
             _endpoints.Add(new Endpoint(HttpMethodEnum.GET, "/getValuesG", vals));
-        }
-
-        //protože generický potomek negenerického rodièe to komplikuje
-        string ValueToString(ValueDto val)
-        {
-            if (val is ValueDo<int> childInt)
-            {
-                return childInt.Value.ToString();
-            }
-            else if (val is ValueDo<float> childFloat)
-            {
-                return childFloat.Value.ToString();
-            }
-            else if (val is ValueDo<bool> childBool)
-            {
-                return childBool.Value.ToString();
-            }
-
-            return "n/a";
         }
     }
 }

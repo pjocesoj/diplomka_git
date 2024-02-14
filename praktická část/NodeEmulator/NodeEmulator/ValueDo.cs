@@ -8,19 +8,28 @@ using System.Threading.Tasks;
 
 namespace NodeEmulator
 {
-    public class ValueDo<T>: ValueDto
+    public class ValueDo<T>: ValueDo
     {
         [JsonIgnore]
         public required T Value { get; set; }
 
-        public string ValueToString()
+        public override string ValueToString()
         {
             return Value.ToString();
         }
 
-        public void ValueFromString(string src)
+        public override void ValueFromString(string src)
         {
             Value= (T)Convert.ChangeType(src, typeof(T));
         }
+    }
+
+    /// <summary>
+    /// virtualní předek generiky abych se vyhnul potřebě spousty if
+    /// </summary>
+    public abstract class ValueDo : ValueDto 
+    {
+        public abstract string ValueToString();
+        public abstract void ValueFromString(string src);
     }
 }
