@@ -16,10 +16,23 @@ namespace NodeEmulator
             _listener.Prefixes.Add($"http://localhost:{port}{endpoint}/");
             _listener.Start();
             Console.WriteLine("Listening...");
-            _ = Task.Run(async() => { await Listen(); });
+            _ = Task.Run(async() => { await Listen(serialize); });
+        }
+        public void Start(int port, string endpoint, Func<string> serializer)
+        {
+            _listener = new HttpListener();
+            _listener.Prefixes.Add($"http://localhost:{port}{endpoint}/");
+            _listener.Start();
+            Console.WriteLine("Listening...");
+            _ = Task.Run(async () => { await Listen(serializer); });
         }
 
-        public async Task Listen()
+        string serialize()
+        {
+            return JsonSerializer.Serialize(_response);
+        }
+
+        public async Task Listen(Func<string> serializer)
         {
             while (true)
             {
@@ -27,7 +40,7 @@ namespace NodeEmulator
                 HttpListenerRequest request = context.Request;
                 HttpListenerResponse response = context.Response;
 
-                var responseString = JsonSerializer.Serialize(_response);
+                var responseString = serializer();
 
                 byte[] buffer = Encoding.UTF8.GetBytes(responseString);
                 response.ContentLength64 = buffer.Length;

@@ -1,6 +1,7 @@
 ﻿using HlavniUzel.Komunikace.Dto;
 using HlavniUzel.Komunikace.Enums;
 using System.Collections;
+using System.Text.Json;
 
 namespace NodeEmulator
 {
@@ -34,12 +35,15 @@ namespace NodeEmulator
                 URL = url,
                 Vals = vals
             };
+        }
 
-            foreach (var val in vals)
-            {
-                //var wtf = (val as ValueDo);
-                //Values.Add(wtf.Value); 
-            }
+        public string SerializeInfo()
+        {
+            return JsonSerializer.Serialize(this);
+        }
+        public string SerializeValues()
+        {
+            return JsonSerializer.Serialize(Values);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace NodeEmulator
             new HttpEndpoint().Start(8080, "/getInfo", list);
             foreach (var endpoint in _endpoints)
             {
-                new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.Values);
+                new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.SerializeValues);
                 createControls(endpoint);
             }
 
