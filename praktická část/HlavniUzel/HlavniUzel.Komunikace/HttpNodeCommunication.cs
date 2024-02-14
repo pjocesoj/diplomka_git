@@ -94,9 +94,8 @@ namespace HlavniUzel.Komunikace
             string url = $"http://{Address}{path.Path}";
             try
             {
-                var t= await getAsync<Dto.temp.Values_temp?>(url);
-                return t;
-                //return await getAsync<ValuesDto>(url);
+                //return await getAsync<Dto.temp.Values_temp?>(url);
+                return await getAsync<ValuesDto>(url);
             }
             catch (Exception ex)
             {
