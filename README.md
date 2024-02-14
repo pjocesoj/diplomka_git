@@ -12,6 +12,8 @@ realizace je tvořena několika částmi
 
 [hlavní uzel (C#)](https://github.com/pjocesoj/diplomka_git/tree/main/praktick%C3%A1%20%C4%8D%C3%A1st/HlavniUzel)
 
+[emulovaný uzel (C#)](https://github.com/pjocesoj/diplomka_git/tree/main/praktick%C3%A1%20%C4%8D%C3%A1st/NodeEmulator)
+
 *odkaz na ostatní bude přidán v budoucnu
 
 
