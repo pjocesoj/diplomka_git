@@ -67,6 +67,7 @@ namespace NodeEmulator
                 #region val_name
                 TextBox val_val = new TextBox();
                 val_val.Text = ValueToString(val);
+                val_val.Tag = val;
                 val_val.Height = 25;
                 val_val.Left = 250;
                 val_val.Top = top;
@@ -79,6 +80,33 @@ namespace NodeEmulator
 
             Control last = panel.Controls[panel.Controls.Count - 1];
             panel.Height = last.Bottom + 5;
+
+            Button btn = new Button();
+            btn.Text = "update";
+            btn.Click += Btn_Click;
+            btn.BackColor = Color.White;
+            btn.Height = last.Bottom - (name.Bottom + 5);
+            btn.Width = 100;
+            btn.Left = 400;
+            btn.Top = name.Bottom + 5;
+            panel.Controls.Add(btn);
+        }
+
+        private void Btn_Click(object? sender, EventArgs e)
+        {
+            var panel = (sender as Button).Parent;
+
+            foreach(var control in panel.Controls)
+            {
+                if(control is TextBox tb) 
+                {
+                    var val = (ValueDto)tb.Tag;
+                    if (val is ValueDo<int> childInt)
+                    {
+                        childInt.Value=Convert.ToInt32(tb.Text);
+                    }
+                }
+            }
         }
 
         void createGet()
