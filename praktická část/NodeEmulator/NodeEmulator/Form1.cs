@@ -22,6 +22,8 @@ namespace NodeEmulator
            };
             _endpoints.Add(new Endpoint(HttpMethodEnum.GET, "/getValues", vals));
 
+            createGet();
+
             var list = _endpoints.Select(x => x.Info);
             new HttpEndpoint().Start(8080, "/getInfo", list);
             foreach (var endpoint in _endpoints)
@@ -89,8 +91,20 @@ namespace NodeEmulator
                 }
             }
 
-            Control last = panel.Controls[panel.Controls.Count-1];
-            panel.Height=last.Bottom + 5;
+            Control last = panel.Controls[panel.Controls.Count - 1];
+            panel.Height = last.Bottom + 5;
+        }
+
+        void createGet()
+        {
+            var vals = new ValueDto[]
+         {
+                   new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
+                   new ValueDo<int>() { Name = "b", Type = ValType.INT,Value=2 },
+                   new ValueDo<float>() { Name = "c", Type = ValType.FLOAT,Value=3.14f },
+                   new ValueDo<bool>() { Name = "d", Type = ValType.BOOL,Value=false }
+         };
+            _endpoints.Add(new Endpoint(HttpMethodEnum.GET, "/getValuesG", vals));
         }
     }
 }
