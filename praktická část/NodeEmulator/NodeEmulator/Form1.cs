@@ -1,5 +1,7 @@
 using HlavniUzel.Komunikace.Dto;
 using HlavniUzel.Komunikace.Enums;
+using System.Net;
+using System.Text.Json;
 
 namespace NodeEmulator
 {
@@ -23,6 +25,8 @@ namespace NodeEmulator
                 createControls(endpoint);
             }
 
+            createSet();
+            createMultiply();
         }
 
         void createControls(Endpoint ep)
@@ -64,7 +68,7 @@ namespace NodeEmulator
                 panel.Controls.Add(val_name);
                 #endregion
 
-                #region val_name
+                #region val_val
                 TextBox val_val = new TextBox();
                 val_val.Text = val.ValueToString();
                 val_val.Tag = val;
@@ -90,6 +94,8 @@ namespace NodeEmulator
             btn.Left = 400;
             btn.Top = name.Bottom + 5;
             panel.Controls.Add(btn);
+
+            ep.View = panel;
         }
 
         private void Btn_Click(object? sender, EventArgs e)
@@ -116,6 +122,45 @@ namespace NodeEmulator
                    new ValueDo<bool>() { Name = "d", Type = ValType.BOOL,Value=false }
          };
             _endpoints.Add(new Endpoint(HttpMethodEnum.GET, "/getValuesG", vals));
+        }
+        void createSet()
+        {
+            var vals = new ValueDto[]
+         {
+                   new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
+         };
+            var endpoint = new Endpoint(HttpMethodEnum.GET, "/setValues", vals);
+            _endpoints.Add(endpoint);
+
+            new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.SerializeValues,endpoint.Deserialize);
+            createControls(endpoint);
+        }
+
+        void createMultiply()
+        {
+            var vals = new ValueDto[]
+         {
+                   new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
+                   new ValueDo<int>() { Name = "b", Type = ValType.INT,Value=10 },
+                   new ValueDo<int>() { Name = "c", Type = ValType.INT,Value=20 }
+         };
+            var endpoint = new Endpoint(HttpMethodEnum.GET, "/multiply", vals);
+            _endpoints.Add(endpoint);
+
+            Action<string> des = ((json) => 
+            {
+                var vals = JsonSerializer.Deserialize<ValuesDto>(json);
+                int x = vals.Ints.First();
+                var ints = endpoint.Info.Vals.Where(x => x.Type == ValType.INT).Select(x => (ValueDo<int>)x);
+                foreach (var i in ints)
+                {
+                    i.Value = i.Value * x;
+                }
+                endpoint.UpdateView();
+            });
+
+            new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.SerializeValues, des);
+            createControls(endpoint);
         }
     }
 }
