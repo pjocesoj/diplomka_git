@@ -1,5 +1,7 @@
 using HlavniUzel.Komunikace.Dto;
 using HlavniUzel.Komunikace.Enums;
+using System.Net;
+using System.Text.Json;
 
 namespace NodeEmulator
 {
@@ -23,6 +25,7 @@ namespace NodeEmulator
                 createControls(endpoint);
             }
 
+            createSet();
         }
 
         void createControls(Endpoint ep)
@@ -119,5 +122,18 @@ namespace NodeEmulator
          };
             _endpoints.Add(new Endpoint(HttpMethodEnum.GET, "/getValuesG", vals));
         }
+        void createSet()
+        {
+            var vals = new ValueDto[]
+         {
+                   new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
+         };
+            var endpoint = new Endpoint(HttpMethodEnum.GET, "/setValues", vals);
+            _endpoints.Add(endpoint);
+
+            new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.SerializeValues,endpoint.Deserialize);
+            createControls(endpoint);
+        }
+        
     }
 }
