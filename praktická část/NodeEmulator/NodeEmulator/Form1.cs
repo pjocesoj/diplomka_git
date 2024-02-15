@@ -26,6 +26,7 @@ namespace NodeEmulator
             }
 
             createSet();
+            createMultiply();
         }
 
         void createControls(Endpoint ep)
@@ -134,6 +135,32 @@ namespace NodeEmulator
             new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.SerializeValues,endpoint.Deserialize);
             createControls(endpoint);
         }
-        
+
+        void createMultiply()
+        {
+            var vals = new ValueDto[]
+         {
+                   new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
+                   new ValueDo<int>() { Name = "b", Type = ValType.INT,Value=10 },
+                   new ValueDo<int>() { Name = "c", Type = ValType.INT,Value=20 }
+         };
+            var endpoint = new Endpoint(HttpMethodEnum.GET, "/multiply", vals);
+            _endpoints.Add(endpoint);
+
+            Action<string> des = ((json) => 
+            {
+                var vals = JsonSerializer.Deserialize<ValuesDto>(json);
+                int x = vals.Ints.First();
+                var ints = endpoint.Info.Vals.Where(x => x.Type == ValType.INT).Select(x => (ValueDo<int>)x);
+                foreach (var i in ints)
+                {
+                    i.Value = i.Value * x;
+                }
+                endpoint.UpdateView();
+            });
+
+            new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.SerializeValues, des);
+            createControls(endpoint);
+        }
     }
 }
