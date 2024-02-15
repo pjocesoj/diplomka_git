@@ -64,7 +64,7 @@ namespace NodeEmulator
                 panel.Controls.Add(val_name);
                 #endregion
 
-                #region val_name
+                #region val_val
                 TextBox val_val = new TextBox();
                 val_val.Text = val.ValueToString();
                 val_val.Tag = val;
@@ -90,6 +90,8 @@ namespace NodeEmulator
             btn.Left = 400;
             btn.Top = name.Bottom + 5;
             panel.Controls.Add(btn);
+
+            ep.View = panel;
         }
 
         private void Btn_Click(object? sender, EventArgs e)
