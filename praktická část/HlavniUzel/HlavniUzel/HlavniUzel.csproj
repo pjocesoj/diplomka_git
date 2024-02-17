@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HlavniUzel.Exceptions\HlavniUzel.Exceptions.csproj" />
-    <ProjectReference Include="..\HlavniUzel.Logika\HlavniUzel.Logika.csproj" />
+    <ProjectReference Include="..\HlavniUzel.Logika\MainNode.Logic.csproj" />
   </ItemGroup>
 
 </Project>
