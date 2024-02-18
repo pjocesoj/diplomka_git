@@ -1,9 +1,9 @@
 ﻿using HlavniUzel.Komunikace.Dto;
 using HlavniUzel.Komunikace.Enums;
 using HlavniUzel.Komunikace.Interfaces;
-using HlavniUzel.Logika.Do;
+using MainNode.Logic.Do;
 
-namespace HlavniUzel.Logika
+namespace MainNode.Logic
 {
     public class Node
     {

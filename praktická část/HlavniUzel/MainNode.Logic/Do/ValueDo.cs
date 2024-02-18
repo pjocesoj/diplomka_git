@@ -1,4 +1,4 @@
-﻿namespace HlavniUzel.Logika.Do
+﻿namespace MainNode.Logic.Do
 {
     public class ValueDo<T>
     {

@@ -1,7 +1,7 @@
 ﻿using HlavniUzel.Komunikace.Enums;
 using HlavniUzel.Komunikace.Interfaces;
 
-namespace HlavniUzel.Logika.Do
+namespace MainNode.Logic.Do
 {
     public class EndPointDo
     {

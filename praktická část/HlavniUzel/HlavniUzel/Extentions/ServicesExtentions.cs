@@ -6,7 +6,7 @@ namespace HlavniUzel.Extentions
     {
         public static void AddServices(this IServiceCollection services)
         {
-            Logika.Extentions.ServicesExtention.Logika(services);
+            MainNode.Logic.Extentions.ServicesExtention.Logika(services);
         }
     }
 }

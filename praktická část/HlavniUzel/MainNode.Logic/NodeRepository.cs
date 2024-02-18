@@ -1,6 +1,6 @@
 ﻿using HlavniUzel.Exceptions;
 
-namespace HlavniUzel.Logika
+namespace MainNode.Logic
 {
     public class NodeRepository
     {
