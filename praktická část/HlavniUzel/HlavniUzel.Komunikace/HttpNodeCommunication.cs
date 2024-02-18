@@ -3,7 +3,7 @@ using HlavniUzel.Komunikace.Interfaces;
 using System.Text.Json;
 using System;
 using System.Net.Http.Json;
-using HlavniUzel.Exceptions;
+using MainNode.Exceptions;
 
 namespace HlavniUzel.Komunikace
 {
