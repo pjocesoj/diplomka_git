@@ -1,4 +1,4 @@
-﻿namespace HlavniUzel.Exceptions
+﻿namespace MainNode.Exceptions
 {
     public class CommunicationException:Exception
     {

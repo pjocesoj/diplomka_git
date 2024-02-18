@@ -1,4 +1,4 @@
-﻿using HlavniUzel.Exceptions;
+﻿using MainNode.Exceptions;
 
 namespace MainNode.Logic
 {
