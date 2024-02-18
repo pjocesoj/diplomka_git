@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using HlavniUzel.Logika;
+using MainNode.Logic;
 using HlavniUzel.Windows;
 using System.Net;
 using System.Windows;

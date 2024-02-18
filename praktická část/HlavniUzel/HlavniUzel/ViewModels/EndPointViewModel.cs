@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using HlavniUzel.Logika.Do;
+using MainNode.Logic.Do;
 
 namespace HlavniUzel.ViewModels
 {
