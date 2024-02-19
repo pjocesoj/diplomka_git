@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <Reference Include="MainNode.Communication">
-      <HintPath>..\..\HlavniUzel\MainNode.Communication\bin\Debug\net8.0\MainNode.Communication.dll</HintPath>
+      <HintPath>..\..\MainNode\MainNode.Communication\bin\Debug\net8.0\MainNode.Communication.dll</HintPath>
     </Reference>
   </ItemGroup>
 
