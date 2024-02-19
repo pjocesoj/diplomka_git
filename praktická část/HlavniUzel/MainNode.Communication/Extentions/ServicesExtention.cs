@@ -1,7 +1,7 @@
-﻿using HlavniUzel.Komunikace.Interfaces;
+﻿using MainNode.Communication.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HlavniUzel.Komunikace.Extentions
+namespace MainNode.Communication.Extentions
 {
     public static class ServicesExtention
     {

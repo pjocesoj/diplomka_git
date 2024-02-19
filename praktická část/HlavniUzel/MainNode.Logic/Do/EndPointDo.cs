@@ -1,5 +1,5 @@
-﻿using HlavniUzel.Komunikace.Enums;
-using HlavniUzel.Komunikace.Interfaces;
+﻿using MainNode.Communication.Enums;
+using MainNode.Communication.Interfaces;
 
 namespace MainNode.Logic.Do
 {

@@ -1,4 +1,4 @@
-﻿namespace HlavniUzel.Komunikace.Dto.temp
+﻿namespace MainNode.Communication.Dto.temp
 {
     /// <summary>
     /// dočasné DTO než převedu ESP8266 PoC na realnou

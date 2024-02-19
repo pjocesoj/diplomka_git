@@ -1,7 +1,7 @@
-﻿using HlavniUzel.Komunikace.Enums;
-using HlavniUzel.Komunikace.Interfaces;
+﻿using MainNode.Communication.Enums;
+using MainNode.Communication.Interfaces;
 
-namespace HlavniUzel.Komunikace.Dto
+namespace MainNode.Communication.Dto
 {
     public class HttpEndPointPath : EndPointPath
     {
