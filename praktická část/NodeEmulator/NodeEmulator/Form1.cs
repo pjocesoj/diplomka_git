@@ -1,5 +1,5 @@
-using HlavniUzel.Komunikace.Dto;
-using HlavniUzel.Komunikace.Enums;
+using MainNode.Communication.Dto;
+using MainNode.Communication.Enums;
 using System.Net;
 using System.Text.Json;
 
@@ -129,7 +129,7 @@ namespace NodeEmulator
          {
                    new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
          };
-            var endpoint = new Endpoint(HttpMethodEnum.GET, "/setValues", vals);
+            var endpoint = new Endpoint(HttpMethodEnum.POST, "/setValues", vals);
             _endpoints.Add(endpoint);
 
             new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.SerializeValues,endpoint.Deserialize);
@@ -144,7 +144,7 @@ namespace NodeEmulator
                    new ValueDo<int>() { Name = "b", Type = ValType.INT,Value=10 },
                    new ValueDo<int>() { Name = "c", Type = ValType.INT,Value=20 }
          };
-            var endpoint = new Endpoint(HttpMethodEnum.GET, "/multiply", vals);
+            var endpoint = new Endpoint(HttpMethodEnum.POST, "/multiply", vals);
             _endpoints.Add(endpoint);
 
             Action<string> des = ((json) => 

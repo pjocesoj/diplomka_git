@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="HlavniUzel.Komunikace">
-      <HintPath>..\..\HlavniUzel\HlavniUzel.Komunikace\bin\Debug\net8.0\HlavniUzel.Komunikace.dll</HintPath>
+    <Reference Include="MainNode.Communication">
+      <HintPath>..\..\MainNode\MainNode.Communication\bin\Debug\net8.0\MainNode.Communication.dll</HintPath>
     </Reference>
   </ItemGroup>
 
