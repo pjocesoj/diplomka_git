@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MainNode.Exceptions\MainNode.Exceptions.csproj" />
-    <ProjectReference Include="..\HlavniUzel.Komunikace\HlavniUzel.Komunikace.csproj" />
+    <ProjectReference Include="..\MainNode.Communication\MainNode.Communication.csproj" />
   </ItemGroup>
 
 </Project>

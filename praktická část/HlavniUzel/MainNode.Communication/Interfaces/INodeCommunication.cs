@@ -1,6 +1,6 @@
-﻿using HlavniUzel.Komunikace.Dto;
+﻿using MainNode.Communication.Dto;
 
-namespace HlavniUzel.Komunikace.Interfaces
+namespace MainNode.Communication.Interfaces
 {
     public interface INodeCommunication
     {

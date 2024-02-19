@@ -1,5 +1,5 @@
-using HlavniUzel.Komunikace.Dto;
-using HlavniUzel.Komunikace.Enums;
+using MainNode.Communication.Dto;
+using MainNode.Communication.Enums;
 using System.Net;
 using System.Text.Json;
 

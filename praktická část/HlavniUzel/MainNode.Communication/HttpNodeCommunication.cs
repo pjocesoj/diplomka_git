@@ -1,11 +1,11 @@
-﻿using HlavniUzel.Komunikace.Dto;
-using HlavniUzel.Komunikace.Interfaces;
+﻿using MainNode.Communication.Dto;
+using MainNode.Communication.Interfaces;
 using System.Text.Json;
 using System;
 using System.Net.Http.Json;
 using MainNode.Exceptions;
 
-namespace HlavniUzel.Komunikace
+namespace MainNode.Communication
 {
     public class HttpNodeCommunication : INodeCommunication
     {

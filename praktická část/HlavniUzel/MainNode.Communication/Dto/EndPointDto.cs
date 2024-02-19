@@ -1,6 +1,6 @@
-﻿using HlavniUzel.Komunikace.Enums;
+﻿using MainNode.Communication.Enums;
 
-namespace HlavniUzel.Komunikace.Dto
+namespace MainNode.Communication.Dto
 {
     public class EndPointDto
     {

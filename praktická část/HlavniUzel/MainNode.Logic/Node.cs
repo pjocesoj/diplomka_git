@@ -1,6 +1,6 @@
-﻿using HlavniUzel.Komunikace.Dto;
-using HlavniUzel.Komunikace.Enums;
-using HlavniUzel.Komunikace.Interfaces;
+﻿using MainNode.Communication.Dto;
+using MainNode.Communication.Enums;
+using MainNode.Communication.Interfaces;
 using MainNode.Logic.Do;
 
 namespace MainNode.Logic

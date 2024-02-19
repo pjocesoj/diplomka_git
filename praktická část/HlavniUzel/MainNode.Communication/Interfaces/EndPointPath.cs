@@ -1,4 +1,4 @@
-﻿namespace HlavniUzel.Komunikace.Interfaces
+﻿namespace MainNode.Communication.Interfaces
 {
     public class EndPointPath
     {
