@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="MainNode.Communication">
-      <HintPath>..\..\MainNode\MainNode.Communication\bin\Debug\net8.0\MainNode.Communication.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\MainNode\MainNode.Communication\MainNode.Communication.csproj" />
   </ItemGroup>
 
 </Project>
