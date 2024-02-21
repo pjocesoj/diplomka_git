@@ -121,7 +121,7 @@ namespace NodeEmulator
                    new ValueDo<float>() { Name = "c", Type = ValType.FLOAT,Value=3.14f },
                    new ValueDo<bool>() { Name = "d", Type = ValType.BOOL,Value=false }
          };
-            _endpoints.Add(new Endpoint(HttpMethodEnum.GET, "/getValuesG", vals));
+            _endpoints.Add(new Endpoint(HttpMethodEnum.GET, EndpointType.GET,"/getValuesG", vals));
         }
         void createSet()
         {
@@ -129,7 +129,7 @@ namespace NodeEmulator
          {
                    new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
          };
-            var endpoint = new Endpoint(HttpMethodEnum.POST, "/setValues", vals);
+            var endpoint = new Endpoint(HttpMethodEnum.POST, EndpointType.SET,"/setValues", vals);
             _endpoints.Add(endpoint);
 
             new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.SerializeValues,endpoint.Deserialize);
@@ -144,7 +144,7 @@ namespace NodeEmulator
                    new ValueDo<int>() { Name = "b", Type = ValType.INT,Value=10 },
                    new ValueDo<int>() { Name = "c", Type = ValType.INT,Value=20 }
          };
-            var endpoint = new Endpoint(HttpMethodEnum.POST, "/multiply", vals);
+            var endpoint = new Endpoint(HttpMethodEnum.POST,EndpointType.GET, "/multiply", vals);
             _endpoints.Add(endpoint);
 
             Action<string> des = ((json) => 
