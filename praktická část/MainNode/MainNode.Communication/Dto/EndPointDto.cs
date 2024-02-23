@@ -8,6 +8,6 @@ namespace MainNode.Communication.Dto
         public EndpointType Type { get; set; }
         public string URL { get; set; } = "";
         public ValueDto[] Vals { get; set; } = new ValueDto[0];
-        public ValueDto[] Args { get; set; } = new ValueDto[0];
+        public ValueArgDto[] Args { get; set; } = new ValueArgDto[0];
     }
 }
