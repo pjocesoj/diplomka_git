@@ -129,10 +129,14 @@ namespace NodeEmulator
             var vals = new ValueDto[]
             {
                    new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
+                   new ValueDo<float>() { Name = "b", Type = ValType.FLOAT,Value=1 },
+                   new ValueDo<bool>() { Name = "C", Type = ValType.BOOL,Value=true },
             };
             var args = new ValueArgDto[]
             {
                 new ValueArgDto() { Name = "a", Type = ValType.INT,Default="1" },
+                new ValueArgDto() { Name = "b", Type = ValType.FLOAT,Default="1" },
+                new ValueArgDto() { Name = "C", Type = ValType.BOOL,Default="true" },
             };
             var endpoint = new Endpoint(HttpMethodEnum.POST, EndpointType.SET, "/setValues", vals, args);
             _endpoints.Add(endpoint);
