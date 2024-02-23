@@ -2,6 +2,7 @@
 using MainNode.Communication.Enums;
 using MainNode.Communication.Interfaces;
 using MainNode.Logic.Do;
+using MainNode.Logic.Extentions;
 
 namespace MainNode.Logic
 {
@@ -50,18 +51,9 @@ namespace MainNode.Logic
         {
             ValuesDto data = await _comm.GetValues(EP.Path);
 
-            for (int i = 0; i < EP.Ints.Count; i++)
-            {
-                EP.Ints[i].Value = data.Ints[i];
-            }
-            for (int i = 0; i < EP.Flots.Count; i++)
-            {
-                EP.Flots[i].Value = data.Floats[i];
-            }
-            for (int i = 0; i < EP.Bools.Count; i++)
-            {
-                EP.Bools[i].Value = data.Bools[i];
-            }
+            EP.Values.Ints.CopyValues(data.Ints);
+            EP.Values.Floats.CopyValues(data.Floats);
+            EP.Values.Bools.CopyValues(data.Bools);
         }
         public async Task GetAllValues()
         {
