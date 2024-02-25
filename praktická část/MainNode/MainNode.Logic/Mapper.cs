@@ -14,6 +14,7 @@ namespace MainNode.Logic
                 HttpMethod = dto.HTTP,
                 Path = dto.URL
             };
+            ret.Type = dto.Type;
             ret.Values = Map(dto.Vals);
             ret.Arguments = Map(dto.Args);
 
