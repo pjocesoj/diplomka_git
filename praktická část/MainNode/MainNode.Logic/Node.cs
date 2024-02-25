@@ -65,9 +65,9 @@ namespace MainNode.Logic
             }
         }
 
-        public async Task SetValues(EndPointPath path, ValuesDo newVals)
+        public async Task SetValues(EndPointDo EP)
         {
-            bool ok = await _comm.SetValues(path, Mapper.Map(newVals));
+            bool ok = await _comm.SetValues(EP.Path, Mapper.Map(EP.Arguments));
         }
     }
 }
