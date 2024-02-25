@@ -12,14 +12,39 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
             <Label Content="{Binding Address}"
                    Grid.Row="0" HorizontalAlignment="Center"/>
-            <ListView ItemsSource="{Binding Values}" Grid.Row="1">
+            
+            <ListView ItemsSource="{Binding Values}" 
+                      Grid.Row="1" Grid.Column="0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border BorderThickness="0" CornerRadius="5" Background="White" Padding="2">
                             <TextBlock Text="{Binding .}" /> <!-- . = this-->
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <!--#region styly-->
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <!--#endregion-->
+            </ListView>
+
+            <ListView ItemsSource="{Binding Arguments}" 
+                      Grid.Row="1" Grid.Column="1">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="0" CornerRadius="5" Background="White" Padding="2">
+                            <TextBlock Text="{Binding .}" />
+                            <!-- . = this-->
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
