@@ -49,7 +49,7 @@ namespace MainNode.Logic
 
         public async Task GetValues(EndPointDo EP)
         {
-            ValuesDto data = await _comm.GetValues(EP.Path);
+            ValuesDto data = await _comm.GetValues(EP.Path,Mapper.Map(EP.Arguments));
 
             EP.Values.Ints.CopyValues(data.Ints);
             EP.Values.Floats.CopyValues(data.Floats);
@@ -57,7 +57,8 @@ namespace MainNode.Logic
         }
         public async Task GetAllValues()
         {
-            var gets = Array.FindAll(EndPoints, (x => (x.Path as HttpEndPointPath).HttpMethod == HttpMethodEnum.GET));
+            //var gets = Array.FindAll(EndPoints, (x => (x.Path as HttpEndPointPath).HttpMethod == HttpMethodEnum.GET));
+            var gets = Array.FindAll(EndPoints, (x => x.Type == EndpointType.GET));
             foreach (var get in gets)
             {
                 await GetValues(get);
