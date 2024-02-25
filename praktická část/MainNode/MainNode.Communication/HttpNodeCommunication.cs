@@ -4,6 +4,7 @@ using System.Text.Json;
 using System;
 using System.Net.Http.Json;
 using MainNode.Exceptions;
+using System.Text;
 
 namespace MainNode.Communication
 {
@@ -18,7 +19,7 @@ namespace MainNode.Communication
             _httpClient = new HttpClient();
             _httpClient.Timeout = new TimeSpan(0, 0, 1);
 
-            Address=address;
+            Address = address;
         }
 
         private async Task<T?> getAsync<T>(string url)
@@ -53,11 +54,11 @@ namespace MainNode.Communication
 
             try
             {
-                string body=JsonSerializer.Serialize(data);
+                string body = JsonSerializer.Serialize(data);
                 HttpResponseMessage response = await _httpClient.PostAsync(url, new StringContent(body));
 
                 string json = await response.Content.ReadAsStringAsync();
-                if (json == "ok") { return (T)(object)true;  }//bool nemůže být přímo převeden
+                if (json == "ok") { return (T)(object)true; }//bool nemůže být přímo převeden
                 var ret = JsonSerializer.Deserialize<T>(json);
                 return ret;
             }
@@ -75,7 +76,17 @@ namespace MainNode.Communication
                 throw new Exception("unexpected error", ex);
             }
         }
+        private string ArgsToString(ValuesDto args)
+        {
+            if (args == null) { return string.Empty; }
 
+            StringBuilder sb = new StringBuilder("?");
+            char name = 'a';//pro snížení množství dat použit 1 písmený název (node zná pořadí)
+            foreach (var v in args.Ints) { sb.Append($"{name++}={v}"); }
+            foreach (var v in args.Floats) { sb.Append($"{name++}={v}"); }
+            foreach (var v in args.Bools) { sb.Append($"{name++}={v}"); }
+            return sb.ToString();
+        }
 
         public async Task<EndPointDto[]> GetEndPoints()
         {
@@ -89,13 +100,18 @@ namespace MainNode.Communication
                 throw;
             }
         }
-        public async Task<ValuesDto?> GetValues(EndPointPath path)
+        public async Task<ValuesDto?> GetValues(EndPointPath path, ValuesDto args = null)
         {
             string url = $"http://{Address}{path.Path}";
             try
             {
-                //return await getAsync<Dto.temp.Values_temp?>(url);
-                return await getAsync<ValuesDto>(url);
+                if ((path as HttpEndPointPath)!.HttpMethod == Enums.HttpMethodEnum.GET)
+                {
+                    string arg=ArgsToString(args);
+                    return await getAsync<ValuesDto>($"{url}{arg}");
+                }
+                return await postAsync<ValuesDto>(url, args);
+
             }
             catch (Exception ex)
             {
@@ -107,8 +123,9 @@ namespace MainNode.Communication
             string url = $"http://{Address}{path.Path}";
             try
             {
-                var ret=await postAsync<bool>(url,vals);
-                return ret;
+                var ret = await postAsync<ValuesDto>(url, vals);
+                return true;
+                //return ret;
             }
             catch (Exception ex)
             {

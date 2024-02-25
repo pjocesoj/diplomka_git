@@ -115,39 +115,52 @@ namespace NodeEmulator
         void createGet()
         {
             var vals = new ValueDto[]
-         {
+            {
                    new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
                    new ValueDo<int>() { Name = "b", Type = ValType.INT,Value=2 },
                    new ValueDo<float>() { Name = "c", Type = ValType.FLOAT,Value=3.14f },
                    new ValueDo<bool>() { Name = "d", Type = ValType.BOOL,Value=false }
-         };
-            _endpoints.Add(new Endpoint(HttpMethodEnum.GET, "/getValuesG", vals));
+            };
+            var args = new ValueArgDto[0];
+            _endpoints.Add(new Endpoint(HttpMethodEnum.GET, EndpointType.GET, "/getValuesG", vals, args));
         }
         void createSet()
         {
             var vals = new ValueDto[]
-         {
+            {
                    new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
-         };
-            var endpoint = new Endpoint(HttpMethodEnum.POST, "/setValues", vals);
+                   new ValueDo<float>() { Name = "b", Type = ValType.FLOAT,Value=1 },
+                   new ValueDo<bool>() { Name = "C", Type = ValType.BOOL,Value=true },
+            };
+            var args = new ValueArgDto[]
+            {
+                new ValueArgDto() { Name = "a", Type = ValType.INT,Default="1" },
+                new ValueArgDto() { Name = "b", Type = ValType.FLOAT,Default="1" },
+                new ValueArgDto() { Name = "C", Type = ValType.BOOL,Default="true" },
+            };
+            var endpoint = new Endpoint(HttpMethodEnum.POST, EndpointType.SET, "/setValues", vals, args);
             _endpoints.Add(endpoint);
 
-            new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.SerializeValues,endpoint.Deserialize);
+            new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.SerializeValues, endpoint.Deserialize);
             createControls(endpoint);
         }
 
         void createMultiply()
         {
             var vals = new ValueDto[]
-         {
+            {
                    new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
                    new ValueDo<int>() { Name = "b", Type = ValType.INT,Value=10 },
                    new ValueDo<int>() { Name = "c", Type = ValType.INT,Value=20 }
-         };
-            var endpoint = new Endpoint(HttpMethodEnum.POST, "/multiply", vals);
+            };
+            var args = new ValueArgDto[]
+            {
+                new ValueArgDto() { Name = "x", Type = ValType.INT,Min="",Max="100",Default="1" },
+            };
+            var endpoint = new Endpoint(HttpMethodEnum.POST, EndpointType.GET, "/multiply", vals, args);
             _endpoints.Add(endpoint);
 
-            Action<string> des = ((json) => 
+            Action<string> des = ((json) =>
             {
                 var vals = JsonSerializer.Deserialize<ValuesDto>(json);
                 int x = vals.Ints.First();

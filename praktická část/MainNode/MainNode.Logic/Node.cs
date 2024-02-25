@@ -2,6 +2,7 @@
 using MainNode.Communication.Enums;
 using MainNode.Communication.Interfaces;
 using MainNode.Logic.Do;
+using MainNode.Logic.Extentions;
 
 namespace MainNode.Logic
 {
@@ -48,33 +49,25 @@ namespace MainNode.Logic
 
         public async Task GetValues(EndPointDo EP)
         {
-            ValuesDto data = await _comm.GetValues(EP.Path);
+            ValuesDto data = await _comm.GetValues(EP.Path,Mapper.Map(EP.Arguments));
 
-            for (int i = 0; i < EP.Ints.Count; i++)
-            {
-                EP.Ints[i].Value = data.Ints[i];
-            }
-            for (int i = 0; i < EP.Flots.Count; i++)
-            {
-                EP.Flots[i].Value = data.Floats[i];
-            }
-            for (int i = 0; i < EP.Bools.Count; i++)
-            {
-                EP.Bools[i].Value = data.Bools[i];
-            }
+            EP.Values.Ints.CopyValues(data.Ints);
+            EP.Values.Floats.CopyValues(data.Floats);
+            EP.Values.Bools.CopyValues(data.Bools);
         }
         public async Task GetAllValues()
         {
-            var gets = Array.FindAll(EndPoints, (x => (x.Path as HttpEndPointPath).HttpMethod == HttpMethodEnum.GET));
+            //var gets = Array.FindAll(EndPoints, (x => (x.Path as HttpEndPointPath).HttpMethod == HttpMethodEnum.GET));
+            var gets = Array.FindAll(EndPoints, (x => x.Type == EndpointType.GET));
             foreach (var get in gets)
             {
                 await GetValues(get);
             }
         }
 
-        public async Task SetValues(EndPointPath path, ValuesDo newVals)
+        public async Task SetValues(EndPointDo EP)
         {
-            bool ok = await _comm.SetValues(path, Mapper.Map(newVals));
+            bool ok = await _comm.SetValues(EP.Path, Mapper.Map(EP.Arguments));
         }
     }
 }

@@ -21,10 +21,14 @@ namespace HlavniUzel.ViewModels
         {
             get
             {
-                var i = _endPoint.Ints.Select(x => x.ToStringShort());
-                var f = _endPoint.Flots.Select(x => x.ToStringShort());
-                var b = _endPoint.Bools.Select(x => x.ToStringShort());
-                return i.Concat(f).Concat(b).ToList();
+                return _endPoint.Values.ToStringListShort();
+            }
+        }
+        public List<string> Arguments
+        {
+            get
+            {
+                return _endPoint.Arguments.ToStringListShort();
             }
         }
     }

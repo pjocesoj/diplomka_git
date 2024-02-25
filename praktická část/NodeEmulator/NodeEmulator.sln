@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeEmulator", "NodeEmulator\NodeEmulator.csproj", "{4E6ED4B2-CCEF-4CB8-8E7C-9C0A64F2D86D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NodeEmulator", "NodeEmulator\NodeEmulator.csproj", "{4E6ED4B2-CCEF-4CB8-8E7C-9C0A64F2D86D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainNode.Communication", "..\MainNode\MainNode.Communication\MainNode.Communication.csproj", "{4A4357DE-40E8-4BC2-AE54-6BC48A4A38C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{4E6ED4B2-CCEF-4CB8-8E7C-9C0A64F2D86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E6ED4B2-CCEF-4CB8-8E7C-9C0A64F2D86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E6ED4B2-CCEF-4CB8-8E7C-9C0A64F2D86D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A4357DE-40E8-4BC2-AE54-6BC48A4A38C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A4357DE-40E8-4BC2-AE54-6BC48A4A38C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A4357DE-40E8-4BC2-AE54-6BC48A4A38C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A4357DE-40E8-4BC2-AE54-6BC48A4A38C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
