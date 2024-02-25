@@ -123,8 +123,9 @@ namespace MainNode.Communication
             string url = $"http://{Address}{path.Path}";
             try
             {
-                var ret = await postAsync<bool>(url, vals);
-                return ret;
+                var ret = await postAsync<ValuesDto>(url, vals);
+                return true;
+                //return ret;
             }
             catch (Exception ex)
             {
