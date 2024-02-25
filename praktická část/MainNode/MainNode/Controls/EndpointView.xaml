@@ -10,6 +10,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -18,28 +19,18 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="{Binding Address}"
-                   Grid.Row="0" HorizontalAlignment="Center"/>
-            
-            <ListView ItemsSource="{Binding Values}" 
-                      Grid.Row="1" Grid.Column="0">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderThickness="0" CornerRadius="5" Background="White" Padding="2">
-                            <TextBlock Text="{Binding .}" /> <!-- . = this-->
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                <!--#region styly-->
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <!--#endregion-->
-            </ListView>
+                   Grid.Row="0" Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center"/>
 
-            <ListView ItemsSource="{Binding Arguments}" 
-                      Grid.Row="1" Grid.Column="1">
+            <!--#region values-->
+            <Border Background="White" Grid.Row="1">
+                <Label Content="values"
+                       Padding="0"
+                       HorizontalAlignment="Center"/>
+            </Border>
+
+            <ListView ItemsSource="{Binding Values}" 
+                      Grid.Row="2" Grid.Column="0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border BorderThickness="0" CornerRadius="5" Background="White" Padding="2">
@@ -56,6 +47,33 @@
                 </ListView.ItemContainerStyle>
                 <!--#endregion-->
             </ListView>
+            <!--#endregion-->
+            <!--#region arguments-->
+            <Border Background="White" Grid.Row="1" Grid.Column="1">
+                <Label Content="values"
+                       Padding="0"
+                       HorizontalAlignment="Center"/>
+            </Border>
+
+            <ListView ItemsSource="{Binding Arguments}" 
+                      Grid.Row="2" Grid.Column="1">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="0" CornerRadius="5" Background="White" Padding="2">
+                            <TextBlock Text="{Binding .}" />
+                            <!-- . = this-->
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <!--#region styly-->
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <!--#endregion-->
+            </ListView>
+            <!--#endregion-->
         </Grid>
     </Border>
 </UserControl>
