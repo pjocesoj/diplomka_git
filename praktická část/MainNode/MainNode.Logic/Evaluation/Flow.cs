@@ -6,15 +6,23 @@ namespace MainNode.Logic.Evaluation
     {
         public string Name { get; set; }
         public List<Operation<T>> Operations { get; } = new List<Operation<T>>();
-        public ValueDo<T> Output { get; set; }
-        public Flow(string name, List<Operation<T>> opers, ValueDo<T> output)
+        public ValueDo<T>? Output { get; set; }
+
+        public Flow(string name, List<Operation<T>> opers, ValueDo<T> output):this(name,opers)
+        {
+            Output= output;
+        }
+        public Flow(string name, List<Operation<T>> opers)
         {
             Name = name;
             Operations = opers;
-            Output= output;
         }
 
         public void Run()
+        {
+            Output!.Value = Evaluate();
+        }
+        public T Evaluate()
         {
             T res = default;
             foreach (var f in Operations)
@@ -22,7 +30,7 @@ namespace MainNode.Logic.Evaluation
                 T r = f.Execute(res);
                 res = r;
             }
-            Output.Value = res;
+            return res;
         }
     }
 }
