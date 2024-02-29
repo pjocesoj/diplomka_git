@@ -7,9 +7,9 @@ namespace MainNode.Logic.Evaluation
         public string Name { get; set; }
         public List<Operation<T>> Operations { get; } = new List<Operation<T>>();
         public ValueDo<T> Output { get; set; }
-        public Flow(string namme, List<Operation<T>> opers, ValueDo<T> output)
+        public Flow(string name, List<Operation<T>> opers, ValueDo<T> output)
         {
-            Name = namme;
+            Name = name;
             Operations = opers;
             Output= output;
         }
