@@ -2,15 +2,14 @@
 
 namespace MainNode.Logic.Evaluation
 {
-    public class Flow<T>
+    public class Flow<T>:Flow where T : struct
     {
-        public string Name { get; set; }
         public List<Operation<T>> Operations { get; } = new List<Operation<T>>();
         public ValueDo<T>? Output { get; set; }
 
-        public Flow(string name, List<Operation<T>> opers, ValueDo<T> output):this(name,opers)
+        public Flow(string name, List<Operation<T>> opers, ValueDo<T> output) : this(name, opers)
         {
-            Output= output;
+            Output = output;
         }
         public Flow(string name, List<Operation<T>> opers)
         {
@@ -18,7 +17,7 @@ namespace MainNode.Logic.Evaluation
             Operations = opers;
         }
 
-        public void Run()
+        public override void Run()
         {
             Output!.Value = Evaluate();
         }
@@ -32,5 +31,12 @@ namespace MainNode.Logic.Evaluation
             }
             return res;
         }
+    }
+
+    public abstract class Flow
+    {
+        public string Name { get; set; } = "";
+
+        public abstract void Run();
     }
 }

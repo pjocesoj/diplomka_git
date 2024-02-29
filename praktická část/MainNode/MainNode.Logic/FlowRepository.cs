@@ -4,11 +4,11 @@ namespace MainNode.Logic
 {
     public class FlowRepository
     {
-        public List<Flow<int>> Flows { get; private set; } = new List<Flow<int>>();
+        public List<Flow> Flows { get; private set; } = new List<Flow>();
 
         public FlowRepository() { }
 
-        public void AddFlow(Flow<int> flow)
+        public void AddFlow(Flow flow)
         {
             Flows.Add(flow);
         }
