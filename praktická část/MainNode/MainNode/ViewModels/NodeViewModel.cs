@@ -70,10 +70,19 @@ namespace HlavniUzel.ViewModels
             List<Operation<float>> oper2=new List<Operation<float>>()
             {
                 new Operation<float>(2.5f,FuncFloatFloat.Plus),
-            new SubflowOperation<float,int>(instr,FuncFloatInt.Plus)
+            new SubflowOperation<float,int>(instr,FuncFloatInt.devide)
             };
             var sub = new Flow<float>("", oper2);
             var f = sub.Evaluate();
+
+            var ep0 = _node.EndPoints[0];
+            List<Operation<bool>> oper3 = new List<Operation<bool>>()
+            {
+                new RefConstOperation<bool,float>(ep0.Values.Floats[0],2,FuncBoolFloat.Greater),
+            new Operation<bool>(true,FuncBoolBool.And)
+            };
+            var rc = new Flow<bool>("", oper3);
+            var b = rc.Evaluate();
         }
     }
 }
