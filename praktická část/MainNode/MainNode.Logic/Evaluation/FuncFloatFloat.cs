@@ -1,5 +1,8 @@
 ﻿namespace MainNode.Logic.Evaluation
 {
+    /// <summary>
+    /// float func(float,float)
+    /// </summary>
     public static class FuncFloatFloat
     {
         public static float Plus(float a, float b) { return a + b; }

@@ -1,5 +1,8 @@
 ﻿namespace MainNode.Logic.Evaluation
 {
+    /// <summary>
+    /// bool func(bool,bool)
+    /// </summary>
     public static class FuncBoolBool
     {
         public static bool And(bool a, bool b) { return a && b; }
