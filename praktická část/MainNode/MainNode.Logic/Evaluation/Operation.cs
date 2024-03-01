@@ -8,6 +8,7 @@ namespace MainNode.Logic.Evaluation
         public T? Const { get; set; }
         public Func<T, T, T> Func { get; set; }
 
+        protected Operation() { }
         public Operation(ValueDo<T> val, Func<T, T, T> func)
         {
             Ref = val;
@@ -18,7 +19,7 @@ namespace MainNode.Logic.Evaluation
             Const = val;
             Func = func;
         }
-        public T Execute(T b)
+        public virtual T Execute(T b)
         {
             if (Ref != null) { return Func(Ref.Value, b); }
             return Func(Const!, b);

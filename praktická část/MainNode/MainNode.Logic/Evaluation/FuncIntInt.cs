@@ -1,5 +1,8 @@
 ﻿namespace MainNode.Logic.Evaluation
 {
+    /// <summary>
+    /// int func(int,int)
+    /// </summary>
     public static class FuncIntInt
     {
         public static int Plus(int a, int b) { return a + b; }
