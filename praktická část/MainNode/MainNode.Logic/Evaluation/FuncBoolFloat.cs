@@ -6,7 +6,8 @@
     public static class FuncBoolFloat
     {
         public static bool Greater(float a, float b) { return a > b; }
-        public static bool Or(bool a, bool b) { return a || b; }
-        public static bool Not(bool a, bool b=true) { return !a; }
+        public static bool Less(float a, float b) { return a < b; }
+        public static bool Equal(float a, float b) { return a==b; }
+        public static bool NotEqual(float a, float b) { return a != b; }
     }
 }
