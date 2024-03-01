@@ -74,6 +74,7 @@ namespace HlavniUzel.ViewModels
             };
             var sub = new Flow<float>("", oper2);
             var f = sub.Evaluate();
+            re.AddFlow(sub);
 
             var ep0 = _node.EndPoints[0];
             List<Operation<bool>> oper3 = new List<Operation<bool>>()
@@ -83,6 +84,9 @@ namespace HlavniUzel.ViewModels
             };
             var rc = new Flow<bool>("", oper3);
             var b = rc.Evaluate();
+            re.AddFlow(rc);
+
+            re.Run();
         }
     }
 }

@@ -19,7 +19,8 @@ namespace MainNode.Logic.Evaluation
 
         public override void Run()
         {
-            Output!.Value = Evaluate();
+            var res = Evaluate();
+            if(Output != null) {  Output.Value = res; }
         }
         public T Evaluate()
         {

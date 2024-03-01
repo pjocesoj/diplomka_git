@@ -12,5 +12,13 @@ namespace MainNode.Logic
         {
             Flows.Add(flow);
         }
+
+        public void Run()
+        {
+            foreach (Flow flow in Flows)
+            {
+                flow.Run();
+            }
+        }
     }
 }
