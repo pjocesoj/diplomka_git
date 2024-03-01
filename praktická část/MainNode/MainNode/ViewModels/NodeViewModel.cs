@@ -4,6 +4,7 @@ using MainNode.Logic;
 using HlavniUzel.Windows;
 using System.Net;
 using System.Windows;
+using MainNode.Logic.Evaluation;
 
 namespace HlavniUzel.ViewModels
 {
@@ -51,6 +52,7 @@ namespace HlavniUzel.ViewModels
             {
                 MessageBox.Show(ex.Message);
             }
+
         }
     }
 }

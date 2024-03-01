@@ -9,6 +9,7 @@ namespace MainNode.Logic.Extentions
             MainNode.Communication.Extentions.ServicesExtention.Komunikace(services);
             services.AddTransient<Node>();
             services.AddSingleton<NodeRepository>();
+            services.AddSingleton<FlowRepository>();
         }
     }
 }
