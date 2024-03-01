@@ -145,28 +145,36 @@ Keywords: klíčová slova anglicky
 Obsah
 
 
-# 1&ensp;Úvod&ensp;9
-# 2&ensp;Cíl práce a metodika&ensp;10
-## 2.1&ensp;Cíl práce&ensp;10
-## 2.2&ensp;Metodika&ensp;10
-# 3&ensp;Teoretická východiska&ensp;11
-## 3.1&ensp;Podkapitola úroveň 2&ensp;11
-### 3.1.1&ensp;Podkapitola úroveň 3&ensp;11
-### 3.1.2&ensp;Podkapitola úroveň 3&ensp;11
-## 3.2&ensp;Podkapitola úroveň 2&ensp;11
-# 4&ensp;Vlastní práce&ensp;12
-## 4.1&ensp;Podkapitola úroveň 2&ensp;12
-### 4.1.1&ensp;Podkapitola úroveň 3&ensp;12
-### 4.1.2&ensp;Podkapitola úroveň 3&ensp;12
-## 4.2&ensp;Podkapitola úroveň 2&ensp;12
-# 5&ensp;Výsledky a diskuse&ensp;13
-## 5.1&ensp;Podkapitola úroveň 2&ensp;13
-### 5.1.1&ensp;Podkapitola úroveň 3&ensp;13
-### 5.1.2&ensp;Podkapitola úroveň 3&ensp;13
-## 5.2&ensp;Podkapitola úroveň 2&ensp;13
-# 6&ensp;Závěr&ensp;14
-# 7&ensp;Seznam použitých zdrojů&ensp;15
-# 8&ensp;Přílohy&ensp;16
+# 1&ensp;Úvod&ensp;1
+# 2&ensp;Cíl práce a metodika&ensp;2
+## 2.1&ensp;Cíl práce&ensp;2
+## 2.2&ensp;Metodika&ensp;2
+# 3&ensp;ARM&ensp;3
+## 3.1&ensp;ESP 8266&ensp;3
+# 4&ensp;Protokoly&ensp;3
+## 4.1&ensp;TCP/IP&ensp;3
+## 4.2&ensp;HTTP&ensp;3
+## 4.3&ensp;JSON&ensp;3
+# 5&ensp;Návrhové vzory&ensp;3
+## 5.1&ensp;Dependency injection&ensp;3
+## 5.2&ensp;DTO&ensp;3
+## 5.3&ensp;MVVM&ensp;3
+# 6&ensp;Hlavní uzel&ensp;3
+## 6.1&ensp;Komunikační vrstva&ensp;3
+## 6.2&ensp;Logická vrstva&ensp;4
+## 6.3&ensp;Uživatelské rozhraní&ensp;4
+# 7&ensp;Uzly&ensp;4
+## 7.1&ensp;Uzel 1&ensp;4
+## 7.2&ensp;Uzel 2&ensp;4
+## 7.3&ensp;Uzel 3&ensp;4
+# 8&ensp;Výsledky a diskuse&ensp;5
+## 8.1&ensp;Podkapitola úroveň 2&ensp;5
+### 8.1.1&ensp;Podkapitola úroveň 3&ensp;5
+### 8.1.2&ensp;Podkapitola úroveň 3&ensp;5
+## 8.2&ensp;Podkapitola úroveň 2&ensp;5
+# 9&ensp;Závěr&ensp;6
+# 10&ensp;Seznam použitých zdrojů&ensp;i
+# 11&ensp;Přílohy&ensp;ii
 
 Seznam obrázků
 Odkazovaný seznam obrázků
@@ -187,26 +195,43 @@ Text…
 ## Metodika
 Text…
 
-# Teoretická východiska
-## Podkapitola úroveň 2
+# ARM
+ARM (Advanced RISC Machine) je
+## ESP 8266
 Text…
-### Podkapitola úroveň 3
+# Protokoly
+Text
+## TCP/IP
+text
+## HTTP
+Text
+## JSON
+*tohle není protokol, takže budu muset vymyslet kam s ním
+# Návrhové vzory
+## Dependency injection
+Text
+## DTO
+text
+## MVVM
+Text
+# Hlavní uzel
+Hlavní uzel je realizován jako počítačový program. Řešení je rozděleno na tři části, které řeší komunikační, logickou a uživatelskou vrstvu. Každá vrstva má referenci jen na vrstvu pod ní. Toto řešení umožňuje snadnou změnu jednotlivých částí, bez výrazných zásahů do kódu.
+## Komunikační vrstva
 Text…
-### Podkapitola úroveň 3
-Text…
-## Podkapitola úroveň 2
+## Logická vrstva
 Text…
 
+## Uživatelské rozhraní
+Text
 
-# Vlastní práce
-## Podkapitola úroveň 2
-Text…
-### Podkapitola úroveň 3
-Text…
-### Podkapitola úroveň 3
-Text…
-## Podkapitola úroveň 2
-Text…
+# Uzly
+Jednotlivé uzly jsou tvořeny jednočipovými počítači ESP8266.
+## Uzel 1
+text
+## Uzel 2
+text
+## Uzel 3
+text
 # Výsledky a diskuse
 ## Podkapitola úroveň 2
 Text…
