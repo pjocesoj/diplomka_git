@@ -2,11 +2,11 @@
 
 namespace MainNode.Logic.Evaluation
 {
-    public class SubflowOperation<T>:Operation<T> where T:struct
+    public class SubflowOperation<T,U>:Operation<T> where T:struct where U : struct
     {
-        public Flow<T> Subflow { get; set; }
-        public Func<T, T, T> Func { get; set; }
-        public SubflowOperation(Flow<T> flow, Func<T, T, T> func)
+        public Flow<U> Subflow { get; set; }
+        public Func<U, T, T> Func { get; set; }
+        public SubflowOperation(Flow<U> flow, Func<U, T, T> func)
         {
             Subflow = flow;
             Func = func;
