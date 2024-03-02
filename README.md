@@ -16,7 +16,7 @@ samotná práce se nachází ve složce [teoretická část](https://github.com/
 ## praktická část
 realizace je tvořena několika částmi
 
-[hlavní uzel (C#)](https://github.com/pjocesoj/diplomka_git/tree/main/praktick%C3%A1%20%C4%8D%C3%A1st/HlavniUzel)
+[hlavní uzel (C#)](https://github.com/pjocesoj/diplomka_git/tree/main/praktick%C3%A1%20%C4%8D%C3%A1st/MainNode)
 
 [emulovaný uzel (C#)](https://github.com/pjocesoj/diplomka_git/tree/main/praktick%C3%A1%20%C4%8D%C3%A1st/NodeEmulator)
 
