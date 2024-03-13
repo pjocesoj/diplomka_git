@@ -26,5 +26,7 @@ void setup()
 
 void loop() {
   // put your main code here, to run repeatedly:
-  test();
+   Endpoint* e1=test();
+   Serial.println(e1->HTTP);
+   Serial.println(e1->URL);
 }

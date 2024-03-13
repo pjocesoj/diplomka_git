@@ -3,9 +3,10 @@
 
 #include "../Endpoint.h"
 
-void test()
+ Endpoint* test()
 {
-    Serial.println("node 1");
+    Endpoint* e1=new Endpoint(GET,"/getValues");
+    return e1;
 }
 
 #endif
