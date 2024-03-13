@@ -1,7 +1,7 @@
 #ifndef NODE_H_
 #define NODE_H_
 
-#include "secret.h"
+#include "secret.h" //git update-index --assume-unchanged secret.h
 #include "helpers.h"
 #include "ESP8266WiFi.h"
 
@@ -16,7 +16,7 @@ void NodeInit() {
 
   while (WiFi.status() != WL_CONNECTED) 
   {
-    delay(100);
+    delay(500);
     Serial.println("Connecting..");
   }
   Serial.println(WiFi.localIP());
