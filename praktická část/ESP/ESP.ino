@@ -29,4 +29,11 @@ void loop() {
    Endpoint* e1=test();
    Serial.println(e1->HTTP);
    Serial.println(e1->URL);
+
+   DynamicJsonDocument doc(1024);
+  JsonObject jsonObject = doc.to<JsonObject>();
+   e1->Serialize(jsonObject);
+   String ret;
+  serializeJson(doc, ret);
+  Serial.println(ret);
 }
