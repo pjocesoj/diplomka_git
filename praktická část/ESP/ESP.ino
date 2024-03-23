@@ -4,8 +4,11 @@
 #include <ArduinoJson.h>
 #include "secret.h" //git update-index --assume-unchanged secret.h
 #include "helpers.h"
+#include "SharedHttpEndpoints.h"
 
 #include "Node1/Node1.h"
+
+//ESP8266WebServer server(80);
 
 void setup() 
 {
@@ -13,7 +16,7 @@ void setup()
   Serial.println("boot");
   AvailableRAM("boot");
 
-
+test2();
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) 
@@ -22,11 +25,19 @@ void setup()
     Serial.println("Connecting..");
   }
   Serial.println(WiFi.localIP());
+
+  server.on("/", handleRootPath);
+  server.begin();
+  Serial.println("Server listening");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-   Endpoint* e1=test();
+    server.handleClient();
+}
+
+void test2()
+{
+  Endpoint* e1=test();
    Serial.println(e1->HTTP);
    Serial.println(e1->URL);
 
