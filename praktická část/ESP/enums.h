@@ -2,11 +2,14 @@
 #define ENUM_H_
 typedef enum
 {
-	GET ,POST
+	GET,
+	POST
 } HttpEnum;
 
 typedef enum
 {
-	INT, BOOL, FLOAT
+	INT,
+	BOOL,
+	FLOAT
 } ValTypeEnum;
 #endif

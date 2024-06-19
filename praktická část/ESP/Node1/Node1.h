@@ -4,7 +4,6 @@
 #include "../Endpoint.h"
 #include "../global.h"
 
-
 //std::vector<Endpoint *> endpoints;
 
 Endpoint *test()
