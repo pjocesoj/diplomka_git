@@ -3,8 +3,15 @@
 
 #include "../Endpoint.h"
 #include "../global.h"
+#include "../SharedHttpEndpoints.h"
+
 
 //std::vector<Endpoint *> endpoints;
+
+void getValues()
+{
+    sendEndpointValues(endpoints[0]);
+}
 
 Endpoint *test()
 {
@@ -14,6 +21,8 @@ Endpoint *test()
     e1->Floats.push_back(new ValueDto<float>("c", 3.14));
     e1->Bools.push_back(new ValueDto<bool>("B1", true));
     endpoints.push_back(e1);
+
+    server.on(e1->URL, getValues);
     return e1;
 }
 

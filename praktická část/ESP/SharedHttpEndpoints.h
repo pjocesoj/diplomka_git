@@ -46,4 +46,16 @@ void AddDefaultEndpoints()
   server.on("/getInfo", getInfo);
 }
 
+void sendEndpointValues(Endpoint *e)
+{
+  DynamicJsonDocument doc(1024);
+  JsonObject jsonObject = doc.to<JsonObject>();
+  e->Serialize_values(jsonObject);
+
+  String ret;
+  serializeJson(doc, ret);
+  Serial.println(ret);
+  server.send(200, "text/plain", ret);
+}
+
 #endif
