@@ -4,6 +4,7 @@
 #include <ArduinoJson.h>
 #include "secret.h" //git update-index --assume-unchanged secret.h
 #include "helpers.h"
+#include "global.h" //global var
 #include "SharedHttpEndpoints.h"
 
 #include "Node1/Node1.h"
@@ -26,7 +27,8 @@ test2();
   }
   Serial.println(WiFi.localIP());
 
-  server.on("/", handleRootPath);
+  //server.on("/", handleRootPath);
+  AddDefaultEndpoints();
   server.begin();
   Serial.println("Server listening");
 }

@@ -2,8 +2,10 @@
 #define NODE_1_H_
 
 #include "../Endpoint.h"
+#include "../global.h"
 
-std::vector<Endpoint *> endpoints;
+
+//std::vector<Endpoint *> endpoints;
 
 Endpoint *test()
 {
@@ -12,7 +14,7 @@ Endpoint *test()
     e1->Ints.push_back(new ValueDto<int>("b", 2));
     e1->Floats.push_back(new ValueDto<float>("c", 3.14));
     e1->Bools.push_back(new ValueDto<bool>("B1", true));
-    //endpoints.push_back(e1);
+    endpoints.push_back(e1);
     return e1;
 }
 

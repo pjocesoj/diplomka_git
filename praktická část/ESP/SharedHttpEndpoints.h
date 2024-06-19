@@ -2,13 +2,15 @@
 #define SHARED_HTTP_H_
 
 #include "ESP8266WebServer.h"
+#include "global.h"
 
-ESP8266WebServer server(80);
-/*void getInfo()
+
+//ESP8266WebServer server(80);
+void getInfo()
 {
   DynamicJsonDocument doc(1024);
   JsonArray EPs = doc.to<JsonArray>();
-  for (auto& obj : endpoints) 
+  for (auto &obj : endpoints)
   {
     JsonObject nestedJsonObject = EPs.createNestedObject();
     obj->Serialize_info(nestedJsonObject);
@@ -18,12 +20,14 @@ ESP8266WebServer server(80);
   serializeJson(doc, ret);
   Serial.println(ret);
   server.send(200, "text/plain", ret);
-}*/
+}
 
-void handleRootPath() {
+void handleRootPath()
+{
   Serial.println("http root");
   int headers = server.headers();
-  for (int i = 0; i < headers; i++) {
+  for (int i = 0; i < headers; i++)
+  {
     String val = server.header(i);
     String nam = server.headerName(i);
     Serial.print(nam);
@@ -35,6 +39,12 @@ void handleRootPath() {
   Serial.println(body);
 
   server.send(200, "text/plain", "Hello world");
+}
+
+void AddDefaultEndpoints()
+{
+  server.on("/", handleRootPath);
+  server.on("/getInfo", getInfo);
 }
 
 #endif
