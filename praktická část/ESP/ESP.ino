@@ -18,6 +18,7 @@ void setup()
   AvailableRAM("boot");
 
   test2();
+  test_set();
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED)

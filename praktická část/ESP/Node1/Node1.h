@@ -4,7 +4,7 @@
 #include "../Endpoint.h"
 #include "../global.h"
 #include "../SharedHttpEndpoints.h"
-
+#include "../helpers.h"
 
 //std::vector<Endpoint *> endpoints;
 
@@ -24,6 +24,28 @@ Endpoint *test()
 
     server.on(e1->URL, getValues);
     return e1;
+}
+
+void setValues()
+{
+  Serial.println("setValue");
+  String body=server.arg("plain");
+  deserializace(body,endpoints[0]);
+  
+  server.send(200, "text/plain", "ok"); 
+}
+
+Endpoint *test_set()
+{
+    Endpoint *e2 = new Endpoint(POST, "/setValues");
+    e2->Ints.push_back(new ValueDto<int>("a", 1));
+    e2->Ints.push_back(new ValueDto<int>("b", 2));
+    e2->Floats.push_back(new ValueDto<float>("c", 3.14));
+    e2->Bools.push_back(new ValueDto<bool>("B1", true));
+    endpoints.push_back(e2);
+
+    server.on(e2->URL, setValues);
+    return e2;
 }
 
 #endif
