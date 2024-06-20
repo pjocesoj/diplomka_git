@@ -9,7 +9,8 @@
 
 #include "Node1/Node1.h"
 
-//ESP8266WebServer server(80);
+ESP8266WebServer server(80);
+std::vector<Endpoint*> endpoints;
 
 void setup()
 {

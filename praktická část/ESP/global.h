@@ -2,9 +2,10 @@
 #define GLOBAL_H_
 
 #include "ESP8266WebServer.h"
+#include <vector>
 #include "Endpoint.h"
 
-ESP8266WebServer server(80);
-std::vector<Endpoint *> endpoints;
+extern ESP8266WebServer server; //rika compileru ze definuji jinde
+extern std::vector<Endpoint*> endpoints; //rika compileru ze definuji jinde
 
 #endif GLOBAL_H_
