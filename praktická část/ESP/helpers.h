@@ -5,6 +5,6 @@
 
 void AvailableRAM(char* const title);
 
-void deserializace(String json, Endpoint *ep);
+void deserializeDTO(String json, Endpoint *ep);
 
 #endif

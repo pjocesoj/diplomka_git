@@ -3,8 +3,8 @@
 
 #include "EndPoint.h"
 
-void getInfo();
-void handleRootPath();
+//void getInfo();
+//void handleRootPath();
 void AddDefaultEndpoints();
 void sendEndpointValues(Endpoint *e);
 

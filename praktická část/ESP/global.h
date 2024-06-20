@@ -5,7 +5,9 @@
 #include <vector>
 #include "Endpoint.h"
 
-extern ESP8266WebServer server; //rika compileru ze definuji jinde
-extern std::vector<Endpoint*> endpoints; //rika compileru ze definuji jinde
+//extern rika compileru ze definuji jinde
+
+extern ESP8266WebServer server; //HTTP server
+extern std::vector<Endpoint*> endpoints; //list vsech endpointu pro tento node
 
 #endif GLOBAL_H_

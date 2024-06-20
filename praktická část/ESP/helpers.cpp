@@ -3,6 +3,11 @@
 #include "HardwareSerial.h"
 #include "Esp.h"
 
+/**
+ * @brief vypise do konzole stav heap a stack
+ * 
+ * @param title text pred vypisem usnadnujici orientaci ve vypisu
+ */
 void AvailableRAM(char* const title)
 {
   Serial.print(title);
@@ -14,7 +19,13 @@ void AvailableRAM(char* const title)
   Serial.println(ESP.getFreeContStack());
 }
 
-void deserializace(String json, Endpoint *ep)
+/**
+ * @brief desrializuje JSON, ktery prisel z POST a hodnoty zapise do prislusnych hodnot endpointu 
+ * 
+ * @param json JSON k deserializaci
+ * @param ep endpoint kam se maji hodnoty zapsat
+ */
+void deserializeDTO(String json, Endpoint *ep)
 {
   DynamicJsonDocument doc(1024);
   deserializeJson(doc, json);

@@ -30,7 +30,7 @@ void setValues()
 {
   Serial.println("setValue");
   String body=server.arg("plain");
-  deserializace(body,endpoints[0]);
+  deserializeDTO(body,endpoints[0]);
   
   server.send(200, "text/plain", "ok"); 
 }

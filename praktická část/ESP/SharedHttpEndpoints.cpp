@@ -3,6 +3,7 @@
 #include "ESP8266WebServer.h"
 #include "global.h"
 
+// handler dotazu na seznam endpontu
 void getInfo()
 {
     DynamicJsonDocument doc(1024);
@@ -19,6 +20,7 @@ void getInfo()
     server.send(200, "text/plain", ret);
 }
 
+// handler pro root
 void handleRootPath()
 {
     Serial.println("http root");
@@ -38,12 +40,21 @@ void handleRootPath()
     server.send(200, "text/plain", "Hello world");
 }
 
+/**
+ * @brief prida serveru root + getinfo, ktere jsou spolecne pro vsechny node
+ */
 void AddDefaultEndpoints()
 {
     server.on("/", handleRootPath);
     server.on("/getInfo", getInfo);
 }
 
+/**
+ *  @brief metoda odesilajici hodnoty
+ * (volana z jine ktera resi ziskani hodnot)
+ * 
+ *  @param e endpoint jehoz hodnoty ma odeslat
+ */
 void sendEndpointValues(Endpoint *e)
 {
     DynamicJsonDocument doc(1024);

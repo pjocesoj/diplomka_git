@@ -10,6 +10,11 @@ Endpoint::Endpoint(HttpEnum http, const char *url)
   URL = url;
 }
 
+/**
+ * @brief serializuje kompletni info o endpointu {GET/POST, URL, vals[] {typ, jmeno, hodnota} }
+ * 
+ * @param jsonObject JSON kam ma zapisovat
+ */
 void Endpoint::Serialize(JsonObject &jsonObject)
 {
   jsonObject["HTTP"] = HTTP;
@@ -33,6 +38,11 @@ void Endpoint::Serialize(JsonObject &jsonObject)
   }
 }
 
+/**
+ * @brief serializuje informace o endpointu {GET/POST, URL, vals[] {typ, jmeno} }
+ * 
+ * @param jsonObject JSON kam ma zapisovat
+ */
 void Endpoint::Serialize_info(JsonObject &jsonObject)
 {
   jsonObject["HTTP"] = HTTP;
@@ -56,6 +66,11 @@ void Endpoint::Serialize_info(JsonObject &jsonObject)
   }
 }
 
+/**
+ * @brief serializuje hodnoty jako { Ints[], Floats[], Bools[] }
+ * 
+ * @param jsonObject JSON kam ma zapisovat
+ */
 void Endpoint::Serialize_values(JsonObject &jsonObject)
 {
   JsonArray ints = jsonObject.createNestedArray("Ints");
