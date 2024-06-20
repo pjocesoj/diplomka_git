@@ -10,18 +10,7 @@ Endpoint::Endpoint(HttpEnum http, const char *url)
   URL = url;
 }
 
-Endpoint::Endpoint(HttpEnum http, const char *url, int i)
-{
-  HTTP = http;
-  URL = url;
-
-  Ints.push_back(new ValueDto<int>("a", 1));
-  Ints.push_back(new ValueDto<int>("b", 2));
-  Floats.push_back(new ValueDto<float>("c", 3.14));
-  Bools.push_back(new ValueDto<bool>("B1", true));
-}
-
-void Endpoint::Serialize(JsonObject &jsonObject) // Serialize the main class data
+void Endpoint::Serialize(JsonObject &jsonObject)
 {
   jsonObject["HTTP"] = HTTP;
   jsonObject["URL"] = URL;
@@ -44,7 +33,7 @@ void Endpoint::Serialize(JsonObject &jsonObject) // Serialize the main class dat
   }
 }
 
-void Endpoint::Serialize_info(JsonObject &jsonObject) // Serialize the main class data
+void Endpoint::Serialize_info(JsonObject &jsonObject)
 {
   jsonObject["HTTP"] = HTTP;
   jsonObject["URL"] = URL;
