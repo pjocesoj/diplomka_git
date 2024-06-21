@@ -20,6 +20,9 @@ realizace je tvořena několika částmi
 
 [emulovaný uzel (C#)](https://github.com/pjocesoj/diplomka_git/tree/main/praktick%C3%A1%20%C4%8D%C3%A1st/NodeEmulator)
 
+[ESP8266 (C++)](https://github.com/pjocesoj/diplomka_git/tree/main/praktick%C3%A1%20%C4%8D%C3%A1st/ESP) 
+(nutno v secret.h přepsat placeholdery)
+
 *odkaz na ostatní bude přidán v budoucnu
 
 
