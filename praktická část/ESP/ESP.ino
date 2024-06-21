@@ -6,9 +6,7 @@
 #include "helpers.h"
 #include "global.h" //global var
 #include "SharedHttpEndpoints.h"
-
-#define NODE1
-#include "Node1/Node1.h"
+#include "src/Node.h"
 
 ESP8266WebServer server(80);
 std::vector<Endpoint*> endpoints;
