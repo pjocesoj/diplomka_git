@@ -7,6 +7,7 @@
 #include "global.h" //global var
 #include "SharedHttpEndpoints.h"
 
+#define NODE1
 #include "Node1/Node1.h"
 
 ESP8266WebServer server(80);
@@ -18,8 +19,7 @@ void setup()
   Serial.println("boot");
   AvailableRAM("boot");
 
-  test2();
-  test_set();
+  NodeInit();
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED)
@@ -38,18 +38,4 @@ void setup()
 void loop()
 {
   server.handleClient();
-}
-
-void test2()
-{
-  Endpoint *e1 = test();
-  Serial.println(e1->HTTP);
-  Serial.println(e1->URL);
-
-  DynamicJsonDocument doc(1024);
-  JsonObject jsonObject = doc.to<JsonObject>();
-  e1->Serialize(jsonObject);
-  String ret;
-  serializeJson(doc, ret);
-  Serial.println(ret);
 }

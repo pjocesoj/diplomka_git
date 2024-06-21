@@ -1,19 +1,18 @@
 #ifndef NODE_1_H_
 #define NODE_1_H_
 
+#include "HardwareSerial.h"
 #include "../Endpoint.h"
 #include "../global.h"
 #include "../SharedHttpEndpoints.h"
 #include "../helpers.h"
-
-//std::vector<Endpoint *> endpoints;
 
 void getValues()
 {
     sendEndpointValues(endpoints[0]);
 }
 
-Endpoint *test()
+Endpoint *test_get()
 {
     Endpoint *e1 = new Endpoint(GET, "/getValues");
     e1->Ints.push_back(new ValueDto<int>("a", 1));
@@ -28,11 +27,11 @@ Endpoint *test()
 
 void setValues()
 {
-  Serial.println("setValue");
-  String body=server.arg("plain");
-  deserializeDTO(body,endpoints[0]);
-  
-  server.send(200, "text/plain", "ok"); 
+    Serial.println("setValue");
+    String body = server.arg("plain");
+    deserializeDTO(body, endpoints[0]);
+
+    server.send(200, "text/plain", "ok");
 }
 
 Endpoint *test_set()
@@ -46,6 +45,28 @@ Endpoint *test_set()
 
     server.on(e2->URL, setValues);
     return e2;
+}
+
+void printEndpoint(Endpoint *ep)
+{
+    DynamicJsonDocument doc(1024);
+    JsonObject jsonObject = doc.to<JsonObject>();
+    ep->Serialize(jsonObject);
+    String ret;
+    serializeJson(doc, ret);
+    Serial.println(ret);
+}
+
+void NodeInit()
+{
+#ifdef NODE1
+    Serial.println("NODE 1");
+#endif
+
+    Endpoint *e1 = test_get();
+    printEndpoint(e1);
+    Endpoint *e2 = test_set();
+    printEndpoint(e2);
 }
 
 #endif
