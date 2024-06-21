@@ -1,11 +1,12 @@
-#ifndef NODE_1_H_
-#define NODE_1_H_
+#include "../Node.h"
 
 #include "HardwareSerial.h"
-#include "../Endpoint.h"
-#include "../global.h"
-#include "../SharedHttpEndpoints.h"
-#include "../helpers.h"
+#include "../../Endpoint.h"
+#include "../../global.h"
+#include "../../SharedHttpEndpoints.h"
+#include "../../helpers.h"
+
+#ifdef NODE1
 
 void getValues()
 {
@@ -47,21 +48,9 @@ Endpoint *test_set()
     return e2;
 }
 
-void printEndpoint(Endpoint *ep)
-{
-    DynamicJsonDocument doc(1024);
-    JsonObject jsonObject = doc.to<JsonObject>();
-    ep->Serialize(jsonObject);
-    String ret;
-    serializeJson(doc, ret);
-    Serial.println(ret);
-}
-
 void NodeInit()
 {
-#ifdef NODE1
     Serial.println("NODE 1");
-#endif
 
     Endpoint *e1 = test_get();
     printEndpoint(e1);
