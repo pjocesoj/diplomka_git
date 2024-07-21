@@ -4,7 +4,7 @@
 
 void printEndpoint(Endpoint *ep)
 {
-    DynamicJsonDocument doc(1024);
+    JsonDocument doc;
     JsonObject jsonObject = doc.to<JsonObject>();
     ep->Serialize(jsonObject);
     String ret;
