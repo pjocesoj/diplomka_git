@@ -10,4 +10,4 @@
 extern ESP8266WebServer server; //HTTP server
 extern std::vector<Endpoint*> endpoints; //list vsech endpointu pro tento node
 
-#endif GLOBAL_H_
+#endif

@@ -8,7 +8,7 @@
  * 
  * @param title text pred vypisem usnadnujici orientaci ve vypisu
  */
-void AvailableRAM(char* const title)
+void AvailableRAM(const char* title)
 {
   Serial.print(title);
 
