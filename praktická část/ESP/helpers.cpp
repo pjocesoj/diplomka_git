@@ -27,7 +27,7 @@ void AvailableRAM(char* const title)
  */
 void deserializeDTO(String json, Endpoint *ep)
 {
-  DynamicJsonDocument doc(1024);
+  JsonDocument doc;
   deserializeJson(doc, json);
 
   JsonArray array1 = doc["Ints"];

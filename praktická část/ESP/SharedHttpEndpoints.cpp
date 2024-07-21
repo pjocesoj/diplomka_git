@@ -6,7 +6,7 @@
 // handler dotazu na seznam endpontu
 void getInfo()
 {
-    DynamicJsonDocument doc(1024);
+    JsonDocument doc;
     JsonArray EPs = doc.to<JsonArray>();
     for (auto &obj : endpoints)
     {
@@ -57,7 +57,7 @@ void AddDefaultEndpoints()
  */
 void sendEndpointValues(Endpoint *e)
 {
-    DynamicJsonDocument doc(1024);
+    JsonDocument doc;
     JsonObject jsonObject = doc.to<JsonObject>();
     e->Serialize_values(jsonObject);
 
