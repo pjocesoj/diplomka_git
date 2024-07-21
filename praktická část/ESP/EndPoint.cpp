@@ -24,18 +24,21 @@ void Endpoint::Serialize(JsonObject &jsonObject)
   JsonArray vals = jsonObject["Vals"].to<JsonArray>();
   for (auto &obj : Ints)
   {
-    JsonObject nestedJsonObject = vals.createNestedObject();
-    obj->Serialize(nestedJsonObject);
+    //JsonObject nestedJsonObject = vals.createNestedObject();
+      JsonObject nestedJsonObject = vals.add<JsonObject>();
+      obj->Serialize(nestedJsonObject);
   }
   for (auto &obj : Floats)
   {
-    JsonObject nestedJsonObject = vals.createNestedObject();
-    obj->Serialize(nestedJsonObject);
+    //JsonObject nestedJsonObject = vals.createNestedObject();
+      JsonObject nestedJsonObject = vals.add<JsonObject>();
+      obj->Serialize(nestedJsonObject);
   }
   for (auto &obj : Bools)
   {
-    JsonObject nestedJsonObject = vals.createNestedObject();
-    obj->Serialize(nestedJsonObject);
+    //JsonObject nestedJsonObject = vals.createNestedObject();
+      JsonObject nestedJsonObject = vals.add<JsonObject>();
+      obj->Serialize(nestedJsonObject);
   }
 }
 
@@ -53,18 +56,21 @@ void Endpoint::Serialize_info(JsonObject &jsonObject)
   JsonArray vals = jsonObject["Vals"].to<JsonArray>();
   for (auto &obj : Ints)
   {
-    JsonObject nestedJsonObject = vals.createNestedObject();
-    obj->Serialize_info(nestedJsonObject);
+    //JsonObject nestedJsonObject = vals.createNestedObject();
+      JsonObject nestedJsonObject = vals.add<JsonObject>();
+      obj->Serialize_info(nestedJsonObject);
   }
   for (auto &obj : Floats)
   {
-    JsonObject nestedJsonObject = vals.createNestedObject();
-    obj->Serialize_info(nestedJsonObject);
+    //JsonObject nestedJsonObject = vals.createNestedObject();
+      JsonObject nestedJsonObject = vals.add<JsonObject>();
+      obj->Serialize_info(nestedJsonObject);
   }
   for (auto &obj : Bools)
   {
-    JsonObject nestedJsonObject = vals.createNestedObject();
-    obj->Serialize_info(nestedJsonObject);
+    //JsonObject nestedJsonObject = vals.createNestedObject();
+      JsonObject nestedJsonObject = vals.add<JsonObject>();
+      obj->Serialize_info(nestedJsonObject);
   }
 }
 
@@ -79,21 +85,24 @@ void Endpoint::Serialize_values(JsonObject &jsonObject)
   JsonArray ints = jsonObject["Ints"].to<JsonArray>();
   for (auto &obj : Ints)
   {
-    JsonObject nestedJsonObject = ints.createNestedObject();
-    obj->Serialize_value(nestedJsonObject);
+    //JsonObject nestedJsonObject = ints.createNestedObject();
+      JsonObject nestedJsonObject = ints.add<JsonObject>();
+      obj->Serialize_value(nestedJsonObject);
   }
   //JsonArray floats = jsonObject.createNestedArray("Floats");
   JsonArray floats = jsonObject["Floats"].to<JsonArray>();
   for (auto &obj : Floats)
   {
-    JsonObject nestedJsonObject = floats.createNestedObject();
-    obj->Serialize_value(nestedJsonObject);
+    //JsonObject nestedJsonObject = floats.createNestedObject();
+      JsonObject nestedJsonObject = floats.add<JsonObject>();
+      obj->Serialize_value(nestedJsonObject);
   }
   //JsonArray bools = jsonObject.createNestedArray("Bools");
   JsonArray bools = jsonObject["Bools"].to<JsonArray>();
   for (auto &obj : Bools)
   {
-    JsonObject nestedJsonObject = bools.createNestedObject();
-    obj->Serialize_value(nestedJsonObject);
+    //JsonObject nestedJsonObject = bools.createNestedObject();
+      JsonObject nestedJsonObject = bools.add<JsonObject>();
+      obj->Serialize_value(nestedJsonObject);
   }
 }

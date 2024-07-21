@@ -10,7 +10,8 @@ void getInfo()
     JsonArray EPs = doc.to<JsonArray>();
     for (auto &obj : endpoints)
     {
-        JsonObject nestedJsonObject = EPs.createNestedObject();
+        //JsonObject nestedJsonObject = EPs.createNestedObject();
+        JsonObject nestedJsonObject = EPs.add<JsonObject>();
         obj->Serialize_info(nestedJsonObject);
     }
 
