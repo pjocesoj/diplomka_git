@@ -6,7 +6,7 @@ namespace MainNode.Logic.Evaluation
     /// obsahuje výsledek flow a informaci zda je aktuální<br/>
     /// pokud ne tak se flow spustí a vrátí výsledek
     /// </summary>
-    public class FlowResult<T> where T : struct
+    public class FlowResult<T>:FlowResult where T : struct
     {
         public bool Finished { get; set; } = false;
         public Flow<T> Flow { get; set; }
@@ -19,7 +19,7 @@ namespace MainNode.Logic.Evaluation
             Flow.Output = _valueDo;
         }
 
-        public ValueDo<T> Value 
+        public override ValueDo<T> Value 
         {
             get
             {
@@ -31,5 +31,16 @@ namespace MainNode.Logic.Evaluation
                 return _valueDo;
             }
         }
+        public override void NewIteration()
+        {
+            Finished = false;
+        }
+    }
+
+    public abstract class FlowResult
+    {
+        public abstract valueDo Value { get; }
+
+        public abstract void NewIteration();
     }
 }

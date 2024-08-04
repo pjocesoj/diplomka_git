@@ -1,6 +1,6 @@
 ﻿namespace MainNode.Logic.Do
 {
-    public class ValueDo<T>
+    public class ValueDo<T>:valueDo
     {
         public string? Name { get; set; } = "val";
         public T Value { get; set; }
@@ -24,5 +24,9 @@
 
             return $"{typeof(T).Name} {Name}";
         }
+    }
+
+    public abstract class valueDo 
+    {
     }
 }

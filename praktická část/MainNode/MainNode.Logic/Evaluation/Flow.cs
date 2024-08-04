@@ -7,10 +7,6 @@ namespace MainNode.Logic.Evaluation
         public List<Operation<T>> Operations { get; } = new List<Operation<T>>();
         public ValueDo<T>? Output { get; set; }
 
-        public Flow(string name, List<Operation<T>> opers, ValueDo<T> output) : this(name, opers)
-        {
-            Output = output;
-        }
         public Flow(string name, List<Operation<T>> opers)
         {
             Name = name;
@@ -32,6 +28,11 @@ namespace MainNode.Logic.Evaluation
             }
             return res;
         }
+
+        public override FlowResult GetResult()
+        {
+            return new FlowResult<T>(this);
+        }
     }
 
     public abstract class Flow
@@ -39,5 +40,7 @@ namespace MainNode.Logic.Evaluation
         public string Name { get; set; } = "";
 
         public abstract void Run();
+
+        public abstract FlowResult GetResult();
     }
 }
