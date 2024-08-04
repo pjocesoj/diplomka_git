@@ -1,23 +1,30 @@
-﻿using MainNode.Logic.Evaluation;
+﻿using MainNode.Logic.Do;
+using MainNode.Logic.Evaluation;
 
 namespace MainNode.Logic
 {
     public class FlowRepository
     {
-        public List<Flow> Flows { get; private set; } = new List<Flow>();
+        public List<FlowResult> Results { get; private set; } = new List<FlowResult>();
 
         public FlowRepository() { }
 
-        public void AddFlow(Flow flow)
+        public FlowResult AddFlow(Flow flow)
         {
-            Flows.Add(flow);
+            var res = flow.GetResult();
+            Results.Add(res);
+            return res;
         }
 
         public void Run()
         {
-            foreach (Flow flow in Flows)
+            foreach (FlowResult r in Results)
             {
-                flow.Run();
+                r.NewIteration();
+            }
+            foreach (FlowResult res in Results)
+            {
+                var val = res.Value;
             }
         }
     }
