@@ -39,7 +39,7 @@ namespace MainNode.Logic.Evaluation
 
     public abstract class FlowResult
     {
-        public abstract valueDo Value { get; }
+        public abstract ValueDo Value { get; }
 
         public abstract void NewIteration();
     }
