@@ -10,7 +10,7 @@ namespace MainNode.Logic
     {
         private readonly INodeCommunication _comm;
 
-        public string Name { get; set; } = "node";
+        public string Name { get; set; } = $"node{NodeRepository.Count}";
 
         private string _address;
         /// <summary>

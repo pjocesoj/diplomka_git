@@ -1,9 +1,11 @@
 ﻿using MainNode.Exceptions;
+using System.Text.Json;
 
 namespace MainNode.Logic
 {
     public class NodeRepository
     {
+        public static int Count { get; private set; } = 0;
         public List<Node> Nodes { get; private set; } = new List<Node>();
 
         public NodeRepository() { }
@@ -12,6 +14,8 @@ namespace MainNode.Logic
         {
             if (string.IsNullOrEmpty(node.Address)) { throw new ArgumentException("address"); }
             if (string.IsNullOrEmpty(node.Name)) { throw new ArgumentException("name"); }
+
+            if (Nodes.Any(x => x.Name == node.Name)) { throw new ArgumentException("name must be unique"); }
 
             try
             {
@@ -25,6 +29,36 @@ namespace MainNode.Logic
 
             if (node.EndPoints.Length == 0) { throw new NoEndPointException("no endpoints"); }
             Nodes.Add(node);
+
+            Count++;
+        }
+
+        public async Task<Dictionary<Node, string>> LoadNodes(string json)
+        {
+            var failed = new Dictionary<Node, string>();
+
+            var loaded = new List<Node>();
+            try
+            {
+                loaded = JsonSerializer.Deserialize<List<Node>>(json);
+            }
+            catch (Exception e)
+            {
+                throw new FileLoadException("deserialization failed",e);
+            }
+
+            foreach (var n in loaded)
+            {
+                try
+                {
+                    await AddNode(n);
+                }
+                catch (Exception e)
+                {
+                    failed.Add(n, e.Message);
+                }
+            }
+            return failed;
         }
     }
 }
