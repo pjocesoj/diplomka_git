@@ -13,7 +13,7 @@ namespace MainNode.Communication
         private HttpClient _httpClient;
 
         public string Address { get; private set; } = "";
-
+        public string AddressType { get; set; } = "http";
         public void Init(string address)
         {
             _httpClient = new HttpClient();
