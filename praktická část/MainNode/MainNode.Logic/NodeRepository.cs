@@ -44,7 +44,7 @@ namespace MainNode.Logic
             }
             catch (Exception e)
             {
-                throw new FileLoadException("deserialization failed",e);
+                throw new FileLoadException("deserialization failed", e);
             }
 
             foreach (var n in loaded)
@@ -59,6 +59,11 @@ namespace MainNode.Logic
                 }
             }
             return failed;
+        }
+
+        public string SaveNodes()
+        {
+            return JsonSerializer.Serialize(Nodes);
         }
     }
 }

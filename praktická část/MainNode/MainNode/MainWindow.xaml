@@ -11,6 +11,7 @@
     <Grid>
         <Button Content="add" HorizontalAlignment="Left" Margin="315,243,0,0" VerticalAlignment="Top" Command="{Binding AddNodeCommand}"/>
         <Button Content="load" HorizontalAlignment="Left" Margin="215,243,0,0" VerticalAlignment="Top" Command="{Binding LoadNodesCommand}"/>
+        <Button Content="save" HorizontalAlignment="Left" Margin="215,343,0,0" VerticalAlignment="Top" Command="{Binding SaveNodesCommand}"/>
 
     </Grid>
 </Window>

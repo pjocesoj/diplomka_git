@@ -44,5 +44,18 @@ namespace MainNode.ViewModels
                 }
             }
         }
+
+        [RelayCommand]
+        public async Task SaveNodes()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Json files (*.json)|*.json";
+            saveFileDialog.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                var json = _nodeRepo.SaveNodes();
+                File.WriteAllText(saveFileDialog.FileName, json);
+            }
+        }
     }
 }
