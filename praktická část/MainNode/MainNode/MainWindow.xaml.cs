@@ -23,10 +23,5 @@ namespace MainNode
             DataContext = vm;
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            App.Current.ShowWindow<AddNodeWindow>();
-        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using MainNode.Extentions;
 using MainNode.ViewModels;
 using MainNode.Windows;
-using MainNode.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Configuration;

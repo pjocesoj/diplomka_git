@@ -1,13 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MainNode.Logic;
+using MainNode.Windows;
 using System.Windows;
 using Microsoft.Win32;
 using System.IO;
 
 namespace MainNode.ViewModels
 {
-    public partial class MainWindowsViewModel: ObservableObject
+    public partial class MainWindowsViewModel : ObservableObject
     {
         private readonly FlowRepository _flowRepo;
         private readonly NodeRepository _nodeRepo;
@@ -18,6 +19,12 @@ namespace MainNode.ViewModels
         }
 
         [RelayCommand]
+        public async Task AddNode()
+        {
+            App.Current.ShowWindow<AddNodeWindow>();
+        }
+
+        [RelayCommand]
         public async Task LoadNodes()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -25,8 +32,8 @@ namespace MainNode.ViewModels
             openFileDialog.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
             if (openFileDialog.ShowDialog() == true)
             {
-                var json=File.ReadAllText(openFileDialog.FileName);
-                var failed=await _nodeRepo.LoadNodes(json);
+                var json = File.ReadAllText(openFileDialog.FileName);
+                var failed = await _nodeRepo.LoadNodes(json);
 
                 foreach (var f in failed)
                 {
