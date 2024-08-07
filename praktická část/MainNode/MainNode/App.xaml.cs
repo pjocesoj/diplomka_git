@@ -1,6 +1,7 @@
 ﻿using HlavniUzel.Extentions;
 using HlavniUzel.ViewModels;
 using HlavniUzel.Windows;
+using MainNode.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Configuration;
@@ -25,6 +26,7 @@ namespace HlavniUzel
                  {
                      services.AddServices();
                      services.AddSingleton<MainWindow>();
+                     services.AddSingleton<MainWindowsViewModel>();
 
                      services.AddTransient<AddNodeWindow>();
                      services.AddTransient<NodeViewModel>();

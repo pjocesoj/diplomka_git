@@ -1,4 +1,5 @@
 ﻿using HlavniUzel.Windows;
+using MainNode.ViewModels;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,8 +18,9 @@ namespace HlavniUzel
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainWindowsViewModel vm)
         {
+            DataContext = vm;
             InitializeComponent();
         }
 
