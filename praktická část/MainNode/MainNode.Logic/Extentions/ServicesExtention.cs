@@ -10,6 +10,7 @@ namespace MainNode.Logic.Extentions
             services.AddTransient<Node>();
             services.AddSingleton<NodeRepository>();
             services.AddSingleton<FlowRepository>();
+            services.AddSingleton<LoopExecutor>();
         }
     }
 }
