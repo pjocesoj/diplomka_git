@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MainNode.Logic.Do;
 
-namespace HlavniUzel.ViewModels
+namespace MainNode.ViewModels
 {
     public partial class EndPointViewModel : ObservableObject
     {

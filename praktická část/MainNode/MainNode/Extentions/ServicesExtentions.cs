@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace HlavniUzel.Extentions
+namespace MainNode.Extentions
 {
     public static class ServicesExtentions
     {

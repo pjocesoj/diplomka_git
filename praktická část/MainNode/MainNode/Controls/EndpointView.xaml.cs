@@ -1,4 +1,4 @@
-﻿using HlavniUzel.ViewModels;
+﻿using MainNode.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HlavniUzel.Controls
+namespace MainNode.Controls
 {
     /// <summary>
     /// Interakční logika pro EndpointView.xaml

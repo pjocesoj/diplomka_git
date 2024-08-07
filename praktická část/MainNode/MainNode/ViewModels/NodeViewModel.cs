@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MainNode.Logic;
-using HlavniUzel.Windows;
+using MainNode.Windows;
 using System.Net;
 using System.Windows;
 using MainNode.Logic.Evaluation;
 
-namespace HlavniUzel.ViewModels
+namespace MainNode.ViewModels
 {
     public partial class NodeViewModel : ObservableObject
     {

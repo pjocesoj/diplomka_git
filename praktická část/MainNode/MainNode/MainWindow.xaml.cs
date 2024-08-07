@@ -1,4 +1,4 @@
-﻿using HlavniUzel.Windows;
+﻿using MainNode.Windows;
 using MainNode.ViewModels;
 using System.Text;
 using System.Windows;
@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HlavniUzel
+namespace MainNode
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

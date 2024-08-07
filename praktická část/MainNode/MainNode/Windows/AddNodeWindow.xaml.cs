@@ -1,4 +1,4 @@
-﻿using HlavniUzel.ViewModels;
+﻿using MainNode.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace HlavniUzel.Windows
+namespace MainNode.Windows
 {
     /// <summary>
     /// Interakční logika pro AddNodeWindow.xaml

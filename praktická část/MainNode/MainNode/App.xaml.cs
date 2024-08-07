@@ -1,6 +1,6 @@
-﻿using HlavniUzel.Extentions;
-using HlavniUzel.ViewModels;
-using HlavniUzel.Windows;
+﻿using MainNode.Extentions;
+using MainNode.ViewModels;
+using MainNode.Windows;
 using MainNode.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,7 +8,7 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 
-namespace HlavniUzel
+namespace MainNode
 {
     public partial class App : Application
     {
