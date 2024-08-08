@@ -66,5 +66,11 @@ namespace MainNode.ViewModels
             }
 
         }
+
+        [RelayCommand]
+        public async Task ShowInfo()
+        {
+            App.Current.ShowWindow<NodeInfoWindow>(this);
+        }
     }
 }

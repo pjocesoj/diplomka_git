@@ -13,9 +13,10 @@
     <Grid MinWidth="10">
         <ListView Grid.Row="2" ItemsSource="{Binding Nodes}" Padding="0,5,0,0">
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate DataType="viewmodels:NodeViewModel">
                     <Button Content="{Binding Name}"
                             Background="{Binding FailedRequests,Converter={StaticResource status}}"
+                            Command="{Binding ShowInfoCommand}"
                             Margin="0"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
