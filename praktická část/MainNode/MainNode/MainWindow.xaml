@@ -21,6 +21,9 @@
                 <Button Content="save" Command="{Binding SaveNodesCommand}"/>
                 <Button Content="add" Command="{Binding AddNodeCommand}"/>
             </StackPanel>
+
+            <controls:NodeListView Grid.Row="2"/>
+
         </Grid>
     </Grid>
 </Window>

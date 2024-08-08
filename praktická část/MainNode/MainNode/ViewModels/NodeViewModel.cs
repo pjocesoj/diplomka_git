@@ -12,19 +12,29 @@ namespace MainNode.ViewModels
     {
         private Node _node;
         private readonly NodeRepository _repo;
-
-        public NodeViewModel(Node node, NodeRepository repo)
+        private readonly MainWindowsViewModel _mainVM;
+        public NodeViewModel(Node node, NodeRepository repo,MainWindowsViewModel main)
         {
             _node = node;
             _repo = repo;
             Name = _node.Name;
             Address = _node.Address;
+
+            _mainVM = main;
         }
         [ObservableProperty]
         private string _name = "";
 
         [ObservableProperty]
         private string _address = "";
+
+        public short FailedRequests 
+        {
+            get 
+            {
+                return 0;
+            }
+        }
 
         public List<EndPointViewModel> EndPoints 
         {
@@ -46,6 +56,7 @@ namespace MainNode.ViewModels
             {
                 await _repo.AddNode(_node);
                 App.Current.ShowWindow<NodeInfoWindow>(this);
+                _mainVM.refreshNodes();
             }
             catch(ApplicationException ex) { throw new ApplicationException(ex.Message,ex); }
             catch (Exception ex)
