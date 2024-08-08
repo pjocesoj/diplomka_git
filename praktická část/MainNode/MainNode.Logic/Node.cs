@@ -1,5 +1,6 @@
 ﻿using MainNode.Communication.Dto;
 using MainNode.Communication.Enums;
+using MainNode.Communication.Helpers;
 using MainNode.Communication.Interfaces;
 using MainNode.Logic.Do;
 using MainNode.Logic.Extentions;
@@ -8,9 +9,20 @@ namespace MainNode.Logic
 {
     public class Node
     {
-        private readonly INodeCommunication _comm;
+        private INodeCommunication _comm;
 
-        public string Name { get; set; } = "node";
+        private string _addressType;
+        public string AddressType 
+        {
+            get { return _addressType; }
+            set
+            {
+                _addressType = value;
+                _comm = CommunicationTypeResolver.GetCommunicationType(AddressType!);
+            }
+        }
+
+        public string Name { get; set; } = $"node{NodeRepository.Count}";
 
         private string _address;
         /// <summary>
@@ -31,6 +43,10 @@ namespace MainNode.Logic
         public Node(INodeCommunication comm)
         {
             this._comm = comm;
+            AddressType = comm.AddressType;
+        }
+        public Node()
+        {
         }
 
         public async Task GetEndPoints()
@@ -49,7 +65,7 @@ namespace MainNode.Logic
 
         public async Task GetValues(EndPointDo EP)
         {
-            ValuesDto? data = await _comm.GetValues(EP.Path,Mapper.Map(EP.Arguments));
+            ValuesDto? data = await _comm.GetValues(EP.Path, Mapper.Map(EP.Arguments));
 
             EP.Values.Ints.CopyValues(data.Ints);
             EP.Values.Floats.CopyValues(data.Floats);

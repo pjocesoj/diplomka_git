@@ -1,5 +1,4 @@
-﻿using MainNode.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,22 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainNode.Windows
+namespace MainNode.Controls
 {
     /// <summary>
-    /// Interakční logika pro NodeInfoWindow.xaml
+    /// Interakční logika pro NodeListView.xaml
     /// </summary>
-    public partial class NodeInfoWindow : Window
+    public partial class NodeListView : UserControl
     {
-        public NodeInfoWindow()
+        public NodeListView()
         {
-            InitializeComponent();
-        }
-        public NodeInfoWindow(NodeViewModel vm)
-        {
-            DataContext = vm;
             InitializeComponent();
         }
     }
