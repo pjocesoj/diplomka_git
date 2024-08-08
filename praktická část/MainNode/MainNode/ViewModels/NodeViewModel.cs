@@ -32,7 +32,8 @@ namespace MainNode.ViewModels
         {
             get 
             {
-                return 0;
+                short fails = 0;
+                return fails;
             }
         }
 

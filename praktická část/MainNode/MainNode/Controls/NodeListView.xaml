@@ -5,18 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainNode.Controls"
              xmlns:viewmodels="clr-namespace:MainNode.ViewModels"
+             xmlns:converters="clr-namespace:MainNode.Converters"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:NodeStatusConverter x:Key="status"/>
+    </UserControl.Resources>
     <Grid MinWidth="10">
-        <ListView Grid.Row="2" ItemsSource="{Binding Nodes}">
+        <ListView Grid.Row="2" ItemsSource="{Binding Nodes}" Padding="0,5,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding Name}"/>
+                    <Button Content="{Binding Name}"
+                            Background="{Binding FailedRequests,Converter={StaticResource status}}"
+                            Margin="0"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    <Setter Property="Margin" Value="5,0,5,0" />
+                    <Setter Property="Margin" Value="0" />
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
