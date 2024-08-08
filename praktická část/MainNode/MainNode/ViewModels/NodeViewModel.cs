@@ -2,9 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MainNode.Logic;
 using MainNode.Windows;
-using System.Net;
 using System.Windows;
-using MainNode.Logic.Evaluation;
 
 namespace MainNode.ViewModels
 {
