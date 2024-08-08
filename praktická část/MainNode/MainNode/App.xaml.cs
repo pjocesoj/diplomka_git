@@ -1,13 +1,13 @@
-﻿using HlavniUzel.Extentions;
-using HlavniUzel.ViewModels;
-using HlavniUzel.Windows;
+﻿using MainNode.Extentions;
+using MainNode.ViewModels;
+using MainNode.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Configuration;
 using System.Data;
 using System.Windows;
 
-namespace HlavniUzel
+namespace MainNode
 {
     public partial class App : Application
     {
@@ -25,6 +25,7 @@ namespace HlavniUzel
                  {
                      services.AddServices();
                      services.AddSingleton<MainWindow>();
+                     services.AddSingleton<MainWindowsViewModel>();
 
                      services.AddTransient<AddNodeWindow>();
                      services.AddTransient<NodeViewModel>();

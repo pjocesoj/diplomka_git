@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HlavniUzel.Windows"
-        xmlns:Controls="clr-namespace:HlavniUzel.Controls" x:Class="HlavniUzel.Windows.NodeInfoWindow"
+        xmlns:local="clr-namespace:MainNode.Windows"
+        xmlns:Controls="clr-namespace:MainNode.Controls" x:Class="MainNode.Windows.NodeInfoWindow"
         mc:Ignorable="d"
         Title="NodeInfoWindow" Height="450" Width="800">
     <Grid>
