@@ -18,6 +18,9 @@ namespace MainNode.ViewModels
             _nodeRepo = nodeRepo;
         }
 
+        public List<NodeViewModel> Nodes => _nodeRepo.Nodes.Select(x => new NodeViewModel(x, _nodeRepo,this)).ToList();
+        public void refreshNodes() => OnPropertyChanged(nameof(Nodes));
+
         [RelayCommand]
         public async Task AddNode()
         {
@@ -43,6 +46,7 @@ namespace MainNode.ViewModels
                     MessageBox.Show($"Node {node.Name} failed to load: {error}");
                 }
             }
+            OnPropertyChanged(nameof(Nodes));
         }
 
         [RelayCommand]
