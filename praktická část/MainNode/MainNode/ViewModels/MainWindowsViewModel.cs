@@ -22,7 +22,7 @@ namespace MainNode.ViewModels
             _loopCompiler = loopCompiler;
 
             //_loopCompiler.test();
-            _loopCompiler.hardcodedEmulator();
+            _=Task.Run(async()=>_loopCompiler.hardcodedEmulator());
         }
 
         #region nodes
