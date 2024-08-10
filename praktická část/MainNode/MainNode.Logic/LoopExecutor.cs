@@ -8,10 +8,20 @@
         private readonly FlowRepository _flowRepo;
         private readonly NodeRepository _nodeRepo;
 
+        public bool IsRunning { get; private set; } = false;
         public LoopExecutor(FlowRepository flowRepo, NodeRepository nodeRepo)
         {
             _flowRepo = flowRepo;
             _nodeRepo = nodeRepo;
+        }
+
+        public void Start()
+        {
+            IsRunning = true;
+        }
+        public void Stop()
+        {
+            IsRunning = false;
         }
 
         //zvážit thread
