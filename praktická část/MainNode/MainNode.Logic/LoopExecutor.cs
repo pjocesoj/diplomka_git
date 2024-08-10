@@ -7,15 +7,34 @@
     {
         private readonly FlowRepository _flowRepo;
         private readonly NodeRepository _nodeRepo;
+        private Thread _thread;
+        private CancellationTokenSource _cancelLoop;
+        public bool IsRunning { get; private set; } = false;
 
         public LoopExecutor(FlowRepository flowRepo, NodeRepository nodeRepo)
         {
             _flowRepo = flowRepo;
             _nodeRepo = nodeRepo;
+
+            _thread= new Thread(Run);
+            _thread.Name = "LoopExecutor";
         }
 
+        public void Start()
+        {
+            IsRunning = true;
+            _cancelLoop = new CancellationTokenSource();
+            _thread.Start(_cancelLoop.Token);
+        }
+        public void Stop()
+        {
+            IsRunning = false;
+            _cancelLoop.Cancel();
+        }
+
+
         //zvážit thread
-        public async Task Run()
+        public async void Run()
         {         
             await loadData();
             _flowRepo.Run();
