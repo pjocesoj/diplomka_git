@@ -71,5 +71,49 @@ namespace MainNode.Logic
             return _flowRepo.AddFlow(flowC);
         }
         #endregion
+
+        public void hardcodedEmulator()
+        {
+            var eps = getEndPoints();
+            //addA(eps[0].Values.Ints[0]);
+            eps[1].Arguments.Ints[0] = eps[0].Values.Ints[0];
+            eps[1].Arguments.Floats[0] = eps[0].Values.Floats[0];
+            eps[1].Arguments.Bools[0] = eps[0].Values.Bools[0];
+
+            eps[1].Arguments.Floats[0].Value=2.5f;
+
+            var _comm=new MainNode.Communication.HttpNodeCommunication();
+            _comm.Init("localhost:8080");
+            _ = Task.Run(async () => _comm.SetValues(eps[1].Path, Mapper.Map(eps[1].Arguments)));
+
+        }
+        private EndPointDo[] getEndPoints()
+        {
+            var get = new EndPointDo
+            {
+                Path = new Communication.Interfaces.EndPointPath() { Path = "/getValuesG" },
+                Type = Communication.Enums.EndpointType.GET,
+                Values = new ValuesDo()
+            };
+            get.Values.Ints.Add(new ValueDo<int>("a", 0));
+            get.Values.Floats.Add(new ValueDo<float>("b", 0));
+            get.Values.Bools.Add(new ValueDo<bool>("c", false));
+
+            var set = new EndPointDo
+            {
+                Path = new Communication.Interfaces.EndPointPath() { Path = "/setValues" },
+                Type = Communication.Enums.EndpointType.SET,
+                Values = new ValuesDo(),
+                Arguments = new ValuesDo()
+            };
+            set.Values.Ints.Add(new ValueDo<int>("a", 0));
+            set.Values.Floats.Add(new ValueDo<float>("b", 0));
+            set.Values.Bools.Add(new ValueDo<bool>("c", false));
+            set.Arguments.Ints.Add(new ValueDo<int>("a", 0));
+            set.Arguments.Floats.Add(new ValueDo<float>("b", 0));
+            set.Arguments.Bools.Add(new ValueDo<bool>("c", false));
+
+            return new EndPointDo[] { get, set };
+        }
     }
 }

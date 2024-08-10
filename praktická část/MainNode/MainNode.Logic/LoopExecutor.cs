@@ -18,15 +18,24 @@
         public void Start()
         {
             IsRunning = true;
+            _=Task.Run(async()=>TaskLoop());
         }
         public void Stop()
         {
             IsRunning = false;
         }
 
+        private async Task TaskLoop()
+        {
+            while (IsRunning)
+            {
+                await Run();
+            }
+        }
+
         //zvážit thread
         public async Task Run()
-        {         
+        {
             await loadData();
             _flowRepo.Run();
             await writeData();
@@ -40,8 +49,8 @@
         }
         private async Task writeData()
         {
-            var sb= new System.Text.StringBuilder();
-            foreach(var f in _flowRepo.Results)
+            var sb = new System.Text.StringBuilder();
+            foreach (var f in _flowRepo.Results)
             {
                 sb.AppendLine($"{f.Value}");
             }

@@ -20,6 +20,9 @@ namespace MainNode.ViewModels
             _nodeRepo = nodeRepo;
             _loopExecutor = loopExecutor;
             _loopCompiler = loopCompiler;
+
+            //_loopCompiler.test();
+            _loopCompiler.hardcodedEmulator();
         }
 
         #region nodes
