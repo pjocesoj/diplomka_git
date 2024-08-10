@@ -12,10 +12,14 @@ namespace MainNode.ViewModels
     {
         private readonly FlowRepository _flowRepo;
         private readonly NodeRepository _nodeRepo;
-        public MainWindowsViewModel(FlowRepository flowRepo, NodeRepository nodeRepo)
+        private readonly LoopExecutor _loopExecutor;
+        private readonly LoopCompiler _loopCompiler;
+        public MainWindowsViewModel(FlowRepository flowRepo, NodeRepository nodeRepo, LoopExecutor loopExecutor, LoopCompiler loopCompiler)
         {
             _flowRepo = flowRepo;
             _nodeRepo = nodeRepo;
+            _loopExecutor = loopExecutor;
+            _loopCompiler = loopCompiler;
         }
 
         public List<NodeViewModel> Nodes => _nodeRepo.Nodes.Select(x => new NodeViewModel(x, _nodeRepo,this)).ToList();

@@ -11,6 +11,7 @@ namespace MainNode.Logic.Extentions
             services.AddSingleton<NodeRepository>();
             services.AddSingleton<FlowRepository>();
             services.AddSingleton<LoopExecutor>();
+            services.AddSingleton<LoopCompiler>();
         }
     }
 }

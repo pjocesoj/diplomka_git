@@ -17,11 +17,25 @@
         //zvážit thread
         public async Task Run()
         {         
+            await loadData();
+            _flowRepo.Run();
+            await writeData();
+        }
+        private async Task loadData()
+        {
             foreach (Node n in _nodeRepo.Nodes)
             {
                 await n.GetAllValues();
             }
-            _flowRepo.Run();
+        }
+        private async Task writeData()
+        {
+            var sb= new System.Text.StringBuilder();
+            foreach(var f in _flowRepo.Results)
+            {
+                sb.AppendLine($"{f.Value}");
+            }
+            Console.WriteLine(sb.ToString());
         }
     }
 }
