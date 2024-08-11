@@ -22,7 +22,8 @@ namespace MainNode.ViewModels
             _loopCompiler = loopCompiler;
 
             //_loopCompiler.test();
-            _=Task.Run(async()=>_loopCompiler.hardcodedEmulator());
+            //_=Task.Run(async()=>_loopCompiler.hardcodedEmulator());
+            _nodeRepo.AddNode(_loopCompiler.EmulatorNode());
         }
 
         #region nodes

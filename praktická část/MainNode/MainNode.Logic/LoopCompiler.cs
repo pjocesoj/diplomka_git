@@ -71,12 +71,36 @@ namespace MainNode.Logic
             return _flowRepo.AddFlow(flowC);
         }
         #endregion
-
-        public async Task hardcodedEmulator()
+        #region hardcoded emulator
+        public Node EmulatorNode()
         {
             var eps = getEndPoints();
             var _comm=new MainNode.Communication.HttpNodeCommunication();
-            _comm.Init("localhost:8080");
+
+            Node n=new Node(_comm);
+            n.Address = "localhost:8080";
+            n.EndPoints = eps;
+
+            return n;
+        }
+        public void hardcodedEmulator()
+        {
+            var node = EmulatorNode();
+            var eps= node.EndPoints;
+            var a=eps[0].Values.Ints[0];
+            a.Value = 1;
+
+            var A=addA(a);
+        }
+        public async Task hardcodedEmulatorTest()
+        {
+            var eps = getEndPoints();
+            var _comm=new MainNode.Communication.HttpNodeCommunication();
+
+            Node n=new Node(_comm);
+            n.Address = "localhost:8080";
+            n.EndPoints = eps;
+
             var a=eps[0].Values.Ints[0];
             a.Value = 1;
 
@@ -84,14 +108,14 @@ namespace MainNode.Logic
             _flowRepo.Run();
             var res=A.Value;
             eps[1].Arguments.Ints[0].Value = (res as ValueDo<int>).Value;
-            await _comm.SetValues(eps[1].Path, Mapper.Map(eps[1].Arguments));
-           // _ = Task.Run(async () => _comm.SetValues(eps[1].Path, Mapper.Map(eps[1].Arguments)));
+            await n.SetValues(eps[1]);
 
             a.Value = 4;
             _flowRepo.Run();
             res = A.Value;
             eps[1].Arguments.Ints[0].Value = (res as ValueDo<int>).Value;
-            _ = Task.Run(async () => _comm.SetValues(eps[1].Path, Mapper.Map(eps[1].Arguments)));
+            await n.SetValues(eps[1]);
+
         }
         private EndPointDo[] getEndPoints()
         {
@@ -130,5 +154,6 @@ namespace MainNode.Logic
 
             return new EndPointDo[] { get, set };
         }
+        #endregion
     }
 }
