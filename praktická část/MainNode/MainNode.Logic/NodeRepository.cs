@@ -1,4 +1,5 @@
 ﻿using MainNode.Exceptions;
+using MainNode.Logic.Do;
 using System.Text.Json;
 
 namespace MainNode.Logic
@@ -64,6 +65,11 @@ namespace MainNode.Logic
         public string SaveNodes()
         {
             return JsonSerializer.Serialize(Nodes);
+        }
+
+        public IEnumerable<EndPointDo> Gets()
+        {
+            return Nodes.SelectMany(x => x.EndPoints).Where(x => x.Type == Communication.Enums.EndpointType.GET).ToList();
         }
     }
 }

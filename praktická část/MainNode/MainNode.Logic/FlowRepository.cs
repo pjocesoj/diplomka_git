@@ -27,5 +27,10 @@ namespace MainNode.Logic
                 var val = res.Value;
             }
         }
+
+        public IEnumerable<ValueDo> GetInputs()
+        {
+            return Results.SelectMany(x => x.GetInputs());
+        }
     }
 }

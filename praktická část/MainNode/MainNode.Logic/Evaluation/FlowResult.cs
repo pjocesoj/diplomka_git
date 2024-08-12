@@ -35,6 +35,11 @@ namespace MainNode.Logic.Evaluation
         {
             Finished = false;
         }
+
+        public override IEnumerable<ValueDo> GetInputs()
+        {
+            return Flow.Operations.Select(x => x.Ref).Where(x => x != null).ToList();
+        }
     }
 
     public abstract class FlowResult
@@ -42,5 +47,7 @@ namespace MainNode.Logic.Evaluation
         public abstract ValueDo Value { get; }
 
         public abstract void NewIteration();
+
+        public abstract IEnumerable<ValueDo> GetInputs();
     }
 }

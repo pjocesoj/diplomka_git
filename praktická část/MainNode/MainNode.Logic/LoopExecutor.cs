@@ -15,6 +15,12 @@
             _nodeRepo = nodeRepo;
         }
 
+        private void GetInputEndpoints()
+        {
+            var inputs = _flowRepo.GetInputs();
+            var gets=_nodeRepo.Gets();
+        }
+
         public void Start()
         {
             IsRunning = true;
