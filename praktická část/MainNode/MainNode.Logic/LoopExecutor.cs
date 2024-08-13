@@ -15,16 +15,11 @@
             _nodeRepo = nodeRepo;
         }
 
-        private void GetInputEndpoints()
-        {
-            var inputs = _flowRepo.GetInputs();
-            var gets=_nodeRepo.Gets();
-        }
 
         public void Start()
         {
             IsRunning = true;
-            _=Task.Run(async()=>TaskLoop());
+            _ = Task.Run(async () => TaskLoop());
         }
         public void Stop()
         {
@@ -48,9 +43,14 @@
         }
         private async Task loadData()
         {
-            foreach (Node n in _nodeRepo.Nodes)
+            foreach(var pair in _flowRepo.Inputs)
             {
-                await n.GetAllValues();
+                var node = pair.Key;
+                var endPoints = pair.Value;
+                foreach (var ep in endPoints)
+                {
+                    await node.GetValues(ep);
+                }
             }
         }
         private async Task writeData()

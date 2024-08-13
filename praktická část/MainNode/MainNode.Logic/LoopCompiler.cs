@@ -90,7 +90,18 @@ namespace MainNode.Logic
             var a=eps[0].Values.Ints[0];
             a.Value = 1;
 
-            var A=addA(a);
+            var A = addA(a);
+        }
+        public FlowResult addA(ValueDo<int> a,Node n,EndPointDo ep)
+        {
+            Flow<int> flowA = new Flow<int>("A", new List<Operation<int>>()
+                {
+                    new Operation<int>(a,FuncIntInt.Plus),
+                    new Operation<int>(2, FuncIntInt.Multiply),
+                });
+            var resA = new FlowResult<int>(flowA);
+
+            return _flowRepo.AddFlow(flowA,n,new List<EndPointDo> { ep });
         }
         public async Task hardcodedEmulatorTest()
         {
@@ -121,9 +132,10 @@ namespace MainNode.Logic
         {
             var get = new EndPointDo
             {
-                Path = new Communication.Interfaces.EndPointPath() { Path = "/getValuesG" },
+                Path = new Communication.Dto.HttpEndPointPath() { Path = "/getValuesG" },
                 Type = Communication.Enums.EndpointType.GET,
-                Values = new ValuesDo()
+                Values = new ValuesDo(),
+                Arguments = new ValuesDo()
             };
             get.Values.Ints.Add(new ValueDo<int>("a", 0));
             get.Values.Floats.Add(new ValueDo<float>("b", 0));
@@ -131,7 +143,7 @@ namespace MainNode.Logic
 
             var set = new EndPointDo
             {
-                Path = new Communication.Interfaces.EndPointPath() { Path = "/setValues" },
+                Path = new Communication.Dto.HttpEndPointPath() { Path = "/setValues" },
                 Type = Communication.Enums.EndpointType.SET,
                 Values = new ValuesDo(),
                 Arguments = new ValuesDo()
