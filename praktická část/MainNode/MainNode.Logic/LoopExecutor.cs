@@ -43,13 +43,20 @@
         }
         private async Task loadData()
         {
-            foreach(var pair in _flowRepo.Inputs)
+            foreach (var pair in _flowRepo.Inputs)
             {
                 var node = pair.Key;
                 var endPoints = pair.Value;
                 foreach (var ep in endPoints)
                 {
-                    await node.GetValues(ep);
+                    try
+                    {
+                        await node.GetValues(ep);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
                 }
             }
         }
