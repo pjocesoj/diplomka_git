@@ -51,7 +51,7 @@
                 {
                     try
                     {
-                        await node.Send(ep);
+                        await node.GetValues(ep);
                     }
                     catch (Exception e)
                     {
@@ -70,7 +70,7 @@
                 {
                     try
                     {
-                        await node.Send(ep);
+                        await node.GetValues(ep);
                     }
                     catch (Exception e)
                     {

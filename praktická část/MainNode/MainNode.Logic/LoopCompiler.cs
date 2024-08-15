@@ -75,9 +75,9 @@ namespace MainNode.Logic
         public Node EmulatorNode()
         {
             var eps = getEndPoints();
-            var _comm=new MainNode.Communication.HttpNodeCommunication();
+            var _comm = new MainNode.Communication.HttpNodeCommunication();
 
-            Node n=new Node(_comm);
+            Node n = new Node(_comm);
             n.Address = "localhost:8080";
             n.EndPoints = eps;
 
@@ -86,13 +86,13 @@ namespace MainNode.Logic
         public void hardcodedEmulator()
         {
             var node = EmulatorNode();
-            var eps= node.EndPoints;
-            var a=eps[0].Values.Ints[0];
+            var eps = node.EndPoints;
+            var a = eps[0].Values.Ints[0];
             a.Value = 1;
 
             var A = addA(a);
         }
-        public FlowResult addA(ValueDo<int> a,Node n,EndPointDo ep)
+        public FlowResult addA(ValueDo<int> a, Node n, EndPointDo ep)
         {
             Flow<int> flowA = new Flow<int>("A", new List<Operation<int>>()
                 {
@@ -106,18 +106,18 @@ namespace MainNode.Logic
         public async Task hardcodedEmulatorTest()
         {
             var eps = getEndPoints();
-            var _comm=new MainNode.Communication.HttpNodeCommunication();
+            var _comm = new MainNode.Communication.HttpNodeCommunication();
 
-            Node n=new Node(_comm);
+            Node n = new Node(_comm);
             n.Address = "localhost:8080";
             n.EndPoints = eps;
 
-            var a=eps[0].Values.Ints[0];
+            var a = eps[0].Values.Ints[0];
             a.Value = 1;
 
-            var A=addA(a);
+            var A = addA(a);
             _flowRepo.Run();
-            var res=A.Value;
+            var res = A.Value;
             eps[1].Arguments.Ints[0].Value = (res as ValueDo<int>).Value;
             await n.SetValues(eps[1]);
 
@@ -143,12 +143,12 @@ namespace MainNode.Logic
 
             var set = new EndPointDo
             {
-                Path = new Communication.Dto.HttpEndPointPath() { Path = "/setValues" },
+                Path = new Communication.Dto.HttpEndPointPath() { Path = "/setValues",HttpMethod=Communication.Enums.HttpMethodEnum.POST },
                 Type = Communication.Enums.EndpointType.SET,
                 Values = new ValuesDo(),
                 Arguments = new ValuesDo()
             };
-            var a = new ValueDo<int>("a", 0);
+            var a = new ValueDo<int>("a", 1);
             var b = new ValueDo<float>("b", 0);
             var c = new ValueDo<bool>("c", false);
 
@@ -160,7 +160,7 @@ namespace MainNode.Logic
             set.Arguments.Floats.Add(b);
             set.Arguments.Bools.Add(c);
 
-            set.Arguments.Ints.Add(new ValueDo<int>("a", 0));
+            set.Arguments.Ints.Add(new ValueDo<int>("a", 1));
             //set.Arguments.Floats.Add(new ValueDo<float>("b", 0));
             //set.Arguments.Bools.Add(new ValueDo<bool>("c", false));
 

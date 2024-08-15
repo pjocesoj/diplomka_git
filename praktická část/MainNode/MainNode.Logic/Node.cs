@@ -86,10 +86,5 @@ namespace MainNode.Logic
             bool ok = await _comm.SetValues(EP.Path, Mapper.Map(EP.Arguments));
         }
 
-        public async Task Send(EndPointDo EP)
-        {
-            if (EP.Type == EndpointType.GET) { await GetValues(EP); }
-            else { await SetValues(EP); }
-        }
     }
 }
