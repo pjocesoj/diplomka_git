@@ -101,7 +101,19 @@ namespace MainNode.Logic
                 });
             var resA = new FlowResult<int>(flowA);
 
-            return _flowRepo.AddFlow(flowA,n,new List<EndPointDo> { ep });
+            var i = new EndpointVariables
+            {
+                Variables = new List<string> { "a" },
+                Node = n,
+                EndPoint = ep
+            };
+            var o = new EndpointVariables
+            {
+                Variables = new List<string> { "a" },
+                Node = n,
+                EndPoint = ep
+            };
+            return _flowRepo.AddFlow(flowA, i,o);
         }
         public async Task hardcodedEmulatorTest()
         {

@@ -5,6 +5,7 @@ using MainNode.Windows;
 using System.Windows;
 using Microsoft.Win32;
 using System.IO;
+using MainNode.Logic.Evaluation;
 
 namespace MainNode.ViewModels
 {
@@ -23,7 +24,9 @@ namespace MainNode.ViewModels
 
             //_loopCompiler.test();
             //_=Task.Run(async()=>_loopCompiler.hardcodedEmulator());
-            _nodeRepo.AddNode(_loopCompiler.EmulatorNode());
+            Node n = _loopCompiler.EmulatorNode();
+            _nodeRepo.AddNode(n);
+            var A = _loopCompiler.addA(n.EndPoints[1].Values.Ints[0], n,n.EndPoints[1]);
         }
 
         #region nodes
