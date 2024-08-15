@@ -51,7 +51,7 @@
                 {
                     try
                     {
-                        await node.GetValues(ep);
+                        await node.Send(ep);
                     }
                     catch (Exception e)
                     {
@@ -62,12 +62,22 @@
         }
         private async Task writeData()
         {
-            var sb = new System.Text.StringBuilder();
-            foreach (var f in _flowRepo.Results)
+            foreach (var pair in _flowRepo.Outputs)
             {
-                sb.AppendLine($"{f.Value}");
+                var node = pair.Key;
+                var endPoints = pair.Value;
+                foreach (var ep in endPoints)
+                {
+                    try
+                    {
+                        await node.Send(ep);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
             }
-            Console.WriteLine(sb.ToString());
         }
     }
 }

@@ -12,7 +12,7 @@ namespace MainNode.Logic
         private INodeCommunication _comm;
 
         private string _addressType;
-        public string AddressType 
+        public string AddressType
         {
             get { return _addressType; }
             set
@@ -84,6 +84,12 @@ namespace MainNode.Logic
         public async Task SetValues(EndPointDo EP)
         {
             bool ok = await _comm.SetValues(EP.Path, Mapper.Map(EP.Arguments));
+        }
+
+        public async Task Send(EndPointDo EP)
+        {
+            if (EP.Type == EndpointType.GET) { await GetValues(EP); }
+            else { await SetValues(EP); }
         }
     }
 }
