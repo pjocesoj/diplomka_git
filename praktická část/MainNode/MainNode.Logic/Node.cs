@@ -12,7 +12,7 @@ namespace MainNode.Logic
         private INodeCommunication _comm;
 
         private string _addressType;
-        public string AddressType 
+        public string AddressType
         {
             get { return _addressType; }
             set
