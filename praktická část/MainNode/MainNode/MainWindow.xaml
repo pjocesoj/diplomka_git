@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MainNode"
         xmlns:controls="clr-namespace:MainNode.Controls"
+        xmlns:converters="clr-namespace:MainNode.Converters"
         xmlns:viewmodels="clr-namespace:MainNode.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <!--<converters:BoolNotConverter x:Key="not"/>-->
+        <converters:VisibleNotConverter x:Key="not"/>
+    </Window.Resources>
     <Grid>
         <Grid HorizontalAlignment="Left"  Width="80" Background="LightGray">
             <Grid.RowDefinitions>
@@ -15,6 +20,17 @@
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="5">
+                <Button Content="start"
+                        Foreground="Green"
+                        Visibility="{Binding IsLoopRunning,Converter={StaticResource not}}"
+                        Command="{Binding StartLoopCommand}"/>
+                <Button Content="stop"
+                        Foreground="Red"
+                        Visibility="{Binding IsLoopRunning}"
+                        Command="{Binding StopLoopCommand}"/>
+            </StackPanel>
 
             <StackPanel Grid.Row="1" Margin="5">
                 <Button Content="load" Command="{Binding LoadNodesCommand}"/>
