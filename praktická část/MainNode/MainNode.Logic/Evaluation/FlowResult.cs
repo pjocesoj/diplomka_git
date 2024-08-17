@@ -6,25 +6,25 @@ namespace MainNode.Logic.Evaluation
     /// obsahuje výsledek flow a informaci zda je aktuální<br/>
     /// pokud ne tak se flow spustí a vrátí výsledek
     /// </summary>
-    public class FlowResult<T>:FlowResult where T : struct
+    public class FlowResult<T> : FlowResult where T : struct
     {
         public bool Finished { get; set; } = false;
         public Flow<T> Flow { get; set; }
 
         private ValueDo<T> _valueDo;
         public FlowResult(Flow<T> flow)
-        {           
+        {
             Flow = flow;
-            _valueDo = new ValueDo<T>($"{flow.Name}_out",default);
+            _valueDo = new ValueDo<T>($"{flow.Name}_out", default);
             Flow.Output = _valueDo;
         }
 
-        public override ValueDo<T> Value 
+        public override ValueDo<T> Value
         {
             get
             {
-                if(Finished) { return _valueDo; }
-                
+                if (Finished) { return _valueDo; }
+
                 Flow.Run();
                 //_valueDo.Value = Flow.Output.Value;
                 Finished = true;
@@ -35,6 +35,11 @@ namespace MainNode.Logic.Evaluation
         {
             Finished = false;
         }
+        public override void BindOutput(ValueDo bind)
+        {
+            _valueDo = (ValueDo<T>)bind;
+            Flow.Output = _valueDo;
+        }
     }
 
     public abstract class FlowResult
@@ -42,5 +47,6 @@ namespace MainNode.Logic.Evaluation
         public abstract ValueDo Value { get; }
 
         public abstract void NewIteration();
+        public abstract void BindOutput(ValueDo bind);
     }
 }

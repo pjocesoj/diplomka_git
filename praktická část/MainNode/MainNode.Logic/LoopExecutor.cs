@@ -18,34 +18,66 @@
         public void Start()
         {
             IsRunning = true;
+            _ = Task.Run(async () => TaskLoop());
         }
         public void Stop()
         {
             IsRunning = false;
         }
 
+        //dočasné řešení než převedu na thread
+        private async Task TaskLoop()
+        {
+            while (IsRunning)
+            {
+                await Run();
+            }
+        }
+
         //zvážit thread
         public async Task Run()
-        {         
+        {
             await loadData();
             _flowRepo.Run();
             await writeData();
         }
         private async Task loadData()
         {
-            foreach (Node n in _nodeRepo.Nodes)
+            foreach (var pair in _flowRepo.Inputs)
             {
-                await n.GetAllValues();
+                var node = pair.Key;
+                var endPoints = pair.Value;
+                foreach (var ep in endPoints)
+                {
+                    try
+                    {
+                        await node.GetValues(ep);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
             }
         }
         private async Task writeData()
         {
-            var sb= new System.Text.StringBuilder();
-            foreach(var f in _flowRepo.Results)
+            foreach (var pair in _flowRepo.Outputs)
             {
-                sb.AppendLine($"{f.Value}");
+                var node = pair.Key;
+                var endPoints = pair.Value;
+                foreach (var ep in endPoints)
+                {
+                    try
+                    {
+                        await node.GetValues(ep);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
             }
-            Console.WriteLine(sb.ToString());
         }
     }
 }
