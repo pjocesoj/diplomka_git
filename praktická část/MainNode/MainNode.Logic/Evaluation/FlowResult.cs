@@ -40,6 +40,13 @@ namespace MainNode.Logic.Evaluation
             _valueDo = (ValueDo<T>)bind;
             Flow.Output = _valueDo;
         }
+        public override bool CompareReference(ValueDo cmp)
+        {
+            var a = _valueDo == Value;
+            var b = _valueDo == cmp;
+            var c = Value == cmp;
+            return c;
+        }
     }
 
     public abstract class FlowResult
@@ -48,5 +55,6 @@ namespace MainNode.Logic.Evaluation
 
         public abstract void NewIteration();
         public abstract void BindOutput(ValueDo bind);
+        public abstract bool CompareReference(ValueDo value);
     }
 }
