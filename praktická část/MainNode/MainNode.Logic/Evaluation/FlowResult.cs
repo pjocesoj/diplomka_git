@@ -15,8 +15,15 @@ namespace MainNode.Logic.Evaluation
         public FlowResult(Flow<T> flow)
         {
             Flow = flow;
-            _valueDo = new ValueDo<T>($"{flow.Name}_out", default);
-            Flow.Output = _valueDo;
+            if (Flow.Output == null)
+            {
+                _valueDo = new ValueDo<T>($"{flow.Name}_out", default);
+                Flow.Output = _valueDo;
+            }
+            else
+            {
+                _valueDo = Flow.Output;
+            }
         }
 
         public override ValueDo<T> Value
