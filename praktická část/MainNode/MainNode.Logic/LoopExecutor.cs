@@ -16,10 +16,29 @@
             _flowRepo = flowRepo;
             _nodeRepo = nodeRepo;
 
-            _thread= new Thread(Run);
+            _thread = new Thread(Run_Thread);
             _thread.Name = "LoopExecutor";
         }
 
+
+        public void Start_Thread()
+        {
+            IsRunning = true;
+            _cancelLoop = new CancellationTokenSource();
+            _thread.Start(_cancelLoop.Token);
+        }
+        public void Stop_Thread()
+        {
+            IsRunning = false;
+            _cancelLoop.Cancel();
+        }
+        public async void Run_Thread()
+        {
+            await loadData();
+            _flowRepo.Run();
+            await writeData();
+        }
+        #region async task (temporary solution)
         public void Start()
         {
             IsRunning = true;
@@ -30,25 +49,13 @@
             IsRunning = false;
         }
 
-        public void Start()
+        //dočasné řešení než převedu na thread
+        private async Task TaskLoop()
         {
-            IsRunning = true;
-            _cancelLoop = new CancellationTokenSource();
-            _thread.Start(_cancelLoop.Token);
-        }
-        public void Stop()
-        {
-            IsRunning = false;
-            _cancelLoop.Cancel();
-        }
-
-
-        //zvážit thread
-        public async void Run()
-        {         
-            await loadData();
-            _flowRepo.Run();
-            await writeData();
+            while (IsRunning)
+            {
+                await Run();
+            }
         }
         public async Task Run()
         {
@@ -56,6 +63,8 @@
             _flowRepo.Run();
             await writeData();
         }
+        #endregion
+
         private async Task loadData()
         {
             foreach (var pair in _flowRepo.Inputs)
