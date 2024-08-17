@@ -100,6 +100,8 @@ namespace MainNode.Logic
                     new Operation<int>(2, FuncIntInt.Multiply),
                 });
             var resA = new FlowResult<int>(flowA);
+            resA.BindOutput(ep.Arguments.Ints[0]);
+            resA.CompareReference(ep.Arguments.Ints[0]);
 
             var i = new EndpointVariables
             {

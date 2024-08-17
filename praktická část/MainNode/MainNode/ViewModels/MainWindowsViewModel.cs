@@ -27,6 +27,9 @@ namespace MainNode.ViewModels
             Node n = _loopCompiler.EmulatorNode();
             _nodeRepo.AddNode(n);
             var A = _loopCompiler.addA(n.EndPoints[1].Values.Ints[0], n,n.EndPoints[1]);
+            A.BindOutput(n.EndPoints[1].Arguments.Ints[0]);
+
+            var wtf = A.CompareReference(n.EndPoints[1].Arguments.Ints[0]);
         }
 
         #region nodes
