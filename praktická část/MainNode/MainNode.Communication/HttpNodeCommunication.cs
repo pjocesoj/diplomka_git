@@ -30,7 +30,7 @@ namespace MainNode.Communication
 
             try
             {
-                var tokenSource = new CancellationTokenSource(delay==null?_defaultTimeout:TimeSpan.FromSeconds(5));
+                var tokenSource = new CancellationTokenSource(delay==null?_defaultTimeout:TimeSpan.FromMilliseconds((double)delay));
                 HttpResponseMessage response = await _httpClient.GetAsync(url,tokenSource.Token);
 
                 string json = await response.Content.ReadAsStringAsync();
@@ -51,14 +51,16 @@ namespace MainNode.Communication
                 throw new Exception("unexpected error", ex);
             }
         }
-        private async Task<T?> postAsync<T>(string url, object data)
+        private async Task<T?> postAsync<T>(string url, object data, int? delay = null)
         {
             if (string.IsNullOrEmpty(Address)) { throw new ApplicationException("call Init to set address"); }
 
             try
             {
                 string body = JsonSerializer.Serialize(data);
-                HttpResponseMessage response = await _httpClient.PostAsync(url, new StringContent(body));
+
+                var tokenSource = new CancellationTokenSource(delay == null ? _defaultTimeout : TimeSpan.FromMilliseconds((double)delay));
+                HttpResponseMessage response = await _httpClient.PostAsync(url, new StringContent(body),tokenSource.Token);
 
                 string json = await response.Content.ReadAsStringAsync();
                 if (json == "ok") { return (T)(object)true; }//bool nemůže být přímo převeden
@@ -79,7 +81,7 @@ namespace MainNode.Communication
                 throw new Exception("unexpected error", ex);
             }
         }
-        private string ArgsToString(ValuesDto args)
+        private string ArgsToString(ValuesDto? args)
         {
             if (args == null) { return string.Empty; }
 
@@ -91,7 +93,7 @@ namespace MainNode.Communication
             return sb.ToString();
         }
 
-        public async Task<EndPointDto[]> GetEndPoints()
+        public async Task<EndPointDto[]?> GetEndPoints()
         {
             string url = $"http://{Address}/getInfo";
             try
@@ -103,7 +105,7 @@ namespace MainNode.Communication
                 throw;
             }
         }
-        public async Task<ValuesDto?> GetValues(EndPointPath path, int? delay, ValuesDto args = null)
+        public async Task<ValuesDto?> GetValues(EndPointPath path, int? delay, ValuesDto? args = null)
         {
             string url = $"http://{Address}{path.Path}";
             try
@@ -113,7 +115,7 @@ namespace MainNode.Communication
                     string arg=ArgsToString(args);
                     return await getAsync<ValuesDto>($"{url}{arg}",delay);
                 }
-                return await postAsync<ValuesDto>(url, args);
+                return await postAsync<ValuesDto>(url, args!,delay);
 
             }
             catch (Exception ex)

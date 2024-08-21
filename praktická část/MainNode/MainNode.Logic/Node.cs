@@ -65,8 +65,9 @@ namespace MainNode.Logic
 
         public async Task GetValues(EndPointDo EP)
         {
-            ValuesDto? data = await _comm.GetValues(EP.Path, null, Mapper.Map(EP.Arguments));
+            ValuesDto? data = await _comm.GetValues(EP.Path, EP.Delay, Mapper.Map(EP.Arguments));
 
+            if (data == null) { return; }
             EP.Values.Ints.CopyValues(data.Ints);
             EP.Values.Floats.CopyValues(data.Floats);
             EP.Values.Bools.CopyValues(data.Bools);
