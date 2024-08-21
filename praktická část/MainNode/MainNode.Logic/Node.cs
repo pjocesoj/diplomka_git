@@ -73,7 +73,6 @@ namespace MainNode.Logic
         }
         public async Task GetAllValues()
         {
-            //var gets = Array.FindAll(EndPoints, (x => (x.Path as HttpEndPointPath).HttpMethod == HttpMethodEnum.GET));
             var gets = Array.FindAll(EndPoints, (x => x.Type == EndpointType.GET));
             foreach (var get in gets)
             {

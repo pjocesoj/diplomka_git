@@ -185,7 +185,7 @@ namespace NodeEmulator
             };
             var args = new ValueArgDto[0];
 
-            var endpoint = new Endpoint(HttpMethodEnum.GET, EndpointType.GET, "/slow", vals, args);
+            var endpoint = new Endpoint(HttpMethodEnum.GET, EndpointType.GET, "/slow", vals, args,1000);
             _endpoints.Add(endpoint);
 
             Action<string> des = ((json) =>

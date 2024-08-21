@@ -14,5 +14,7 @@ namespace MainNode.Logic.Do
         */
         public ValuesDo Values { get; set; }
         public ValuesDo Arguments { get; set; }
+        public int? Delay { get; set; }
+
     }
 }
