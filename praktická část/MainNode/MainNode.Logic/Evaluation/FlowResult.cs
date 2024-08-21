@@ -33,7 +33,6 @@ namespace MainNode.Logic.Evaluation
                 if (Finished) { return _valueDo; }
 
                 Flow.Run();
-                //_valueDo.Value = Flow.Output.Value;
                 Finished = true;
                 return _valueDo;
             }
