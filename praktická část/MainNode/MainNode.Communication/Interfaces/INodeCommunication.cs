@@ -9,7 +9,7 @@ namespace MainNode.Communication.Interfaces
         void Init(string address);
 
         Task<EndPointDto[]> GetEndPoints();
-        Task<ValuesDto?> GetValues(EndPointPath path, ValuesDto args = null);
+        Task<ValuesDto?> GetValues(EndPointPath path,int? delay, ValuesDto args = null);
         Task<bool> SetValues(EndPointPath path, ValuesDto vals);
     }
 }
