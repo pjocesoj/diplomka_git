@@ -85,5 +85,16 @@ namespace MainNode.Logic
         {
             bool ok = await _comm.SetValues(EP.Path, Mapper.Map(EP.Arguments));
         }
+
+        /// <summary>
+        /// pro pomalé endpointy, které mohou běžet během iterace smyčky <br/>
+        /// načte hodnoty, ale neprovede aktualizaci, aby nenarušil integritu výpočtu
+        /// </summary>
+        /// <param name="EP"></param>
+        /// <returns></returns>
+        public async Task<ValuesDto?> ParalelCall (EndPointDo EP)
+        {
+            return await _comm.GetValues(EP.Path, EP.Delay, Mapper.Map(EP.Arguments));
+        }
     }
 }
