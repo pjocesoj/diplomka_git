@@ -30,7 +30,7 @@ namespace NodeEmulator
 
         public Control View { get; set; }
 
-        public Endpoint(HttpMethodEnum http,EndpointType type, string url, ValueDto[] vals, ValueArgDto[] args)
+        public Endpoint(HttpMethodEnum http,EndpointType type, string url, ValueDto[] vals, ValueArgDto[] args, int? delay=null)
         {
             Info = new EndPointDto()
             {
@@ -38,7 +38,8 @@ namespace NodeEmulator
                 Type=type,
                 URL = url,
                 Vals = vals,
-                Args=args
+                Args=args,
+                Delay=delay
             };
             UpdateViewEvent += Endpoint_UpdateViewEvent;
         }
