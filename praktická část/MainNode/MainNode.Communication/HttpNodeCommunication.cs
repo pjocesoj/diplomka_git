@@ -30,7 +30,8 @@ namespace MainNode.Communication
 
             try
             {
-                var tokenSource = new CancellationTokenSource(delay==null?_defaultTimeout:TimeSpan.FromMilliseconds((double)delay));
+                var timeout = delay == null ? _defaultTimeout : 3*TimeSpan.FromMilliseconds((double)delay);
+                var tokenSource = new CancellationTokenSource(timeout);
                 HttpResponseMessage response = await _httpClient.GetAsync(url,tokenSource.Token);
 
                 string json = await response.Content.ReadAsStringAsync();

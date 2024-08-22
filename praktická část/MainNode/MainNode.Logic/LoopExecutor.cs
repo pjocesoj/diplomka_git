@@ -69,8 +69,8 @@
             var slow = _flowRepo.Inputs[EnpointLoadTypeEnum.SLOW];
             foreach (var ep in slow)
             {
+                if (ep.Loaded) { _ = ep.UpdateValues(); }
                 if (!ep.Loading) { _ = ep.Load(); }
-                if(!ep.Loaded) { _ = ep.UpdateValues(); }
             }
         }
         private async Task writeData()
