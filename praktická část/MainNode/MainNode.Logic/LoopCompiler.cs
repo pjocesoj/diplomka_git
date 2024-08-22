@@ -78,6 +78,7 @@ namespace MainNode.Logic
             Node n = EmulatorNode();
             //_nodeRepo.AddNode(n);
             var A = addA(n.EndPoints[1].Values.Ints[0], n, n.EndPoints[1]);
+            var B= addB(n.EndPoints[2].Values.Ints[0], n, n.EndPoints[2]);
             //A.BindOutput(n.EndPoints[1].Arguments.Ints[0]);
 
             var wtf = A.CompareReference(n.EndPoints[1].Arguments.Ints[0]);
@@ -108,9 +109,32 @@ namespace MainNode.Logic
             };
             return _flowRepo.AddFlow(flowA, i, o);
         }
+        public FlowResult addB(ValueDo<int> a, Node n, EndPointDo ep)
+        {
+            Flow<int> flowB = new Flow<int>("B", new List<Operation<int>>()
+                {
+                    new Operation<int>(a,FuncIntInt.Plus),
+                    new Operation<int>(2, FuncIntInt.Multiply),
+                });
+            var resB = new FlowResult<int>(flowB);
+
+            var i = new EndpointVariables
+            {
+                Variables = new List<string> { "a" },
+                Node = n,
+                EndPoint = ep
+            };
+            return _flowRepo.AddFlow(flowB, i, null);
+        }
+
         public Node EmulatorNode()
         {
-            var eps = getEndPoints();
+            var get = endpointGet();
+            var set = endpointSet();
+            var slow = endpointSlow();
+
+            //var eps = getEndPoints();
+            var eps= new EndPointDo[] { get, set, slow };
             var _comm = new MainNode.Communication.HttpNodeCommunication();
 
             Node n = new Node(_comm);
@@ -118,6 +142,63 @@ namespace MainNode.Logic
             n.EndPoints = eps;
 
             return n;
+        }
+        
+        private EndPointDo endpointGet()
+        {
+            var get = new EndPointDo
+            {
+                Path = new Communication.Dto.HttpEndPointPath() { Path = "/getValuesG" },
+                Type = Communication.Enums.EndpointType.GET,
+                Values = new ValuesDo(),
+                Arguments = new ValuesDo()
+            };
+            get.Values.Ints.Add(new ValueDo<int>("a", 0));
+            get.Values.Floats.Add(new ValueDo<float>("b", 0));
+            get.Values.Bools.Add(new ValueDo<bool>("c", false));
+
+            return get;
+        }
+        private EndPointDo endpointSet()
+        {
+            var set = new EndPointDo
+            {
+                Path = new Communication.Dto.HttpEndPointPath() { Path = "/setValues", HttpMethod = Communication.Enums.HttpMethodEnum.POST },
+                Type = Communication.Enums.EndpointType.SET,
+                Values = new ValuesDo(),
+                Arguments = new ValuesDo()
+            };
+            var a = new ValueDo<int>("a", 1);
+            var b = new ValueDo<float>("b", 0);
+            var c = new ValueDo<bool>("c", false);
+
+            set.Values.Ints.Add(a);
+            set.Values.Floats.Add(b);
+            set.Values.Bools.Add(c);
+
+            //set.Arguments.Ints.Add(a);
+            set.Arguments.Floats.Add(b);
+            set.Arguments.Bools.Add(c);
+
+            set.Arguments.Ints.Add(new ValueDo<int>("a", 1));
+            //set.Arguments.Floats.Add(new ValueDo<float>("b", 0));
+            //set.Arguments.Bools.Add(new ValueDo<bool>("c", false));
+
+            return set;
+        }
+        private EndPointDo endpointSlow()
+        {
+            var slow = new EndPointDo
+            {
+                Path = new Communication.Dto.HttpEndPointPath() { Path = "/slow" },
+                Type = Communication.Enums.EndpointType.GET,
+                Values = new ValuesDo(),
+                Arguments = new ValuesDo(),
+                Delay = 1000
+            };
+            slow.Values.Ints.Add(new ValueDo<int>("a", 0));
+
+            return slow;
         }
         private EndPointDo[] getEndPoints()
         {

@@ -43,6 +43,7 @@
         }
         private async Task loadData()
         {
+            /*
             foreach (var pair in _flowRepo.Inputs)
             {
                 var node = pair.Key;
@@ -59,9 +60,22 @@
                     }
                 }
             }
+            */
+            var normal = _flowRepo.Inputs[EnpointLoadTypeEnum.NORMAL];
+            foreach (var ep in normal)
+            {
+                await ep.getValues();
+            }
+            var slow = _flowRepo.Inputs[EnpointLoadTypeEnum.SLOW];
+            foreach (var ep in slow)
+            {
+                if (ep.Loaded) { _ = ep.UpdateValues(); }
+                if (!ep.Loading) { _ = ep.Load(); }
+            }
         }
         private async Task writeData()
         {
+            /*
             foreach (var pair in _flowRepo.Outputs)
             {
                 var node = pair.Key;
@@ -77,6 +91,12 @@
                         Console.WriteLine(e.Message);
                     }
                 }
+            }
+            */
+            var normal = _flowRepo.Inputs[EnpointLoadTypeEnum.NORMAL];
+            foreach (var ep in normal)
+            {
+                await ep.getValues();
             }
         }
     }

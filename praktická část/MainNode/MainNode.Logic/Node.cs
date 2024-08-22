@@ -65,15 +65,15 @@ namespace MainNode.Logic
 
         public async Task GetValues(EndPointDo EP)
         {
-            ValuesDto? data = await _comm.GetValues(EP.Path, Mapper.Map(EP.Arguments));
+            ValuesDto? data = await _comm.GetValues(EP.Path, EP.Delay, Mapper.Map(EP.Arguments));
 
+            if (data == null) { return; }
             EP.Values.Ints.CopyValues(data.Ints);
             EP.Values.Floats.CopyValues(data.Floats);
             EP.Values.Bools.CopyValues(data.Bools);
         }
         public async Task GetAllValues()
         {
-            //var gets = Array.FindAll(EndPoints, (x => (x.Path as HttpEndPointPath).HttpMethod == HttpMethodEnum.GET));
             var gets = Array.FindAll(EndPoints, (x => x.Type == EndpointType.GET));
             foreach (var get in gets)
             {
@@ -84,6 +84,17 @@ namespace MainNode.Logic
         public async Task SetValues(EndPointDo EP)
         {
             bool ok = await _comm.SetValues(EP.Path, Mapper.Map(EP.Arguments));
+        }
+
+        /// <summary>
+        /// pro pomalé endpointy, které mohou běžet během iterace smyčky <br/>
+        /// načte hodnoty, ale neprovede aktualizaci, aby nenarušil integritu výpočtu
+        /// </summary>
+        /// <param name="EP"></param>
+        /// <returns></returns>
+        public async Task<ValuesDto?> ParalelCall (EndPointDo EP)
+        {
+            return await _comm.GetValues(EP.Path, EP.Delay, Mapper.Map(EP.Arguments));
         }
     }
 }

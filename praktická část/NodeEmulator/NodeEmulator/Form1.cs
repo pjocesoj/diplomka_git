@@ -27,6 +27,7 @@ namespace NodeEmulator
 
             createSet();
             createMultiply();
+            createSlow();
         }
 
         void createControls(Endpoint ep)
@@ -169,6 +170,32 @@ namespace NodeEmulator
                 {
                     i.Value = i.Value * x;
                 }
+                endpoint.UpdateView();
+            });
+
+            new HttpEndpoint().Start(8080, endpoint.Info.URL, endpoint.SerializeValues, des);
+            createControls(endpoint);
+        }
+
+        void createSlow()
+        {
+            var vals = new ValueDto[]
+            {
+                   new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
+            };
+            var args = new ValueArgDto[0];
+
+            var endpoint = new Endpoint(HttpMethodEnum.GET, EndpointType.GET, "/slow", vals, args,1000);
+            _endpoints.Add(endpoint);
+
+            Action<string> des = ((json) =>
+            {
+                var ints = endpoint.Info.Vals.Where(x => x.Type == ValType.INT).Select(x => (ValueDo<int>)x);
+                foreach (var i in ints)
+                {
+                    i.Value = i.Value+1;
+                }
+                Thread.Sleep(1000);
                 endpoint.UpdateView();
             });
 
