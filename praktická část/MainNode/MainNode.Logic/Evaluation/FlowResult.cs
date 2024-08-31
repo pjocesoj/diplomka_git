@@ -34,11 +34,17 @@ namespace MainNode.Logic.Evaluation
 
                 Flow.Run();
                 Finished = true;
+                _lastRun = DateTime.Now;
                 return _valueDo;
             }
         }
         public override void NewIteration()
         {
+            var diff=DateTime.Now-_lastRun;
+            if (diff < RunFrequency) 
+            { 
+                return; 
+            }
             Finished = false;
         }
         public override void BindOutput(ValueDo bind)
@@ -62,5 +68,8 @@ namespace MainNode.Logic.Evaluation
         public abstract void NewIteration();
         public abstract void BindOutput(ValueDo bind);
         public abstract bool CompareReference(ValueDo value);
+
+        protected DateTime _lastRun = DateTime.MinValue;
+        public TimeSpan RunFrequency { get; set; } = TimeSpan.FromMicroseconds(0);
     }
 }
