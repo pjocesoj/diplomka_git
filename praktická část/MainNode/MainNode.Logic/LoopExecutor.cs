@@ -44,6 +44,7 @@
             await writeData();
             Iteration++;
             LoopFinished?.Invoke(this, new EventArgs());
+            Thread.Sleep(1000);
         }
         private async Task loadData()
         {

@@ -5,6 +5,7 @@ using MainNode.Windows;
 using System.Windows;
 using Microsoft.Win32;
 using System.IO;
+using System.Text;
 
 namespace MainNode.ViewModels
 {
@@ -22,6 +23,9 @@ namespace MainNode.ViewModels
             _loopCompiler = loopCompiler;
 
             _loopExecutor.LoopFinished += _loopExecutor_LoopFinished;
+
+            var n = _loopCompiler.TestNode();
+            _nodeRepo.AddNode(n);
         }
 
         #region nodes
@@ -90,10 +94,25 @@ namespace MainNode.ViewModels
         {
             _loopExecutor.Stop();
             OnPropertyChanged(nameof(IsLoopRunning));
-        }
+        }       
         private void _loopExecutor_LoopFinished(object? sender, EventArgs e)
         {
+            OnPropertyChanged(nameof(LoopValues));
         }
         #endregion
+
+        public string LoopValues
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder($"iteration: {_loopExecutor.Iteration}\n");
+                foreach (var res in _flowRepo.Results)
+                {
+                    var act=res.IsActual?"new":"old";
+                    sb.AppendLine($"{res.Value} {act}");
+                }
+                return sb.ToString();
+            }
+        }
     }
 }

@@ -42,5 +42,6 @@
             <controls:NodeListView Grid.Row="2"/>
 
         </Grid>
+        <Label Content="{Binding LoopValues}" HorizontalAlignment="Left" Margin="242,47,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
