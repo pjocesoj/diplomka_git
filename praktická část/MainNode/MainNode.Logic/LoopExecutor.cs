@@ -8,7 +8,9 @@
         private readonly FlowRepository _flowRepo;
         private readonly NodeRepository _nodeRepo;
 
+        public event EventHandler<EventArgs> LoopFinished;
         public bool IsRunning { get; private set; } = false;
+        public ulong Iteration { get; private set; } = 0;
         public LoopExecutor(FlowRepository flowRepo, NodeRepository nodeRepo)
         {
             _flowRepo = flowRepo;
@@ -40,6 +42,8 @@
             await loadData();
             _flowRepo.Run();
             await writeData();
+            Iteration++;
+            LoopFinished?.Invoke(this, new EventArgs());
         }
         private async Task loadData()
         {

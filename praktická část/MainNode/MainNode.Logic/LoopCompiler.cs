@@ -79,6 +79,7 @@ namespace MainNode.Logic
             //_nodeRepo.AddNode(n);
             var A = addA(n.EndPoints[1].Values.Ints[0], n, n.EndPoints[1]);
             var B= addB(n.EndPoints[2].Values.Ints[0], n, n.EndPoints[2]);
+            B.RunFrequency = TimeSpan.FromMilliseconds(1100);
             //A.BindOutput(n.EndPoints[1].Arguments.Ints[0]);
 
             var wtf = A.CompareReference(n.EndPoints[1].Arguments.Ints[0]);
