@@ -32,4 +32,6 @@ void NodeInit()
     printEndpoint(e1);
 }
 
+//nepovedlo se mi definovak weak v headeru
+void CustomWifiConnecting(){}
 #endif
