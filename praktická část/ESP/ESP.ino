@@ -16,16 +16,10 @@ void setup()
   Serial.begin(9600);
   Serial.println("boot");
   AvailableRAM("boot");
-
+  
   NodeInit();
-  WiFi.begin(ssid, password);
-
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
-    Serial.println("Connecting..");
-  }
-  Serial.println(WiFi.localIP());
+  
+  WifiConnect();
 
   //server.on("/", handleRootPath);
   AddDefaultEndpoints();
@@ -36,4 +30,20 @@ void setup()
 void loop()
 {
   server.handleClient();
+}
+
+void WifiConnect()
+{
+  Serial.print("Connecting to ");
+	Serial.println(ssid);
+	WiFi.begin(ssid, password);
+
+  CustomWifiConnecting();
+  //pokus se pripoji pomoci custom tak default 1 zkontroluje podminku a pokracuje
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.println("Connecting..");
+  }
+  Serial.println(WiFi.localIP());
 }

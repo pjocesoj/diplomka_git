@@ -15,4 +15,8 @@ void NodeInit();
  */
 void printEndpoint(Endpoint *ep);
 
+/**
+ * @brief umoznuje nodu definovat vlastni pripojovani k wifi
+ */
+void CustomWifiConnecting();
 #endif

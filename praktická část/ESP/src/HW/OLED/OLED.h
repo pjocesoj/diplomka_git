@@ -51,23 +51,10 @@ void print_IP()
 	display.display();
 }
 
-void connect_wifi(const char* ssid, const char* password)
+void showWifiIco(int x,int y)
 {
-	Serial.print("Connecting to ");
-	Serial.println(ssid);
-
-	WiFi.begin(ssid, password);
-	while (WiFi.status() != WL_CONNECTED) {
-		blink_wifi(0, 0);
-		Serial.print(".");
-		delay(200);
-	}
-
-	Serial.println("");
-	Serial.println(WiFi.localIP());
-	print_IP();
-	_showWifiIco = true;
-	blink_wifi(0, 0);
+    _showWifiIco = true;
+    blink_wifi(x, y);
 }
 
 #endif
