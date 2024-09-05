@@ -7,8 +7,11 @@
 #include "../../helpers.h"
 
 #include "../HW/OLED/OLED.h"
+#include "../HW/DHT/DhtWrapper.h"
 
 #ifdef NODE1
+
+DhtWrapper DhtWrapper(D4);
 
 void getValues()
 {
@@ -49,6 +52,8 @@ Endpoint *test_set()
 	server.on(e2->URL, setValues);
 	return e2;
 }
+
+
 
 void NodeInit()
 {
