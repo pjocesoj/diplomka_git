@@ -11,7 +11,38 @@
 
 #ifdef NODE1
 
-DhtWrapper DhtWrapper(D4);
+DhtWrapper _dhtWrapper(D4);
+ValueDto<float> *_tempValue;
+ValueDto<float> *_humidValue;
+ValueDto<int> *_ageValue;
+
+void getDhtValues()
+{
+	Serial.println("-> getDhtValues");
+	_dhtWrapper.WaitForNewestData();
+
+	_tempValue->Value = _dhtWrapper.GetTemp();
+	_humidValue->Value = _dhtWrapper.GetHumid();
+	_ageValue->Value = _dhtWrapper.GetDataAge();
+
+	sendEndpointValues(endpoints[2]);
+}
+
+Endpoint *test_getDht()
+{
+	Endpoint *e1 = new Endpoint(GET, "/getDhtValues");
+	_tempValue = new ValueDto<float>("temp", 0);
+	_humidValue = new ValueDto<float>("humid", 0);
+	_ageValue = new ValueDto<int>("age", 0);
+	e1->Floats.push_back(_tempValue);
+	e1->Floats.push_back(_humidValue);
+	e1->Ints.push_back(_ageValue);
+
+	endpoints.push_back(e1);
+
+	server.on(e1->URL, getDhtValues);
+	return e1;
+}
 
 void getValues()
 {
@@ -63,6 +94,8 @@ void NodeInit()
 	printEndpoint(e1);
     Endpoint *e2 = test_set();
 	printEndpoint(e2);
+	Endpoint *e3 = test_getDht();
+	printEndpoint(e3);
 
 	bool oled = OledInit();
 	if (!oled)
@@ -73,7 +106,7 @@ void NodeInit()
 	else
 	{
 		Serial.println("OLED OK");
-	}
+    }
 }
 
 void CustomWifiConnecting()

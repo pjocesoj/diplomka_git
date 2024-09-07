@@ -3,6 +3,7 @@
 DhtWrapper::DhtWrapper(uint8_t pin, uint8_t type)
 {
   _dht=new DHT(pin, type);
+  _dht->begin();
 }
 
 ulong DhtWrapper::GetDataAge()
