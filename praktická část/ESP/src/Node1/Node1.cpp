@@ -12,36 +12,53 @@
 #ifdef NODE1
 
 DhtWrapper _dhtWrapper(D4);
-ValueDto<float> *_tempValue;
-ValueDto<float> *_humidValue;
-ValueDto<int> *_ageValue;
 
-void getDhtValues()
+Endpoint* _dhtNew;
+Endpoint* _dhtAny;
+
+void getDhtValuesNew()
 {
-	Serial.println("-> getDhtValues");
 	_dhtWrapper.WaitForNewestData();
 
-	_tempValue->Value = _dhtWrapper.GetTemp();
-	_humidValue->Value = _dhtWrapper.GetHumid();
-	_ageValue->Value = _dhtWrapper.GetDataAge();
+	_dhtNew->Floats[0]->Value = _dhtWrapper.GetTemp();
+	_dhtNew->Floats[1]->Value = _dhtWrapper.GetHumid();
+	_dhtNew->Ints[0]->Value = _dhtWrapper.GetDataAge();
 
-	sendEndpointValues(endpoints[2]);
+	sendEndpointValues(_dhtNew);
 }
-
-Endpoint *test_getDht()
+void getDhtValuesAny()
 {
-	Endpoint *e1 = new Endpoint(GET, "/getDhtValues");
-	_tempValue = new ValueDto<float>("temp", 0);
-	_humidValue = new ValueDto<float>("humid", 0);
-	_ageValue = new ValueDto<int>("age", 0);
-	e1->Floats.push_back(_tempValue);
-	e1->Floats.push_back(_humidValue);
-	e1->Ints.push_back(_ageValue);
+	_dhtWrapper.ReadRaw();
 
-	endpoints.push_back(e1);
+	_dhtAny->Floats[0]->Value = _dhtWrapper.GetTemp();
+	_dhtAny->Floats[1]->Value = _dhtWrapper.GetHumid();
+	_dhtAny->Ints[0]->Value = _dhtWrapper.GetDataAge();
 
-	server.on(e1->URL, getDhtValues);
-	return e1;
+	sendEndpointValues(_dhtAny);
+}
+Endpoint* create_getDhtNew()
+{
+	_dhtNew = new Endpoint(GET, "/getDhtValuesNew");
+	_dhtNew->Floats.push_back(new ValueDto<float>("temp", 0));
+	_dhtNew->Floats.push_back(new ValueDto<float>("humid", 0));
+	_dhtNew->Ints.push_back(new ValueDto<int>("age", 0));
+
+	endpoints.push_back(_dhtNew);
+
+	server.on(_dhtNew->URL, getDhtValuesNew);
+	return _dhtNew;
+}
+Endpoint* create_getDhtAny()
+{
+	_dhtAny = new Endpoint(GET, "/getDhtValuesAny");
+	_dhtAny->Floats.push_back(new ValueDto<float>("temp", 0));
+	_dhtAny->Floats.push_back(new ValueDto<float>("humid", 0));
+	_dhtAny->Ints.push_back(new ValueDto<int>("age", 0));
+
+	endpoints.push_back(_dhtAny);
+
+	server.on(_dhtAny->URL, getDhtValuesAny);
+	return _dhtAny;
 }
 
 void getValues()
@@ -49,9 +66,9 @@ void getValues()
 	sendEndpointValues(endpoints[0]);
 }
 
-Endpoint *test_get()
+Endpoint* test_get()
 {
-    Endpoint *e1 = new Endpoint(GET, "/getValues");
+	Endpoint* e1 = new Endpoint(GET, "/getValues");
 	e1->Ints.push_back(new ValueDto<int>("a", 1));
 	e1->Ints.push_back(new ValueDto<int>("b", 2));
 	e1->Floats.push_back(new ValueDto<float>("c", 3.14));
@@ -71,9 +88,9 @@ void setValues()
 	server.send(200, "text/plain", "ok");
 }
 
-Endpoint *test_set()
+Endpoint* test_set()
 {
-    Endpoint *e2 = new Endpoint(POST, "/setValues");
+	Endpoint* e2 = new Endpoint(POST, "/setValues");
 	e2->Ints.push_back(new ValueDto<int>("a", 1));
 	e2->Ints.push_back(new ValueDto<int>("b", 2));
 	e2->Floats.push_back(new ValueDto<float>("c", 3.14));
@@ -90,12 +107,14 @@ void NodeInit()
 {
 	Serial.println("NODE 1");
 
-    Endpoint *e1 = test_get();
+	Endpoint* e1 = test_get();
 	printEndpoint(e1);
-    Endpoint *e2 = test_set();
+	Endpoint* e2 = test_set();
 	printEndpoint(e2);
-	Endpoint *e3 = test_getDht();
+	Endpoint* e3 = create_getDhtNew();
 	printEndpoint(e3);
+	Endpoint* e4 = create_getDhtAny();
+	printEndpoint(e4);
 
 	bool oled = OledInit();
 	if (!oled)
@@ -106,7 +125,7 @@ void NodeInit()
 	else
 	{
 		Serial.println("OLED OK");
-    }
+	}
 }
 
 void CustomWifiConnecting()
