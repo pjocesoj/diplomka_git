@@ -47,7 +47,7 @@ void getDhtValuesAny()
 	newLine();
 	ShowText(humid,2);
 	ShowText(" %",2);
-
+	ShowText(MillisToTimestemp(millis()),1,0,50);
 }
 Endpoint* create_getDhtNew()
 {

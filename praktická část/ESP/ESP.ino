@@ -25,6 +25,10 @@ void setup()
   AddDefaultEndpoints();
   server.begin();
   Serial.println("Server listening");
+
+  const char* c=MillisToTimestemp(millis());
+  Serial.println(c);
+  Serial.println(strlen(c));
 }
 
 void loop()
