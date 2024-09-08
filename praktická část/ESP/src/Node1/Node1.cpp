@@ -71,7 +71,10 @@ void NodeInit()
 	}
 }
 
-void CustomWifiConnecting()
+/**
+ * @brief upravena verze pripojovani k Wi-Fi vyuzivajici OLED displej
+ */
+void WaitToConnect()
 {
 	while (WiFi.status() != WL_CONNECTED)
 	{

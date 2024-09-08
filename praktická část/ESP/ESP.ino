@@ -18,7 +18,7 @@ void setup()
   AvailableRAM("boot");
   
   NodeInit();
-  
+
   WifiConnect();
 
   //server.on("/", handleRootPath);
@@ -32,18 +32,25 @@ void loop()
   server.handleClient();
 }
 
+/**
+ * @brief defaultni pripojovani k Wi-Fi vyuzivajici konzoli
+ */
+__attribute__((weak)) void WaitToConnect()
+{
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.println("Connecting..");
+  }
+}
+
 void WifiConnect()
 {
   Serial.print("Connecting to ");
 	Serial.println(ssid);
 	WiFi.begin(ssid, password);
 
-  CustomWifiConnecting();
-  //pokus se pripoji pomoci custom tak default 1 zkontroluje podminku a pokracuje
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
-    Serial.println("Connecting..");
-  }
+  WaitToConnect();//weak ktery muze byt prepsan
+
   Serial.println(WiFi.localIP());
 }
