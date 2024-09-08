@@ -40,6 +40,7 @@ void getDhtValuesAny()
 
 	sendEndpointValues(_dhtAny);
 
+	clearDisplay(0,21);
 	ShowText(temp,2,0,21);
 	ShowDeg(2);
 	ShowText("C",2);

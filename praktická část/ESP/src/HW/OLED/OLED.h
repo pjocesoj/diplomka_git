@@ -87,5 +87,15 @@ void newLine()
 {
 	display.println();
 }
+void clearDisplay(int x1,int y1,int x2,int y2)
+{
+	display.fillRect(x1, y1, x2, y2, BLACK);
+	display.display();
+}
+void clearDisplay(int x1,int y1)
+{
+	display.fillRect(x1, y1, SCREEN_WIDTH, SCREEN_HEIGHT, BLACK);
+	display.display();
+}
 
 #endif
