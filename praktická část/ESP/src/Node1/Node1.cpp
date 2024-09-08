@@ -30,11 +30,23 @@ void getDhtValuesAny()
 {
 	_dhtWrapper.ReadRaw();
 
-	_dhtAny->Floats[0]->Value = _dhtWrapper.GetTemp();
-	_dhtAny->Floats[1]->Value = _dhtWrapper.GetHumid();
-	_dhtAny->Ints[0]->Value = _dhtWrapper.GetDataAge();
+	float temp = _dhtWrapper.GetTemp();
+	float humid = _dhtWrapper.GetHumid();
+	long age = _dhtWrapper.GetDataAge();
+
+	_dhtAny->Floats[0]->Value = temp;
+	_dhtAny->Floats[1]->Value = humid;
+	_dhtAny->Ints[0]->Value = age;
 
 	sendEndpointValues(_dhtAny);
+
+	ShowText(temp,2,0,21);
+	ShowDeg(2);
+	ShowText("C",2);
+	newLine();
+	ShowText(humid,2);
+	ShowText(" %",2);
+
 }
 Endpoint* create_getDhtNew()
 {

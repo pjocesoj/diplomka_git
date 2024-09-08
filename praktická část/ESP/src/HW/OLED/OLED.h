@@ -1,7 +1,7 @@
 #ifndef OLED_H_
 #define OLED_H_
 
-//https://randomnerdtutorials.com/guide-for-oled-display-with-arduino/
+// https://randomnerdtutorials.com/guide-for-oled-display-with-arduino/
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -11,9 +11,8 @@
 
 // 'wifi', 16x16px
 const unsigned char wifi_ico[] PROGMEM = {
-  0x00, 0x00, 0x00, 0x00, 0x0f, 0xf0, 0x3f, 0xfc, 0x70, 0x0e, 0xe7, 0xe7, 0x1f, 0xf8, 0x38, 0x1c,
-  0x03, 0xc0, 0x0f, 0xf0, 0x04, 0x20, 0x01, 0x80, 0x01, 0x80, 0x01, 0x80, 0x00, 0x00, 0x00, 0x00
-};
+	0x00, 0x00, 0x00, 0x00, 0x0f, 0xf0, 0x3f, 0xfc, 0x70, 0x0e, 0xe7, 0xe7, 0x1f, 0xf8, 0x38, 0x1c,
+	0x03, 0xc0, 0x0f, 0xf0, 0x04, 0x20, 0x01, 0x80, 0x01, 0x80, 0x01, 0x80, 0x00, 0x00, 0x00, 0x00};
 
 bool _showWifiIco = true;
 
@@ -36,8 +35,14 @@ bool OledInit()
 
 void blink_wifi(int x, int y)
 {
-	if (_showWifiIco) { display.drawBitmap(x, y, wifi_ico, 16, 16, WHITE); }
-	else { display.fillRect(x, y, 16, 16, BLACK); }
+	if (_showWifiIco)
+	{
+		display.drawBitmap(x, y, wifi_ico, 16, 16, WHITE);
+	}
+	else
+	{
+		display.fillRect(x, y, 16, 16, BLACK);
+	}
 	_showWifiIco = !_showWifiIco;
 	display.display();
 }
@@ -51,10 +56,36 @@ void print_IP()
 	display.display();
 }
 
-void showWifiIco(int x,int y)
+void showWifiIco(int x, int y)
 {
-    _showWifiIco = true;
-    blink_wifi(x, y);
+	_showWifiIco = true;
+	blink_wifi(x, y);
+}
+
+template <typename T>
+void ShowText(T text, int8_t size)
+{
+	display.setTextSize(size);
+	display.print(text);
+	display.display();
+}
+
+template <typename T>
+void ShowText(T text, int8_t size, int x, int y)
+{
+	display.setCursor(x, y);
+	ShowText(text, size);
+}
+
+void ShowDeg(int8_t size)
+{
+	display.setTextSize(size);
+	display.print((char)247); // stupen (ma jiny kod nez ASCII)
+	display.display();
+}
+void newLine()
+{
+	display.println();
 }
 
 #endif
