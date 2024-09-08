@@ -2,30 +2,34 @@
 
 DhtWrapper::DhtWrapper(uint8_t pin, uint8_t type)
 {
-  _dht=new DHT(pin, type);
-  _dht->begin();
+	_dht = new DHT(pin, type);
+	_dht->begin();
 }
 
 ulong DhtWrapper::GetDataAge()
 {
-  return millis() - _lastDhtRead;
+	return millis() - _lastDhtRead;
 }
 
 bool DhtWrapper::ReadRaw()
 {
-  _temp = _dht->readTemperature();
-  _humid = _dht->readHumidity();
-  _lastDhtRead = millis();
+	_temp = _dht->readTemperature();
+	_humid = _dht->readHumidity();
 
-  return !isnan(_temp) && !isnan(_humid);
+	if (GetDataAge() >= 2000)
+	{
+		_lastDhtRead = millis();
+	}
+
+	return !isnan(_temp) && !isnan(_humid);
 }
 
 bool DhtWrapper::WaitForNewestData()
 {
-    ulong diff = GetDataAge();
-  if(diff<2000 && diff>0)
-  {
-      delay(2000-diff);
-  }
-  return ReadRaw();
+	ulong diff = GetDataAge();
+	if (diff < 2000 && diff>0)
+	{
+		delay(2000 - diff);
+	}
+	return ReadRaw();
 }
