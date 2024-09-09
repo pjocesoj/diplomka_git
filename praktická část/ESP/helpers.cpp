@@ -57,3 +57,27 @@ void deserializeDTO(String json, Endpoint *ep)
     j++;
   }
 }
+
+/**
+ * @brief z milisekund vytvori casovou znacku ve formatu HH:MM:SS:MSS
+ * @author GitHub Copilot
+ */
+const char* MillisToTimestemp(ulong milliseconds) {
+
+  unsigned long hours = milliseconds / 3600000;
+    milliseconds %= 3600000;
+    unsigned long minutes = milliseconds / 60000;
+    milliseconds %= 60000;
+    unsigned long seconds = milliseconds / 1000;
+    milliseconds %= 1000;
+
+    // Allocate a buffer large enough to hold the concatenated string
+    // 3x(2 digit + 3 separator)+3 digit and 1 for null terminator
+    static char buffer[19];
+    
+    // Format the numbers into the buffer
+    sprintf(buffer, "%02d : %02d : %02d : %03d", hours, minutes, seconds, milliseconds);
+    
+    // Return the buffer
+    return buffer;
+}
