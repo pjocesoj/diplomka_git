@@ -9,6 +9,12 @@ Endpoint::Endpoint(HttpEnum http, const char *url)
   HTTP = http;
   URL = url;
 }
+Endpoint::Endpoint(HttpEnum http, const char *url,int delay)
+{
+  HTTP = http;
+  URL = url;
+  Delay = delay;
+}
 
 /**
  * @brief serializuje kompletni info o endpointu {GET/POST, URL, vals[] {typ, jmeno, hodnota} }
@@ -19,6 +25,11 @@ void Endpoint::Serialize(JsonObject &jsonObject)
 {
   jsonObject["HTTP"] = HTTP;
   jsonObject["URL"] = URL;
+
+  if (Delay.has_value()) 
+  {
+    jsonObject["Delay"] = Delay.value();
+  }
 
   // JsonArray vals = jsonObject.createNestedArray("Vals");
   JsonArray vals = jsonObject["Vals"].to<JsonArray>();
@@ -51,6 +62,11 @@ void Endpoint::Serialize_info(JsonObject &jsonObject)
 {
   jsonObject["HTTP"] = HTTP;
   jsonObject["URL"] = URL;
+
+  if (Delay.has_value()) 
+  {
+    jsonObject["Delay"] = Delay.value();
+  }
 
   // JsonArray vals = jsonObject.createNestedArray("Vals");
   JsonArray vals = jsonObject["Vals"].to<JsonArray>();

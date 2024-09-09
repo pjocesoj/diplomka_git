@@ -62,7 +62,7 @@ void getDhtValuesAny()
 }
 Endpoint *create_getDhtNew()
 {
-	_dhtNew = new Endpoint(GET, "/getDhtValuesNew");
+	_dhtNew = new Endpoint(GET, "/getDhtValuesNew", 2100);
 	_dhtNew->Floats.push_back(new ValueDto<float>("temp", 0));
 	_dhtNew->Floats.push_back(new ValueDto<float>("humid", 0));
 	_dhtNew->Ints.push_back(new ValueDto<int>("age", 0));
