@@ -7,6 +7,7 @@
         xmlns:controls="clr-namespace:MainNode.Controls"
         xmlns:converters="clr-namespace:MainNode.Converters"
         xmlns:viewmodels="clr-namespace:MainNode.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowsViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>

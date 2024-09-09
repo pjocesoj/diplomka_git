@@ -17,6 +17,7 @@ namespace MainNode.Logic
             ret.Type = dto.Type;
             ret.Values = Map(dto.Vals);
             ret.Arguments = Map(dto.Args);
+            ret.Delay = dto.Delay;
 
             return ret;
         }

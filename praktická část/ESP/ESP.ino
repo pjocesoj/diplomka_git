@@ -16,24 +16,45 @@ void setup()
   Serial.begin(9600);
   Serial.println("boot");
   AvailableRAM("boot");
-
+  
   NodeInit();
-  WiFi.begin(ssid, password);
 
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
-    Serial.println("Connecting..");
-  }
-  Serial.println(WiFi.localIP());
+  WifiConnect();
 
   //server.on("/", handleRootPath);
   AddDefaultEndpoints();
   server.begin();
   Serial.println("Server listening");
+
+  const char* c=MillisToTimestemp(millis());
+  Serial.println(c);
+  Serial.println(strlen(c));
 }
 
 void loop()
 {
   server.handleClient();
+}
+
+/**
+ * @brief defaultni pripojovani k Wi-Fi vyuzivajici konzoli
+ */
+__attribute__((weak)) void WaitToConnect()
+{
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.println("Connecting..");
+  }
+}
+
+void WifiConnect()
+{
+  Serial.print("Connecting to ");
+	Serial.println(ssid);
+	WiFi.begin(ssid, password);
+
+  WaitToConnect();//weak ktery muze byt prepsan
+
+  Serial.println(WiFi.localIP());
 }

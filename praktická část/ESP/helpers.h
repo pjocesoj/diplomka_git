@@ -7,4 +7,6 @@ void AvailableRAM(const char* title);
 
 void deserializeDTO(String json, Endpoint *ep);
 
+const char* MillisToTimestemp(ulong milliseconds);
+
 #endif

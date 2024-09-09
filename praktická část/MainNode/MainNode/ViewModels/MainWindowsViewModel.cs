@@ -20,6 +20,8 @@ namespace MainNode.ViewModels
             _nodeRepo = nodeRepo;
             _loopExecutor = loopExecutor;
             _loopCompiler = loopCompiler;
+
+            _loopExecutor.LoopFinished += _loopExecutor_LoopFinished;
         }
 
         #region nodes
@@ -88,6 +90,9 @@ namespace MainNode.ViewModels
         {
             _loopExecutor.Stop();
             OnPropertyChanged(nameof(IsLoopRunning));
+        }
+        private void _loopExecutor_LoopFinished(object? sender, EventArgs e)
+        {
         }
         #endregion
     }

@@ -6,12 +6,14 @@
 #include "ValueDto.h"
 #include <ArduinoJson.h>
 #include <vector>
+#include <optional> // optional = nullable
 
 class Endpoint
 {
 public:
   Endpoint();
   Endpoint(HttpEnum http, const char *url);
+  Endpoint(HttpEnum http, const char *url,int delay);
 
   void Serialize(JsonObject &jsonObject);
   void Serialize_info(JsonObject &jsonObject);
@@ -23,6 +25,8 @@ public:
   std::vector<ValueDto<int>*> Ints;
   std::vector<ValueDto<float>*> Floats;
   std::vector<ValueDto<bool>*> Bools;
+
+  std::optional<int> Delay;
 
 private:
 

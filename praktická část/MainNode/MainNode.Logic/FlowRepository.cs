@@ -6,9 +6,19 @@ namespace MainNode.Logic
     public class FlowRepository
     {
         public List<FlowResult> Results { get; private set; } = new List<FlowResult>();
-        public Dictionary<Node, List<EndPointDo>> Inputs { get; private set; } = new Dictionary<Node, List<EndPointDo>>();
-        public Dictionary<Node, List<EndPointDo>> Outputs { get; private set; } = new Dictionary<Node, List<EndPointDo>>();
+        //public Dictionary<Node, List<EndPointDo>> Inputs { get; private set; } = new Dictionary<Node, List<EndPointDo>>();
+        //public Dictionary<Node, List<EndPointDo>> Outputs { get; private set; } = new Dictionary<Node, List<EndPointDo>>();
 
+        public Dictionary<EnpointLoadTypeEnum, List<EndpointVariables>> Inputs { get; private set; } = new Dictionary<EnpointLoadTypeEnum, List<EndpointVariables>>
+        {
+            { EnpointLoadTypeEnum.NORMAL, new List<EndpointVariables>() },
+            { EnpointLoadTypeEnum.SLOW, new List<EndpointVariables>() }
+        };
+        public Dictionary<EnpointLoadTypeEnum, List<EndpointVariables>> Outputs { get; private set; } = new Dictionary<EnpointLoadTypeEnum, List<EndpointVariables>>
+        {
+            { EnpointLoadTypeEnum.NORMAL, new List<EndpointVariables>() },
+            { EnpointLoadTypeEnum.SLOW, new List<EndpointVariables>() }
+        };
         public FlowRepository() { }
 
         public FlowResult AddFlow(Flow flow)
@@ -23,6 +33,7 @@ namespace MainNode.Logic
             var res = flow.GetResult();
             Results.Add(res);//bind správného výstupu
 
+            /*
             if (!Inputs.ContainsKey(input.Node))
             {
                 Inputs.Add(input.Node, new List<EndPointDo> { input.EndPoint });
@@ -39,6 +50,18 @@ namespace MainNode.Logic
             else
             {
                 Outputs[output.Node].Add(output.EndPoint);
+            }
+            */
+
+            if (input != null)
+            {
+                var IT = input.EndPoint.Delay == null ? EnpointLoadTypeEnum.NORMAL : EnpointLoadTypeEnum.SLOW;
+                Inputs[IT].Add(input);
+            }
+            if (output != null)
+            {
+                var OT = input.EndPoint.Delay == null ? EnpointLoadTypeEnum.NORMAL : EnpointLoadTypeEnum.SLOW;
+                Outputs[OT].Add(output);
             }
 
             return res;
