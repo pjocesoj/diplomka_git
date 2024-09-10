@@ -36,26 +36,7 @@ namespace MainNode.Logic
             IsRunning = false;
             _timer.Dispose();
         }
-        public void Start()
-        {
-            IsRunning = true;
-            _ = Task.Run(async () => TaskLoop());
-        }
-        public void Stop()
-        {
-            IsRunning = false;
-        }
 
-        //dočasné řešení než převedu na thread
-        private async Task TaskLoop()
-        {
-            while (IsRunning)
-            {
-                await Run();
-            }
-        }
-
-        //zvážit thread
         public async Task Run()
         {
             if (_lock) { return; }
@@ -69,29 +50,11 @@ namespace MainNode.Logic
             LoopFinished?.Invoke(this, new EventArgs());
 
             _iterationStopwatch.Stop();
-            Debug.WriteLine($"Iteration {Iteration} took {_iterationStopwatch.ElapsedMilliseconds}ms");
+            Debug.WriteLine($"Iteration {Iteration} took {_iterationStopwatch.ElapsedMilliseconds} ms");
             _lock = false;
         }
         private async Task loadData()
         {
-            /*
-            foreach (var pair in _flowRepo.Inputs)
-            {
-                var node = pair.Key;
-                var endPoints = pair.Value;
-                foreach (var ep in endPoints)
-                {
-                    try
-                    {
-                        await node.GetValues(ep);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-                }
-            }
-            */
             var normal = _flowRepo.Inputs[EnpointLoadTypeEnum.NORMAL];
             foreach (var ep in normal)
             {
@@ -106,24 +69,6 @@ namespace MainNode.Logic
         }
         private async Task writeData()
         {
-            /*
-            foreach (var pair in _flowRepo.Outputs)
-            {
-                var node = pair.Key;
-                var endPoints = pair.Value;
-                foreach (var ep in endPoints)
-                {
-                    try
-                    {
-                        await node.GetValues(ep);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-                }
-            }
-            */
             var normal = _flowRepo.Inputs[EnpointLoadTypeEnum.NORMAL];
             foreach (var ep in normal)
             {
