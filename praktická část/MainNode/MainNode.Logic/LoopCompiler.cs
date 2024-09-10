@@ -195,7 +195,7 @@ namespace MainNode.Logic
                 Type = Communication.Enums.EndpointType.GET,
                 Values = new ValuesDo(),
                 Arguments = new ValuesDo(),
-                Delay = 1000
+                Delay = 1100
             };
             slow.Values.Ints.Add(new ValueDo<int>("a", 0));
 
