@@ -17,6 +17,7 @@ namespace MainNode.Logic
         public TimeSpan IterationDuration => _iterationStopwatch.Elapsed;
         private Stopwatch _iterationStopwatch = new Stopwatch();
 
+        public int Period { get; set; } = 1000;
         private Timer _timer;
         private bool _lock = false;
         public LoopExecutor(FlowRepository flowRepo, NodeRepository nodeRepo)
@@ -26,12 +27,12 @@ namespace MainNode.Logic
         }
 
 
-        public void Start_t()
+        public void Start()
         {
             IsRunning = true;
-            _timer = new Timer(async (e) => await Run(), null, 0, 1000);
+            _timer = new Timer(async (e) => await Run(), null, 0, Period);
         }
-        public void Stop_t()
+        public void Stop()
         {
             IsRunning = false;
             _timer.Dispose();
