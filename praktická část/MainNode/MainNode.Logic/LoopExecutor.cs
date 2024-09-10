@@ -1,4 +1,6 @@
-﻿namespace MainNode.Logic
+﻿using System.Diagnostics;
+
+namespace MainNode.Logic
 {
     /// <summary>
     /// objekt zajišťující běh uživatelem zadané smyčky
@@ -11,12 +13,29 @@
         public event EventHandler<EventArgs> LoopFinished;
         public bool IsRunning { get; private set; } = false;
         public ulong Iteration { get; private set; } = 0;
+
+        public TimeSpan IterationDuration => _iterationStopwatch.Elapsed;
+        private Stopwatch _iterationStopwatch = new Stopwatch();
+
+        private Timer _timer;
+        private bool _lock = false;
         public LoopExecutor(FlowRepository flowRepo, NodeRepository nodeRepo)
         {
             _flowRepo = flowRepo;
             _nodeRepo = nodeRepo;
         }
 
+
+        public void Start_t()
+        {
+            IsRunning = true;
+            _timer = new Timer(async (e) => await Run(), null, 0, 1000);
+        }
+        public void Stop_t()
+        {
+            IsRunning = false;
+            _timer.Dispose();
+        }
         public void Start()
         {
             IsRunning = true;
@@ -39,11 +58,19 @@
         //zvážit thread
         public async Task Run()
         {
+            if (_lock) { return; }
+            _lock = true;
+            _iterationStopwatch.Restart();
+
             await loadData();
             _flowRepo.Run();
             await writeData();
             Iteration++;
             LoopFinished?.Invoke(this, new EventArgs());
+
+            _iterationStopwatch.Stop();
+            Debug.WriteLine($"Iteration {Iteration} took {_iterationStopwatch.ElapsedMilliseconds}ms");
+            _lock = false;
         }
         private async Task loadData()
         {
