@@ -1,21 +1,32 @@
-﻿using MainNode.Logic.Enums;
+﻿using MainNode.Logic.Do;
+using MainNode.Logic.Enums;
 
 namespace MainNode.Logic
 {
     public class ConnectionStatus
     {
-        public static uint MaxFails = 5;
-        public static uint recoveryThreshold = 5;
+        private uint _maxFails = 5;
+        private uint _recoveryThreshold = 5;
 
+        /// <summary>
+        /// vytvoří nový objekt pro sledování stavu spojení
+        /// </summary>
+        /// <param name="maxFails">hranice kdy se z WITH_PROBLEMS stane LOST</param>
+        /// <param name="recoveryThreshold">hranice kde se z RECOVERING stane opět GOOD</param>
+        public ConnectionStatus(uint maxFails, uint recoveryThreshold)
+        {
+            _maxFails = maxFails;
+            _recoveryThreshold = recoveryThreshold;
+        }
         public ConnectionStatusEnum Status
         {
             get
             {
                 if (Fails.Count > 0)
                 {
-                    if (FailsInRow >= MaxFails) { return ConnectionStatusEnum.LOST; }
+                    if (FailsInRow >= _maxFails) { return ConnectionStatusEnum.LOST; }
                     if (FailsInRow > 0) { return ConnectionStatusEnum.WITH_PROBLEMS; }
-                    if (SuccessesInRow >= recoveryThreshold) { return ConnectionStatusEnum.GOOD; }
+                    if (SuccessesInRow >= _recoveryThreshold) { return ConnectionStatusEnum.GOOD; }
                     return ConnectionStatusEnum.RECOVERING;
                 }
                 if (SuccessesInRow > 0) { return ConnectionStatusEnum.GOOD; }
@@ -33,7 +44,7 @@ namespace MainNode.Logic
         /// použito jen pro statistiku
         /// </summary>
         public ulong Successes { get; private set; } = 0;
-        
+
         /// <summary>
         /// nepřerušená řada úspěšných pokusů <br/>
         /// použito pro určení statusu
@@ -53,13 +64,13 @@ namespace MainNode.Logic
             SuccessesInRow++;
             FailsInRow = 0;
         }
-        public void Failure(string error)
+        public void Failure(string error, EndPointDo endPoint)
         {
-            Fails.Add(new ErrorData() { Message = error, Time = DateTime.Now });
+            Fails.Add(new ErrorData() { Message = error, Time = DateTime.Now, EndPoint = endPoint });
 
             SuccessesInRow = 0;
             FailsInRow++;
-        }   
+        }
         public void Reset()
         {
             Fails.Clear();
