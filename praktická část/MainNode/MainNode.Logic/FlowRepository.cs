@@ -1,4 +1,5 @@
 ﻿using MainNode.Logic.Do;
+using MainNode.Logic.Enums;
 using MainNode.Logic.Evaluation;
 
 namespace MainNode.Logic

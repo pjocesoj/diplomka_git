@@ -1,4 +1,4 @@
-﻿namespace MainNode.Logic
+﻿namespace MainNode.Logic.Enums
 {
     public enum EnpointLoadTypeEnum
     {
