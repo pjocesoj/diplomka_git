@@ -26,14 +26,7 @@ namespace MainNode.ViewModels
         [ObservableProperty]
         private string _address = "";
 
-        public short FailedRequests 
-        {
-            get 
-            {
-                short fails = 0;
-                return fails;
-            }
-        }
+        public ConnectionStatus ConnectionStatus => _node.ConnectionStatus;
 
         public List<EndPointViewModel> EndPoints 
         {

@@ -4,6 +4,7 @@ using MainNode.Communication.Helpers;
 using MainNode.Communication.Interfaces;
 using MainNode.Logic.Do;
 using MainNode.Logic.Extentions;
+using System.Text.Json.Serialization;
 
 namespace MainNode.Logic
 {
@@ -40,6 +41,9 @@ namespace MainNode.Logic
         }
 
         public EndPointDo[] EndPoints { get; set; } = new EndPointDo[0];
+
+        [JsonIgnore]
+        public ConnectionStatus ConnectionStatus { get; set; } = new ConnectionStatus(5, 5);
         public Node(INodeCommunication comm)
         {
             this._comm = comm;
@@ -65,12 +69,21 @@ namespace MainNode.Logic
 
         public async Task GetValues(EndPointDo EP)
         {
-            ValuesDto? data = await _comm.GetValues(EP.Path, EP.Delay, Mapper.Map(EP.Arguments));
+            try
+            {
+                ValuesDto? data = await _comm.GetValues(EP.Path, EP.Delay, Mapper.Map(EP.Arguments));
 
-            if (data == null) { return; }
-            EP.Values.Ints.CopyValues(data.Ints);
-            EP.Values.Floats.CopyValues(data.Floats);
-            EP.Values.Bools.CopyValues(data.Bools);
+                if (data == null) { return; }
+                EP.Values.Ints.CopyValues(data.Ints);
+                EP.Values.Floats.CopyValues(data.Floats);
+                EP.Values.Bools.CopyValues(data.Bools);
+
+                ConnectionStatus.Success();
+            }
+            catch (Exception e)
+            {
+                ConnectionStatus.Failure(e.Message, EP);
+            }
         }
         public async Task GetAllValues()
         {
@@ -83,7 +96,14 @@ namespace MainNode.Logic
 
         public async Task SetValues(EndPointDo EP)
         {
-            bool ok = await _comm.SetValues(EP.Path, Mapper.Map(EP.Arguments));
+            try
+            {
+                bool ok = await _comm.SetValues(EP.Path, Mapper.Map(EP.Arguments));
+            }
+            catch (Exception e)
+            {
+                ConnectionStatus.Failure(e.Message, EP);
+            }
         }
 
         /// <summary>
@@ -92,9 +112,17 @@ namespace MainNode.Logic
         /// </summary>
         /// <param name="EP"></param>
         /// <returns></returns>
-        public async Task<ValuesDto?> ParalelCall (EndPointDo EP)
+        public async Task<ValuesDto?> ParalelCall(EndPointDo EP)
         {
-            return await _comm.GetValues(EP.Path, EP.Delay, Mapper.Map(EP.Arguments));
+            try
+            {
+                return await _comm.GetValues(EP.Path, EP.Delay, Mapper.Map(EP.Arguments));
+            }
+            catch (Exception e)
+            {
+                ConnectionStatus.Failure(e.Message, EP);
+                return null;
+            }
         }
     }
 }

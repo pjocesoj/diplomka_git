@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using MainNode.Logic.Enums;
 
 namespace MainNode.Logic
 {

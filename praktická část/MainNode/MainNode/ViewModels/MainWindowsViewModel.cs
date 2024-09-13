@@ -93,6 +93,7 @@ namespace MainNode.ViewModels
         }
         private void _loopExecutor_LoopFinished(object? sender, EventArgs e)
         {
+            OnPropertyChanged(nameof(Nodes));
         }
         #endregion
     }
