@@ -4,6 +4,7 @@ using MainNode.Communication.Helpers;
 using MainNode.Communication.Interfaces;
 using MainNode.Logic.Do;
 using MainNode.Logic.Extentions;
+using System.Text.Json.Serialization;
 
 namespace MainNode.Logic
 {
@@ -41,6 +42,7 @@ namespace MainNode.Logic
 
         public EndPointDo[] EndPoints { get; set; } = new EndPointDo[0];
 
+        [JsonIgnore]
         public ConnectionStatus ConnectionStatus { get; set; } = new ConnectionStatus(5, 5);
         public Node(INodeCommunication comm)
         {
