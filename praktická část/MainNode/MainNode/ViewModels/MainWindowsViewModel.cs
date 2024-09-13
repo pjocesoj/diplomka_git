@@ -5,6 +5,7 @@ using MainNode.Windows;
 using System.Windows;
 using Microsoft.Win32;
 using System.IO;
+using System.Diagnostics;
 
 namespace MainNode.ViewModels
 {
@@ -22,6 +23,11 @@ namespace MainNode.ViewModels
             _loopCompiler = loopCompiler;
 
             _loopExecutor.LoopFinished += _loopExecutor_LoopFinished;
+
+            var n=_loopCompiler.TestNode();
+            _nodeRepo.AddNode(n);
+            Nodes.Add(new NodeViewModel(n, _nodeRepo, this));
+            OnPropertyChanged(nameof(Nodes));
         }
 
         #region nodes
@@ -93,6 +99,11 @@ namespace MainNode.ViewModels
         }
         private void _loopExecutor_LoopFinished(object? sender, EventArgs e)
         {
+            foreach (var n in Nodes)
+            {                
+                var stat = n.ConnectionStatus;
+                Debug.WriteLine($"{stat.Status} ({stat.FailsInRow}/{stat.SuccessesInRow})");
+            }
             OnPropertyChanged(nameof(Nodes));
         }
         #endregion
