@@ -15,7 +15,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate DataType="viewmodels:NodeViewModel">
                     <Button Content="{Binding Name}"
-                            Background="{Binding FailedRequests,Converter={StaticResource status}}"
+                            Background="{Binding ConnectionStatus,Converter={StaticResource status}}"
                             Command="{Binding ShowInfoCommand}"
                             Margin="0"/>
                 </DataTemplate>
