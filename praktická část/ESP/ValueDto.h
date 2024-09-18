@@ -10,7 +10,7 @@ template <class T>
 class ValueDto
 {
 public:
-  ValueDto(){};
+  ValueDto() {};
   ValueDto(const char *name, T val)
   {
     Value = val;
@@ -36,9 +36,29 @@ public:
   const char *Name = "val";
   T Value;
 
+  ValTypeEnum GetType()
+  {
+    if constexpr (std::is_same_v<T, int>)
+    {
+      return INT;
+    }
+    else if constexpr (std::is_same_v<T, float>)
+    {
+      return FLOAT;
+    }
+    else if constexpr (std::is_same_v<T, bool>)
+    {
+      return BOOL;
+    }
+    else
+    {
+      throw std::runtime_error("Unsupported type");
+    }
+  }
+
 private:
-  ValTypeEnum getType(int v){return INT;}
-  ValTypeEnum getType(float v){return FLOAT;}
-  ValTypeEnum getType(bool v){return BOOL;}
+  ValTypeEnum getType(int v) { return INT; }
+  ValTypeEnum getType(float v) { return FLOAT; }
+  ValTypeEnum getType(bool v) { return BOOL; }
 };
 #endif
