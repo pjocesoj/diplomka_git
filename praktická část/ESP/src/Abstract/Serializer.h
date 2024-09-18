@@ -1,147 +1,35 @@
 #ifndef Serializer_H_
 #define Serializer_H_
 
-#include <ArduinoJson.h>
-
 #include "../../EndPoint.h"
 #include "../../ValueDto.h"
 
-void printJSON(JsonDocument &doc)
-{
-    String ret;
-    serializeJson(doc, ret);
-    Serial.println(ret);
-}
+//jelikož se každý soubor kompiluje samostatně, musí být datový typ známý předem (generika nejde vytáhnout do cpp)
+//https://www.learncpp.com/cpp-tutorial/template-classes/
 
 /*
  *-----------------------------------------------------  ValueDTo  -----------------------------------------------------
  */
-template <class T>
-void Serialize(ValueDto<T> *value)
-{
-    JsonDocument doc;
-    JsonObject jsonObject = doc.to<JsonObject>();
 
-    jsonObject["Type"] = value->GetType();
-    jsonObject["Name"] = value->Name;
-    jsonObject["Value"] = value->Value;
+void Serialize(ValueDto<int> *value);
+void Serialize(ValueDto<float> *value);
+void Serialize(ValueDto<bool> *value);
 
-    printJSON(doc);
-}
+void SerializeInfo(ValueDto<int> *value);
+void SerializeInfo(ValueDto<float> *value);
+void SerializeInfo(ValueDto<bool> *value);
 
-template <class T>
-void SerializeInfo(ValueDto<T> *value)
-{
-    JsonDocument doc;
-    JsonObject jsonObject = doc.to<JsonObject>();
-
-    jsonObject["Type"] = value->GetType();
-    jsonObject["Name"] = value->Name;
-
-    printJSON(doc);
-}
-
-template <class T>
-void SerializeValue(ValueDto<T> *value)
-{
-    JsonDocument doc;
-    JsonObject jsonObject = doc.to<JsonObject>();
-
-    jsonObject["Value"] = value->Value;
-
-    printJSON(doc);
-}
-
+void SerializeValue(ValueDto<int> *value);
+void SerializeValue(ValueDto<float> *value);
+void SerializeValue(ValueDto<bool> *value);
 /*
  *-----------------------------------------------------  Endpoint  -----------------------------------------------------
  */
-void Serialize(Endpoint *ep)
-{
-    JsonDocument doc;
-    JsonObject jsonObject = doc.to<JsonObject>();
 
-    jsonObject["HTTP"] = ep->HTTP;
-    jsonObject["URL"] = ep->URL;
+void Serialize(Endpoint *ep);
 
-    if (ep->Delay.has_value())
-    {
-        jsonObject["Delay"] = ep->Delay.value();
-    }
+void SerializeInfo(Endpoint *ep);
 
-    JsonArray vals = jsonObject["Vals"].to<JsonArray>();
-    for (auto &obj : ep->Ints)
-    {
-        JsonObject nestedJsonObject = vals.add<JsonObject>();
-        obj->Serialize(nestedJsonObject);
-    }
-    for (auto &obj : ep->Floats)
-    {
-        JsonObject nestedJsonObject = vals.add<JsonObject>();
-        obj->Serialize(nestedJsonObject);
-    }
-    for (auto &obj : ep->Bools)
-    {
-        JsonObject nestedJsonObject = vals.add<JsonObject>();
-        obj->Serialize(nestedJsonObject);
-    }
+void SerializeValue(Endpoint *ep);
 
-        printJSON(doc);
-}
-
-void SerializeInfo(Endpoint *ep)
-{
-    JsonDocument doc;
-    JsonObject jsonObject = doc.to<JsonObject>();
-
-    jsonObject["HTTP"] = ep->HTTP;
-    jsonObject["URL"] = ep->URL;
-
-    if (ep->Delay.has_value())
-    {
-        jsonObject["Delay"] = ep->Delay.value();
-    }
-
-    JsonArray vals = jsonObject["Vals"].to<JsonArray>();
-    for (auto &obj : ep->Ints)
-    {
-        JsonObject nestedJsonObject = vals.add<JsonObject>();
-        obj->Serialize_info(nestedJsonObject);
-    }
-    for (auto &obj : ep->Floats)
-    {
-        JsonObject nestedJsonObject = vals.add<JsonObject>();
-        obj->Serialize_info(nestedJsonObject);
-    }
-    for (auto &obj : ep->Bools)
-    {
-        JsonObject nestedJsonObject = vals.add<JsonObject>();
-        obj->Serialize_info(nestedJsonObject);
-    }
-
-        printJSON(doc);
-}
-
-void SerializeValue(Endpoint *ep)
-{
-    JsonDocument doc;
-    JsonObject jsonObject = doc.to<JsonObject>();
-
-    JsonArray ints = jsonObject["Ints"].to<JsonArray>();
-    for (auto &obj : ep->Ints)
-    {
-        ints.add(obj->Value);
-    }
-    JsonArray floats = jsonObject["Floats"].to<JsonArray>();
-    for (auto &obj : ep->Floats)
-    {
-        floats.add(obj->Value);
-    }
-    JsonArray bools = jsonObject["Bools"].to<JsonArray>();
-    for (auto &obj : ep->Bools)
-    {
-        bools.add(obj->Value);
-    }
-
-    printJSON(doc);
-}
 #endif

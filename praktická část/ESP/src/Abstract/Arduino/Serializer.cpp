@@ -1,0 +1,169 @@
+#include "../Serializer.h"
+#include <ArduinoJson.h>
+
+void printJSON(JsonDocument &doc)
+{
+    String ret;
+    serializeJson(doc, ret);
+    Serial.println(ret);
+}
+
+/*
+ *-----------------------------------------------------  ValueDTo  helpers (arduino)-----------------------------------------------------
+ */
+
+template <class T>
+void Serialize(ValueDto<T> *value,JsonObject &jsonObject)
+{
+    jsonObject["Type"] = value->GetType();
+    jsonObject["Name"] = value->Name;
+    jsonObject["Value"] = value->Value;
+}
+
+template <class T>
+void SerializeInfo(ValueDto<T> *value,JsonObject &jsonObject)
+{
+    jsonObject["Type"] = value->GetType();
+    jsonObject["Name"] = value->Name;
+}
+
+/*
+ *-----------------------------------------------------  ValueDTo  -----------------------------------------------------
+ */
+
+/**
+ * @brief Serializuje hodnotu ValueDto
+ */
+template <class T>
+void Serialize(ValueDto<T> *value)
+{
+    JsonDocument doc;
+    JsonObject jsonObject = doc.to<JsonObject>();
+    Serialize(value,jsonObject);
+
+    printJSON(doc);
+}
+void Serialize(ValueDto<int> *value){Serialize<int>(value);}
+void Serialize(ValueDto<float> *value){Serialize<float>(value);}
+void Serialize(ValueDto<bool> *value){Serialize<bool>(value);}
+
+template <class T>
+void SerializeInfo(ValueDto<T> *value)
+{
+    JsonDocument doc;
+    JsonObject jsonObject = doc.to<JsonObject>();
+    SerializeInfo(value,jsonObject);
+
+    printJSON(doc);
+}
+void SerializeInfo(ValueDto<int> *value){SerializeInfo<int>(value);}
+void SerializeInfo(ValueDto<float> *value){SerializeInfo<float>(value);}
+void SerializeInfo(ValueDto<bool> *value){SerializeInfo<bool>(value);}
+
+template <class T>
+void SerializeValue(ValueDto<T> *value)
+{
+    JsonDocument doc;
+    JsonObject jsonObject = doc.to<JsonObject>();
+
+    jsonObject["Value"] = value->Value;
+
+    printJSON(doc);
+}
+void SerializeValue(ValueDto<int> *value){SerializeValue<int>(value);}
+void SerializeValue(ValueDto<float> *value){SerializeValue<float>(value);}
+void SerializeValue(ValueDto<bool> *value){SerializeValue<bool>(value);}
+
+/*
+ *-----------------------------------------------------  Endpoint  -----------------------------------------------------
+ */
+
+void Serialize(Endpoint *ep)
+{
+    JsonDocument doc;
+    JsonObject jsonObject = doc.to<JsonObject>();
+
+    jsonObject["HTTP"] = ep->HTTP;
+    jsonObject["URL"] = ep->URL;
+
+    if (ep->Delay.has_value())
+    {
+        jsonObject["Delay"] = ep->Delay.value();
+    }
+
+    JsonArray vals = jsonObject["Vals"].to<JsonArray>();
+    for (auto &obj : ep->Ints)
+    {
+        JsonObject nestedJsonObject = vals.add<JsonObject>();
+        Serialize(obj,nestedJsonObject);
+    }
+    for (auto &obj : ep->Floats)
+    {
+        JsonObject nestedJsonObject = vals.add<JsonObject>();
+        Serialize(obj,nestedJsonObject);
+    }
+    for (auto &obj : ep->Bools)
+    {
+        JsonObject nestedJsonObject = vals.add<JsonObject>();
+        Serialize(obj,nestedJsonObject);
+    }
+
+        printJSON(doc);
+}
+
+void SerializeInfo(Endpoint *ep)
+{
+    JsonDocument doc;
+    JsonObject jsonObject = doc.to<JsonObject>();
+
+    jsonObject["HTTP"] = ep->HTTP;
+    jsonObject["URL"] = ep->URL;
+
+    if (ep->Delay.has_value())
+    {
+        jsonObject["Delay"] = ep->Delay.value();
+    }
+
+    JsonArray vals = jsonObject["Vals"].to<JsonArray>();
+    for (auto &obj : ep->Ints)
+    {
+        JsonObject nestedJsonObject = vals.add<JsonObject>();
+        SerializeInfo(obj,nestedJsonObject);
+    }
+    for (auto &obj : ep->Floats)
+    {
+        JsonObject nestedJsonObject = vals.add<JsonObject>();
+        SerializeInfo(obj,nestedJsonObject);
+    }
+    for (auto &obj : ep->Bools)
+    {
+        JsonObject nestedJsonObject = vals.add<JsonObject>();
+        SerializeInfo(obj,nestedJsonObject);
+    }
+
+        printJSON(doc);
+}
+
+void SerializeValue(Endpoint *ep)
+{
+    JsonDocument doc;
+    JsonObject jsonObject = doc.to<JsonObject>();
+
+    JsonArray ints = jsonObject["Ints"].to<JsonArray>();
+    for (auto &obj : ep->Ints)
+    {
+        ints.add(obj->Value);
+    }
+    JsonArray floats = jsonObject["Floats"].to<JsonArray>();
+    for (auto &obj : ep->Floats)
+    {
+        floats.add(obj->Value);
+    }
+    JsonArray bools = jsonObject["Bools"].to<JsonArray>();
+    for (auto &obj : ep->Bools)
+    {
+        bools.add(obj->Value);
+    }
+
+    printJSON(doc);
+}
