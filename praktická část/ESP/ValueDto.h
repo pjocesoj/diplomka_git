@@ -2,8 +2,8 @@
 #define VALUE_H_
 
 #include "enums.h"
-#include "WString.h"
-#include <ArduinoJson.h>
+#include <type_traits>
+#include <stdexcept>
 
 // serializace si neumi poradit s generikou kdyz je ctrida rozdelena na .h a .cpp
 template <class T>

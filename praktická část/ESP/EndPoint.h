@@ -1,10 +1,8 @@
 #ifndef ENDPOINT_H_
 #define ENDPOINT_H_
 
-#include "WString.h"
 #include "Enums.h"
 #include "ValueDto.h"
-#include <ArduinoJson.h>
 #include <vector>
 #include <optional> // optional = nullable
 
