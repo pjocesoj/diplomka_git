@@ -15,10 +15,6 @@ public:
   Endpoint(HttpEnum http, const char *url);
   Endpoint(HttpEnum http, const char *url,int delay);
 
-  void Serialize(JsonObject &jsonObject);
-  void Serialize_info(JsonObject &jsonObject);
-  void Serialize_values(JsonObject &jsonObject);
-
   HttpEnum HTTP = GET;
   const char *URL = "GetVal";
 

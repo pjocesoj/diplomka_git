@@ -53,4 +53,13 @@ void SerializeInfo(Endpoint *ep, char* arr, int size);
  */
 void SerializeValue(Endpoint *ep, char* arr, int size);
 
+/**
+ * @brief serializuje list endpointu
+ * 
+ * @param endpoints list endpointu
+ * @param arr kam ma zapisovat
+ * @param size kapacita pole
+ */
+void SerializeEndpoints(std::vector<Endpoint*> endpoints,char* arr, int size);
+
 #endif

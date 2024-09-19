@@ -2,21 +2,13 @@
 
 #include "ESP8266WebServer.h"
 #include "global.h"
+#include "src/Abstract/Serializer.h"
 
 // handler dotazu na seznam endpontu
 void getInfo()
 {
-    JsonDocument doc;
-    JsonArray EPs = doc.to<JsonArray>();
-    for (auto &obj : endpoints)
-    {
-        //JsonObject nestedJsonObject = EPs.createNestedObject();
-        JsonObject nestedJsonObject = EPs.add<JsonObject>();
-        obj->Serialize_info(nestedJsonObject);
-    }
-
-    String ret;
-    serializeJson(doc, ret);
+    char ret[512];
+    SerializeEndpoints(endpoints, ret, 512);
     Serial.println(ret);
     server.send(200, "text/plain", ret);
 }
@@ -58,12 +50,9 @@ void AddDefaultEndpoints()
  */
 void sendEndpointValues(Endpoint *e)
 {
-    JsonDocument doc;
-    JsonObject jsonObject = doc.to<JsonObject>();
-    e->Serialize_values(jsonObject);
-
-    String ret;
-    serializeJson(doc, ret);
+    char ret[512];
+    SerializeValue(e, ret, 512);
+    
     Serial.println(ret);
     server.send(200, "text/plain", ret);
 }

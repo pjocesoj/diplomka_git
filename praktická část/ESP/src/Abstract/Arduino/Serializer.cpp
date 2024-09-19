@@ -80,14 +80,11 @@ void SerializeValue(ValueDto<float> *value){SerializeValue<float>(value);}
 void SerializeValue(ValueDto<bool> *value){SerializeValue<bool>(value);}
 
 /*
- *-----------------------------------------------------  Endpoint  -----------------------------------------------------
+ *-----------------------------------------------------  Endpoint helpers (arduino)-----------------------------------------------------
  */
 
-void Serialize(Endpoint *ep,char* arr, int size)
+void Serialize(Endpoint *ep,JsonObject &jsonObject)
 {
-    JsonDocument doc;
-    JsonObject jsonObject = doc.to<JsonObject>();
-
     jsonObject["HTTP"] = ep->HTTP;
     jsonObject["URL"] = ep->URL;
 
@@ -112,17 +109,10 @@ void Serialize(Endpoint *ep,char* arr, int size)
         JsonObject nestedJsonObject = vals.add<JsonObject>();
         Serialize(obj,nestedJsonObject);
     }
-
-    serializeJson(doc, arr, size);
-
-    printJSON(arr,size);
 }
 
-void SerializeInfo(Endpoint *ep, char* arr, int size)
+void SerializeInfo(Endpoint *ep,JsonObject &jsonObject)
 {
-    JsonDocument doc;
-    JsonObject jsonObject = doc.to<JsonObject>();
-
     jsonObject["HTTP"] = ep->HTTP;
     jsonObject["URL"] = ep->URL;
 
@@ -147,17 +137,10 @@ void SerializeInfo(Endpoint *ep, char* arr, int size)
         JsonObject nestedJsonObject = vals.add<JsonObject>();
         SerializeInfo(obj,nestedJsonObject);
     }
-
-    serializeJson(doc, arr, size);
-
-        printJSON(arr,size);
 }
 
-void SerializeValue(Endpoint *ep, char* arr, int size)
+void SerializeValue(Endpoint *ep,JsonObject &jsonObject)
 {
-    JsonDocument doc;
-    JsonObject jsonObject = doc.to<JsonObject>();
-
     JsonArray ints = jsonObject["Ints"].to<JsonArray>();
     for (auto &obj : ep->Ints)
     {
@@ -172,6 +155,54 @@ void SerializeValue(Endpoint *ep, char* arr, int size)
     for (auto &obj : ep->Bools)
     {
         bools.add(obj->Value);
+    }
+}
+
+/*
+ *-----------------------------------------------------  Endpoint  -----------------------------------------------------
+ */
+
+void Serialize(Endpoint *ep,char* arr, int size)
+{
+    JsonDocument doc;
+    JsonObject jsonObject = doc.to<JsonObject>();
+    Serialize(ep,jsonObject);
+
+    serializeJson(doc, arr, size);
+
+    printJSON(arr,size);
+}
+
+void SerializeInfo(Endpoint *ep, char* arr, int size)
+{
+    JsonDocument doc;
+    JsonObject jsonObject = doc.to<JsonObject>();
+    SerializeInfo(ep,jsonObject);
+
+    serializeJson(doc, arr, size);
+
+        printJSON(arr,size);
+}
+
+void SerializeValue(Endpoint *ep, char* arr, int size)
+{
+    JsonDocument doc;
+    JsonObject jsonObject = doc.to<JsonObject>();
+    SerializeValue(ep,jsonObject);
+
+    serializeJson(doc, arr, size);
+
+    printJSON(arr,size);
+}
+
+void SerializeEndpoints(std::vector<Endpoint*> endpoints, char* arr, int size)
+{
+    JsonDocument doc;
+    JsonArray EPs = doc.to<JsonArray>();
+    for (auto &obj : endpoints)
+    {
+        JsonObject nestedJsonObject = EPs.add<JsonObject>();
+        SerializeInfo(obj,nestedJsonObject);
     }
 
     serializeJson(doc, arr, size);

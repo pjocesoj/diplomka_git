@@ -16,22 +16,6 @@ public:
     Value = val;
     Name = name;
   }
-  void Serialize(JsonObject &jsonObject)
-  {
-    // Serialize the nested class data
-    jsonObject["Type"] = getType(Value);
-    jsonObject["Name"] = Name;
-    jsonObject["Value"] = Value;
-  }
-  void Serialize_info(JsonObject &jsonObject) // Serialize the nested class data
-  {
-    jsonObject["Type"] = getType(Value);
-    jsonObject["Name"] = Name;
-  }
-  void Serialize_value(JsonObject &jsonObject) // Serialize the nested class data
-  {
-    jsonObject["Value"] = Value;
-  }
 
   const char *Name = "val";
   T Value;
@@ -57,8 +41,6 @@ public:
   }
 
 private:
-  ValTypeEnum getType(int v) { return INT; }
-  ValTypeEnum getType(float v) { return FLOAT; }
-  ValTypeEnum getType(bool v) { return BOOL; }
+
 };
 #endif
