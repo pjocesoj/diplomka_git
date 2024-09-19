@@ -1,10 +1,8 @@
 #ifndef ENDPOINT_H_
 #define ENDPOINT_H_
 
-#include "WString.h"
 #include "Enums.h"
 #include "ValueDto.h"
-#include <ArduinoJson.h>
 #include <vector>
 #include <optional> // optional = nullable
 
@@ -14,10 +12,6 @@ public:
   Endpoint();
   Endpoint(HttpEnum http, const char *url);
   Endpoint(HttpEnum http, const char *url,int delay);
-
-  void Serialize(JsonObject &jsonObject);
-  void Serialize_info(JsonObject &jsonObject);
-  void Serialize_values(JsonObject &jsonObject);
 
   HttpEnum HTTP = GET;
   const char *URL = "GetVal";

@@ -2,6 +2,7 @@
 
 #include "HardwareSerial.h"
 #include "Esp.h"
+#include <ArduinoJson.h>
 
 /**
  * @brief vypise do konzole stav heap a stack

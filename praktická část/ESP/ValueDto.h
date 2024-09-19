@@ -2,43 +2,45 @@
 #define VALUE_H_
 
 #include "enums.h"
-#include "WString.h"
-#include <ArduinoJson.h>
+#include <type_traits>
+#include <stdexcept>
 
 // serializace si neumi poradit s generikou kdyz je ctrida rozdelena na .h a .cpp
 template <class T>
 class ValueDto
 {
 public:
-  ValueDto(){};
+  ValueDto() {};
   ValueDto(const char *name, T val)
   {
     Value = val;
     Name = name;
   }
-  void Serialize(JsonObject &jsonObject)
-  {
-    // Serialize the nested class data
-    jsonObject["Type"] = getType(Value);
-    jsonObject["Name"] = Name;
-    jsonObject["Value"] = Value;
-  }
-  void Serialize_info(JsonObject &jsonObject) // Serialize the nested class data
-  {
-    jsonObject["Type"] = getType(Value);
-    jsonObject["Name"] = Name;
-  }
-  void Serialize_value(JsonObject &jsonObject) // Serialize the nested class data
-  {
-    jsonObject["Value"] = Value;
-  }
 
   const char *Name = "val";
   T Value;
 
+  ValTypeEnum GetType()
+  {
+    if constexpr (std::is_same_v<T, int>)
+    {
+      return INT;
+    }
+    else if constexpr (std::is_same_v<T, float>)
+    {
+      return FLOAT;
+    }
+    else if constexpr (std::is_same_v<T, bool>)
+    {
+      return BOOL;
+    }
+    else
+    {
+      throw std::runtime_error("Unsupported type");
+    }
+  }
+
 private:
-  ValTypeEnum getType(int v){return INT;}
-  ValTypeEnum getType(float v){return FLOAT;}
-  ValTypeEnum getType(bool v){return BOOL;}
+
 };
 #endif
