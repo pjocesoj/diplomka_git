@@ -26,7 +26,7 @@ void AvailableRAM(const char* title)
  * @param json JSON k deserializaci
  * @param ep endpoint kam se maji hodnoty zapsat
  */
-void deserializeDTO(String json, Endpoint *ep)
+void deserializeDTO(String json, EndPointDto *ep)
 {
   JsonDocument doc;
   deserializeJson(doc, json);

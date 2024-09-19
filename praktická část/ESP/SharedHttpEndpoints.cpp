@@ -48,7 +48,7 @@ void AddDefaultEndpoints()
  * 
  *  @param e endpoint jehoz hodnoty ma odeslat
  */
-void sendEndpointValues(Endpoint *e)
+void sendEndpointValues(EndPointDto *e)
 {
     char ret[512];
     SerializeValue(e, ret, 512);

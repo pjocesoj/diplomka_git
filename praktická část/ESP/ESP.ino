@@ -9,7 +9,7 @@
 #include "src/Node.h"
 
 ESP8266WebServer server(80);
-std::vector<Endpoint*> endpoints;
+std::vector<EndPointDto*> endpoints;
 
 void setup()
 {

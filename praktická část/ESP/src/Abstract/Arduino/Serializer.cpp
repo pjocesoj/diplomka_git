@@ -83,7 +83,7 @@ void SerializeValue(ValueDto<bool> *value){SerializeValue<bool>(value);}
  *-----------------------------------------------------  Endpoint helpers (arduino)-----------------------------------------------------
  */
 
-void Serialize(Endpoint *ep,JsonObject &jsonObject)
+void Serialize(EndPointDto *ep,JsonObject &jsonObject)
 {
     jsonObject["HTTP"] = ep->HTTP;
     jsonObject["URL"] = ep->URL;
@@ -111,7 +111,7 @@ void Serialize(Endpoint *ep,JsonObject &jsonObject)
     }
 }
 
-void SerializeInfo(Endpoint *ep,JsonObject &jsonObject)
+void SerializeInfo(EndPointDto *ep,JsonObject &jsonObject)
 {
     jsonObject["HTTP"] = ep->HTTP;
     jsonObject["URL"] = ep->URL;
@@ -139,7 +139,7 @@ void SerializeInfo(Endpoint *ep,JsonObject &jsonObject)
     }
 }
 
-void SerializeValue(Endpoint *ep,JsonObject &jsonObject)
+void SerializeValue(EndPointDto *ep,JsonObject &jsonObject)
 {
     JsonArray ints = jsonObject["Ints"].to<JsonArray>();
     for (auto &obj : ep->Ints)
@@ -162,7 +162,7 @@ void SerializeValue(Endpoint *ep,JsonObject &jsonObject)
  *-----------------------------------------------------  Endpoint  -----------------------------------------------------
  */
 
-void Serialize(Endpoint *ep,char* arr, int size)
+void Serialize(EndPointDto *ep,char* arr, int size)
 {
     JsonDocument doc;
     JsonObject jsonObject = doc.to<JsonObject>();
@@ -173,7 +173,7 @@ void Serialize(Endpoint *ep,char* arr, int size)
     printJSON(arr,size);
 }
 
-void SerializeInfo(Endpoint *ep, char* arr, int size)
+void SerializeInfo(EndPointDto *ep, char* arr, int size)
 {
     JsonDocument doc;
     JsonObject jsonObject = doc.to<JsonObject>();
@@ -184,7 +184,7 @@ void SerializeInfo(Endpoint *ep, char* arr, int size)
         printJSON(arr,size);
 }
 
-void SerializeValue(Endpoint *ep, char* arr, int size)
+void SerializeValue(EndPointDto *ep, char* arr, int size)
 {
     JsonDocument doc;
     JsonObject jsonObject = doc.to<JsonObject>();
@@ -195,7 +195,7 @@ void SerializeValue(Endpoint *ep, char* arr, int size)
     printJSON(arr,size);
 }
 
-void SerializeEndpoints(std::vector<Endpoint*> endpoints, char* arr, int size)
+void SerializeEndpoints(std::vector<EndPointDto*> endpoints, char* arr, int size)
 {
     JsonDocument doc;
     JsonArray EPs = doc.to<JsonArray>();

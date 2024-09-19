@@ -1,7 +1,7 @@
 #include "../Node.h"
 
 #include "HardwareSerial.h"
-#include "../../Endpoint.h"
+#include "../Lib/EndPointDto.h"
 #include "../../global.h"
 #include "../../SharedHttpEndpoints.h"
 #include "../../helpers.h"
@@ -10,12 +10,12 @@
 
 void getValues()
 {
-    sendEndpointValues(endpoints[0]);
+    sendEndpointValues(EndPointDto[0]);
 }
 
-Endpoint *test_get()
+EndPointDto *test_get()
 {
-    Endpoint *e1 = new Endpoint(GET, "/getValues");
+    EndPointDto *e1 = new EndPointDto(GET, "/getValues");
     e1->Ints.push_back(new ValueDto<int>("a", 10));
     e1->Ints.push_back(new ValueDto<int>("b", 20));
     endpoints.push_back(e1);
@@ -28,7 +28,7 @@ void NodeInit()
 {
     Serial.println("NODE 2");
 
-    Endpoint *e1 = test_get();
+    EndPointDto *e1 = test_get();
     printEndpoint(e1);
 }
 

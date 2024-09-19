@@ -1,8 +1,8 @@
 #ifndef Serializer_H_
 #define Serializer_H_
 
-#include "../../EndPoint.h"
-#include "../../ValueDto.h"
+#include "../Lib/EndPointDto.h"
+#include "../Lib/ValueDto.h"
 
 //jelikož se každý soubor kompiluje samostatně, musí být datový typ známý předem (generika nejde vytáhnout do cpp)
 //https://www.learncpp.com/cpp-tutorial/template-classes/
@@ -33,7 +33,7 @@ void SerializeValue(ValueDto<bool> *value);
  * @param arr kam ma zapisovat
  * @param size kapacita pole
  */
-void Serialize(Endpoint *ep, char* arr, int size);
+void Serialize(EndPointDto *ep, char* arr, int size);
 
 /**
  * @brief serializuje informace o endpointu {GET/POST, URL, vals[] {typ, jmeno} }
@@ -42,7 +42,7 @@ void Serialize(Endpoint *ep, char* arr, int size);
  * @param arr kam ma zapisovat
  * @param size kapacita pole
  */
-void SerializeInfo(Endpoint *ep, char* arr, int size);
+void SerializeInfo(EndPointDto *ep, char* arr, int size);
 
 /**
  * @brief serializuje hodnoty jako { Ints[], Floats[], Bools[] }
@@ -51,7 +51,7 @@ void SerializeInfo(Endpoint *ep, char* arr, int size);
  * @param arr kam ma zapisovat
  * @param size kapacita pole
  */
-void SerializeValue(Endpoint *ep, char* arr, int size);
+void SerializeValue(EndPointDto *ep, char* arr, int size);
 
 /**
  * @brief serializuje list endpointu
@@ -60,6 +60,6 @@ void SerializeValue(Endpoint *ep, char* arr, int size);
  * @param arr kam ma zapisovat
  * @param size kapacita pole
  */
-void SerializeEndpoints(std::vector<Endpoint*> endpoints,char* arr, int size);
+void SerializeEndpoints(std::vector<EndPointDto*> endpoints,char* arr, int size);
 
 #endif
