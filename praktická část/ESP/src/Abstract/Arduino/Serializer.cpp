@@ -7,6 +7,11 @@ void printJSON(JsonDocument &doc)
     serializeJson(doc, ret);
     Serial.println(ret);
 }
+void printJSON(char* arr, int size)
+{
+    Serial.println(arr);
+    Serial.printf("size %d/%d\n",strlen(arr),size);
+}
 
 /*
  *-----------------------------------------------------  ValueDTo  helpers (arduino)-----------------------------------------------------
@@ -78,7 +83,7 @@ void SerializeValue(ValueDto<bool> *value){SerializeValue<bool>(value);}
  *-----------------------------------------------------  Endpoint  -----------------------------------------------------
  */
 
-void Serialize(Endpoint *ep)
+void Serialize(Endpoint *ep,char* arr, int size)
 {
     JsonDocument doc;
     JsonObject jsonObject = doc.to<JsonObject>();
@@ -108,10 +113,12 @@ void Serialize(Endpoint *ep)
         Serialize(obj,nestedJsonObject);
     }
 
-        printJSON(doc);
+    serializeJson(doc, arr, size);
+
+    printJSON(arr,size);
 }
 
-void SerializeInfo(Endpoint *ep)
+void SerializeInfo(Endpoint *ep, char* arr, int size)
 {
     JsonDocument doc;
     JsonObject jsonObject = doc.to<JsonObject>();
@@ -141,10 +148,12 @@ void SerializeInfo(Endpoint *ep)
         SerializeInfo(obj,nestedJsonObject);
     }
 
-        printJSON(doc);
+    serializeJson(doc, arr, size);
+
+        printJSON(arr,size);
 }
 
-void SerializeValue(Endpoint *ep)
+void SerializeValue(Endpoint *ep, char* arr, int size)
 {
     JsonDocument doc;
     JsonObject jsonObject = doc.to<JsonObject>();
@@ -165,5 +174,7 @@ void SerializeValue(Endpoint *ep)
         bools.add(obj->Value);
     }
 
-    printJSON(doc);
+    serializeJson(doc, arr, size);
+
+    printJSON(arr,size);
 }

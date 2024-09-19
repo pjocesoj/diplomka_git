@@ -26,10 +26,31 @@ void SerializeValue(ValueDto<bool> *value);
  *-----------------------------------------------------  Endpoint  -----------------------------------------------------
  */
 
-void Serialize(Endpoint *ep);
+/**
+ * @brief serializuje kompletni info o endpointu {GET/POST, URL, vals[] {typ, jmeno, hodnota} }
+ *
+ * @param ep endpoint ktery ma serializovat
+ * @param arr kam ma zapisovat
+ * @param size kapacita pole
+ */
+void Serialize(Endpoint *ep, char* arr, int size);
 
-void SerializeInfo(Endpoint *ep);
+/**
+ * @brief serializuje informace o endpointu {GET/POST, URL, vals[] {typ, jmeno} }
+ *
+ * @param ep endpoint ktery ma serializovat
+ * @param arr kam ma zapisovat
+ * @param size kapacita pole
+ */
+void SerializeInfo(Endpoint *ep, char* arr, int size);
 
-void SerializeValue(Endpoint *ep);
+/**
+ * @brief serializuje hodnoty jako { Ints[], Floats[], Bools[] }
+ *
+ * @param ep endpoint ktery ma serializovat
+ * @param arr kam ma zapisovat
+ * @param size kapacita pole
+ */
+void SerializeValue(Endpoint *ep, char* arr, int size);
 
 #endif
