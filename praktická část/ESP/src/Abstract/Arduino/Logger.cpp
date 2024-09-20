@@ -1,5 +1,6 @@
 #include "../Logger.h"
 #include "LoggerExtend.h"
+#include "HardwareSerial.h"
 
 void Log(const char* text)
 {

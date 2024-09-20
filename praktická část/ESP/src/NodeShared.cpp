@@ -1,5 +1,4 @@
 #include "Node.h"
-#include "HardwareSerial.h"
 #include "Abstract/Serializer.h"
 #include "Abstract/Logger.h"
 
