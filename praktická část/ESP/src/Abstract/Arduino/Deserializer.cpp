@@ -11,7 +11,6 @@ void Deserialize(const char* json, EndPointDto *ep)
   for(int i : array1)   
   {
     ep->Ints[j]->Value=i;
-    Serial.println(i);
     j++;
   }
 
@@ -20,7 +19,6 @@ void Deserialize(const char* json, EndPointDto *ep)
   for(float i : array2) 
   {
     ep->Floats[j]->Value=i;
-    Serial.println(i);
     j++;
   }
 
@@ -29,7 +27,6 @@ void Deserialize(const char* json, EndPointDto *ep)
   for(bool i : array3) 
   {
     ep->Bools[j]->Value=i;
-    Serial.println(i);
     j++;
   }
 }
