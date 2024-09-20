@@ -5,12 +5,16 @@
 #include "../../global.h"
 #include "../../SharedHttpEndpoints.h"
 #include "../../helpers.h"
+#include "../Abstract/Deserializer.h"
 
 #ifdef NODE2
 
+EndPointDto* _get;
+EndPointDto* _set;
+
 void getValues()
 {
-    sendEndpointValues(EndPointDto[0]);
+    sendEndpointValues(_get);
 }
 
 EndPointDto *test_get()
@@ -21,7 +25,34 @@ EndPointDto *test_get()
     endpoints.push_back(e1);
 
     server.on(e1->URL, getValues);
+    _get = e1;
     return e1;
+}
+
+void setValues()
+{
+    Serial.println("setValue");
+    String body = server.arg("plain");
+
+    const char* bodyC = body.c_str();
+    Deserialize(bodyC, _set);
+
+    //deserializeDTO(body, _set);
+    printEndpoint(_set);
+
+    server.send(200, "text/plain", "ok");
+}
+EndPointDto *test_set()
+{
+    EndPointDto *e2 = new EndPointDto(POST, "/setValues");
+    e2->Ints.push_back(new ValueDto<int>("a", 1));
+    e2->Ints.push_back(new ValueDto<int>("b", 2));
+    e2->Floats.push_back(new ValueDto<float>("c", 3.14));
+    e2->Bools.push_back(new ValueDto<bool>("B1", true));
+    endpoints.push_back(e2);
+    server.on(e2->URL, setValues);
+    _set = e2;
+    return e2;
 }
 
 void NodeInit()
@@ -30,6 +61,8 @@ void NodeInit()
 
     EndPointDto *e1 = test_get();
     printEndpoint(e1);
+    EndPointDto *e2 = test_set();
+    printEndpoint(e2);
 }
 
 #endif
