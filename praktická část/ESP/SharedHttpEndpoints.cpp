@@ -3,32 +3,33 @@
 #include "ESP8266WebServer.h"
 #include "global.h"
 #include "src/Abstract/Serializer.h"
+#include "src/Abstract/Logger.h"
+#include "src/Abstract/Arduino/LoggerExtend.h"
+
 
 // handler dotazu na seznam endpontu
 void getInfo()
 {
     char ret[512];
     SerializeEndpoints(endpoints, ret, 512);
-    Serial.println(ret);
+    Log(ret);
     server.send(200, "text/plain", ret);
 }
 
 // handler pro root
 void handleRootPath()
 {
-    Serial.println("http root");
+    Log("http root");
     int headers = server.headers();
     for (int i = 0; i < headers; i++)
     {
         String val = server.header(i);
         String nam = server.headerName(i);
-        Serial.print(nam);
-        Serial.print("=");
-        Serial.println(val);
+        LogExt(val,"=",nam);
     }
 
     String body = server.arg("plain");
-    Serial.println(body);
+    LogExt(body);
 
     server.send(200, "text/plain", "Hello world");
 }
@@ -53,6 +54,6 @@ void sendEndpointValues(EndPointDto *e)
     char ret[512];
     SerializeValue(e, ret, 512);
     
-    Serial.println(ret);
+    Log(ret);
     server.send(200, "text/plain", ret);
 }
