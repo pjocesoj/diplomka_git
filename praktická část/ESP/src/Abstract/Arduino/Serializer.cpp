@@ -33,7 +33,7 @@ void SerializeInfo(ValueDto<T> *value,JsonObject &jsonObject)
 }
 
 /*
- *-----------------------------------------------------  ValueDTo  -----------------------------------------------------
+ *-----------------------------------------------------  ValueDTo (vystup do konzole) -----------------------------------------------------
  */
 
 /**
@@ -169,8 +169,6 @@ void Serialize(EndPointDto *ep,char* arr, int size)
     Serialize(ep,jsonObject);
 
     serializeJson(doc, arr, size);
-
-    printJSON(arr,size);
 }
 
 void SerializeInfo(EndPointDto *ep, char* arr, int size)
@@ -180,8 +178,6 @@ void SerializeInfo(EndPointDto *ep, char* arr, int size)
     SerializeInfo(ep,jsonObject);
 
     serializeJson(doc, arr, size);
-
-        printJSON(arr,size);
 }
 
 void SerializeValue(EndPointDto *ep, char* arr, int size)
@@ -191,8 +187,6 @@ void SerializeValue(EndPointDto *ep, char* arr, int size)
     SerializeValue(ep,jsonObject);
 
     serializeJson(doc, arr, size);
-
-    printJSON(arr,size);
 }
 
 void SerializeEndpoints(std::vector<EndPointDto*> endpoints, char* arr, int size)
@@ -206,6 +200,4 @@ void SerializeEndpoints(std::vector<EndPointDto*> endpoints, char* arr, int size
     }
 
     serializeJson(doc, arr, size);
-
-    printJSON(arr,size);
 }
