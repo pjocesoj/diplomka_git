@@ -1,6 +1,8 @@
 #ifndef CommunicationHandler_H_
 #define CommunicationHandler_H_
 
+#include <functional>
+
 class CommunicationHandler
 {
 public:
@@ -13,6 +15,10 @@ public:
     void SendError(const char *data);
 
     void loop();
+
+    int getBody(char*ret, int size);
+
+    int HeaderList(char*ret, int size);
 
 private:
 

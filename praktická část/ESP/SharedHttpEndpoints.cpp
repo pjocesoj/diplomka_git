@@ -1,6 +1,5 @@
 #include "SharedHttpEndpoints.h"
 
-#include "ESP8266WebServer.h"
 #include "global.h"
 #include "src/Abstract/Serializer.h"
 #include "src/Abstract/Logger.h"
@@ -21,19 +20,16 @@ void getInfo()
 // handler pro root
 void handleRootPath()
 {
-    /*
+    
     Log("http root");
-    int headers = server.headers();
-    for (int i = 0; i < headers; i++)
-    {
-        String val = server.header(i);
-        String nam = server.headerName(i);
-        LogExt(val,"=",nam);
-    }
+    char head[512];
+    int hl= communicationHandler.HeaderList(head,512);
+    Log(head);
 
-    String body = server.arg("plain");
-    LogExt(body);
-*/
+    char body[512];
+    int bl = communicationHandler.getBody(body,512);
+    Log(body);
+
     communicationHandler.SendOk("hello world");
 }
 

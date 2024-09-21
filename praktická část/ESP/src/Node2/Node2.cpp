@@ -32,15 +32,15 @@ EndPointDto *test_get()
 
 void setValues()
 {
-    /*
+    
     Serial.println("setValue");
-    String body = server.arg("plain");
 
-    const char* bodyC = body.c_str();
-    Deserialize(bodyC, _set);
+char body[512];
+    int bl = communicationHandler.getBody(body, 512);
+    Deserialize(body, _set);
 
     printEndpoint(_set);
-*/
+
     communicationHandler.SendOk("ok");
 }
 EndPointDto *test_set()
