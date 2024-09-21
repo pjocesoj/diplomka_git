@@ -1,10 +1,11 @@
 #include "../Node.h"
 
 #include "HardwareSerial.h"
-#include "../../Endpoint.h"
+#include "../Lib/EndPointDto.h"
 #include "../../global.h"
 #include "../../SharedHttpEndpoints.h"
 #include "../../helpers.h"
+#include "../Abstract/CommunicationHandler.h"
 
 #include "../HW/OLED/OLED.h"
 #include "../HW/DHT/DhtWrapper.h"
@@ -13,8 +14,8 @@
 
 DhtWrapper _dhtWrapper(D4);
 
-Endpoint *_dhtNew;
-Endpoint *_dhtAny;
+EndPointDto *_dhtNew;
+EndPointDto *_dhtAny;
 
 void DhtPrint(float temp, float humid)
 {
@@ -60,28 +61,28 @@ void getDhtValuesAny()
 
 	DhtPrint(temp, humid);
 }
-Endpoint *create_getDhtNew()
+EndPointDto *create_getDhtNew()
 {
-	_dhtNew = new Endpoint(GET, "/getDhtValuesNew", 2100);
+	_dhtNew = new EndPointDto(GET, "/getDhtValuesNew", 2100);
 	_dhtNew->Floats.push_back(new ValueDto<float>("temp", 0));
 	_dhtNew->Floats.push_back(new ValueDto<float>("humid", 0));
 	_dhtNew->Ints.push_back(new ValueDto<int>("age", 0));
 
 	endpoints.push_back(_dhtNew);
 
-	server.on(_dhtNew->URL, getDhtValuesNew);
+    communicationHandler.StartListening(_dhtNew->URL, getDhtValuesNew);
 	return _dhtNew;
 }
-Endpoint *create_getDhtAny()
+EndPointDto *create_getDhtAny()
 {
-	_dhtAny = new Endpoint(GET, "/getDhtValuesAny");
+	_dhtAny = new EndPointDto(GET, "/getDhtValuesAny");
 	_dhtAny->Floats.push_back(new ValueDto<float>("temp", 0));
 	_dhtAny->Floats.push_back(new ValueDto<float>("humid", 0));
 	_dhtAny->Ints.push_back(new ValueDto<int>("age", 0));
 
 	endpoints.push_back(_dhtAny);
 
-	server.on(_dhtAny->URL, getDhtValuesAny);
+    communicationHandler.StartListening(_dhtAny->URL, getDhtValuesAny);
 	return _dhtAny;
 }
 
@@ -89,9 +90,9 @@ void NodeInit()
 {
 	Serial.println("NODE 1");
 
-	Endpoint *e1 = create_getDhtNew();
+	EndPointDto *e1 = create_getDhtNew();
 	printEndpoint(e1);
-	Endpoint *e2 = create_getDhtAny();
+	EndPointDto *e2 = create_getDhtAny();
 	printEndpoint(e2);
 
 	bool oled = OledInit();

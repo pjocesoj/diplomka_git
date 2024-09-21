@@ -1,13 +1,10 @@
 #include "Node.h"
-#include "HardwareSerial.h"
-#include "../Endpoint.h"
+#include "Abstract/Serializer.h"
+#include "Abstract/Logger.h"
 
-void printEndpoint(Endpoint *ep)
+void printEndpoint(EndPointDto *ep)
 {
-    JsonDocument doc;
-    JsonObject jsonObject = doc.to<JsonObject>();
-    ep->Serialize(jsonObject);
-    String ret;
-    serializeJson(doc, ret);
-    Serial.println(ret);
+    char ret[512];
+    Serialize(ep, ret, 512);
+    Log(ret);
 }

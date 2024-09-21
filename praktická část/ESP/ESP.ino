@@ -8,8 +8,12 @@
 #include "SharedHttpEndpoints.h"
 #include "src/Node.h"
 
-ESP8266WebServer server(80);
-std::vector<Endpoint*> endpoints;
+#include "src/Abstract/CommunicationHandler.h"
+
+
+//ESP8266WebServer server(80);
+CommunicationHandler communicationHandler;
+std::vector<EndPointDto*> endpoints;
 
 void setup()
 {
@@ -23,7 +27,7 @@ void setup()
 
   //server.on("/", handleRootPath);
   AddDefaultEndpoints();
-  server.begin();
+  //server.begin();
   Serial.println("Server listening");
 
   const char* c=MillisToTimestemp(millis());
@@ -33,7 +37,7 @@ void setup()
 
 void loop()
 {
-  server.handleClient();
+  communicationHandler.loop();
 }
 
 /**
