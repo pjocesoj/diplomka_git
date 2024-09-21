@@ -38,6 +38,10 @@ int CommunicationHandler::getBody(char* ret, int size)
     return strlen(ret);
 }
 
+/**
+ * @brief ziska headery z requestu <br/>
+ * vraci pouze Authorization + If-None-Match ostatni musim rict explicitně
+ */
 int CommunicationHandler::HeaderList(char*ret, int size)
 {
     String headerList = "";
