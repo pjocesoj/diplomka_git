@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
-namespace MainNode.Logic
+namespace MainNode.Logic.Compile
 {
     /// <summary>
     /// překládá uživatelem zadaný vstup do podoby, kterou lze vykonat
@@ -17,6 +17,76 @@ namespace MainNode.Logic
         public LoopCompiler(FlowRepository flowRepo)
         {
             _flowRepo = flowRepo;
+            InitTable();
+        }
+        #region finite automata
+        private Stack<StackValue> _stack = new Stack<StackValue>();
+        private TransitionFunc[,] _table;
+
+        private void InitTable()
+        {
+            char[] chars = { 'Ø', 'A', '0', '.', '(', ')', '+', '-', '*', '/', '<', '>', '=' };
+            string[] states = { "Ø", "N", "E", "V", "+", "-", "*", "/", "<", ">", "=", ">=", "<=" };
+
+            _table = new TransitionFunc[chars.Length, states.Length];
+
+            _table[getId('a'), 0] = new TransitionFunc(new Point(getId('a'), 1), AddChar);
+            _table[getId('a'), 1] = new TransitionFunc(new Point(getId('a'), 1), AddChar);
+            _table[getId('0'), 1] = new TransitionFunc(new Point(getId('a'), 1), AddChar);
+
+        }
+        private int getId(char c)
+        {
+            if (c >= 'a' && c <= 'z') { return 1; }
+            if (c >= 'A' && c <= 'Z') { return 1; }
+            if (c >= '0' && c <= '9') { return 2; }
+
+            switch (c)
+            {
+                case '.': return 3;
+                case '(': return 4;
+                case ')': return 5;
+                case '+': return 6;
+                case '-': return 7;
+                case '*': return 8;
+                case '/': return 9;
+                case '<': return 10;
+                case '>': return 11;
+                case '=': return 12;
+                default: return 0;
+            }
+        }
+        private void AddChar(char c, StackValueTypeEnum state)
+        {
+            var cache = _stack.FirstOrDefault();
+            if (cache == null)
+            {
+                cache = new StackValue { Type = state };
+                _stack.Push(cache);
+            }
+            cache.Value.Append(c);
+        }
+        #endregion
+        public void Compile(string input)
+        {
+            int state = 0;
+            for (int i = 0; i < input.Length; i++)
+            {
+                char c = input[i];
+                var f = _table[getId(c), state];
+
+                if (f != null) 
+                {
+                    f.Func(c, StackValueTypeEnum.NODE);
+                    state = f.Next.Y;
+                }
+                else
+                {
+                    var ok = input.Remove(i);
+                    var rest = input.Substring(i);
+                    throw new ApplicationException($"Invalid character {c} at position {i} \n \"{ok}\" \"{rest}\"");
+                }
+            }
         }
 
         #region test
@@ -78,7 +148,7 @@ namespace MainNode.Logic
             Node n = EmulatorNode();
             //_nodeRepo.AddNode(n);
             var A = addA(n.EndPoints[1].Values.Ints[0], n, n.EndPoints[1]);
-            var B= addB(n.EndPoints[2].Values.Ints[0], n, n.EndPoints[2]);
+            var B = addB(n.EndPoints[2].Values.Ints[0], n, n.EndPoints[2]);
             B.RunFrequency = TimeSpan.FromMilliseconds(1100);
             //A.BindOutput(n.EndPoints[1].Arguments.Ints[0]);
 
@@ -135,8 +205,8 @@ namespace MainNode.Logic
             var slow = endpointSlow();
 
             //var eps = getEndPoints();
-            var eps= new EndPointDo[] { get, set, slow };
-            var _comm = new MainNode.Communication.HttpNodeCommunication();
+            var eps = new EndPointDo[] { get, set, slow };
+            var _comm = new Communication.HttpNodeCommunication();
 
             Node n = new Node(_comm);
             n.Address = "localhost:8080";
@@ -144,7 +214,7 @@ namespace MainNode.Logic
 
             return n;
         }
-        
+
         private EndPointDo endpointGet()
         {
             var get = new EndPointDo
