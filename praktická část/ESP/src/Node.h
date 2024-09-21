@@ -1,4 +1,4 @@
-#define NODE1
+#define NODE2
 
 #ifndef NODE_H_
 #define NODE_H_

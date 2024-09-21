@@ -5,6 +5,7 @@
 #include "../../global.h"
 #include "../../SharedHttpEndpoints.h"
 #include "../../helpers.h"
+#include "../Abstract/CommunicationHandler.h"
 
 #include "../HW/OLED/OLED.h"
 #include "../HW/DHT/DhtWrapper.h"
@@ -69,7 +70,7 @@ EndPointDto *create_getDhtNew()
 
 	endpoints.push_back(_dhtNew);
 
-	server.on(_dhtNew->URL, getDhtValuesNew);
+    communicationHandler.StartListening(_dhtNew->URL, getDhtValuesNew);
 	return _dhtNew;
 }
 EndPointDto *create_getDhtAny()
@@ -81,7 +82,7 @@ EndPointDto *create_getDhtAny()
 
 	endpoints.push_back(_dhtAny);
 
-	server.on(_dhtAny->URL, getDhtValuesAny);
+    communicationHandler.StartListening(_dhtAny->URL, getDhtValuesAny);
 	return _dhtAny;
 }
 
