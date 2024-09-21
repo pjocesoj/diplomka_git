@@ -6,6 +6,7 @@
 #include "../../SharedHttpEndpoints.h"
 #include "../../helpers.h"
 #include "../Abstract/Deserializer.h"
+#include "../Abstract/CommunicationHandler.h"
 
 #ifdef NODE2
 
@@ -24,23 +25,23 @@ EndPointDto *test_get()
     e1->Ints.push_back(new ValueDto<int>("b", 20));
     endpoints.push_back(e1);
 
-    server.on(e1->URL, getValues);
+    communicationHandler.StartListening(e1->URL, getValues);
     _get = e1;
     return e1;
 }
 
 void setValues()
 {
+    
     Serial.println("setValue");
-    String body = server.arg("plain");
 
-    const char* bodyC = body.c_str();
-    Deserialize(bodyC, _set);
+char body[512];
+    int bl = communicationHandler.getBody(body, 512);
+    Deserialize(body, _set);
 
-    //deserializeDTO(body, _set);
     printEndpoint(_set);
 
-    server.send(200, "text/plain", "ok");
+    communicationHandler.SendOk("ok");
 }
 EndPointDto *test_set()
 {
@@ -50,7 +51,7 @@ EndPointDto *test_set()
     e2->Floats.push_back(new ValueDto<float>("c", 3.14));
     e2->Bools.push_back(new ValueDto<bool>("B1", true));
     endpoints.push_back(e2);
-    server.on(e2->URL, setValues);
+    communicationHandler.StartListening(e2->URL, setValues);
     _set = e2;
     return e2;
 }
