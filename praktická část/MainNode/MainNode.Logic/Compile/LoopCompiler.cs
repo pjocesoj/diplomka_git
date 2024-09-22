@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using MainNode.Logic.Enums;
+using System.Diagnostics;
 
 namespace MainNode.Logic.Compile
 {
@@ -27,13 +29,22 @@ namespace MainNode.Logic.Compile
         {
             char[] chars = { 'Ø', 'A', '0', '.', '(', ')', '+', '-', '*', '/', '<', '>', '=' };
             string[] states = { "Ø", "N", "E", "V", "+", "-", "*", "/", "<", ">", "=", ">=", "<=" };
+            int numberOfstates = Enum.GetValues(typeof(LCStateEnum)).Length;
 
-            _table = new TransitionFunc[chars.Length, states.Length];
+            _table = new TransitionFunc[chars.Length, numberOfstates];
 
-            _table[getId('a'), 0] = new TransitionFunc(new Point(getId('a'), 1), AddChar);
-            _table[getId('a'), 1] = new TransitionFunc(new Point(getId('a'), 1), AddChar);
-            _table[getId('0'), 1] = new TransitionFunc(new Point(getId('a'), 1), AddChar);
+            _table[getId('a'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.NODE, AddChar,StackValueTypeEnum.NODE);
+            _table[getId('a'), (int)LCStateEnum.NODE] = new TransitionFunc(LCStateEnum.NODE, AddChar, StackValueTypeEnum.NODE);
+            _table[getId('0'), (int)LCStateEnum.NODE] = new TransitionFunc(LCStateEnum.NODE, AddChar, StackValueTypeEnum.NODE);
 
+            _table[getId('.'), (int)LCStateEnum.NODE] = new TransitionFunc(LCStateEnum.DOT, validate, null);
+
+            _table[getId('a'), (int)LCStateEnum.DOT] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
+            _table[getId('0'), (int)LCStateEnum.DOT] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
+            _table[getId('a'), (int)LCStateEnum.ENDPOINT] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
+            _table[getId('0'), (int)LCStateEnum.ENDPOINT] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
+
+            printTable();
         }
         private int getId(char c)
         {
@@ -56,29 +67,61 @@ namespace MainNode.Logic.Compile
                 default: return 0;
             }
         }
-        private void AddChar(char c, StackValueTypeEnum state)
+        private void printTable()
         {
+            for (int i = 0; i < _table.GetLength(0); i++)
+            {
+                for (int j = 0; j < _table.GetLength(1); j++)
+                {
+                    if (_table[i, j] != null)
+                    {
+                        Debug.Write($"O");
+                    }
+                    else
+                    {
+                        Debug.Write($"X");
+                    }
+                }
+                Debug.WriteLine("");
+            }
+        }
+        
+        #region transition functions
+        private void AddChar(char c, LCStateEnum state,StackValueTypeEnum? pushType)
+        {
+            if(pushType == null)
+            {
+                throw new ApplicationException($" state:{state} char: {c} Push type is null");
+            }
+
             var cache = _stack.FirstOrDefault();
             if (cache == null)
             {
-                cache = new StackValue { Type = state };
+                cache = new StackValue { Type = pushType.Value };
                 _stack.Push(cache);
             }
             cache.Value.Append(c);
         }
+
+        private void validate(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        { 
+        
+        }
+        #endregion
+
         #endregion
         public void Compile(string input)
         {
-            int state = 0;
+            LCStateEnum state = 0;
             for (int i = 0; i < input.Length; i++)
             {
                 char c = input[i];
-                var f = _table[getId(c), state];
+                var f = _table[getId(c), (int)state];
 
-                if (f != null) 
+                if (f != null)
                 {
-                    f.Func(c, StackValueTypeEnum.NODE);
-                    state = f.Next.Y;
+                    f.Func(c, state,f.PushValue);
+                    state = f.Next;
                 }
                 else
                 {

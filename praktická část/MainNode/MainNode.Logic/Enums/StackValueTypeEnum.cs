@@ -2,8 +2,10 @@
 {
     internal enum StackValueTypeEnum
     {
+        UNKNOWN,
         NODE,
         ENDPOINT,
-        VALUE
+        VALUE,
+        OPERATOR
     }
 }

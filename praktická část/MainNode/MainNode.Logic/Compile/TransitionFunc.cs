@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using MainNode.Logic.Enums;
+using System.Drawing;
 
 namespace MainNode.Logic.Compile
 {
@@ -7,13 +8,15 @@ namespace MainNode.Logic.Compile
     /// </summary>
     internal class TransitionFunc
     {
-        public Point Next { get; set; }
-        public Action<char,StackValueTypeEnum> Func { get; set; }
+        public LCStateEnum Next { get; set; }
+        public Action<char,LCStateEnum, StackValueTypeEnum?> Func { get; set; }
 
-        public TransitionFunc(Point next, Action<char, StackValueTypeEnum> func)
+        public StackValueTypeEnum? PushValue { get; set; }
+        public TransitionFunc(LCStateEnum next, Action<char, LCStateEnum, StackValueTypeEnum?> func, StackValueTypeEnum? pushValue)
         {
             Next = next;
             Func = func;
+            PushValue = pushValue;
         }
     }
 }
