@@ -6,5 +6,6 @@ namespace MainNode.Logic.Compile
     {
         public StackValueTypeEnum Type { get; set; }
         public StringBuilder Value { get; set; } = new StringBuilder();
+        public object? CachedValue { get; set; }
     }
 }

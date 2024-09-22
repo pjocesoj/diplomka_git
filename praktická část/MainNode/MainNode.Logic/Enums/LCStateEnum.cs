@@ -6,7 +6,8 @@
         NODE,
         ENDPOINT,
         VALUE,
-        DOT,
+        DOT_EP,
+        DOT_VAL,
         OPERATOR
     }
 }

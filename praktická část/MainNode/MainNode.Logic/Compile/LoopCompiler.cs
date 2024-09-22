@@ -7,6 +7,8 @@ using System.Text;
 using System.Drawing;
 using MainNode.Logic.Enums;
 using System.Diagnostics;
+using MainNode.Logic.Extentions;
+using System.Globalization;
 
 namespace MainNode.Logic.Compile
 {
@@ -16,9 +18,12 @@ namespace MainNode.Logic.Compile
     public class LoopCompiler
     {
         private FlowRepository _flowRepo = new FlowRepository();
-        public LoopCompiler(FlowRepository flowRepo)
+        private NodeRepository _nodeRepo = new NodeRepository();
+        public LoopCompiler(FlowRepository flowRepo, NodeRepository nodeRepo)
         {
             _flowRepo = flowRepo;
+            _nodeRepo = nodeRepo;
+
             InitTable();
         }
         #region finite automata
@@ -33,16 +38,27 @@ namespace MainNode.Logic.Compile
 
             _table = new TransitionFunc[chars.Length, numberOfstates];
 
-            _table[getId('a'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.NODE, AddChar,StackValueTypeEnum.NODE);
+            //node
+            _table[getId('a'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.NODE, AddChar, StackValueTypeEnum.NODE);
             _table[getId('a'), (int)LCStateEnum.NODE] = new TransitionFunc(LCStateEnum.NODE, AddChar, StackValueTypeEnum.NODE);
             _table[getId('0'), (int)LCStateEnum.NODE] = new TransitionFunc(LCStateEnum.NODE, AddChar, StackValueTypeEnum.NODE);
 
-            _table[getId('.'), (int)LCStateEnum.NODE] = new TransitionFunc(LCStateEnum.DOT, validate, null);
-
-            _table[getId('a'), (int)LCStateEnum.DOT] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
-            _table[getId('0'), (int)LCStateEnum.DOT] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
+            _table[getId('.'), (int)LCStateEnum.NODE] = new TransitionFunc(LCStateEnum.DOT_EP, validateNode, null);
+            _table[getId('.'), (int)LCStateEnum.ENDPOINT] = new TransitionFunc(LCStateEnum.DOT_VAL, validateEndpoint, null);
+            //endpoint
+            _table[getId('a'), (int)LCStateEnum.DOT_EP] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
+            _table[getId('0'), (int)LCStateEnum.DOT_EP] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
             _table[getId('a'), (int)LCStateEnum.ENDPOINT] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
             _table[getId('0'), (int)LCStateEnum.ENDPOINT] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
+            //value ref + const
+            _table[getId('a'), (int)LCStateEnum.DOT_VAL] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
+            _table[getId('0'), (int)LCStateEnum.DOT_VAL] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
+            _table[getId('a'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
+            _table[getId('0'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
+            _table[getId('.'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
+            _table[getId('0'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
+
+            _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, validateValue, StackValueTypeEnum.VALUE);
 
             printTable();
         }
@@ -86,16 +102,29 @@ namespace MainNode.Logic.Compile
             }
         }
         
-        #region transition functions
-        private void AddChar(char c, LCStateEnum state,StackValueTypeEnum? pushType)
+        private StackValue PopValue(StackValueTypeEnum expected)
         {
-            if(pushType == null)
+            var cache = _stack.Pop();
+            if (cache == null)
+            {
+                throw new ApplicationException($"Invalid stack state");
+            }
+            if (cache.Type != expected)
+            {
+                throw new ApplicationException($"Invalid type {cache.Type} expected {expected}");
+            }
+            return cache;
+        }
+        #region transition functions
+        private void AddChar(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            if (pushType == null)
             {
                 throw new ApplicationException($" state:{state} char: {c} Push type is null");
             }
 
             var cache = _stack.FirstOrDefault();
-            if (cache == null)
+            if (cache == null || cache.Type != pushType)
             {
                 cache = new StackValue { Type = pushType.Value };
                 _stack.Push(cache);
@@ -103,9 +132,66 @@ namespace MainNode.Logic.Compile
             cache.Value.Append(c);
         }
 
-        private void validate(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        private void validateNode(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            var cache = PopValue(StackValueTypeEnum.NODE);
+
+            var n = _nodeRepo.Nodes.FirstOrDefault(x => x.Name == cache.Value.ToString());
+            if (n == null)
+            {
+                throw new ApplicationException($"Node {cache.Value} not found");
+            }
+            cache.CachedValue = n;
+            _stack.Push(cache);
+        }
+        private void validateEndpoint(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         { 
+            var cacheEp = PopValue(StackValueTypeEnum.ENDPOINT);
+            var cacheN = PopValue(StackValueTypeEnum.NODE);
         
+            var n = (Node)cacheN.CachedValue;
+            if (n == null)
+            {
+                throw new ApplicationException($"Node {cacheN.Value} not found in cache");
+        }
+
+            var ep = n.EndPoints.FirstOrDefault(x => x.Path.Path.EndsWith(cacheEp.Value.ToString()));//kvůli / v cestě
+            if (ep == null)
+            {
+                throw new ApplicationException($"Endpoint {cacheEp.Value} not found at Node {n.Name}");
+            }
+            cacheEp.CachedValue = ep;
+            _stack.Push(cacheEp);
+        }
+        private void validateValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            var chacheV = PopValue(StackValueTypeEnum.VALUE);
+            ValueDo val = null;
+
+            if (chacheV.Value[0] > '9')
+            {
+                var cacheEp = PopValue(StackValueTypeEnum.ENDPOINT);
+                var ep = (EndPointDo)cacheEp.CachedValue;
+
+                val = ep.Values.GetValueByname(chacheV.Value.ToString());
+            }
+            else
+            {
+                var temp = chacheV.Value.ToString();
+                if (temp.Contains('.'))
+                {
+                    val = new ValueDo<float>(temp, float.Parse(temp, CultureInfo.InvariantCulture));
+                }
+                else
+                {
+                    val = new ValueDo<int>(temp, int.Parse(temp));
+                }
+            }
+
+            if (val == null)
+            {
+                throw new ApplicationException($"Value {chacheV.Value} not found");
+            }
         }
         #endregion
 
@@ -113,6 +199,7 @@ namespace MainNode.Logic.Compile
         public void Compile(string input)
         {
             LCStateEnum state = 0;
+            //aby v chybe šlo použít i není použit foreach
             for (int i = 0; i < input.Length; i++)
             {
                 char c = input[i];
@@ -120,7 +207,7 @@ namespace MainNode.Logic.Compile
 
                 if (f != null)
                 {
-                    f.Func(c, state,f.PushValue);
+                    f.Func(c, state, f.PushValue);
                     state = f.Next;
                 }
                 else
@@ -129,6 +216,15 @@ namespace MainNode.Logic.Compile
                     var rest = input.Substring(i);
                     throw new ApplicationException($"Invalid character {c} at position {i} \n \"{ok}\" \"{rest}\"");
                 }
+            }
+            var eos = _table[0, (int)state];
+            if (eos != null)
+            {
+                eos.Func('-', state, eos.PushValue);
+            }
+            else
+            {
+                throw new ApplicationException($"transition function to end is missing");
             }
         }
 
