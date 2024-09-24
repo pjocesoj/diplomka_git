@@ -58,7 +58,8 @@ namespace MainNode.Logic.Compile
             _table[getId('.'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
             _table[getId('0'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
 
-            _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, validateValue, StackValueTypeEnum.VALUE);
+            //vše přečteno
+            _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, StackValueTypeEnum.VALUE);
 
             printTable();
         }
@@ -220,7 +221,7 @@ namespace MainNode.Logic.Compile
             var eos = _table[0, (int)state];
             if (eos != null)
             {
-                eos.Func('-', state, eos.PushValue);
+                eos.Func(' ', state, eos.PushValue);
             }
             else
             {

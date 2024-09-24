@@ -2,7 +2,6 @@
 {
     public class ValueDo<T>:ValueDo
     {
-        public string? Name { get; set; } = "val";
         public T Value { get; set; }
 
         public ValueDo(string name, T value)
@@ -28,5 +27,6 @@
 
     public abstract class ValueDo 
     {
+        public string? Name { get; set; } = "val";
     }
 }
