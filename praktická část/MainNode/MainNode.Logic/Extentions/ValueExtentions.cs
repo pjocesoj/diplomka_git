@@ -31,5 +31,16 @@ namespace MainNode.Logic.Extentions
             return null;
         }
 
+        public static ValueDo DefaultValue(this Type type)
+        {
+            if (type == typeof(int))
+                return new ValueDo<int>("int",0);
+            if (type == typeof(float))
+                return new ValueDo<float>("float",0.0f);
+            if (type == typeof(bool))
+                return new ValueDo<bool>("bool",false);
+
+            return null;
+        }
     }
 }
