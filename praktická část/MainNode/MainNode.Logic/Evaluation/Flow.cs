@@ -12,6 +12,11 @@ namespace MainNode.Logic.Evaluation
             Name = name;
             Operations = opers;
         }
+        public Flow(string name)
+        {
+            Name = name;
+            Operations = new List<Operation<T>>();
+        }
 
         public override void Run()
         {
@@ -42,5 +47,17 @@ namespace MainNode.Logic.Evaluation
         public abstract void Run();
 
         public abstract FlowResult GetResult();
+
+        public static Flow Create(Type type, string name)
+        {
+            if (type == typeof(int))
+                return new Flow<int>(name);
+            if (type == typeof(float))
+                return new Flow<float>(name);
+            if (type == typeof(bool))
+                return new Flow<bool>(name);
+
+            return null;
+        }
     }
 }

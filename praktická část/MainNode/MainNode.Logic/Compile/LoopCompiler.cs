@@ -22,7 +22,6 @@ namespace MainNode.Logic.Compile
         private NodeRepository _nodeRepo = new NodeRepository();
         private FuncRepo _funcRepo = new FuncRepo();
 
-        private Flow<int> _hardcoded_flow= new Flow<int>("hardcoded", new List<Operation<int>>());
         public LoopCompiler(FlowRepository flowRepo, NodeRepository nodeRepo, FuncRepo funcRepo)
         {
             _flowRepo = flowRepo;
@@ -62,7 +61,7 @@ namespace MainNode.Logic.Compile
             _table[getId('0'), (int)LCStateEnum.DOT_EP] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
             _table[getId('a'), (int)LCStateEnum.ENDPOINT] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
             _table[getId('0'), (int)LCStateEnum.ENDPOINT] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
-            
+
             //value ref + const
             _table[getId('a'), (int)LCStateEnum.DOT_VAL] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
             _table[getId('0'), (int)LCStateEnum.DOT_VAL] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
@@ -76,7 +75,7 @@ namespace MainNode.Logic.Compile
 
 
             //vše přečteno
-            _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, StackValueTypeEnum.VALUE);
+            _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, null);
 
             printTable();
         }
@@ -211,10 +210,13 @@ namespace MainNode.Logic.Compile
         }
         private void addValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            var val = validateValue(c, state, pushType,out Type T);
-            createOperation(val,T);
+            var val = validateValue(c, state, pushType, out Type T);
+            createOperation(val, T);
 
-            AddChar(c, state, pushType);
+            if (pushType != null)//není poslední znak
+            {
+                AddChar(c, state, pushType);
+            }
         }
         private ValueDo validateValue(char c, LCStateEnum state, StackValueTypeEnum? pushType, out Type T)
         {
@@ -246,27 +248,24 @@ namespace MainNode.Logic.Compile
             if (val == null)
             {
                 throw new ApplicationException($"Value {chacheV.Value} not found");
-            }  
-            
+            }
+
             return val;
         }
 
-        void createOperation(ValueDo value,Type typeB)
+        void createOperation(ValueDo value, Type typeB)
         {
             var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
-            //var cacheR = PopValue(StackValueTypeEnum.FLOW);
 
             Flow flow = null;
-            //flow = (Flow)cacheR.CachedValue;
-            
-            Type typeA = (cacheO.CachedValue is Type)?(Type)cacheO.CachedValue:typeB;
+
+            Type typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
 
             if (typeB == null)
             {
                 throw new ApplicationException($"cant get type of value {value.Name}");
             }
 
-            //dočasně
             try
             {
                 var R = PopValue(StackValueTypeEnum.FLOW);
@@ -274,21 +273,32 @@ namespace MainNode.Logic.Compile
             }
             catch
             {
-                flow= _hardcoded_flow;
+                flow = createFlow(typeB, $"flow{_flowRepo.Results.Count}");
             }
 
-            var op= cacheO.Value.ToString();
+            var op = cacheO.Value.ToString();
             if (_funcRepo.FunctionsT.TryGetValue((typeA, typeB, op), out var f))
             {
-                var A = typeA.DefaultValue();//místo T nemohu použít proměnnou type a explicitně rozepisovat by bylo na dlouho
-                FuncHelper.AddFuncion(f, A, value, flow);            
-                
+                var A = typeA.DefaultValue();//místo T nemohu použít proměnnou Type a explicitně rozepisovat by bylo na dlouho
+                FuncHelper.AddFuncion(f, A, value, flow);
+
                 _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
             }
             else
-            {                 
+            {
                 throw new ApplicationException($"Function {typeA.Name} {op} {typeB.Name} not found");
             }
+        }
+
+        Flow createFlow(Type typeR, string name)
+        {
+            var flow = Flow.Create(typeR, name);
+            return flow;
+        }
+        void saveFlow(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            var cache = PopValue(StackValueTypeEnum.FLOW);
+            _flowRepo.AddFlow((Flow)cache.CachedValue);
         }
         #endregion
 
@@ -326,6 +336,7 @@ namespace MainNode.Logic.Compile
             {
                 throw new ApplicationException($"transition function to end is missing");
             }
+            saveFlow(' ', state, null);
         }
 
         #region test
