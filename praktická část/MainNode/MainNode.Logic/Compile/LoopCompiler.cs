@@ -9,6 +9,7 @@ using MainNode.Logic.Enums;
 using System.Diagnostics;
 using MainNode.Logic.Extentions;
 using System.Globalization;
+using MainNode.Logic.Evaluation.Funcs;
 
 namespace MainNode.Logic.Compile
 {
@@ -19,10 +20,14 @@ namespace MainNode.Logic.Compile
     {
         private FlowRepository _flowRepo = new FlowRepository();
         private NodeRepository _nodeRepo = new NodeRepository();
-        public LoopCompiler(FlowRepository flowRepo, NodeRepository nodeRepo)
+        private FuncRepo _funcRepo = new FuncRepo();
+
+        private Flow<int> _hardcoded_flow= new Flow<int>("hardcoded", new List<Operation<int>>());
+        public LoopCompiler(FlowRepository flowRepo, NodeRepository nodeRepo, FuncRepo funcRepo)
         {
             _flowRepo = flowRepo;
             _nodeRepo = nodeRepo;
+            _funcRepo = funcRepo;
 
             InitTable();
         }
@@ -168,23 +173,26 @@ namespace MainNode.Logic.Compile
         {
             var chacheV = PopValue(StackValueTypeEnum.VALUE);
             ValueDo val = null;
+            Type T = null;
 
             if (chacheV.Value[0] > '9')
             {
                 var cacheEp = PopValue(StackValueTypeEnum.ENDPOINT);
                 var ep = (EndPointDo)cacheEp.CachedValue;
 
-                val = ep.Values.GetValueByname(chacheV.Value.ToString());
+                val = ep.Values.GetValueByname(chacheV.Value.ToString(), out T);
             }
             else
             {
                 var temp = chacheV.Value.ToString();
                 if (temp.Contains('.'))
                 {
+                    T = typeof(float);
                     val = new ValueDo<float>(temp, float.Parse(temp, CultureInfo.InvariantCulture));
                 }
                 else
                 {
+                    T = typeof(int);
                     val = new ValueDo<int>(temp, int.Parse(temp));
                 }
             }
@@ -193,12 +201,56 @@ namespace MainNode.Logic.Compile
             {
                 throw new ApplicationException($"Value {chacheV.Value} not found");
             }
+            
+            createOperation(val, T);
+        }
+
+        void createOperation(ValueDo value,Type typeB)
+        {
+            var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
+            //var cacheR = PopValue(StackValueTypeEnum.FLOW);
+
+            Type typeA = null;
+            //Type typeR = (Type)cacheR.CachedValue;
+
+            if (typeB == null)
+            {
+                throw new ApplicationException($"cant get type of value {value.Name}");
+            }
+            //if (typeR == null)
+            //{
+            //    throw new ApplicationException($"cant get type of value {value.Name}");
+            //}
+
+            try
+            {
+                var A = PopValue(StackValueTypeEnum.VALUE);
+                typeA = (Type)A.CachedValue;
+            }
+            catch
+            {
+                typeA = typeB;
+        }
+            var op= cacheO.Value.ToString();
+            if (_funcRepo.FunctionsT.TryGetValue((typeA, typeB, op), out var f))
+            {
+                //Flow res = (Flow)cacheR.Value;
+                Flow res = _hardcoded_flow;
+                FuncHelper.AddFuncion(f, value, value, res);
+            }
+            else
+            {                 
+                throw new ApplicationException($"Function {typeA.Name} {op} {typeB.Name} not found");
+            }
         }
         #endregion
 
         #endregion
         public void Compile(string input)
         {
+            _stack.Clear();
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("+") });
+
             LCStateEnum state = 0;
             //aby v chybe šlo použít i není použit foreach
             for (int i = 0; i < input.Length; i++)
