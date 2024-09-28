@@ -211,8 +211,8 @@ namespace MainNode.Logic.Compile
         }
         private void addValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            var val = validateValue(c, state, pushType,out Type T);
-            createOperation(val,T);
+            var val = validateValue(c, state, pushType, out Type T);
+            createOperation(val, T);
 
             AddChar(c, state, pushType);
         }
@@ -250,23 +250,19 @@ namespace MainNode.Logic.Compile
             
             return val;
         }
-
-        void createOperation(ValueDo value,Type typeB)
+        void createOperation(ValueDo value, Type typeB)
         {
             var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
-            //var cacheR = PopValue(StackValueTypeEnum.FLOW);
 
             Flow flow = null;
-            //flow = (Flow)cacheR.CachedValue;
             
-            Type typeA = (cacheO.CachedValue is Type)?(Type)cacheO.CachedValue:typeB;
+            Type typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
 
             if (typeB == null)
             {
                 throw new ApplicationException($"cant get type of value {value.Name}");
             }
 
-            //dočasně
             try
             {
                 var R = PopValue(StackValueTypeEnum.FLOW);
@@ -277,10 +273,10 @@ namespace MainNode.Logic.Compile
                 flow= _hardcoded_flow;
             }
 
-            var op= cacheO.Value.ToString();
+            var op = cacheO.Value.ToString();
             if (_funcRepo.FunctionsT.TryGetValue((typeA, typeB, op), out var f))
             {
-                var A = typeA.DefaultValue();//místo T nemohu použít proměnnou type a explicitně rozepisovat by bylo na dlouho
+                var A = typeA.DefaultValue();//místo T nemohu použít proměnnou Type a explicitně rozepisovat by bylo na dlouho
                 FuncHelper.AddFuncion(f, A, value, flow);            
                 
                 _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
@@ -299,7 +295,7 @@ namespace MainNode.Logic.Compile
             _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("+") });
 
             LCStateEnum state = 0;
-            //aby v chybe šlo použít i není použit foreach
+            //aby v chybové hlášce šlo použít i není použit foreach
             for (int i = 0; i < input.Length; i++)
             {
                 char c = input[i];
