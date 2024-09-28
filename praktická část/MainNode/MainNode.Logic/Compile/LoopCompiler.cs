@@ -38,8 +38,14 @@ namespace MainNode.Logic.Compile
 
             _table = new TransitionFunc[chars.Length, numberOfstates];
 
+            //nemohu určit jestli je to node, subflow nebo true/false
+            _table[getId('a'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.UNKNOWN, AddChar, StackValueTypeEnum.UNKNOWN);
+            _table[getId('a'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, AddChar, StackValueTypeEnum.UNKNOWN);
+            _table[getId('0'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, AddChar, StackValueTypeEnum.UNKNOWN);
+            _table[getId('.'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.DOT_EP, resolveUnknown, null);
+
             //node
-            _table[getId('a'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.NODE, AddChar, StackValueTypeEnum.NODE);
+            //_table[getId('a'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.NODE, AddChar, StackValueTypeEnum.NODE);
             _table[getId('a'), (int)LCStateEnum.NODE] = new TransitionFunc(LCStateEnum.NODE, AddChar, StackValueTypeEnum.NODE);
             _table[getId('0'), (int)LCStateEnum.NODE] = new TransitionFunc(LCStateEnum.NODE, AddChar, StackValueTypeEnum.NODE);
 
@@ -101,7 +107,7 @@ namespace MainNode.Logic.Compile
                 Debug.WriteLine("");
             }
         }
-        
+
         private StackValue PopValue(StackValueTypeEnum expected)
         {
             var cache = _stack.Pop();
@@ -131,7 +137,32 @@ namespace MainNode.Logic.Compile
             }
             cache.Value.Append(c);
         }
+        private void resolveUnknown(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            var cache = _stack.Peek();
 
+            if (c == '.')
+            {
+                cache.Type = StackValueTypeEnum.NODE;
+                validateNode(c, state, pushType);
+                return;
+            }
+
+            switch (cache.Value.ToString())
+            {
+                case "true":
+                    cache.CachedValue = true;
+                    cache.Type = StackValueTypeEnum.VALUE;
+                    break;
+                case "false":
+                    cache.CachedValue = false;
+                    cache.Type = StackValueTypeEnum.VALUE;
+                    break;
+                default:
+                    cache.Type = StackValueTypeEnum.NODE;
+                    break;
+            }
+        }
         private void validateNode(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
             var cache = PopValue(StackValueTypeEnum.NODE);
@@ -145,15 +176,15 @@ namespace MainNode.Logic.Compile
             _stack.Push(cache);
         }
         private void validateEndpoint(char c, LCStateEnum state, StackValueTypeEnum? pushType)
-        { 
+        {
             var cacheEp = PopValue(StackValueTypeEnum.ENDPOINT);
             var cacheN = PopValue(StackValueTypeEnum.NODE);
-        
+
             var n = (Node)cacheN.CachedValue;
             if (n == null)
             {
                 throw new ApplicationException($"Node {cacheN.Value} not found in cache");
-        }
+            }
 
             var ep = n.EndPoints.FirstOrDefault(x => x.Path.Path.EndsWith(cacheEp.Value.ToString()));//kvůli / v cestě
             if (ep == null)

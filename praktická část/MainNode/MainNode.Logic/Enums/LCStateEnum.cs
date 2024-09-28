@@ -8,6 +8,7 @@
         VALUE,
         DOT_EP,
         DOT_VAL,
-        OPERATOR
+        OPERATOR,
+        UNKNOWN //nemohu určit jestli je to node, subflow nebo true/false
     }
 }
