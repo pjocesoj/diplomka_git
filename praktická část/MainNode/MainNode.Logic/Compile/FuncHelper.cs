@@ -7,6 +7,13 @@ namespace MainNode.Logic.Compile
     {
         private static void AddFuncion<T, U, V>(Delegate f, ValueDo<T> A, ValueDo<U> B, Flow<V> R) where T : struct where U : struct where V : struct
         {
+            //dočasné řešení než předělám Operatition
+            if (typeof(T) == typeof(U) && typeof(U) == typeof(V))
+            {
+                var B_t = (ValueDo<T>)(object)B;
+                var R_t = (Flow<T>)(object)R;
+                R_t.Operations.Add(new Operation<T>(B_t, (Func<T,T,T>)f));
+            }
             var func = (Func<T, U, V>)f;
         }
         private static void AddFuncion<U,V>(Delegate f, ValueDo A, ValueDo<U> B, Flow<V> R) where U : struct where V : struct
