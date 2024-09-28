@@ -5,6 +5,7 @@ using MainNode.Windows;
 using System.Windows;
 using Microsoft.Win32;
 using System.IO;
+using MainNode.Logic.Compile;
 
 namespace MainNode.ViewModels
 {

@@ -6,6 +6,7 @@
         NODE,
         ENDPOINT,
         VALUE,
-        OPERATOR
+        OPERATOR,
+        FLOW
     }
 }

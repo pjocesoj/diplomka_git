@@ -9,6 +9,7 @@ using MainNode.Logic.Enums;
 using System.Diagnostics;
 using MainNode.Logic.Extentions;
 using System.Globalization;
+using MainNode.Logic.Evaluation.Funcs;
 
 namespace MainNode.Logic.Compile
 {
@@ -19,10 +20,14 @@ namespace MainNode.Logic.Compile
     {
         private FlowRepository _flowRepo = new FlowRepository();
         private NodeRepository _nodeRepo = new NodeRepository();
-        public LoopCompiler(FlowRepository flowRepo, NodeRepository nodeRepo)
+        private FuncRepo _funcRepo = new FuncRepo();
+
+        private Flow<int> _hardcoded_flow= new Flow<int>("hardcoded", new List<Operation<int>>());
+        public LoopCompiler(FlowRepository flowRepo, NodeRepository nodeRepo, FuncRepo funcRepo)
         {
             _flowRepo = flowRepo;
             _nodeRepo = nodeRepo;
+            _funcRepo = funcRepo;
 
             InitTable();
         }
@@ -51,20 +56,27 @@ namespace MainNode.Logic.Compile
 
             _table[getId('.'), (int)LCStateEnum.NODE] = new TransitionFunc(LCStateEnum.DOT_EP, validateNode, null);
             _table[getId('.'), (int)LCStateEnum.ENDPOINT] = new TransitionFunc(LCStateEnum.DOT_VAL, validateEndpoint, null);
+
             //endpoint
             _table[getId('a'), (int)LCStateEnum.DOT_EP] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
             _table[getId('0'), (int)LCStateEnum.DOT_EP] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
             _table[getId('a'), (int)LCStateEnum.ENDPOINT] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
             _table[getId('0'), (int)LCStateEnum.ENDPOINT] = new TransitionFunc(LCStateEnum.ENDPOINT, AddChar, StackValueTypeEnum.ENDPOINT);
+            
             //value ref + const
             _table[getId('a'), (int)LCStateEnum.DOT_VAL] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
             _table[getId('0'), (int)LCStateEnum.DOT_VAL] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
             _table[getId('a'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
             _table[getId('0'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
-            _table[getId('.'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
+            _table[getId('.'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);//float
             _table[getId('0'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
 
-            _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, validateValue, StackValueTypeEnum.VALUE);
+            //operation +-*/
+            _table[getId('+'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, StackValueTypeEnum.OPERATOR);//float
+
+
+            //vše přečteno
+            _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, StackValueTypeEnum.VALUE);
 
             printTable();
         }
@@ -79,13 +91,16 @@ namespace MainNode.Logic.Compile
                 case '.': return 3;
                 case '(': return 4;
                 case ')': return 5;
+
                 case '+': return 6;
-                case '-': return 7;
-                case '*': return 8;
-                case '/': return 9;
-                case '<': return 10;
-                case '>': return 11;
-                case '=': return 12;
+                case '-': return 6;
+                case '*': return 6;
+                case '/': return 6;
+
+                case '<': return 7;
+                case '>': return 8;
+                case '=': return 9;
+
                 default: return 0;
             }
         }
@@ -194,7 +209,14 @@ namespace MainNode.Logic.Compile
             cacheEp.CachedValue = ep;
             _stack.Push(cacheEp);
         }
-        private void validateValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        private void addValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            var val = validateValue(c, state, pushType,out Type T);
+            createOperation(val,T);
+
+            AddChar(c, state, pushType);
+        }
+        private ValueDo validateValue(char c, LCStateEnum state, StackValueTypeEnum? pushType, out Type T)
         {
             var chacheV = PopValue(StackValueTypeEnum.VALUE);
             ValueDo val = null;
@@ -204,17 +226,19 @@ namespace MainNode.Logic.Compile
                 var cacheEp = PopValue(StackValueTypeEnum.ENDPOINT);
                 var ep = (EndPointDo)cacheEp.CachedValue;
 
-                val = ep.Values.GetValueByname(chacheV.Value.ToString());
+                val = ep.Values.GetValueByname(chacheV.Value.ToString(), out T);
             }
             else
             {
                 var temp = chacheV.Value.ToString();
                 if (temp.Contains('.'))
                 {
+                    T = typeof(float);
                     val = new ValueDo<float>(temp, float.Parse(temp, CultureInfo.InvariantCulture));
                 }
                 else
                 {
+                    T = typeof(int);
                     val = new ValueDo<int>(temp, int.Parse(temp));
                 }
             }
@@ -222,6 +246,48 @@ namespace MainNode.Logic.Compile
             if (val == null)
             {
                 throw new ApplicationException($"Value {chacheV.Value} not found");
+            }  
+            
+            return val;
+        }
+
+        void createOperation(ValueDo value,Type typeB)
+        {
+            var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
+            //var cacheR = PopValue(StackValueTypeEnum.FLOW);
+
+            Flow flow = null;
+            //flow = (Flow)cacheR.CachedValue;
+            
+            Type typeA = (cacheO.CachedValue is Type)?(Type)cacheO.CachedValue:typeB;
+
+            if (typeB == null)
+            {
+                throw new ApplicationException($"cant get type of value {value.Name}");
+            }
+
+            //dočasně
+            try
+            {
+                var R = PopValue(StackValueTypeEnum.FLOW);
+                flow = (Flow)R.CachedValue;
+            }
+            catch
+            {
+                flow= _hardcoded_flow;
+            }
+
+            var op= cacheO.Value.ToString();
+            if (_funcRepo.FunctionsT.TryGetValue((typeA, typeB, op), out var f))
+            {
+                var A = typeA.DefaultValue();//místo T nemohu použít proměnnou type a explicitně rozepisovat by bylo na dlouho
+                FuncHelper.AddFuncion(f, A, value, flow);            
+                
+                _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+            }
+            else
+            {                 
+                throw new ApplicationException($"Function {typeA.Name} {op} {typeB.Name} not found");
             }
         }
         #endregion
@@ -229,6 +295,9 @@ namespace MainNode.Logic.Compile
         #endregion
         public void Compile(string input)
         {
+            _stack.Clear();
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("+") });
+
             LCStateEnum state = 0;
             //aby v chybe šlo použít i není použit foreach
             for (int i = 0; i < input.Length; i++)
@@ -251,7 +320,7 @@ namespace MainNode.Logic.Compile
             var eos = _table[0, (int)state];
             if (eos != null)
             {
-                eos.Func('-', state, eos.PushValue);
+                eos.Func(' ', state, eos.PushValue);
             }
             else
             {
