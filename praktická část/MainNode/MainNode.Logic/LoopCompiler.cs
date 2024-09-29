@@ -78,7 +78,7 @@ namespace MainNode.Logic
             Node n = EmulatorNode();
             //_nodeRepo.AddNode(n);
             var A = addA(n.EndPoints[1].Values.Ints[0], n, n.EndPoints[1]);
-            var B= addB(n.EndPoints[2].Values.Ints[0], n, n.EndPoints[2]);
+            var B = addB(n.EndPoints[2].Values.Ints[0], n, n.EndPoints[2]);
             B.RunFrequency = TimeSpan.FromMilliseconds(1100);
             //A.BindOutput(n.EndPoints[1].Arguments.Ints[0]);
 
@@ -135,7 +135,7 @@ namespace MainNode.Logic
             var slow = endpointSlow();
 
             //var eps = getEndPoints();
-            var eps= new EndPointDo[] { get, set, slow };
+            var eps = new EndPointDo[] { get, set, slow };
             var _comm = new MainNode.Communication.HttpNodeCommunication();
 
             Node n = new Node(_comm);
@@ -144,7 +144,7 @@ namespace MainNode.Logic
 
             return n;
         }
-        
+
         private EndPointDo endpointGet()
         {
             var get = new EndPointDo
@@ -238,6 +238,36 @@ namespace MainNode.Logic
             //set.Arguments.Bools.Add(new ValueDo<bool>("c", false));
 
             return new EndPointDo[] { get, set };
+        }
+        #endregion
+
+        #region merge flow
+        public void testMerge()
+        {
+            var a = new ValueDo<int>("a", 1);
+
+            var A = addA(a);
+            var B = addB();
+            var C = mergeAB(A, B);
+
+            var res = C.Value;
+
+            _flowRepo.Run();
+            a.Value = 4;
+            _flowRepo.Run();
+            res = C.Value;
+
+        }
+        public FlowResult mergeAB(FlowResult A, FlowResult B)
+        {
+            Flow<bool> flowC = new Flow<bool>("C", new List<Operation<bool>>()
+                {
+                    new MergeflowOperation<int, float, bool>((FlowResult<int>)A, (FlowResult<float>)B, (a, b) => { return a > b; })
+            });
+
+            var resC = new FlowResult<bool>(flowC);
+
+            return _flowRepo.AddFlow(flowC);
         }
         #endregion
     }
