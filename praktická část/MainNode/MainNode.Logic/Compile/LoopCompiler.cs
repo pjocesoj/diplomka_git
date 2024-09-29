@@ -560,5 +560,46 @@ namespace MainNode.Logic.Compile
             return new EndPointDo[] { get, set };
         }
         #endregion
+
+        #region merge flow
+        public void testMerge()
+        {
+            var a = new ValueDo<int>("a", 1);
+
+            var A = addA(a);
+            var B = addB();
+            var C = mergeAB(A, B);
+
+            var res = C.Value;
+
+            _flowRepo.Run();
+            a.Value = 4;
+            _flowRepo.Run();
+            res = C.Value;
+
+            var D = addD(C);
+            res = D.Value;
+        }
+        public FlowResult mergeAB(FlowResult A, FlowResult B)
+        {
+            Flow<bool> flowC = new Flow<bool>("C", new List<Operation<bool>>()
+                {
+                    new MergeflowOperation<int, float, bool>((FlowResult<int>)A, (FlowResult<float>)B, (a, b) => { return a > b; })
+            });
+            var resC = new FlowResult<bool>(flowC);
+            return _flowRepo.AddFlow(flowC);
+        }
+        public FlowResult addD(FlowResult C)
+        {
+            Flow<bool> flowD = new Flow<bool>("D", new List<Operation<bool>>()
+                {
+                    new SubflowOperation<bool,bool>((FlowResult<bool>)C,FuncBoolBool.Or),
+                    new Operation<bool>(true, FuncBoolBool.And),
+                });
+            var resD = new FlowResult<bool>(flowD);
+
+            return _flowRepo.AddFlow(flowD);
+        }
+        #endregion
     }
 }
