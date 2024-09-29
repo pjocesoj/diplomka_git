@@ -11,7 +11,7 @@ namespace MainNode.Logic.Evaluation
         public bool Finished { get; set; } = false;
         public Flow<T> Flow { get; set; }
 
-        private ValueDo<T> _valueDo;
+        protected ValueDo<T> _valueDo;
         public FlowResult(Flow<T> flow)
         {
             Flow = flow;
