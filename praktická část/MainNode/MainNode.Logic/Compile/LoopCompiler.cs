@@ -72,7 +72,7 @@ namespace MainNode.Logic.Compile
 
             //operation +-*/
             _table[getId('+'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, StackValueTypeEnum.OPERATOR);//float
-
+            _table[getId('+'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.VALUE, resolveUnknown, StackValueTypeEnum.OPERATOR);//float
 
             //vše přečteno
             _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, null);
@@ -165,15 +165,17 @@ namespace MainNode.Logic.Compile
             switch (cache.Value.ToString())
             {
                 case "true":
-                    cache.CachedValue = true;
+                    cache.CachedValue = new ValueDo<bool>("true",true);
                     cache.Type = StackValueTypeEnum.VALUE;
+                    addValue(c, state, pushType);
                     break;
                 case "false":
-                    cache.CachedValue = false;
+                    cache.CachedValue = new ValueDo<bool>("false",false);
                     cache.Type = StackValueTypeEnum.VALUE;
+                    addValue(c, state, pushType);
                     break;
                 default:
-                    cache.Type = StackValueTypeEnum.NODE;
+                    cache.Type = StackValueTypeEnum.FLOW;
                     break;
             }
         }
@@ -223,7 +225,12 @@ namespace MainNode.Logic.Compile
             var chacheV = PopValue(StackValueTypeEnum.VALUE);
             ValueDo val = null;
 
-            if (chacheV.Value[0] > '9')
+            if(chacheV.CachedValue !=null)
+            {
+                val=(ValueDo)chacheV.CachedValue;
+                T=val.getT();
+            }
+            else if (chacheV.Value[0] > '9')
             {
                 var cacheEp = PopValue(StackValueTypeEnum.ENDPOINT);
                 var ep = (EndPointDo)cacheEp.CachedValue;
@@ -279,7 +286,7 @@ namespace MainNode.Logic.Compile
             var op = cacheO.Value.ToString();
             if (_funcRepo.FunctionsT.TryGetValue((typeA, typeB, op), out var f))
             {
-                var A = typeA.DefaultValue();//místo T nemohu použít proměnnou Type a explicitně rozepisovat by bylo na dlouho
+                var A = typeA.DefaultValue();//místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
                 FuncHelper.AddFuncion(f, A, value, flow);
 
                 _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
