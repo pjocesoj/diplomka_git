@@ -72,7 +72,11 @@ namespace MainNode.Logic.Compile
 
             //operation +-*/
             _table[getId('+'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, StackValueTypeEnum.OPERATOR);//float
-            _table[getId('+'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.VALUE, resolveUnknown, StackValueTypeEnum.OPERATOR);//float
+            _table[getId('+'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, resolveUnknown, StackValueTypeEnum.OPERATOR);//float
+
+            //flow
+            _table[getId('='), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.UNKNOWN, addFlowFromValue, StackValueTypeEnum.FLOW);//float
+            _table[getId('='), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, resolveUnknown, StackValueTypeEnum.FLOW);//float
 
             //vše přečteno
             _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, null);
@@ -176,6 +180,7 @@ namespace MainNode.Logic.Compile
                     break;
                 default:
                     cache.Type = StackValueTypeEnum.FLOW;
+                    addFlowFromName(c, state, pushType);
                     break;
             }
         }
@@ -280,7 +285,7 @@ namespace MainNode.Logic.Compile
             }
             catch
             {
-                flow = createFlow(typeB, $"flow{_flowRepo.Results.Count}");
+                flow=Flow.Create(typeB, $"<flow{_flowRepo.Results.Count}>");
             }
 
             var op = cacheO.Value.ToString();
@@ -297,9 +302,31 @@ namespace MainNode.Logic.Compile
             }
         }
 
+        void addFlowFromValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            var val=validateValue(c, state, pushType, out Type T);
+            createFlow(val.getT(), $"<{val.Name}>");
+            /*
+            var flow = createFlow(val.getT(), $"<{val.Name}>");
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+
+            //default
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("+") });
+            */
+        }
+        void addFlowFromName(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            var cache = PopValue(StackValueTypeEnum.FLOW);
+            createFlow(typeof(int), cache.Value.ToString());
+        }
         Flow createFlow(Type typeR, string name)
         {
             var flow = Flow.Create(typeR, name);
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+
+            //default
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("+") });
+
             return flow;
         }
         void saveFlow(char c, LCStateEnum state, StackValueTypeEnum? pushType)
