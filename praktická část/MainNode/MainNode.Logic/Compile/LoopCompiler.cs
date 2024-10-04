@@ -109,7 +109,7 @@ namespace MainNode.Logic.Compile
                 case '=': return 9;
                 case ' ': return 10;
 
-                default: 
+                default:
                     throw new ApplicationException($"Invalid character {c}");
             }
         }
@@ -171,6 +171,7 @@ namespace MainNode.Logic.Compile
                 validateNode(c, state, pushType);
                 return;
             }
+
             var str = cache.Value.ToString();
             switch (str)
             {
@@ -202,8 +203,8 @@ namespace MainNode.Logic.Compile
                 default:
                     if (str.Any(char.IsLetter))
                     {
-                    cache.Type = StackValueTypeEnum.FLOW;
-                    addFlowFromName(c, state, pushType);
+                        cache.Type = StackValueTypeEnum.FLOW;
+                        addValue(c, state, pushType);
                     }
                     else
                     {
@@ -247,8 +248,17 @@ namespace MainNode.Logic.Compile
         }
         private void addValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            var val = validateValue(c, state, pushType, out Type T);
-            createOperation(val, T);
+            if (_stack.Peek().Type == StackValueTypeEnum.VALUE)
+            {
+                var val = validateValue(c, state, pushType, out Type T);
+                createOperation(val, T);
+            }
+            else
+            {
+                var cacheF = PopValue(StackValueTypeEnum.FLOW);
+                var flow = _flowRepo.GetFlowByName(cacheF.Value.ToString());
+                createOperation(flow, flow.getT());
+            }
 
             if (pushType != null)//není poslední znak
             {
@@ -296,6 +306,42 @@ namespace MainNode.Logic.Compile
         }
 
         void createOperation(ValueDo value, Type typeB)
+        {
+            var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
+
+            Flow flow = null;
+
+            Type typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
+
+            if (typeB == null)
+            {
+                throw new ApplicationException($"cant get type of value {value.Name}");
+            }
+
+            try
+            {
+                var R = PopValue(StackValueTypeEnum.FLOW);
+                flow = (Flow)R.CachedValue;
+            }
+            catch
+            {
+                flow = Flow.Create(typeB, $"<flow{_flowRepo.Results.Count}>");
+            }
+
+            var op = cacheO.Value.ToString();
+            if (_funcRepo.FunctionsT.TryGetValue((typeA, typeB, op), out var f))
+            {
+                var A = typeA.DefaultValue();//místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
+                FuncHelper.AddFuncion(f, A, value, flow);
+
+                _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+            }
+            else
+            {
+                throw new ApplicationException($"Function {typeA.Name} {op} {typeB.Name} not found");
+            }
+        }
+        void createOperation(FlowResult value, Type typeB)
         {
             var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
 

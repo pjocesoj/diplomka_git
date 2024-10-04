@@ -68,6 +68,20 @@ namespace MainNode.Logic
             return res;
         }
 
+        public FlowResult GetFlowByName(string name)
+        {
+            var res = Results.FindAll(x => x.Name == name);
+            if (res.Count==0)
+            {
+                throw new Exception($"Flow with name {name} not found");
+            }
+            if (res.Count > 1)
+            {
+                throw new Exception($"More than one flow with name {name} found");
+            }
+            return res.First();
+        }
+
         public void Run()
         {
             foreach (FlowResult r in Results)
