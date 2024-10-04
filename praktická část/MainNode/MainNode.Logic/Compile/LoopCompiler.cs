@@ -49,7 +49,6 @@ namespace MainNode.Logic.Compile
             _table[getId('.'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.DOT_EP, resolveUnknown, null);
 
             //node
-            //_table[getId('a'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.NODE, AddChar, StackValueTypeEnum.NODE);
             _table[getId('a'), (int)LCStateEnum.NODE] = new TransitionFunc(LCStateEnum.NODE, AddChar, StackValueTypeEnum.NODE);
             _table[getId('0'), (int)LCStateEnum.NODE] = new TransitionFunc(LCStateEnum.NODE, AddChar, StackValueTypeEnum.NODE);
 
@@ -84,6 +83,7 @@ namespace MainNode.Logic.Compile
 
             //vše přečteno
             _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, null);
+            _table[0, (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.VALUE, resolveUnknown, null);
 
             printTable();
         }
@@ -107,8 +107,10 @@ namespace MainNode.Logic.Compile
                 case '<': return 7;
                 case '>': return 8;
                 case '=': return 9;
+                case ' ': return 10;
 
-                default: return 0;
+                default: 
+                    throw new ApplicationException($"Invalid character {c}");
             }
         }
         private void printTable()
@@ -169,9 +171,12 @@ namespace MainNode.Logic.Compile
                 validateNode(c, state, pushType);
                 return;
             }
-
-            switch (cache.Value.ToString())
+            var str = cache.Value.ToString();
+            switch (str)
             {
+                case " ":
+                    //pro jistotu
+                    break;
                 case "true":
                     cache.CachedValue = new ValueDo<bool>("true", true);
                     cache.Type = StackValueTypeEnum.VALUE;
@@ -195,8 +200,17 @@ namespace MainNode.Logic.Compile
                     cache.Type = StackValueTypeEnum.TYPE;
                     break;
                 default:
+                    if (str.Any(char.IsLetter))
+                    {
                     cache.Type = StackValueTypeEnum.FLOW;
                     addFlowFromName(c, state, pushType);
+                    }
+                    else
+                    {
+                        cache.Type = StackValueTypeEnum.VALUE;
+                        addValue(c, state, pushType);
+                    }
+
                     break;
             }
         }
