@@ -77,6 +77,10 @@ namespace MainNode.Logic.Compile
             //flow
             _table[getId('='), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.UNKNOWN, addFlowFromValue, StackValueTypeEnum.FLOW);//float
             _table[getId('='), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, resolveUnknown, StackValueTypeEnum.FLOW);//float
+            _table[getId(' '), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.FLOW, resolveUnknown, StackValueTypeEnum.FLOW);//float
+            _table[getId('a'), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.FLOW, AddChar, StackValueTypeEnum.FLOW);
+            _table[getId('0'), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.FLOW, AddChar, StackValueTypeEnum.FLOW);
+            _table[getId('='), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.UNKNOWN, addFlowFromName, StackValueTypeEnum.FLOW);//float
 
             //vše přečteno
             _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, null);
@@ -169,14 +173,26 @@ namespace MainNode.Logic.Compile
             switch (cache.Value.ToString())
             {
                 case "true":
-                    cache.CachedValue = new ValueDo<bool>("true",true);
+                    cache.CachedValue = new ValueDo<bool>("true", true);
                     cache.Type = StackValueTypeEnum.VALUE;
                     addValue(c, state, pushType);
                     break;
                 case "false":
-                    cache.CachedValue = new ValueDo<bool>("false",false);
+                    cache.CachedValue = new ValueDo<bool>("false", false);
                     cache.Type = StackValueTypeEnum.VALUE;
                     addValue(c, state, pushType);
+                    break;
+                case "int":
+                    cache.CachedValue = typeof(int);
+                    cache.Type = StackValueTypeEnum.TYPE;
+                    break;
+                case "float":
+                    cache.CachedValue = typeof(float);
+                    cache.Type = StackValueTypeEnum.TYPE;
+                    break;
+                case "bool":
+                    cache.CachedValue = typeof(bool);
+                    cache.Type = StackValueTypeEnum.TYPE;
                     break;
                 default:
                     cache.Type = StackValueTypeEnum.FLOW;
@@ -230,10 +246,10 @@ namespace MainNode.Logic.Compile
             var chacheV = PopValue(StackValueTypeEnum.VALUE);
             ValueDo val = null;
 
-            if(chacheV.CachedValue !=null)
+            if (chacheV.CachedValue != null)
             {
-                val=(ValueDo)chacheV.CachedValue;
-                T=val.getT();
+                val = (ValueDo)chacheV.CachedValue;
+                T = val.getT();
             }
             else if (chacheV.Value[0] > '9')
             {
@@ -285,7 +301,7 @@ namespace MainNode.Logic.Compile
             }
             catch
             {
-                flow=Flow.Create(typeB, $"<flow{_flowRepo.Results.Count}>");
+                flow = Flow.Create(typeB, $"<flow{_flowRepo.Results.Count}>");
             }
 
             var op = cacheO.Value.ToString();
@@ -304,20 +320,23 @@ namespace MainNode.Logic.Compile
 
         void addFlowFromValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            var val=validateValue(c, state, pushType, out Type T);
+            var val = validateValue(c, state, pushType, out Type T);
             createFlow(val.getT(), $"<{val.Name}>");
-            /*
-            var flow = createFlow(val.getT(), $"<{val.Name}>");
-            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
-
-            //default
-            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("+") });
-            */
         }
         void addFlowFromName(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
             var cache = PopValue(StackValueTypeEnum.FLOW);
-            createFlow(typeof(int), cache.Value.ToString());
+
+            try
+            {
+                var cacheT = PopValue(StackValueTypeEnum.TYPE);
+                var T = (Type)cacheT.CachedValue;
+                createFlow(T, cache.Value.ToString());
+            }
+            catch
+            {
+                createFlow(typeof(int), cache.Value.ToString());
+            }
         }
         Flow createFlow(Type typeR, string name)
         {

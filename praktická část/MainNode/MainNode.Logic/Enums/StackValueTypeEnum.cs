@@ -7,6 +7,7 @@
         ENDPOINT,
         VALUE,
         OPERATOR,
-        FLOW
+        FLOW,
+        TYPE
     }
 }
