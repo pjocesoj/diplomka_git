@@ -33,7 +33,7 @@ namespace MainNode.Logic.Compile
         #region finite automata
         private Stack<StackValue> _stack = new Stack<StackValue>();
         private TransitionFunc[,] _table;
-
+        private int _subflowCounter = 0;
         private void InitTable()
         {
             char[] chars = { 'Ø', 'A', '0', '.', '(', ')', '+', '-', '*', '/', '<', '>', '=' };
@@ -80,6 +80,13 @@ namespace MainNode.Logic.Compile
             _table[getId('a'), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.FLOW, AddChar, StackValueTypeEnum.FLOW);
             _table[getId('0'), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.FLOW, AddChar, StackValueTypeEnum.FLOW);
             _table[getId('='), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.UNKNOWN, addFlowFromName, StackValueTypeEnum.FLOW);//float
+
+            //subflow
+            _table[getId('('), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowStart, StackValueTypeEnum.FLOW);//float
+            _table[getId('('), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowStart, StackValueTypeEnum.FLOW);//float
+            _table[getId(')'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowEnd, StackValueTypeEnum.FLOW);//float
+            _table[getId(')'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowEnd, StackValueTypeEnum.FLOW);//float
+
 
             //vše přečteno
             _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, null);
@@ -248,6 +255,12 @@ namespace MainNode.Logic.Compile
         }
         private void addValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
+            if (_subflowCounter > 0 && state != LCStateEnum.SUBFLOW)
+            {
+                AddChar(c, state, pushType);
+                return;
+            }
+
             if (_stack.Peek().Type == StackValueTypeEnum.VALUE)
             {
                 var val = validateValue(c, state, pushType, out Type T);
@@ -412,6 +425,28 @@ namespace MainNode.Logic.Compile
         {
             var cache = PopValue(StackValueTypeEnum.FLOW);
             _flowRepo.AddFlow((Flow)cache.CachedValue);
+        }
+
+        void subflowStart(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            _subflowCounter++;
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.SUBFLOW_START });
+        }
+        void subflowEnd(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            _subflowCounter--;
+
+            if (state == LCStateEnum.VALUE)
+            {
+                addValue(c, LCStateEnum.SUBFLOW, pushType);
+            }
+            else if (state == LCStateEnum.UNKNOWN)
+            {
+                resolveUnknown(c, LCStateEnum.SUBFLOW, pushType);
+            }
+            var flow = PopValue(StackValueTypeEnum.FLOW);
+            var temp = PopValue(StackValueTypeEnum.SUBFLOW_START);
+            _stack.Push(flow);
         }
         #endregion
 

@@ -8,6 +8,7 @@
         VALUE,
         OPERATOR,
         FLOW,
-        TYPE
+        TYPE,
+        SUBFLOW_START
     }
 }
