@@ -318,18 +318,17 @@ namespace MainNode.Logic.Compile
             return val;
         }
 
-        void createOperation(ValueDo value, Type typeB)
+        #region operation
+
+        void operationdata(Type typeB, out Type typeA, out Flow flow, out Delegate f)
         {
             var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
 
-            Flow flow = null;
-
-            Type typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
-
             if (typeB == null)
             {
-                throw new ApplicationException($"cant get type of value {value.Name}");
+                throw new ApplicationException($"cant get typeB");
             }
+            typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
 
             try
             {
@@ -341,56 +340,43 @@ namespace MainNode.Logic.Compile
                 flow = Flow.Create(typeB, $"<flow{_flowRepo.Results.Count}>");
             }
 
-            var op = cacheO.Value.ToString();
-            if (_funcRepo.FunctionsT.TryGetValue((typeA, typeB, op), out var f))
+            f = _funcRepo.GetFunction(typeA, typeB, cacheO.Value.ToString());
+        }
+
+        void createOperation(ValueDo value, Type typeB)
             {
-                var A = typeA.DefaultValue();//místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
+            operationdata(typeB, out Type typeA, out Flow flow, out Delegate f);
+
+            //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
+            var A = typeA.DefaultValue();
                 FuncHelper.AddFuncion(f, A, value, flow);
 
                 _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
             }
-            else
-            {
-                throw new ApplicationException($"Function {typeA.Name} {op} {typeB.Name} not found");
-            }
-        }
         void createOperation(FlowResult value, Type typeB)
         {
-            var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
+            operationdata(typeB, out Type typeA, out Flow flow, out Delegate f);
 
-            Flow flow = null;
+            //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
+            var A = typeA.DefaultValue();
+            FuncHelper.AddFuncion(f, A, value, flow);
 
-            Type typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
-
-            if (typeB == null)
-            {
-                throw new ApplicationException($"cant get type of value {value.Name}");
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
             }
 
-            try
+        void createOperation(FlowResult A, FlowResult B, string op)
             {
-                var R = PopValue(StackValueTypeEnum.FLOW);
-                flow = (Flow)R.CachedValue;
-            }
-            catch
-            {
-                flow = Flow.Create(typeB, $"<flow{_flowRepo.Results.Count}>");
-            }
+            var typeA = A.getT();
+            var typeB = B.getT();
 
-            var op = cacheO.Value.ToString();
-            if (_funcRepo.FunctionsT.TryGetValue((typeA, typeB, op), out var f))
-            {
-                var A = typeA.DefaultValue();//místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
-                FuncHelper.AddFuncion(f, A, value, flow);
+            var f = _funcRepo.GetFunction(typeA, typeB, op);
+            var typeR = f.GetType().GetGenericArguments().Last();
+            var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+            FuncHelper.AddFuncion(f, A, B, flow);
 
                 _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
             }
-            else
-            {
-                throw new ApplicationException($"Function {typeA.Name} {op} {typeB.Name} not found");
-            }
-        }
-
+        #endregion
         void addFlowFromValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
             var val = validateValue(c, state, pushType, out Type T);
