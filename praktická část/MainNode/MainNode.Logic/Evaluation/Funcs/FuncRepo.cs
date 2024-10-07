@@ -1,4 +1,5 @@
 using MainNode.Communication.Enums;
+using System;
 
 namespace MainNode.Logic.Evaluation.Funcs
 {
@@ -15,5 +16,13 @@ namespace MainNode.Logic.Evaluation.Funcs
 
         public Dictionary<(Type, Type, string), Delegate> FunctionsT = new Dictionary<(Type, Type, string), Delegate>();
 
+        public Delegate GetFunction(Type A, Type B, string op)
+        {
+            if (FunctionsT.TryGetValue((A, B, op), out var f))
+            {
+                return f;
+            }
+            throw new ApplicationException($"Function {A.Name} {op} {B.Name} not found");
+        }
     }
 }
