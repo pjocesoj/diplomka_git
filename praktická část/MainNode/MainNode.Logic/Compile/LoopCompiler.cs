@@ -264,7 +264,7 @@ namespace MainNode.Logic.Compile
 
             if (_stack.Peek().Type == StackValueTypeEnum.VALUE)
             {
-                var val = validateValue(c, state, pushType, out Type T);
+                var val = validateValue(c, state, pushType);
                 createOperation(val);
             }
             else
@@ -279,41 +279,42 @@ namespace MainNode.Logic.Compile
                 AddChar(c, state, pushType);
             }
         }
-        private ValueDo validateValue(char c, LCStateEnum state, StackValueTypeEnum? pushType, out Type T)
+        private ValueDo validateValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            var chacheV = PopValue(StackValueTypeEnum.VALUE);
+            var cacheV = PopValue(StackValueTypeEnum.VALUE);
+            return validateValue(cacheV);
+        }
+        private ValueDo validateValue(StackValue cacheV)
+        {
             ValueDo val = null;
 
-            if (chacheV.CachedValue != null)
+            if (cacheV.CachedValue != null)
             {
-                val = (ValueDo)chacheV.CachedValue;
-                T = val.getT();
+                val = (ValueDo)cacheV.CachedValue;
             }
-            else if (chacheV.Value[0] > '9')
+            else if (cacheV.Value[0] > '9')
             {
                 var cacheEp = PopValue(StackValueTypeEnum.ENDPOINT);
                 var ep = (EndPointDo)cacheEp.CachedValue;
 
-                val = ep.Values.GetValueByname(chacheV.Value.ToString(), out T);
+                val = ep.Values.GetValueByname(cacheV.Value.ToString());
             }
             else
             {
-                var temp = chacheV.Value.ToString();
+                var temp = cacheV.Value.ToString();
                 if (temp.Contains('.'))
                 {
-                    T = typeof(float);
                     val = new ValueDo<float>(temp, float.Parse(temp, CultureInfo.InvariantCulture));
                 }
                 else
                 {
-                    T = typeof(int);
                     val = new ValueDo<int>(temp, int.Parse(temp));
                 }
             }
 
             if (val == null)
             {
-                throw new ApplicationException($"Value {chacheV.Value} not found");
+                throw new ApplicationException($"Value {cacheV.Value} not found");
             }
 
             return val;
