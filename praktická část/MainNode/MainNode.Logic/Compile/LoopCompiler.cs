@@ -152,6 +152,7 @@ namespace MainNode.Logic.Compile
             }
             return cache;
         }
+
         #region transition functions
         private void AddChar(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
@@ -264,13 +265,13 @@ namespace MainNode.Logic.Compile
             if (_stack.Peek().Type == StackValueTypeEnum.VALUE)
             {
                 var val = validateValue(c, state, pushType, out Type T);
-                createOperation(val, T);
+                createOperation(val);
             }
             else
             {
                 var cacheF = PopValue(StackValueTypeEnum.FLOW);
                 var flow = _flowRepo.GetFlowByName(cacheF.Value.ToString());
-                createOperation(flow, flow.getT());
+                createOperation(flow);
             }
 
             if (pushType != null)//není poslední znak
@@ -343,8 +344,9 @@ namespace MainNode.Logic.Compile
             f = _funcRepo.GetFunction(typeA, typeB, cacheO.Value.ToString());
         }
 
-        void createOperation(ValueDo value, Type typeB)
+        void createOperation(ValueDo value)
             {
+            var typeB = value.getT();
             operationdata(typeB, out Type typeA, out Flow flow, out Delegate f);
 
             //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
@@ -353,8 +355,9 @@ namespace MainNode.Logic.Compile
 
                 _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
             }
-        void createOperation(FlowResult value, Type typeB)
+        void createOperation(FlowResult value)
         {
+            var typeB = value.getT();
             operationdata(typeB, out Type typeA, out Flow flow, out Delegate f);
 
             //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
