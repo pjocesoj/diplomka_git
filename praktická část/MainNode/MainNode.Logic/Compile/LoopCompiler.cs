@@ -383,7 +383,7 @@ namespace MainNode.Logic.Compile
         #endregion
         void addFlowFromValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            var val = validateValue(c, state, pushType, out Type T);
+            var val = validateValue(c, state, pushType);
             createFlow(val.getT(), $"<{val.Name}>");
         }
         void addFlowFromName(char c, LCStateEnum state, StackValueTypeEnum? pushType)
