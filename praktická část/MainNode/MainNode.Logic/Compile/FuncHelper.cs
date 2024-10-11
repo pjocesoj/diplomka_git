@@ -13,11 +13,11 @@ namespace MainNode.Logic.Compile
             {
                 var B_t = (ValueDo<T>)(object)B;
                 var R_t = (Flow<T>)(object)R;
-                R_t.Operations.Add(new Operation<T>(B_t, (Func<T,T,T>)f));
+                R_t.Operations.Add(new Operation<T>(B_t, (Func<T, T, T>)f));
             }
             var func = (Func<T, U, V>)f;
         }
-        private static void AddFuncion<U,V>(Delegate f, ValueDo A, ValueDo<U> B, Flow<V> R) where U : struct where V : struct
+        private static void AddFuncion<U, V>(Delegate f, ValueDo A, ValueDo<U> B, Flow<V> R) where U : struct where V : struct
         {
             switch (A)
             {
@@ -61,7 +61,7 @@ namespace MainNode.Logic.Compile
             if (typeof(U) == typeof(V))
             {
                 var R_t = (Flow<T>)(object)R;
-                R_t.Operations.Add(new SubflowOperation<T,U>(B, (Func<U, T, T>)f));
+                R_t.Operations.Add(new SubflowOperation<T, U>(B, (Func<U, T, T>)f));
             }
             var func = (Func<T, U, V>)f;
         }
@@ -105,7 +105,7 @@ namespace MainNode.Logic.Compile
         #region flow flow
         private static void AddFuncion<T, U, V>(Delegate f, FlowResult<T> A, FlowResult<U> B, Flow<V> R) where T : struct where U : struct where V : struct
         {
-            R.Operations.Add(new MergeflowOperation<T,U,V>(A, B, (Func<T,U,V>)f));
+            R.Operations.Add(new MergeflowOperation<T, U, V>(A, B, (Func<T, U, V>)f));
         }
         private static void AddFuncion<U, V>(Delegate f, FlowResult A, FlowResult<U> B, Flow<V> R) where U : struct where V : struct
         {
