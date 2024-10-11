@@ -404,7 +404,7 @@ namespace MainNode.Logic.Compile
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
 
             //default
-            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("+") });
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("+"),CachedValue=typeR });
 
             return flow;
         }
