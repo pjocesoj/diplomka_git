@@ -7,6 +7,7 @@ namespace MainNode.Logic.Evaluation
         public List<Operation<T>> Operations { get; } = new List<Operation<T>>();
         public ValueDo<T>? Output { get; set; }
 
+        public override Type getT() => typeof(T);
         public Flow(string name, List<Operation<T>> opers)
         {
             Name = name;
@@ -43,6 +44,7 @@ namespace MainNode.Logic.Evaluation
     public abstract class Flow
     {
         public string Name { get; set; } = "";
+        public abstract Type getT();
 
         public abstract void Run();
 

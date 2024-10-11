@@ -33,7 +33,7 @@ namespace MainNode.Logic.Compile
         #region finite automata
         private Stack<StackValue> _stack = new Stack<StackValue>();
         private TransitionFunc[,] _table;
-
+        private int _subflowCounter = 0;
         private void InitTable()
         {
             char[] chars = { 'Ø', 'A', '0', '.', '(', ')', '+', '-', '*', '/', '<', '>', '=' };
@@ -80,6 +80,13 @@ namespace MainNode.Logic.Compile
             _table[getId('a'), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.FLOW, AddChar, StackValueTypeEnum.FLOW);
             _table[getId('0'), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.FLOW, AddChar, StackValueTypeEnum.FLOW);
             _table[getId('='), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.UNKNOWN, addFlowFromName, StackValueTypeEnum.FLOW);//float
+
+            //subflow
+            _table[getId('('), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowStart, StackValueTypeEnum.FLOW);//float
+            _table[getId('('), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowStart, StackValueTypeEnum.FLOW);//float
+            _table[getId(')'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowEnd, StackValueTypeEnum.FLOW);//float
+            _table[getId(')'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowEnd, StackValueTypeEnum.FLOW);//float
+
 
             //vše přečteno
             _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, null);
@@ -145,6 +152,7 @@ namespace MainNode.Logic.Compile
             }
             return cache;
         }
+
         #region transition functions
         private void AddChar(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
@@ -164,6 +172,12 @@ namespace MainNode.Logic.Compile
         private void resolveUnknown(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
             var cache = _stack.Peek();
+
+            //end of stream
+            if(cache.Type != StackValueTypeEnum.UNKNOWN)
+            {
+                return;
+            }
 
             if (c == '.')
             {
@@ -248,16 +262,22 @@ namespace MainNode.Logic.Compile
         }
         private void addValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
+            if (_subflowCounter > 0 && state != LCStateEnum.SUBFLOW)
+            {
+                AddChar(c, state, pushType);
+                return;
+            }
+
             if (_stack.Peek().Type == StackValueTypeEnum.VALUE)
             {
-                var val = validateValue(c, state, pushType, out Type T);
-                createOperation(val, T);
+                var val = validateValue(c, state, pushType);
+                createOperation(val);
             }
             else
             {
                 var cacheF = PopValue(StackValueTypeEnum.FLOW);
                 var flow = _flowRepo.GetFlowByName(cacheF.Value.ToString());
-                createOperation(flow, flow.getT());
+                createOperation(flow);
             }
 
             if (pushType != null)//není poslední znak
@@ -265,58 +285,58 @@ namespace MainNode.Logic.Compile
                 AddChar(c, state, pushType);
             }
         }
-        private ValueDo validateValue(char c, LCStateEnum state, StackValueTypeEnum? pushType, out Type T)
+        private ValueDo validateValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            var chacheV = PopValue(StackValueTypeEnum.VALUE);
+            var cacheV = PopValue(StackValueTypeEnum.VALUE);
+            return validateValue(cacheV);
+        }
+        private ValueDo validateValue(StackValue cacheV)
+        {
             ValueDo val = null;
 
-            if (chacheV.CachedValue != null)
+            if (cacheV.CachedValue != null)
             {
-                val = (ValueDo)chacheV.CachedValue;
-                T = val.getT();
+                val = (ValueDo)cacheV.CachedValue;
             }
-            else if (chacheV.Value[0] > '9')
+            else if (cacheV.Value[0] > '9')
             {
                 var cacheEp = PopValue(StackValueTypeEnum.ENDPOINT);
                 var ep = (EndPointDo)cacheEp.CachedValue;
 
-                val = ep.Values.GetValueByname(chacheV.Value.ToString(), out T);
+                val = ep.Values.GetValueByname(cacheV.Value.ToString());
             }
             else
             {
-                var temp = chacheV.Value.ToString();
+                var temp = cacheV.Value.ToString();
                 if (temp.Contains('.'))
                 {
-                    T = typeof(float);
                     val = new ValueDo<float>(temp, float.Parse(temp, CultureInfo.InvariantCulture));
                 }
                 else
                 {
-                    T = typeof(int);
                     val = new ValueDo<int>(temp, int.Parse(temp));
                 }
             }
 
             if (val == null)
             {
-                throw new ApplicationException($"Value {chacheV.Value} not found");
+                throw new ApplicationException($"Value {cacheV.Value} not found");
             }
 
             return val;
         }
 
-        void createOperation(ValueDo value, Type typeB)
+        #region operation
+
+        void operationdata(Type typeB, out Type typeA, out Flow flow, out Delegate f)
         {
             var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
 
-            Flow flow = null;
-
-            Type typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
-
             if (typeB == null)
             {
-                throw new ApplicationException($"cant get type of value {value.Name}");
+                throw new ApplicationException($"cant get typeB");
             }
+            typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
 
             try
             {
@@ -328,59 +348,85 @@ namespace MainNode.Logic.Compile
                 flow = Flow.Create(typeB, $"<flow{_flowRepo.Results.Count}>");
             }
 
-            var op = cacheO.Value.ToString();
-            if (_funcRepo.FunctionsT.TryGetValue((typeA, typeB, op), out var f))
-            {
-                var A = typeA.DefaultValue();//místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
-                FuncHelper.AddFuncion(f, A, value, flow);
-
-                _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
-            }
-            else
-            {
-                throw new ApplicationException($"Function {typeA.Name} {op} {typeB.Name} not found");
-            }
+            f = _funcRepo.GetFunction(typeA, typeB, cacheO.Value.ToString());
         }
-        void createOperation(FlowResult value, Type typeB)
+
+        void createOperation(ValueDo value)
         {
-            var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
+            var typeB = value.getT();
+            operationdata(typeB, out Type typeA, out Flow flow, out Delegate f);
 
-            Flow flow = null;
+            //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
+            var A = typeA.DefaultValue();
+            FuncHelper.AddFuncion(f, A, value, flow);
 
-            Type typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+        }
+        void createOperation(FlowResult value)
+        {
+            var typeB = value.getT();
+            operationdata(typeB, out Type typeA, out Flow flow, out Delegate f);
 
-            if (typeB == null)
-            {
-                throw new ApplicationException($"cant get type of value {value.Name}");
-            }
+            //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
+            var A = typeA.DefaultValue();
+            FuncHelper.AddFuncion(f, A, value, flow);
 
-            try
-            {
-                var R = PopValue(StackValueTypeEnum.FLOW);
-                flow = (Flow)R.CachedValue;
-            }
-            catch
-            {
-                flow = Flow.Create(typeB, $"<flow{_flowRepo.Results.Count}>");
-            }
-
-            var op = cacheO.Value.ToString();
-            if (_funcRepo.FunctionsT.TryGetValue((typeA, typeB, op), out var f))
-            {
-                var A = typeA.DefaultValue();//místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
-                FuncHelper.AddFuncion(f, A, value, flow);
-
-                _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
-            }
-            else
-            {
-                throw new ApplicationException($"Function {typeA.Name} {op} {typeB.Name} not found");
-            }
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
         }
 
+        void createOperation(FlowResult A, FlowResult B, string op)
+        {
+            var typeA = A.getT();
+            var typeB = B.getT();
+
+            var f = _funcRepo.GetFunction(typeA, typeB, op);
+            var typeR = f.GetType().GetGenericArguments().Last();
+            var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+            FuncHelper.AddFuncion(f, A, B, flow);
+
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+        }
+        void createOperation(ValueDo A, FlowResult B, string op)
+        {
+            var typeA = A.getT();
+            var typeB = B.getT();
+
+            var f = _funcRepo.GetFunction(typeA, typeB, op);
+            var typeR = f.GetType().GetGenericArguments().Last();
+            var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+            FuncHelper.AddFuncion(f, A, B, flow);
+
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+        }
+        void createOperation(FlowResult A, ValueDo B, string op)
+        {
+            var typeA = A.getT();
+            var typeB = B.getT();
+
+            var f = _funcRepo.GetFunction(typeA, typeB, op);
+            var typeR = f.GetType().GetGenericArguments().Last();
+            var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+            FuncHelper.AddFuncion(f, A, B, flow);
+
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+        }
+        void createOperation(ValueDo A, ValueDo B, string op)
+        {
+            var typeA = A.getT();
+            var typeB = B.getT();
+
+            var f = _funcRepo.GetFunction(typeA, typeB, op);
+            var typeR = f.GetType().GetGenericArguments().Last();
+            var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+            FuncHelper.AddFuncion(f, A, B, flow);
+
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+        }
+        #endregion
+        
         void addFlowFromValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            var val = validateValue(c, state, pushType, out Type T);
+            var val = validateValue(c, state, pushType);
             createFlow(val.getT(), $"<{val.Name}>");
         }
         void addFlowFromName(char c, LCStateEnum state, StackValueTypeEnum? pushType)
@@ -412,6 +458,137 @@ namespace MainNode.Logic.Compile
         {
             var cache = PopValue(StackValueTypeEnum.FLOW);
             _flowRepo.AddFlow((Flow)cache.CachedValue);
+        }
+
+        void subflowStart(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            _subflowCounter++;
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.SUBFLOW_START });
+        }
+        void subflowEnd(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            _subflowCounter--;
+
+            if (_stack.Count < 4)
+            {
+                throw new ApplicationException($"Invalid stack state");
+            }
+
+            var cacheB = _stack.Pop();
+            var op = PopValue(StackValueTypeEnum.OPERATOR);
+            var cacheA = _stack.Pop();
+            var start = PopValue(StackValueTypeEnum.SUBFLOW_START);
+
+            if (cacheB.Type == StackValueTypeEnum.UNKNOWN)
+            {
+                resolveUnknown(cacheA, op.Value.ToString(), cacheB);
+            }
+            else if (cacheB.Type == StackValueTypeEnum.FLOW)//když budu v budoucno rozšiřovat
+            {
+                var B = _flowRepo.GetFlowByName(cacheB.Value.ToString());
+                addSubflow(cacheA, op.Value.ToString(),B );
+            }
+            else if (cacheB.Type == StackValueTypeEnum.VALUE)//když budu v budoucno rozšiřovat
+            {
+                var B = validateValue(cacheB);
+                addSubflow(cacheA, op.Value.ToString(), B);
+            }
+            else
+            {
+                throw new ApplicationException($"unexpected value of type {cacheB.Type}");
+            }
+
+            addSubflow();
+        }
+        private void resolveUnknown(StackValue cacheA,string op, StackValue cacheB)
+        {
+            var str = cacheB.Value.ToString();
+            switch (str)
+            {
+                case "true":
+                    cacheB.CachedValue = new ValueDo<bool>("true", true);
+                    cacheB.Type = StackValueTypeEnum.VALUE;
+                    //addValue(c, state, pushType);
+                    break;
+                case "false":
+                    cacheB.CachedValue = new ValueDo<bool>("false", false);
+                    cacheB.Type = StackValueTypeEnum.VALUE;
+                    //addValue(c, state, pushType);
+                    break;
+                default:
+                    if (str.Any(char.IsLetter))
+                    {
+                        cacheB.Type = StackValueTypeEnum.FLOW;
+                        var flow = _flowRepo.GetFlowByName(str);
+                        addSubflow(cacheA, op, flow);
+                    }
+                    else
+                    {
+                        cacheB.Type = StackValueTypeEnum.VALUE;
+                        var B=validateValue(cacheB);
+                        addSubflow(cacheA, op, B);
+                    }
+                    break;
+            }
+        }
+        private void addSubflow(StackValue cacheA,string op,ValueDo B)
+        {
+            if (cacheA.Type == StackValueTypeEnum.FLOW)
+            {
+                var A = _flowRepo.GetFlowByName(cacheA.Value.ToString());
+                //createOperation(A);
+                createOperation(A, B, op);
+            }
+            else if (cacheA.Type == StackValueTypeEnum.VALUE)
+            {
+                var A = validateValue(cacheA);
+                createOperation(A, B, op);
+            }
+            else
+            {
+                throw new ApplicationException($"unexpected value of type {cacheA.Type}");
+            }
+        }
+        private void addSubflow(StackValue cacheA, string op, FlowResult B)
+        {
+            if (cacheA.Type == StackValueTypeEnum.FLOW)
+            {
+                var A = _flowRepo.GetFlowByName(cacheA.Value.ToString());
+                createOperation(A, B, op);
+            }
+            else if (cacheA.Type == StackValueTypeEnum.VALUE)
+            {
+                var A = validateValue(cacheA);
+                createOperation(A, B, op);
+            }
+            else
+            {
+                throw new ApplicationException($"unexpected value of type {cacheA.Type}");
+            }
+        }
+
+        private void addSubflow()
+        {
+            if (_subflowCounter > 0)
+            {
+                throw new NotImplementedException("at this moment subflow inside subflow is not allowed");
+            }
+
+            var cacheS = PopValue(StackValueTypeEnum.FLOW);
+            var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
+            var cacheR = PopValue(StackValueTypeEnum.FLOW);
+
+            var sub = (cacheS.CachedValue as Flow).GetResult();
+            var R = (Flow)cacheR.CachedValue;
+
+            var typeR = R.getT();
+            var f = _funcRepo.GetFunction(typeR, sub.getT(), cacheO.Value.ToString());
+
+            //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
+            var A = typeR.DefaultValue();
+            FuncHelper.AddFuncion(f, A, sub, R);
+
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = R });
         }
         #endregion
 
