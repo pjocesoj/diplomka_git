@@ -475,22 +475,22 @@ namespace MainNode.Logic.Compile
             }
 
             var cacheB = _stack.Pop();
+            resolveUnknown(cacheB);
+
             var op = PopValue(StackValueTypeEnum.OPERATOR);
             var cacheA = _stack.Pop();
             var start = PopValue(StackValueTypeEnum.SUBFLOW_START);
 
-            if (cacheB.Type == StackValueTypeEnum.UNKNOWN)
+            if (cacheB.Type == StackValueTypeEnum.FLOW)
             {
-                resolveUnknown(cacheA, op.Value.ToString(), cacheB);
-            }
-            else if (cacheB.Type == StackValueTypeEnum.FLOW)//když budu v budoucno rozšiřovat
-            {
-                var B = _flowRepo.GetFlowByName(cacheB.Value.ToString());
+                //var B = _flowRepo.GetFlowByName(cacheB.Value.ToString());
+                var B = (FlowResult)cacheB.CachedValue;
                 addSubflow(cacheA, op.Value.ToString(),B );
             }
-            else if (cacheB.Type == StackValueTypeEnum.VALUE)//když budu v budoucno rozšiřovat
+            else if (cacheB.Type == StackValueTypeEnum.VALUE)
             {
-                var B = validateValue(cacheB);
+                //var B = validateValue(cacheB);
+                var B = (ValueDo)cacheB.CachedValue;
                 addSubflow(cacheA, op.Value.ToString(), B);
             }
             else
@@ -531,6 +531,47 @@ namespace MainNode.Logic.Compile
                     break;
             }
         }
+        private void resolveUnknown(StackValue cache)
+        {
+            
+            if(cache.Type == StackValueTypeEnum.VALUE)
+            {
+                var val = validateValue(cache);
+                cache.CachedValue = val;
+                return;
+            }
+            
+
+            var str = cache.Value.ToString();
+            switch (str)
+            {
+                case "true":
+                    cache.CachedValue = new ValueDo<bool>("true", true);
+                    cache.Type = StackValueTypeEnum.VALUE;
+                    return;
+                case "false":
+                    cache.CachedValue = new ValueDo<bool>("false", false);
+                    cache.Type = StackValueTypeEnum.VALUE;
+                    return;
+                default:
+                    if (str.Any(char.IsLetter))
+                    {
+                        cache.Type = StackValueTypeEnum.FLOW;
+                        var flow = _flowRepo.GetFlowByName(str);
+                        cache.CachedValue = flow;
+                        //addSubflow(cacheA, op, flow);
+                    }
+                    else
+                    {
+                        cache.Type = StackValueTypeEnum.VALUE;
+                        var val = validateValue(cache);
+                        cache.CachedValue = val;
+                        //addSubflow(cacheA, op, B);
+                    }
+                    return;
+            }
+        }
+
         private void addSubflow(StackValue cacheA,string op,ValueDo B)
         {
             if (cacheA.Type == StackValueTypeEnum.FLOW)
