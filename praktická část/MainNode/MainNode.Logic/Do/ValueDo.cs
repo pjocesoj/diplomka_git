@@ -23,10 +23,17 @@
 
             return $"{typeof(T).Name} {Name}";
         }
+
+        public override Type getT()
+        {
+            return typeof(T);
+        }
     }
 
     public abstract class ValueDo 
     {
         public string? Name { get; set; } = "val";
+
+        public abstract Type getT();
     }
 }

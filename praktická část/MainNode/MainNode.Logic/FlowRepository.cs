@@ -61,11 +61,40 @@ namespace MainNode.Logic
             }
             if (output != null)
             {
-                var OT = input.EndPoint.Delay == null ? EnpointLoadTypeEnum.NORMAL : EnpointLoadTypeEnum.SLOW;
+                var OT = output.EndPoint.Delay == null ? EnpointLoadTypeEnum.NORMAL : EnpointLoadTypeEnum.SLOW;
                 Outputs[OT].Add(output);
             }
 
             return res;
+        }
+
+        public void AddInput(EndpointVariables input)
+        {
+            var IT = input.EndPoint.Delay == null ? EnpointLoadTypeEnum.NORMAL : EnpointLoadTypeEnum.SLOW;
+            var list = Inputs[IT];
+            if (list.Any(x => x.Node == input.Node && x.EndPoint == input.EndPoint)) { return; }
+            list.Add(input);
+        }
+        public void AddOutput(EndpointVariables output)
+        {
+            var IT = output.EndPoint.Delay == null ? EnpointLoadTypeEnum.NORMAL : EnpointLoadTypeEnum.SLOW;
+            var list = Outputs[IT];
+            if (list.Any(x => x.Node == output.Node && x.EndPoint == output.EndPoint)) { return; }
+            list.Add(output);
+        }
+
+        public FlowResult GetFlowByName(string name)
+        {
+            var res = Results.FindAll(x => x.Name == name);
+            if (res.Count==0)
+            {
+                throw new Exception($"Flow with name {name} not found");
+            }
+            if (res.Count > 1)
+            {
+                throw new Exception($"More than one flow with name {name} found");
+            }
+            return res.First();
         }
 
         public void Run()

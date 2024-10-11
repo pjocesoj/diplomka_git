@@ -7,10 +7,16 @@ namespace MainNode.Logic.Evaluation
         public List<Operation<T>> Operations { get; } = new List<Operation<T>>();
         public ValueDo<T>? Output { get; set; }
 
+        public override Type getT() => typeof(T);
         public Flow(string name, List<Operation<T>> opers)
         {
             Name = name;
             Operations = opers;
+        }
+        public Flow(string name)
+        {
+            Name = name;
+            Operations = new List<Operation<T>>();
         }
 
         public override void Run()
@@ -38,9 +44,22 @@ namespace MainNode.Logic.Evaluation
     public abstract class Flow
     {
         public string Name { get; set; } = "";
+        public abstract Type getT();
 
         public abstract void Run();
 
         public abstract FlowResult GetResult();
+
+        public static Flow Create(Type type, string name)
+        {
+            if (type == typeof(int))
+                return new Flow<int>(name);
+            if (type == typeof(float))
+                return new Flow<float>(name);
+            if (type == typeof(bool))
+                return new Flow<bool>(name);
+
+            return null;
+        }
     }
 }

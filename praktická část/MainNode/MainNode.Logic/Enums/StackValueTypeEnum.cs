@@ -7,6 +7,9 @@
         ENDPOINT,
         VALUE,
         OPERATOR,
-        FLOW
+        FLOW,
+        TYPE,
+        SUBFLOW_START,
+        EP_VARIABLE
     }
 }

@@ -9,9 +9,10 @@ namespace MainNode.Logic.Evaluation
     public class FlowResult<T> : FlowResult where T : struct
     {
         public bool Finished { get; set; } = false;
+        public override string Name => Flow.Name;
         public Flow<T> Flow { get; set; }
 
-        private ValueDo<T> _valueDo;
+        protected ValueDo<T> _valueDo;
         public FlowResult(Flow<T> flow)
         {
             Flow = flow;
@@ -25,7 +26,7 @@ namespace MainNode.Logic.Evaluation
                 _valueDo = Flow.Output;
             }
         }
-
+        public override Type getT() => typeof(T);
         public override ValueDo<T> Value
         {
             get
@@ -65,7 +66,9 @@ namespace MainNode.Logic.Evaluation
 
     public abstract class FlowResult
     {
+        public abstract string Name { get; }
         public abstract ValueDo Value { get; }
+        public abstract Type getT();
 
         public abstract void NewIteration();
         public abstract void BindOutput(ValueDo bind);
