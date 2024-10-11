@@ -450,7 +450,7 @@ namespace MainNode.Logic.Compile
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
 
             //default
-            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("+"),CachedValue=typeR });
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("0"),CachedValue=typeR });
 
             return flow;
         }
@@ -596,7 +596,7 @@ namespace MainNode.Logic.Compile
         public void Compile(string input)
         {
             _stack.Clear();
-            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("+") });
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("0") });
 
             LCStateEnum state = 0;
             //aby v chybe šlo použít i není použit foreach
