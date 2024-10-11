@@ -259,6 +259,8 @@ namespace MainNode.Logic.Compile
             }
             cacheEp.CachedValue = ep;
             _stack.Push(cacheEp);
+
+            _flowRepo.AddInput(new EndpointVariables { Node = n, EndPoint = ep });
         }
         private void addValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
