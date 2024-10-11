@@ -563,6 +563,7 @@ namespace MainNode.Logic.Compile
             {
                 var val = validateValue(cache);
                 cache.CachedValue = val;
+                addInputOutput(')');
                 return;
             }
             
