@@ -152,7 +152,14 @@ namespace MainNode.Logic.Compile
             }
             return cache;
         }
-
+        private void PushVariable(EndPointDo ep, Node n)
+        {
+            _stack.Push(new StackValue
+            {
+                Type = StackValueTypeEnum.EP_VARIABLE,
+                CachedValue = new EndpointVariables { Node = n, EndPoint = ep }
+            });
+        }
         #region transition functions
         private void AddChar(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
@@ -174,7 +181,7 @@ namespace MainNode.Logic.Compile
             var cache = _stack.Peek();
 
             //end of stream
-            if(cache.Type != StackValueTypeEnum.UNKNOWN)
+            if (cache.Type != StackValueTypeEnum.UNKNOWN)
             {
                 return;
             }
@@ -258,9 +265,8 @@ namespace MainNode.Logic.Compile
                 throw new ApplicationException($"Endpoint {cacheEp.Value} not found at Node {n.Name}");
             }
             cacheEp.CachedValue = ep;
+            PushVariable(ep, n);
             _stack.Push(cacheEp);
-
-            _flowRepo.AddInput(new EndpointVariables { Node = n, EndPoint = ep });
         }
         private void addValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
@@ -290,7 +296,9 @@ namespace MainNode.Logic.Compile
         private ValueDo validateValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
             var cacheV = PopValue(StackValueTypeEnum.VALUE);
-            return validateValue(cacheV);
+            var ret = validateValue(cacheV);
+            addInputOutput(c);
+            return ret;
         }
         private ValueDo validateValue(StackValue cacheV)
         {
@@ -425,7 +433,22 @@ namespace MainNode.Logic.Compile
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
         }
         #endregion
-        
+
+        void addInputOutput(char c)
+        {
+            if (_stack.Peek().Type != StackValueTypeEnum.EP_VARIABLE) { return; }
+
+            var cache = PopValue(StackValueTypeEnum.EP_VARIABLE);
+            if (c == '=')
+            {
+                _flowRepo.AddOutput((EndpointVariables)cache.CachedValue);
+            }
+            else
+            {
+                _flowRepo.AddInput((EndpointVariables)cache.CachedValue);
+            }
+        }
+
         void addFlowFromValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
             var val = validateValue(c, state, pushType);
@@ -452,7 +475,7 @@ namespace MainNode.Logic.Compile
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
 
             //default
-            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("0"),CachedValue=typeR });
+            _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("0"), CachedValue = typeR });
 
             return flow;
         }
@@ -488,7 +511,7 @@ namespace MainNode.Logic.Compile
             else if (cacheB.Type == StackValueTypeEnum.FLOW)//když budu v budoucno rozšiřovat
             {
                 var B = _flowRepo.GetFlowByName(cacheB.Value.ToString());
-                addSubflow(cacheA, op.Value.ToString(),B );
+                addSubflow(cacheA, op.Value.ToString(), B);
             }
             else if (cacheB.Type == StackValueTypeEnum.VALUE)//když budu v budoucno rozšiřovat
             {
@@ -502,7 +525,7 @@ namespace MainNode.Logic.Compile
 
             addSubflow();
         }
-        private void resolveUnknown(StackValue cacheA,string op, StackValue cacheB)
+        private void resolveUnknown(StackValue cacheA, string op, StackValue cacheB)
         {
             var str = cacheB.Value.ToString();
             switch (str)
@@ -527,13 +550,13 @@ namespace MainNode.Logic.Compile
                     else
                     {
                         cacheB.Type = StackValueTypeEnum.VALUE;
-                        var B=validateValue(cacheB);
+                        var B = validateValue(cacheB);
                         addSubflow(cacheA, op, B);
                     }
                     break;
             }
         }
-        private void addSubflow(StackValue cacheA,string op,ValueDo B)
+        private void addSubflow(StackValue cacheA, string op, ValueDo B)
         {
             if (cacheA.Type == StackValueTypeEnum.FLOW)
             {

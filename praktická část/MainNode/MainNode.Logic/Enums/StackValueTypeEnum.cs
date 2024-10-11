@@ -9,6 +9,7 @@
         OPERATOR,
         FLOW,
         TYPE,
-        SUBFLOW_START
+        SUBFLOW_START,
+        EP_VARIABLE
     }
 }

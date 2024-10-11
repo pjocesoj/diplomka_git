@@ -75,6 +75,13 @@ namespace MainNode.Logic
             if (list.Any(x => x.Node == input.Node && x.EndPoint == input.EndPoint)) { return; }
             list.Add(input);
         }
+        public void AddOutput(EndpointVariables output)
+        {
+            var IT = output.EndPoint.Delay == null ? EnpointLoadTypeEnum.NORMAL : EnpointLoadTypeEnum.SLOW;
+            var list = Outputs[IT];
+            if (list.Any(x => x.Node == output.Node && x.EndPoint == output.EndPoint)) { return; }
+            list.Add(output);
+        }
 
         public FlowResult GetFlowByName(string name)
         {
