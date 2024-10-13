@@ -37,7 +37,7 @@ namespace MainNode.Logic.Compile
         private void InitTable()
         {
             //char[] chars = { 'Ø', 'A', '0', '.', '(', ')', '+', '-', '*', '/', '<', '>', '=' };
-            string[] chars = { "Ø","A-Z<br/>a-z","0-9", ".","(",")", "+-*/", "<",">","=", " " };
+            string[] chars = { "Ø", "A-Z<br/>a-z", "0-9", ".", "(", ")", "+-*/", "<", ">", "=", " " };
 
             string[] states = { "Ø", "N", "E", "V", "+", "-", "*", "/", "<", ">", "=", ">=", "<=" };
             int numberOfstates = Enum.GetValues(typeof(LCStateEnum)).Length;
@@ -127,7 +127,7 @@ namespace MainNode.Logic.Compile
             var states = Enum.GetValues(typeof(LCStateEnum));
             var values = string.Join("|", states.Cast<LCStateEnum>().Select(x => x.ToString()));
             var sb = new StringBuilder($"|-|{values}|\n");
-            for(int i=0; i<=states.Length; i++)
+            for (int i = 0; i <= states.Length; i++)
             {
                 sb.Append("|-");
             }
@@ -139,7 +139,7 @@ namespace MainNode.Logic.Compile
                 sb.Append($"|{chars[i]}");
                 for (int j = 0; j < _table.GetLength(1); j++)
                 {
-                    var next= _table[i, j];
+                    var next = _table[i, j];
                     if (next != null)
                     {
                         sb.Append($"|{next.Next}");
@@ -194,11 +194,19 @@ namespace MainNode.Logic.Compile
         private void resolveUnknown(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
             var cache = _stack.Peek();
+            var str = cache.Value.ToString();
 
-            //end of stream
             if (cache.Type != StackValueTypeEnum.UNKNOWN)
             {
+            //end of stream
+                if (cache.Type == StackValueTypeEnum.FLOW)
+            {
                 return;
+            }
+                else
+                {
+                    throw new ApplicationException($"Unexpected character {c} after {cache.Type}");
+                }
             }
 
             if (c == '.')
@@ -208,7 +216,6 @@ namespace MainNode.Logic.Compile
                 return;
             }
 
-            var str = cache.Value.ToString();
             switch (str)
             {
                 case " ":
