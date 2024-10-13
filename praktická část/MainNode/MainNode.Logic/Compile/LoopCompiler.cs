@@ -70,22 +70,22 @@ namespace MainNode.Logic.Compile
             _table[getId('0'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
 
             //operation +-*/
-            _table[getId('+'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, StackValueTypeEnum.OPERATOR);//float
-            _table[getId('+'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, resolveUnknown, StackValueTypeEnum.OPERATOR);//float
+            _table[getId('+'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, StackValueTypeEnum.OPERATOR);
+            _table[getId('+'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, resolveUnknown, StackValueTypeEnum.OPERATOR);
 
             //flow
-            _table[getId('='), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.UNKNOWN, addFlowFromValue, StackValueTypeEnum.FLOW);//float
-            _table[getId('='), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, resolveUnknown, StackValueTypeEnum.FLOW);//float
-            _table[getId(' '), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.FLOW, resolveUnknown, StackValueTypeEnum.FLOW);//float
+            _table[getId('='), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.UNKNOWN, addFlowFromValue, StackValueTypeEnum.FLOW);
+            _table[getId('='), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, resolveUnknown, StackValueTypeEnum.FLOW);
+            _table[getId(' '), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.FLOW, resolveUnknown, StackValueTypeEnum.FLOW);
             _table[getId('a'), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.FLOW, AddChar, StackValueTypeEnum.FLOW);
             _table[getId('0'), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.FLOW, AddChar, StackValueTypeEnum.FLOW);
-            _table[getId('='), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.UNKNOWN, addFlowFromName, StackValueTypeEnum.FLOW);//float
+            _table[getId('='), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.UNKNOWN, addFlowFromName, StackValueTypeEnum.FLOW);
 
             //subflow
-            _table[getId('('), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowStart, StackValueTypeEnum.FLOW);//float
-            _table[getId('('), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowStart, StackValueTypeEnum.FLOW);//float
-            _table[getId(')'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowEnd, StackValueTypeEnum.FLOW);//float
-            _table[getId(')'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowEnd, StackValueTypeEnum.FLOW);//float
+            _table[getId('('), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowStart, StackValueTypeEnum.FLOW);
+            _table[getId('('), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowStart, StackValueTypeEnum.FLOW);
+            _table[getId(')'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowEnd, StackValueTypeEnum.FLOW);
+            _table[getId(')'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, subflowEnd, StackValueTypeEnum.FLOW);
 
 
             //vše přečteno
@@ -510,7 +510,7 @@ namespace MainNode.Logic.Compile
             {
                 //var B = _flowRepo.GetFlowByName(cacheB.Value.ToString());
                 var B = (FlowResult)cacheB.CachedValue;
-                addSubflow(cacheA, op.Value.ToString(),B );
+                addSubflow(cacheA, op.Value.ToString(), B);
             }
             else if (cacheB.Type == StackValueTypeEnum.VALUE)
             {
@@ -558,15 +558,15 @@ namespace MainNode.Logic.Compile
         }
         private void resolveUnknown(StackValue cache)
         {
-            
-            if(cache.Type == StackValueTypeEnum.VALUE)
+
+            if (cache.Type == StackValueTypeEnum.VALUE)
             {
                 var val = validateValue(cache);
                 cache.CachedValue = val;
                 addInputOutput(')');
                 return;
             }
-            
+
 
             var str = cache.Value.ToString();
             switch (str)
@@ -598,7 +598,7 @@ namespace MainNode.Logic.Compile
             }
         }
 
-        private void addSubflow(StackValue cacheA,string op,ValueDo B)
+        private void addSubflow(StackValue cacheA, string op, ValueDo B)
         {
             if (cacheA.Type == StackValueTypeEnum.FLOW)
             {
