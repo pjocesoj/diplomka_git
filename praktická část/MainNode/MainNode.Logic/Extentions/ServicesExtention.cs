@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MainNode.Logic.Compile;
+using MainNode.Logic.Evaluation.Funcs;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MainNode.Logic.Extentions
 {
@@ -12,6 +14,7 @@ namespace MainNode.Logic.Extentions
             services.AddSingleton<FlowRepository>();
             services.AddSingleton<LoopExecutor>();
             services.AddSingleton<LoopCompiler>();
+            services.AddSingleton<FuncRepo>();
         }
     }
 }

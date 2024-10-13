@@ -2,7 +2,6 @@
 {
     public class ValueDo<T>:ValueDo
     {
-        public string? Name { get; set; } = "val";
         public T Value { get; set; }
 
         public ValueDo(string name, T value)
@@ -24,9 +23,17 @@
 
             return $"{typeof(T).Name} {Name}";
         }
+
+        public override Type getT()
+        {
+            return typeof(T);
+        }
     }
 
     public abstract class ValueDo 
     {
+        public string? Name { get; set; } = "val";
+
+        public abstract Type getT();
     }
 }
