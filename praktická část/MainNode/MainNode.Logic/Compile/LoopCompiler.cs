@@ -36,7 +36,9 @@ namespace MainNode.Logic.Compile
         private int _subflowCounter = 0;
         private void InitTable()
         {
-            char[] chars = { 'Ø', 'A', '0', '.', '(', ')', '+', '-', '*', '/', '<', '>', '=' };
+            //char[] chars = { 'Ø', 'A', '0', '.', '(', ')', '+', '-', '*', '/', '<', '>', '=' };
+            string[] chars = { "Ø", "A-Z<br/>a-z", "0-9", ".", "(", ")", "+-*/", "<", ">", "=", " " };
+
             string[] states = { "Ø", "N", "E", "V", "+", "-", "*", "/", "<", ">", "=", ">=", "<=" };
             int numberOfstates = Enum.GetValues(typeof(LCStateEnum)).Length;
 
@@ -94,7 +96,7 @@ namespace MainNode.Logic.Compile
             _table[0, (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, addValue, null);
             _table[0, (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.VALUE, resolveUnknown, null);
 
-            printTable();
+            printTableMD(chars);
         }
         private int getId(char c)
         {
@@ -122,23 +124,36 @@ namespace MainNode.Logic.Compile
                     throw new ApplicationException($"Invalid character {c}");
             }
         }
-        private void printTable()
+        private void printTableMD(string[] chars)
         {
+            var states = Enum.GetValues(typeof(LCStateEnum));
+            var values = string.Join("|", states.Cast<LCStateEnum>().Select(x => x.ToString()));
+            var sb = new StringBuilder($"|-|{values}|\n");
+            for (int i = 0; i <= states.Length; i++)
+            {
+                sb.Append("|-");
+            }
+            sb.AppendLine("|");
+
+
             for (int i = 0; i < _table.GetLength(0); i++)
             {
+                sb.Append($"|{chars[i]}");
                 for (int j = 0; j < _table.GetLength(1); j++)
                 {
-                    if (_table[i, j] != null)
+                    var next = _table[i, j];
+                    if (next != null)
                     {
-                        Debug.Write($"O");
+                        sb.Append($"|{next.Next}");
                     }
                     else
                     {
-                        Debug.Write($"X");
+                        sb.Append($"|-");
                     }
                 }
-                Debug.WriteLine("");
+                sb.AppendLine("|");
             }
+            Debug.WriteLine(sb.ToString());
         }
 
         private StackValue PopValue(StackValueTypeEnum expected)
@@ -181,11 +196,19 @@ namespace MainNode.Logic.Compile
         private void resolveUnknown(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
             var cache = _stack.Peek();
+            var str = cache.Value.ToString();
 
-            //end of stream
             if (cache.Type != StackValueTypeEnum.UNKNOWN)
             {
+            //end of stream
+                if (cache.Type == StackValueTypeEnum.FLOW)
+            {
                 return;
+            }
+                else
+                {
+                    throw new ApplicationException($"Unexpected character {c} after {cache.Type}");
+                }
             }
 
             if (c == '.')
@@ -195,7 +218,6 @@ namespace MainNode.Logic.Compile
                 return;
             }
 
-            var str = cache.Value.ToString();
             switch (str)
             {
                 case " ":
