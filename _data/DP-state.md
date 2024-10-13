@@ -5,10 +5,10 @@
 |A-Z<br/>a-z|UNKNOWN|NODE|ENDPOINT|VALUE|ENDPOINT|VALUE|-|UNKNOWN|FLOW|-|
 |0-9|VALUE|NODE|ENDPOINT|VALUE|ENDPOINT|VALUE|-|UNKNOWN|FLOW|-|
 |.|-|DOT_EP|DOT_VAL|VALUE|-|-|-|DOT_EP|-|-|
-|(|-|-|-|UNKNOWN|-|-|-|UNKNOWN|-|-|
+|(|NULL|-|-|NULL|-|-|-|NULL|-|-|
 |)|-|-|-|UNKNOWN|-|-|-|UNKNOWN|-|-|
-|+-*/|-|-|-|VALUE|-|-|-|UNKNOWN|-|-|
+|+-*/|-|-|-|NULL|-|-|-|NULL|-|-|
 |<|-|-|-|-|-|-|-|-|-|-|
 |>|-|-|-|-|-|-|-|-|-|-|
-|=|-|-|-|UNKNOWN|-|-|-|UNKNOWN|UNKNOWN|-|
+|=|-|-|-|NULL|-|-|-|NULL|NULL|-|
 | |-|-|-|-|-|-|-|FLOW|-|-|
