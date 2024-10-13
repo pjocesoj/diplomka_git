@@ -95,7 +95,7 @@ namespace MainNode.Logic.Compile
             _table[0, (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.VALUE, resolveUnknown, null);
 
             printTableMD(chars);
-        }
+          }
         private int getId(char c)
         {
             if (c >= 'a' && c <= 'z') { return 1; }
@@ -126,7 +126,7 @@ namespace MainNode.Logic.Compile
         {
             var states = Enum.GetValues(typeof(LCStateEnum));
             var values = string.Join("|", states.Cast<LCStateEnum>().Select(x => x.ToString()));
-            var sb = new StringBuilder($"|-|{values}|\n");
+            var sb = new StringBuilder($"|_____|{values}|\n");
             for (int i = 0; i <= states.Length; i++)
             {
                 sb.Append("|-");
