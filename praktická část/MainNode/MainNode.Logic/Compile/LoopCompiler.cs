@@ -37,7 +37,7 @@ namespace MainNode.Logic.Compile
         private void InitTable()
         {
             //char[] chars = { 'Ø', 'A', '0', '.', '(', ')', '+', '-', '*', '/', '<', '>', '=' };
-            string[] chars = { "Ø", "A-Z<br/>a-z", "0-9", ".", "(", ")", "+-*/", "<", ">", "=", " " };
+            string[] chars = { "Ø", "A-Z<br/>a-z", "0-9", ".", "(", ")", "+-*/","&\\|", "<", ">", "=", " " };
 
             string[] states = { "Ø", "N", "E", "V", "+", "-", "*", "/", "<", ">", "=", ">=", "<=" };
             int numberOfstates = Enum.GetValues(typeof(LCStateEnum)).Length;
@@ -75,6 +75,10 @@ namespace MainNode.Logic.Compile
             //operation +-*/
             _table[getId('+'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addValue, StackValueTypeEnum.OPERATOR);
             _table[getId('+'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.OPERATOR);
+
+            //operation &|
+            _table[getId('&'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addValue, StackValueTypeEnum.OPERATOR);
+            _table[getId('&'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.OPERATOR);
 
             //flow
             _table[getId('='), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addFlowFromValue, StackValueTypeEnum.FLOW);
@@ -115,10 +119,13 @@ namespace MainNode.Logic.Compile
                 case '*': return 6;
                 case '/': return 6;
 
-                case '<': return 7;
-                case '>': return 8;
-                case '=': return 9;
-                case ' ': return 10;
+                case '&': return 7;
+                case '|': return 7;
+
+                case '<': return 8;
+                case '>': return 9;
+                case '=': return 10;
+                case ' ': return 11;
 
                 default:
                     throw new ApplicationException($"Invalid character {c}");
