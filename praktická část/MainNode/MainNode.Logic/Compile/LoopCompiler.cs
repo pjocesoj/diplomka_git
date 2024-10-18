@@ -37,7 +37,7 @@ namespace MainNode.Logic.Compile
         private void InitTable()
         {
             //char[] chars = { 'Ø', 'A', '0', '.', '(', ')', '+', '-', '*', '/', '<', '>', '=' };
-            string[] chars = { "Ø", "A-Z<br/>a-z", "0-9", ".", "(", ")", "+-*/","&\\|", "<", ">", "=", " " };
+            string[] chars = { "Ø", "A-Z<br/>a-z", "0-9", ".", "(", ")", "+-*/", "&\\|", "!", "<", ">", "=", " " };
 
             string[] states = { "Ø", "N", "E", "V", "+", "-", "*", "/", "<", ">", "=", ">=", "<=" };
             int numberOfstates = Enum.GetValues(typeof(LCStateEnum)).Length;
@@ -122,10 +122,12 @@ namespace MainNode.Logic.Compile
                 case '&': return 7;
                 case '|': return 7;
 
-                case '<': return 8;
-                case '>': return 9;
-                case '=': return 10;
-                case ' ': return 11;
+                case '!': return 8;
+
+                case '<': return 9;
+                case '>': return 10;
+                case '=': return 11;
+                case ' ': return 12;
 
                 default:
                     throw new ApplicationException($"Invalid character {c}");
@@ -312,7 +314,7 @@ namespace MainNode.Logic.Compile
                 var val = validateValue(c, state, pushType);
                 createOperation(val);
             }
-            else
+            else if (_stack.Peek().Type == StackValueTypeEnum.FLOW)
             {
                 var cacheF = PopValue(StackValueTypeEnum.FLOW);
                 var flow = _flowRepo.GetFlowByName(cacheF.Value.ToString());
