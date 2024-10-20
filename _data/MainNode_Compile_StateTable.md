@@ -1,5 +1,4 @@
-
-|-|NULL|NODE|ENDPOINT|VALUE|DOT_EP|DOT_VAL|OPERATOR|UNKNOWN|FLOW|SUBFLOW|
+|_____|NULL|NODE|ENDPOINT|VALUE|DOT_EP|DOT_VAL|OPERATOR|UNKNOWN|FLOW|SUBFLOW|
 |-|-|-|-|-|-|-|-|-|-|-|
 |Ø|-|-|-|VALUE|-|-|-|VALUE|-|-|
 |A-Z<br/>a-z|UNKNOWN|NODE|ENDPOINT|VALUE|ENDPOINT|VALUE|-|UNKNOWN|FLOW|-|
@@ -8,6 +7,8 @@
 |(|NULL|-|-|NULL|-|-|-|NULL|-|-|
 |)|-|-|-|UNKNOWN|-|-|-|UNKNOWN|-|-|
 |+-*/|-|-|-|NULL|-|-|-|NULL|-|-|
+|&\||-|-|-|NULL|-|-|-|NULL|-|-|
+|!|NULL|-|-|NULL|-|-|-|NULL|-|-|
 |<|-|-|-|-|-|-|-|-|-|-|
 |>|-|-|-|-|-|-|-|-|-|-|
 |=|-|-|-|NULL|-|-|-|NULL|NULL|-|

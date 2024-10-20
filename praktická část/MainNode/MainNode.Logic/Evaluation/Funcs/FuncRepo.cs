@@ -42,6 +42,24 @@ namespace MainNode.Logic.Evaluation.Funcs
             FunctionsT.Add((typeof(float), typeof(float), "*"), new Func<float, float, float>((a, b) => a * b));
             FunctionsT.Add((typeof(float), typeof(float), "/"), new Func<float, float, float>((a, b) => a / b));
             #endregion
+
+            #region &|
+            FunctionsT.Add((typeof(bool), typeof(bool), "+"), new Func<bool, bool, bool>((a, b) => a || b));
+            FunctionsT.Add((typeof(bool), typeof(bool), "*"), new Func<bool, bool, bool>((a, b) => a && b));
+
+            FunctionsT.Add((typeof(bool), typeof(bool), "|"), new Func<bool, bool, bool>((a, b) => a || b));
+            FunctionsT.Add((typeof(bool), typeof(bool), "&"), new Func<bool, bool, bool>((a, b) => a && b));
+            #endregion
+
+            #region !
+            //FunctionsT.Add((typeof(bool), typeof(bool), "!"), new Func<bool, bool, bool>((a, b) => !b));
+            //FunctionsT.Add((typeof(bool), typeof(bool), "-"), new Func<bool, bool, bool>((a, b) => !b));
+
+            //kvuli bugu musim doèasnì prohodit
+            FunctionsT.Add((typeof(bool), typeof(bool), "!"), new Func<bool, bool, bool>((a, b) => !a));
+            FunctionsT.Add((typeof(bool), typeof(bool), "-"), new Func<bool, bool, bool>((a, b) => !a));
+
+            #endregion
         }
 
         public Dictionary<(Type, Type, string), Delegate> FunctionsT = new Dictionary<(Type, Type, string), Delegate>();

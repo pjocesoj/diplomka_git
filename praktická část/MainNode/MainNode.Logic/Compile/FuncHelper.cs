@@ -144,7 +144,6 @@ namespace MainNode.Logic.Compile
             }
         }
         #endregion
-
         #region flow value
         private static void AddFuncion<T, U, V>(Delegate f, FlowResult<T> A, ValueDo<U> B, Flow<V> R) where T : struct where U : struct where V : struct
         {
