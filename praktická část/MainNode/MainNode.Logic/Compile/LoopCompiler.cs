@@ -80,6 +80,11 @@ namespace MainNode.Logic.Compile
             _table[getId('&'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addValue, StackValueTypeEnum.OPERATOR);
             _table[getId('&'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.OPERATOR);
 
+            //operation !
+            _table[getId('!'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
+            _table[getId('!'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
+            _table[getId('!'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
+
             //flow
             _table[getId('='), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addFlowFromValue, StackValueTypeEnum.FLOW);
             _table[getId('='), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.FLOW);
@@ -101,7 +106,7 @@ namespace MainNode.Logic.Compile
             _table[0, (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.VALUE, resolveUnknown, null);
 
             printTableMD(chars);
-          }
+        }
         private int getId(char c)
         {
             if (c >= 'a' && c <= 'z') { return 1; }
@@ -202,6 +207,17 @@ namespace MainNode.Logic.Compile
             }
             cache.Value.Append(c);
         }
+        private void AddNewPush(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            if (pushType == null)
+            {
+                throw new ApplicationException($" state:{state} char: {c} Push type is null");
+            }
+
+            var cache = new StackValue { Type = pushType.Value };
+            cache.Value.Append(c);
+            _stack.Push(cache);
+        }
         private void resolveUnknown(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
             var cache = _stack.Peek();
@@ -209,11 +225,11 @@ namespace MainNode.Logic.Compile
 
             if (cache.Type != StackValueTypeEnum.UNKNOWN)
             {
-            //end of stream
+                //end of stream
                 if (cache.Type == StackValueTypeEnum.FLOW)
-            {
-                return;
-            }
+                {
+                    return;
+                }
                 else
                 {
                     throw new ApplicationException($"Unexpected character {c} after {cache.Type}");
@@ -370,11 +386,13 @@ namespace MainNode.Logic.Compile
         }
 
         #region operation
-
         void operationdata(Type typeB, out Type typeA, out Flow flow, out Delegate f)
         {
             var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
-
+            operationdata(typeB, cacheO, out typeA, out flow, out f);
+        }
+        void operationdata(Type typeB, StackValue cacheO, out Type typeA, out Flow flow, out Delegate f)
+        {
             if (typeB == null)
             {
                 throw new ApplicationException($"cant get typeB");
@@ -397,24 +415,42 @@ namespace MainNode.Logic.Compile
         void createOperation(ValueDo value)
         {
             var typeB = value.getT();
-            operationdata(typeB, out Type typeA, out Flow flow, out Delegate f);
+            var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
+            if (_stack.Peek().Type == StackValueTypeEnum.OPERATOR)
+            {
+                var flow = createOperation(value, cacheO.Value.ToString());
+                createOperation(flow);
+            }
+            else
+            {
+                operationdata(typeB, cacheO, out Type typeA, out Flow flow, out Delegate f);
 
-            //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
-            var A = typeA.DefaultValue();
-            FuncHelper.AddFuncion(f, A, value, flow);
+                //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
+                var A = typeA.DefaultValue();
+                FuncHelper.AddFuncion(f, A, value, flow);
 
-            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+                _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+            }
         }
         void createOperation(FlowResult value)
         {
             var typeB = value.getT();
-            operationdata(typeB, out Type typeA, out Flow flow, out Delegate f);
+            var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
+            if (_stack.Peek().Type == StackValueTypeEnum.OPERATOR)
+            {
+                var flow = createOperation(value, cacheO.Value.ToString());
+                createOperation(flow);
+            }
+            else
+            {
+                operationdata(typeB, cacheO, out Type typeA, out Flow flow, out Delegate f);
 
-            //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
-            var A = typeA.DefaultValue();
-            FuncHelper.AddFuncion(f, A, value, flow);
+                //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
+                var A = typeA.DefaultValue();
+                FuncHelper.AddFuncion(f, A, value, flow);
 
-            _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+                _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+            }
         }
 
         void createOperation(FlowResult A, FlowResult B, string op)
@@ -464,6 +500,37 @@ namespace MainNode.Logic.Compile
             FuncHelper.AddFuncion(f, A, B, flow);
 
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+        }
+
+        FlowResult createOperation(ValueDo value, string op)
+        {
+            var typeB = value.getT();
+
+            var f = _funcRepo.GetFunction(typeB, typeB, op);
+            var typeR = f.GetType().GetGenericArguments().Last();
+            var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+
+            //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
+            var A = typeB.DefaultValue();
+            FuncHelper.AddFuncion(f, A, value, flow);
+
+            // _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+            return flow.GetResult();
+        }
+        FlowResult createOperation(FlowResult value, string op)
+        {
+            var typeB = value.getT();
+
+            var f = _funcRepo.GetFunction(typeB, typeB, op);
+            var typeR = f.GetType().GetGenericArguments().Last();
+            var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+
+            //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
+            var A = typeB.DefaultValue();
+            FuncHelper.AddFuncion(f, A, value, flow);
+
+            // _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
+            return flow.GetResult();
         }
         #endregion
 
