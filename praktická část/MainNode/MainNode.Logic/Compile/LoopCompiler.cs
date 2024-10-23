@@ -416,7 +416,7 @@ namespace MainNode.Logic.Compile
         {
             var typeB = value.getT();
             var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
-            if (_stack.Peek().Type == StackValueTypeEnum.OPERATOR)
+            if (_stack.Count > 0 && _stack.Peek().Type == StackValueTypeEnum.OPERATOR)
             {
                 var flow = createOperation(value, cacheO.Value.ToString());
                 createOperation(flow);
@@ -840,7 +840,7 @@ namespace MainNode.Logic.Compile
         {
             Flow<float> flowC = new Flow<float>("C", new List<Operation<float>>()
                 {
-                    new SubflowOperation<float,int>((FlowResult<int>)A,FuncFloatInt.Plus),
+                    new SubflowOperation<float,int>((FlowResult<int>)A,(float a,int b)=>{return a+b; }),
                     new SubflowOperation<float,float>((FlowResult<float>)B, FuncFloatFloat.Plus),
                 });
             var resC = new FlowResult<float>(flowC);

@@ -19,10 +19,10 @@ namespace MainNode.Logic.Evaluation
             Const = val;
             Func = func;
         }
-        public virtual T Execute(T b)
+        public virtual T Execute(T a)
         {
-            if (Ref != null) { return Func(Ref.Value, b); }
-            return Func(Const!, b);
+            if (Ref != null) { return Func(a,Ref.Value); }
+            return Func(a,Const!);
         }
     }
 }

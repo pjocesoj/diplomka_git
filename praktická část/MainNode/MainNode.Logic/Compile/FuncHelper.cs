@@ -61,7 +61,7 @@ namespace MainNode.Logic.Compile
             if (typeof(U) == typeof(V))
             {
                 var R_t = (Flow<T>)(object)R;
-                R_t.Operations.Add(new SubflowOperation<T, U>(B, (Func<U, T, T>)f));
+                R_t.Operations.Add(new SubflowOperation<T, U>(B, (Func<T, U, T>)f));
             }
             var func = (Func<T, U, V>)f;
         }
