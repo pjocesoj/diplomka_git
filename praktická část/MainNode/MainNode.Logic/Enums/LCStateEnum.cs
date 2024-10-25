@@ -11,6 +11,7 @@
         OPERATOR,
         UNKNOWN, //nemohu určit jestli je to node, subflow nebo true/false
         FLOW,
-        SUBFLOW
+        SUBFLOW,
+        EQUALS_SIGN
     }
 }
