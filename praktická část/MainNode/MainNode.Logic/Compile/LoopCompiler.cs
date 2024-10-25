@@ -85,9 +85,11 @@ namespace MainNode.Logic.Compile
             _table[getId('!'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
             _table[getId('!'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
 
-            //operation <
+            //operation < >
             _table[getId('<'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addValue, StackValueTypeEnum.COMPARE);
             _table[getId('<'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.COMPARE);
+            _table[getId('>'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addValue, StackValueTypeEnum.COMPARE);
+            _table[getId('>'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.COMPARE);
 
             //flow
             _table[getId('='), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addFlowFromValue, StackValueTypeEnum.FLOW);
