@@ -85,6 +85,10 @@ namespace MainNode.Logic.Compile
             _table[getId('!'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
             _table[getId('!'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
 
+            //operation <
+            _table[getId('<'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addValue, StackValueTypeEnum.COMPARE);
+            _table[getId('<'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.COMPARE);
+
             //flow
             _table[getId('='), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addFlowFromValue, StackValueTypeEnum.FLOW);
             _table[getId('='), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.FLOW);
@@ -532,6 +536,23 @@ namespace MainNode.Logic.Compile
             // _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
             return flow.GetResult();
         }
+
+        FlowResult GetFlow(StackValue cache)
+        {
+            if (cache.Type == StackValueTypeEnum.FLOW)
+            {
+                return (FlowResult)cache.CachedValue;
+            }
+            else if (cache.Type == StackValueTypeEnum.VALUE)
+            {
+                var val = validateValue(cache);
+                return createOperation(val, "0");
+            }
+            else
+            {
+                throw new ApplicationException($"Unexpected type {cache.Type}");
+            }
+        }
         #endregion
 
         void addInputOutput(char c)
@@ -602,11 +623,18 @@ namespace MainNode.Logic.Compile
             var cacheB = _stack.Pop();
             resolveUnknown(cacheB);
 
-            var op = PopValue(StackValueTypeEnum.OPERATOR);
+            //var op = PopValue(StackValueTypeEnum.OPERATOR);
+            var op = _stack.Pop();
             var cacheA = _stack.Pop();
             var start = PopValue(StackValueTypeEnum.SUBFLOW_START);
 
-            if (cacheB.Type == StackValueTypeEnum.FLOW)
+            if(op.Type == StackValueTypeEnum.COMPARE)
+            {
+                var A=GetFlow(cacheA);
+                var B=GetFlow(cacheB);
+                createOperation(A, B, op.Value.ToString());
+            }
+            else if (cacheB.Type == StackValueTypeEnum.FLOW)
             {
                 //var B = _flowRepo.GetFlowByName(cacheB.Value.ToString());
                 var B = (FlowResult)cacheB.CachedValue;
