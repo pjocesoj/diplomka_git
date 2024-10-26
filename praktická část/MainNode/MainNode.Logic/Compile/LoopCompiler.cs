@@ -47,6 +47,7 @@ namespace MainNode.Logic.Compile
             //nemohu určit jestli je to node, subflow nebo true/false
             _table[getId('a'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.UNKNOWN, AddChar, StackValueTypeEnum.UNKNOWN);
             _table[getId('a'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, AddChar, StackValueTypeEnum.UNKNOWN);
+            _table[getId('a'), (int)LCStateEnum.OPERATOR] = new TransitionFunc(LCStateEnum.UNKNOWN, AddChar, StackValueTypeEnum.UNKNOWN);
             _table[getId('0'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, AddChar, StackValueTypeEnum.UNKNOWN);
 
             //node
@@ -71,6 +72,7 @@ namespace MainNode.Logic.Compile
             _table[getId('0'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
             _table[getId('.'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);//float
             _table[getId('0'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
+            _table[getId('0'), (int)LCStateEnum.OPERATOR] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
 
             //operation +-*/
             _table[getId('+'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addValue, StackValueTypeEnum.OPERATOR);
@@ -81,17 +83,34 @@ namespace MainNode.Logic.Compile
             _table[getId('&'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.OPERATOR);
 
             //operation !
-            _table[getId('!'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
-            _table[getId('!'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
-            _table[getId('!'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
+            _table[getId('!'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.OPERATOR, AddNewPush, StackValueTypeEnum.OPERATOR);
+            _table[getId('!'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.OPERATOR, AddNewPush, StackValueTypeEnum.OPERATOR);
+            _table[getId('!'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.OPERATOR, AddNewPush, StackValueTypeEnum.OPERATOR);
+            _table[getId('!'), (int)LCStateEnum.EQUALS_SIGN] = new TransitionFunc(LCStateEnum.OPERATOR, assign, StackValueTypeEnum.OPERATOR);
+
+            //operation < >
+            _table[getId('<'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.OPERATOR, addValue, StackValueTypeEnum.COMPARE);
+            _table[getId('<'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.OPERATOR, resolveUnknown, StackValueTypeEnum.COMPARE);
+            _table[getId('>'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.OPERATOR, addValue, StackValueTypeEnum.COMPARE);
+            _table[getId('>'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.OPERATOR, resolveUnknown, StackValueTypeEnum.COMPARE);
+
+            //=
+            _table[getId('='), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.EQUALS_SIGN, AddNewPush, StackValueTypeEnum.VALUE);
+            _table[getId('='), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.EQUALS_SIGN, AddNewPush, StackValueTypeEnum.FLOW);
+            _table[getId('='), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.EQUALS_SIGN, AddNewPush, StackValueTypeEnum.UNKNOWN);
+            _table[getId('='), (int)LCStateEnum.EQUALS_SIGN] = new TransitionFunc(LCStateEnum.NULL, changeToEqual, StackValueTypeEnum.COMPARE);
+            _table[getId('='), (int)LCStateEnum.OPERATOR] = new TransitionFunc(LCStateEnum.NULL, changeToEqual, StackValueTypeEnum.COMPARE);
+            _table[getId('0'), (int)LCStateEnum.EQUALS_SIGN] = new TransitionFunc(LCStateEnum.VALUE, assign, StackValueTypeEnum.VALUE);
+            _table[getId('a'), (int)LCStateEnum.EQUALS_SIGN] = new TransitionFunc(LCStateEnum.UNKNOWN, assign, StackValueTypeEnum.UNKNOWN);
+            _table[getId('('), (int)LCStateEnum.EQUALS_SIGN] = new TransitionFunc(LCStateEnum.NULL, assign, StackValueTypeEnum.FLOW);
 
             //flow
-            _table[getId('='), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addFlowFromValue, StackValueTypeEnum.FLOW);
-            _table[getId('='), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.FLOW);
+            //_table[getId('='), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addFlowFromValue, StackValueTypeEnum.FLOW);
+            //_table[getId('='), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.NULL, addFlowFromName, StackValueTypeEnum.FLOW);
+            //_table[getId('='), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.FLOW);
             _table[getId(' '), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.FLOW, resolveUnknown, StackValueTypeEnum.FLOW);
             _table[getId('a'), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.FLOW, AddChar, StackValueTypeEnum.FLOW);
             _table[getId('0'), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.FLOW, AddChar, StackValueTypeEnum.FLOW);
-            _table[getId('='), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.NULL, addFlowFromName, StackValueTypeEnum.FLOW);
 
             //subflow
             _table[getId('('), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, subflowStart, StackValueTypeEnum.FLOW);
@@ -217,6 +236,36 @@ namespace MainNode.Logic.Compile
             var cache = new StackValue { Type = pushType.Value };
             cache.Value.Append(c);
             _stack.Push(cache);
+        }
+        private void assign(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            var eq = _stack.Pop();
+            switch (eq.Type)
+            {
+                case StackValueTypeEnum.VALUE:
+                    addFlowFromValue(c, state, pushType);
+                    break;
+                case StackValueTypeEnum.FLOW:
+                    addFlowFromName(c, state, pushType);
+                    break;
+                case StackValueTypeEnum.UNKNOWN:
+                    resolveUnknown(c, state, pushType);
+                    break;
+                default:
+                    throw new ApplicationException($"Unexpected type {eq.Type}");
+            }
+            if (c=='(')
+            {
+                subflowStart(c, state, pushType);
+                return;
+            }
+            AddNewPush(c, state, pushType);
+        }
+        private void changeToEqual(char c, LCStateEnum state, StackValueTypeEnum? pushType)
+        {
+            var cache = _stack.Peek();
+            cache.Type = StackValueTypeEnum.COMPARE;
+            cache.Value.Append(c);
         }
         private void resolveUnknown(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
@@ -532,6 +581,23 @@ namespace MainNode.Logic.Compile
             // _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
             return flow.GetResult();
         }
+
+        FlowResult GetFlow(StackValue cache)
+        {
+            if (cache.Type == StackValueTypeEnum.FLOW)
+            {
+                return (FlowResult)cache.CachedValue;
+            }
+            else if (cache.Type == StackValueTypeEnum.VALUE)
+            {
+                var val = validateValue(cache);
+                return createOperation(val, "0");
+            }
+            else
+            {
+                throw new ApplicationException($"Unexpected type {cache.Type}");
+            }
+        }
         #endregion
 
         void addInputOutput(char c)
@@ -602,11 +668,18 @@ namespace MainNode.Logic.Compile
             var cacheB = _stack.Pop();
             resolveUnknown(cacheB);
 
-            var op = PopValue(StackValueTypeEnum.OPERATOR);
+            //var op = PopValue(StackValueTypeEnum.OPERATOR);
+            var op = _stack.Pop();
             var cacheA = _stack.Pop();
             var start = PopValue(StackValueTypeEnum.SUBFLOW_START);
 
-            if (cacheB.Type == StackValueTypeEnum.FLOW)
+            if (op.Type == StackValueTypeEnum.COMPARE)
+            {
+                var A = GetFlow(cacheA);
+                var B = GetFlow(cacheB);
+                createOperation(A, B, op.Value.ToString());
+            }
+            else if (cacheB.Type == StackValueTypeEnum.FLOW)
             {
                 //var B = _flowRepo.GetFlowByName(cacheB.Value.ToString());
                 var B = (FlowResult)cacheB.CachedValue;
