@@ -47,6 +47,7 @@ namespace MainNode.Logic.Compile
             //nemohu určit jestli je to node, subflow nebo true/false
             _table[getId('a'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.UNKNOWN, AddChar, StackValueTypeEnum.UNKNOWN);
             _table[getId('a'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, AddChar, StackValueTypeEnum.UNKNOWN);
+            _table[getId('a'), (int)LCStateEnum.OPERATOR] = new TransitionFunc(LCStateEnum.UNKNOWN, AddChar, StackValueTypeEnum.UNKNOWN);
             _table[getId('0'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.UNKNOWN, AddChar, StackValueTypeEnum.UNKNOWN);
 
             //node
@@ -71,6 +72,7 @@ namespace MainNode.Logic.Compile
             _table[getId('0'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
             _table[getId('.'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);//float
             _table[getId('0'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
+            _table[getId('0'), (int)LCStateEnum.OPERATOR] = new TransitionFunc(LCStateEnum.VALUE, AddChar, StackValueTypeEnum.VALUE);
 
             //operation +-*/
             _table[getId('+'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addValue, StackValueTypeEnum.OPERATOR);
@@ -81,21 +83,22 @@ namespace MainNode.Logic.Compile
             _table[getId('&'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.OPERATOR);
 
             //operation !
-            _table[getId('!'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
-            _table[getId('!'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
-            _table[getId('!'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.NULL, AddNewPush, StackValueTypeEnum.OPERATOR);
+            _table[getId('!'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.OPERATOR, AddNewPush, StackValueTypeEnum.OPERATOR);
+            _table[getId('!'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.OPERATOR, AddNewPush, StackValueTypeEnum.OPERATOR);
+            _table[getId('!'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.OPERATOR, AddNewPush, StackValueTypeEnum.OPERATOR);
 
             //operation < >
-            _table[getId('<'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addValue, StackValueTypeEnum.COMPARE);
-            _table[getId('<'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.COMPARE);
-            _table[getId('>'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.NULL, addValue, StackValueTypeEnum.COMPARE);
-            _table[getId('>'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.NULL, resolveUnknown, StackValueTypeEnum.COMPARE);
+            _table[getId('<'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.OPERATOR, addValue, StackValueTypeEnum.COMPARE);
+            _table[getId('<'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.OPERATOR, resolveUnknown, StackValueTypeEnum.COMPARE);
+            _table[getId('>'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.OPERATOR, addValue, StackValueTypeEnum.COMPARE);
+            _table[getId('>'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.OPERATOR, resolveUnknown, StackValueTypeEnum.COMPARE);
 
             //=
             _table[getId('='), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.EQUALS_SIGN, AddNewPush, StackValueTypeEnum.VALUE);
             _table[getId('='), (int)LCStateEnum.FLOW] = new TransitionFunc(LCStateEnum.EQUALS_SIGN, AddNewPush, StackValueTypeEnum.FLOW);
             _table[getId('='), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.EQUALS_SIGN, AddNewPush, StackValueTypeEnum.UNKNOWN);
             _table[getId('='), (int)LCStateEnum.EQUALS_SIGN] = new TransitionFunc(LCStateEnum.NULL, changeToEqual, StackValueTypeEnum.COMPARE);
+            _table[getId('='), (int)LCStateEnum.OPERATOR] = new TransitionFunc(LCStateEnum.NULL, changeToEqual, StackValueTypeEnum.COMPARE);
             _table[getId('0'), (int)LCStateEnum.EQUALS_SIGN] = new TransitionFunc(LCStateEnum.VALUE, assign, StackValueTypeEnum.VALUE);
             _table[getId('a'), (int)LCStateEnum.EQUALS_SIGN] = new TransitionFunc(LCStateEnum.UNKNOWN, assign, StackValueTypeEnum.UNKNOWN);
             _table[getId('('), (int)LCStateEnum.EQUALS_SIGN] = new TransitionFunc(LCStateEnum.NULL, assign, StackValueTypeEnum.FLOW);

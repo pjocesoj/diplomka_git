@@ -61,7 +61,7 @@ namespace MainNode.Logic.Evaluation.Funcs
 
             #endregion
 
-            #region < >
+            #region < > == >= <= !=
             FunctionsT.Add((typeof(int), typeof(int), "<"), new Func<int, int, bool>((a, b) => a<b));
             FunctionsT.Add((typeof(int), typeof(float), "<"), new Func<int, float, bool>((a, b) => a<b));
             FunctionsT.Add((typeof(float), typeof(int), "<"), new Func<float, int, bool>((a, b) => a<b));
@@ -76,6 +76,21 @@ namespace MainNode.Logic.Evaluation.Funcs
             FunctionsT.Add((typeof(int), typeof(float), "=="), new Func<int, float, bool>((a, b) => a == b));
             FunctionsT.Add((typeof(float), typeof(int), "=="), new Func<float, int, bool>((a, b) => a == b));
             FunctionsT.Add((typeof(float), typeof(float), "=="), new Func<float, float, bool>((a, b) => a == b));
+
+            FunctionsT.Add((typeof(int), typeof(int), ">="), new Func<int, int, bool>((a, b) => a >= b));
+            FunctionsT.Add((typeof(int), typeof(float), ">="), new Func<int, float, bool>((a, b) => a >= b));
+            FunctionsT.Add((typeof(float), typeof(int), ">="), new Func<float, int, bool>((a, b) => a >= b));
+            FunctionsT.Add((typeof(float), typeof(float), ">="), new Func<float, float, bool>((a, b) => a >= b));
+
+            FunctionsT.Add((typeof(int), typeof(int), "<="), new Func<int, int, bool>((a, b) => a <= b));
+            FunctionsT.Add((typeof(int), typeof(float), "<="), new Func<int, float, bool>((a, b) => a <= b));
+            FunctionsT.Add((typeof(float), typeof(int), "<="), new Func<float, int, bool>((a, b) => a <= b));
+            FunctionsT.Add((typeof(float), typeof(float), "<="), new Func<float, float, bool>((a, b) => a <= b));
+
+            FunctionsT.Add((typeof(int), typeof(int), "!="), new Func<int, int, bool>((a, b) => a != b));
+            FunctionsT.Add((typeof(int), typeof(float), "!="), new Func<int, float, bool>((a, b) => a != b));
+            FunctionsT.Add((typeof(float), typeof(int), "!="), new Func<float, int, bool>((a, b) => a != b));
+            FunctionsT.Add((typeof(float), typeof(float), "!="), new Func<float, float, bool>((a, b) => a != b));
             #endregion
         }
 
