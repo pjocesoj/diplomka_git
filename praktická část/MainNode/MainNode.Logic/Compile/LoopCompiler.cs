@@ -86,6 +86,7 @@ namespace MainNode.Logic.Compile
             _table[getId('!'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.OPERATOR, AddNewPush, StackValueTypeEnum.OPERATOR);
             _table[getId('!'), (int)LCStateEnum.UNKNOWN] = new TransitionFunc(LCStateEnum.OPERATOR, AddNewPush, StackValueTypeEnum.OPERATOR);
             _table[getId('!'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.OPERATOR, AddNewPush, StackValueTypeEnum.OPERATOR);
+            _table[getId('!'), (int)LCStateEnum.EQUALS_SIGN] = new TransitionFunc(LCStateEnum.OPERATOR, assign, StackValueTypeEnum.OPERATOR);
 
             //operation < >
             _table[getId('<'), (int)LCStateEnum.VALUE] = new TransitionFunc(LCStateEnum.OPERATOR, addValue, StackValueTypeEnum.COMPARE);

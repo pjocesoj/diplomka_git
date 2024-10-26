@@ -1,15 +1,15 @@
-|_____|NULL|NODE|ENDPOINT|VALUE|DOT_EP|DOT_VAL|OPERATOR|UNKNOWN|FLOW|SUBFLOW|
-|-|-|-|-|-|-|-|-|-|-|-|
-|Ø|-|-|-|VALUE|-|-|-|VALUE|-|-|
-|A-Z<br/>a-z|UNKNOWN|NODE|ENDPOINT|VALUE|ENDPOINT|VALUE|-|UNKNOWN|FLOW|-|
-|0-9|VALUE|NODE|ENDPOINT|VALUE|ENDPOINT|VALUE|-|UNKNOWN|FLOW|-|
-|.|-|DOT_EP|DOT_VAL|VALUE|-|-|-|DOT_EP|-|-|
-|(|NULL|-|-|NULL|-|-|-|NULL|-|-|
-|)|-|-|-|UNKNOWN|-|-|-|UNKNOWN|-|-|
-|+-*/|-|-|-|NULL|-|-|-|NULL|-|-|
-|&\||-|-|-|NULL|-|-|-|NULL|-|-|
-|!|NULL|-|-|NULL|-|-|-|NULL|-|-|
-|<|-|-|-|-|-|-|-|-|-|-|
-|>|-|-|-|-|-|-|-|-|-|-|
-|=|-|-|-|NULL|-|-|-|NULL|NULL|-|
-| |-|-|-|-|-|-|-|FLOW|-|-|
+|_____|NULL|NODE|ENDPOINT|VALUE|DOT_EP|DOT_VAL|OPERATOR|UNKNOWN|FLOW|SUBFLOW|EQUALS_SIGN|
+|-|-|-|-|-|-|-|-|-|-|-|-|
+|Ø|-|-|-|VALUE|-|-|-|VALUE|-|-|-|
+|A-Z<br/>a-z|UNKNOWN|NODE|ENDPOINT|VALUE|ENDPOINT|VALUE|UNKNOWN|UNKNOWN|FLOW|-|UNKNOWN|
+|0-9|VALUE|NODE|ENDPOINT|VALUE|ENDPOINT|VALUE|VALUE|UNKNOWN|FLOW|-|VALUE|
+|.|-|DOT_EP|DOT_VAL|VALUE|-|-|-|DOT_EP|-|-|-|
+|(|NULL|-|-|NULL|-|-|-|NULL|-|-|NULL|
+|)|-|-|-|UNKNOWN|-|-|-|UNKNOWN|-|-|-|
+|+-*/|-|-|-|NULL|-|-|-|NULL|-|-|-|
+|&\||-|-|-|NULL|-|-|-|NULL|-|-|-|
+|!|OPERATOR|-|-|OPERATOR|-|-|-|OPERATOR|-|-|OPERATOR|
+|<|-|-|-|OPERATOR|-|-|-|OPERATOR|-|-|-|
+|>|-|-|-|OPERATOR|-|-|-|OPERATOR|-|-|-|
+|=|-|-|-|EQUALS_SIGN|-|-|NULL|EQUALS_SIGN|EQUALS_SIGN|-|NULL|
+| |-|-|-|-|-|-|-|FLOW|-|-|-|
