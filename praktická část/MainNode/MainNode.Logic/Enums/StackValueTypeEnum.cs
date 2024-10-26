@@ -10,6 +10,7 @@
         FLOW,
         TYPE,
         SUBFLOW_START,
-        EP_VARIABLE
+        EP_VARIABLE,
+        COMPARE
     }
 }
