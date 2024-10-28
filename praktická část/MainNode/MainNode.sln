@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainNode.Communication", "M
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{74A2CF8C-3056-415D-A8EA-FF4C7D77D8B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainNode.Logic.Test", "MainNode.Logic.Test\MainNode.Logic.Test.csproj", "{BAABB5BB-7B21-466F-840B-3B1B1FE6E433}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainNode.Logic.Test", "Tests\MainNode.Logic.Test\MainNode.Logic.Test.csproj", "{547F9190-B46F-4E40-A106-43033B4A34CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,16 +37,16 @@ Global
 		{593E4577-36B8-410D-8CB5-9E90F844477F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{593E4577-36B8-410D-8CB5-9E90F844477F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{593E4577-36B8-410D-8CB5-9E90F844477F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAABB5BB-7B21-466F-840B-3B1B1FE6E433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAABB5BB-7B21-466F-840B-3B1B1FE6E433}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAABB5BB-7B21-466F-840B-3B1B1FE6E433}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAABB5BB-7B21-466F-840B-3B1B1FE6E433}.Release|Any CPU.Build.0 = Release|Any CPU
+		{547F9190-B46F-4E40-A106-43033B4A34CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{547F9190-B46F-4E40-A106-43033B4A34CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{547F9190-B46F-4E40-A106-43033B4A34CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{547F9190-B46F-4E40-A106-43033B4A34CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BAABB5BB-7B21-466F-840B-3B1B1FE6E433} = {74A2CF8C-3056-415D-A8EA-FF4C7D77D8B4}
+		{547F9190-B46F-4E40-A106-43033B4A34CC} = {74A2CF8C-3056-415D-A8EA-FF4C7D77D8B4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {930B1D6C-4A0E-4AF1-96C8-B9264AE7C55D}

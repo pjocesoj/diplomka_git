@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MainNode.Logic\MainNode.Logic.csproj" />
+    <ProjectReference Include="..\..\MainNode.Logic\MainNode.Logic.csproj" />
   </ItemGroup>
 
   <ItemGroup>
