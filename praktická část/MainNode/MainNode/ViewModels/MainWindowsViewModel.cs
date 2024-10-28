@@ -23,6 +23,41 @@ namespace MainNode.ViewModels
             _loopCompiler = loopCompiler;
 
             _loopExecutor.LoopFinished += _loopExecutor_LoopFinished;
+
+            /*
+            var n = loopCompiler.TestNode();
+            _nodeRepo.Nodes.Add(n);
+            
+            _loopCompiler.Compile("int C=A+1");
+            _loopCompiler.Compile("int D=(C+A)");
+            _loopCompiler.Compile("int D1=(1+A)");
+            _loopCompiler.Compile("int D2=(C+1)");
+            _loopCompiler.Compile("int D3=(1+2)");
+
+            _loopCompiler.Compile("node0.setValues.a=node0.getValuesG.a+2");
+            _loopCompiler.Compile("float C=node0.getValuesG.a+2.0");
+            _loopCompiler.Compile("int D4=node0.getValuesG.a+2");
+
+            _loopCompiler.Compile("bool E1=true|false");
+            _loopCompiler.Compile("bool E2=true+false");
+            _loopCompiler.Compile("bool E3=true&false");
+            _loopCompiler.Compile("bool E4=true*false");
+
+            _loopCompiler.Compile("bool E5=true|!false");
+            _loopCompiler.Compile("bool E=true");
+            _loopCompiler.Compile("bool E6=true|!node0.getValuesG.c");
+            _loopCompiler.Compile("bool E7=true|!E");
+            _loopCompiler.Compile("bool E8=!E");
+
+            _loopCompiler.Compile("bool L=(1<2)");
+            _loopCompiler.Compile("bool G=(2>1)");
+
+            _loopCompiler.Compile("bool E=(2==2)");
+
+            _loopCompiler.Compile("bool NE=(2!=2)");
+            _loopCompiler.Compile("bool GE=(2>=2)");
+            _loopCompiler.Compile("bool LE=(2==2)");
+            */
         }
 
         #region nodes
