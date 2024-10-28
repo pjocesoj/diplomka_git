@@ -38,11 +38,6 @@ namespace MainNode.ViewModels
             _loopCompiler.Compile("float C=node0.getValuesG.a+2.0");
             _loopCompiler.Compile("int D4=node0.getValuesG.a+2");
 
-            _loopCompiler.Compile("bool E1=true|false");
-            _loopCompiler.Compile("bool E2=true+false");
-            _loopCompiler.Compile("bool E3=true&false");
-            _loopCompiler.Compile("bool E4=true*false");
-
             _loopCompiler.Compile("bool E5=true|!false");
             _loopCompiler.Compile("bool E=true");
             _loopCompiler.Compile("bool E6=true|!node0.getValuesG.c");
