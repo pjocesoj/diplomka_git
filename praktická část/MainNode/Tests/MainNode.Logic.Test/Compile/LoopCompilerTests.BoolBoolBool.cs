@@ -6,7 +6,7 @@ namespace MainNode.Logic.Test.Compile;
 
 public partial class LoopCompilerTests
 {
-
+    #region or
     [TestMethod]
     public void BBB_Plus_FalseTrue()
     {
@@ -45,7 +45,9 @@ public partial class LoopCompilerTests
         var A4 = (_flowRepo.Results.Find(x => x.Name == "A4").Value as ValueDo<bool>).Value;
         Assert.AreEqual(true, A4);
     }
+    #endregion
 
+    #region and
     [TestMethod]
     public void BBB_Multiply_FalseFalse()
     {
@@ -81,4 +83,84 @@ public partial class LoopCompilerTests
         var B4 = (_flowRepo.Results.Find(x => x.Name == "B4").Value as ValueDo<bool>).Value;
         Assert.AreEqual(false, B4);
     }
+    #endregion
+
+    #region not
+    [TestMethod]
+    public void B_Not_True()
+    {
+        _loopCompiler.Compile("bool C1=!true");
+        var C1 = (_flowRepo.Results.Find(x => x.Name == "C1").Value as ValueDo<bool>).Value;
+        Assert.AreEqual(false, C1);
+    }
+    [TestMethod]
+    public void B_Not_False()
+    {
+        _loopCompiler.Compile("bool C2=!false");
+        var C2 = (_flowRepo.Results.Find(x => x.Name == "C2").Value as ValueDo<bool>).Value;
+        Assert.AreEqual(true, C2);
+    }
+    #endregion
+
+    #region or not
+    [TestMethod]
+    public void BBB_OrNot_TrueFalse()
+    {
+        _loopCompiler.Compile("bool D1=true|!false");
+        var D1 = (_flowRepo.Results.Find(x => x.Name == "D1").Value as ValueDo<bool>).Value;
+        Assert.AreEqual(true, D1);
+    }
+    [TestMethod]
+    public void BBB_OrNot_FalseTrue()
+    {
+        _loopCompiler.Compile("bool D2=false|!true");
+        var D2 = (_flowRepo.Results.Find(x => x.Name == "D2").Value as ValueDo<bool>).Value;
+        Assert.AreEqual(false, D2);
+    }
+    [TestMethod]
+    public void BBB_OrNot_FalseFalse()
+    {
+        _loopCompiler.Compile("bool D3=false|!false");
+        var D3 = (_flowRepo.Results.Find(x => x.Name == "D3").Value as ValueDo<bool>).Value;
+        Assert.AreEqual(true, D3);
+    }
+    [TestMethod]
+    public void BBB_OrNot_TrueTrue()
+    {
+        _loopCompiler.Compile("bool D4=true|!true");
+        var D4 = (_flowRepo.Results.Find(x => x.Name == "D4").Value as ValueDo<bool>).Value;
+        Assert.AreEqual(true, D4);
+    }
+    #endregion
+
+    #region and not
+    [TestMethod]
+    public void BBB_AndNot_TrueFalse()
+    {
+        _loopCompiler.Compile("bool E1=true&!false");
+        var E1 = (_flowRepo.Results.Find(x => x.Name == "E1").Value as ValueDo<bool>).Value;
+        Assert.AreEqual(true, E1);
+    }
+    [TestMethod]
+    public void BBB_AndNot_FalseTrue()
+    {
+        _loopCompiler.Compile("bool E2=false&!true");
+        var E2 = (_flowRepo.Results.Find(x => x.Name == "E2").Value as ValueDo<bool>).Value;
+        Assert.AreEqual(false, E2);
+    }
+    [TestMethod]
+    public void BBB_AndNot_FalseFalse()
+    {
+        _loopCompiler.Compile("bool E3=false&!false");
+        var E3 = (_flowRepo.Results.Find(x => x.Name == "E3").Value as ValueDo<bool>).Value;
+        Assert.AreEqual(false, E3);
+    }
+    [TestMethod]
+    public void BBB_AndNot_TrueTrue()
+    {
+        _loopCompiler.Compile("bool E4=true&!true");
+        var E4 = (_flowRepo.Results.Find(x => x.Name == "E4").Value as ValueDo<bool>).Value;
+        Assert.AreEqual(false, E4);
+    }
+    #endregion
 }
