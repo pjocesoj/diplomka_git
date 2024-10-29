@@ -1,6 +1,4 @@
-﻿using MainNode.Logic.Compile;
-using MainNode.Logic.Do;
-using MainNode.Logic.Evaluation.Funcs;
+﻿using MainNode.Logic.Do;
 
 namespace MainNode.Logic.Test.Compile;
 

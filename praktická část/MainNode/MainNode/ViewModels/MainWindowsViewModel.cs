@@ -39,15 +39,6 @@ namespace MainNode.ViewModels
             _loopCompiler.Compile("int D4=node0.getValuesG.a+2");
 
             _loopCompiler.Compile("bool E6=true|!node0.getValuesG.c");
-
-            _loopCompiler.Compile("bool L=(1<2)");
-            _loopCompiler.Compile("bool G=(2>1)");
-
-            _loopCompiler.Compile("bool E=(2==2)");
-
-            _loopCompiler.Compile("bool NE=(2!=2)");
-            _loopCompiler.Compile("bool GE=(2>=2)");
-            _loopCompiler.Compile("bool LE=(2==2)");
             */
         }
 
