@@ -446,7 +446,7 @@ namespace MainNode.Logic.Compile
             {
                 throw new ApplicationException($"cant get typeB");
             }
-            typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
+            //typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
 
             try
             {
@@ -458,6 +458,7 @@ namespace MainNode.Logic.Compile
                 flow = Flow.Create(typeB, $"<flow{_flowRepo.Results.Count}>");
             }
 
+            typeA = flow.getT();
             f = _funcRepo.GetFunction(typeA, typeB, cacheO.Value.ToString());
         }
 
