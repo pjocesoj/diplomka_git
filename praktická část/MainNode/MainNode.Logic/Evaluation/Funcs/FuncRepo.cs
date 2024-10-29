@@ -13,8 +13,8 @@ namespace MainNode.Logic.Evaluation.Funcs
             FunctionsT.Add((typeof(bool), typeof(bool), "0"), new Func<bool, bool, bool>((a, b) => b));
 
 
-            FunctionsT.Add((typeof(float), typeof(int), "0"), new Func<float, int, float>((a, b) => a));
-            FunctionsT.Add((typeof(int), typeof(float), "0"), new Func<int, float, int>((a, b) => a));
+            FunctionsT.Add((typeof(float), typeof(int), "0"), new Func<float, int, float>((a, b) => b));
+            FunctionsT.Add((typeof(int), typeof(float), "0"), new Func<int, float, int>((a, b) => (int)b));
             #endregion
 
             #region + - * /
