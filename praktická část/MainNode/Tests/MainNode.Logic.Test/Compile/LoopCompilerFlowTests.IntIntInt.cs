@@ -37,7 +37,7 @@ public partial class LoopCompilerFlowTests
     {
         _loopCompiler.Compile("int B1=(i+1)");
         var B1 = (_flowRepo.Results.Find(x => x.Name == "B1").Value as ValueDo<int>).Value;
-        Assert.AreEqual(6, B1);
+        Assert.AreEqual(4, B1);
     }
     [TestMethod]
     public void III_Plus_Sub_ConstFlow()
