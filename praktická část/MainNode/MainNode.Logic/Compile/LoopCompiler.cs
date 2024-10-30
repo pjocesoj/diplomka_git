@@ -503,6 +503,7 @@ namespace MainNode.Logic.Compile
             }
         }
 
+        #region subflow
         void createOperation(FlowResult A, FlowResult B, string op)
         {
             var typeA = A.getT();
@@ -520,9 +521,11 @@ namespace MainNode.Logic.Compile
             var typeA = A.getT();
             var typeB = B.getT();
 
+            var f0 = _funcRepo.GetFunction(typeA, typeA, "0");
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
             var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+            FuncHelper.AddFuncion(f0, A, A, flow);
             FuncHelper.AddFuncion(f, A, B, flow);
 
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
@@ -532,9 +535,12 @@ namespace MainNode.Logic.Compile
             var typeA = A.getT();
             var typeB = B.getT();
 
+            var help = typeA.DefaultValue();
+            var f0 = _funcRepo.GetFunction(typeA, typeA, "0");
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
             var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+            FuncHelper.AddFuncion(f0, help, A, flow);
             FuncHelper.AddFuncion(f, A, B, flow);
 
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
@@ -544,14 +550,16 @@ namespace MainNode.Logic.Compile
             var typeA = A.getT();
             var typeB = B.getT();
 
+            var f0 = _funcRepo.GetFunction(typeA, typeA, "0");
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
             var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+            FuncHelper.AddFuncion(f0, A, A, flow);
             FuncHelper.AddFuncion(f, A, B, flow);
 
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
         }
-
+        #endregion
         FlowResult createOperation(ValueDo value, string op)
         {
             var typeB = value.getT();
