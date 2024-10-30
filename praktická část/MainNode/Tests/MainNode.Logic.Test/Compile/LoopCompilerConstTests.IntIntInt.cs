@@ -2,18 +2,17 @@
 
 namespace MainNode.Logic.Test.Compile;
 
-[TestClass]
-public partial class LoopCompilerTests
+public partial class LoopCompilerConstTests
 {
     [TestMethod]
     public void III_Plus()
-    {            
+    {
         // Arrange
-        _loopCompiler.Compile("int A=1+2");
+        _loopCompiler.Compile("int A1=1+1");
         // Act
-        var A = (_flowRepo.Results.Find(x => x.Name == "A").Value as ValueDo<int>).Value;
+        var A1 = (_flowRepo.Results.Find(x => x.Name == "A1").Value as ValueDo<int>).Value;
         // Assert
-        Assert.AreEqual(3, A);
+        Assert.AreEqual(2, A1);
     }
     [TestMethod]
     public void III_Minus()

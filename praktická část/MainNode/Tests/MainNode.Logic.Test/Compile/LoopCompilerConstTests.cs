@@ -4,7 +4,8 @@ using MainNode.Logic.Evaluation.Funcs;
 
 namespace MainNode.Logic.Test.Compile;
 
-public partial class LoopCompilerTests
+[TestClass]
+public partial class LoopCompilerConstTests
 {
     private LoopCompiler _loopCompiler;
     private FlowRepository _flowRepo;

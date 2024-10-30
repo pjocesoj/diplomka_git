@@ -2,7 +2,7 @@
 
 namespace MainNode.Logic.Test.Compile
 {
-    public partial class LoopCompilerTests
+    public partial class LoopCompilerConstTests
     {
         [TestMethod]
         public void COMP_L_True()
