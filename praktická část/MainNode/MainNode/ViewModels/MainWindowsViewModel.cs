@@ -26,13 +26,7 @@ namespace MainNode.ViewModels
 
             /*
             var n = loopCompiler.TestNode();
-            _nodeRepo.Nodes.Add(n);
-            
-            _loopCompiler.Compile("int C=A+1");
-            _loopCompiler.Compile("int D=(C+A)");
-            _loopCompiler.Compile("int D1=(1+A)");
-            _loopCompiler.Compile("int D2=(C+1)");
-            _loopCompiler.Compile("int D3=(1+2)");
+            _nodeRepo.Nodes.Add(n);            
 
             _loopCompiler.Compile("node0.setValues.a=node0.getValuesG.a+2");
             _loopCompiler.Compile("float C=node0.getValuesG.a+2.0");
