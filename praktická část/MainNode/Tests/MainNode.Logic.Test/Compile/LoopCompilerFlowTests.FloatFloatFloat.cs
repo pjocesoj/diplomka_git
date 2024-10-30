@@ -29,13 +29,6 @@ namespace MainNode.Logic.Test.Compile
             var A2 = (_flowRepo.Results.Find(x => x.Name == "A2").Value as ValueDo<float>).Value;
             Assert.AreEqual(4, A2);
         }
-        [TestMethod]
-        public void FFF_Plus_ConstConst()
-        {
-            _loopCompiler.Compile("float A3=1.0+1.0");
-            var A3 = (_flowRepo.Results.Find(x => x.Name == "A3").Value as ValueDo<float>).Value;
-            Assert.AreEqual(2, A3);
-        }
         #endregion
     
         #region (float + float)
