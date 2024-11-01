@@ -878,59 +878,6 @@ namespace MainNode.Logic.Compile
             saveFlow(' ', state, null);
         }
 
-        #region test
-        public void test()
-        {
-            var a = new ValueDo<int>("a", 1);
-
-            var A = addA(a);
-            var B = addB();
-            var C = addC(A, B);
-
-            var res = C.Value;
-
-            _flowRepo.Run();
-            a.Value = 4;
-            _flowRepo.Run();
-            res = C.Value;
-
-        }
-        public FlowResult addA(ValueDo<int> a)
-        {
-            Flow<int> flowA = new Flow<int>("A", new List<Operation<int>>()
-                {
-                    new Operation<int>(a,FuncIntInt.Plus),
-                    new Operation<int>(2, FuncIntInt.Multiply),
-                });
-            var resA = new FlowResult<int>(flowA);
-
-            return _flowRepo.AddFlow(flowA);
-        }
-        public FlowResult addB()
-        {
-            var c = new ValueDo<float>("c", 3.14f);
-            Flow<float> flowB = new Flow<float>("B", new List<Operation<float>>()
-                {
-                    new Operation<float>(c,FuncFloatFloat.Plus),
-                    new Operation<float>(2, FuncFloatFloat.Multiply),
-                });
-            var resB = new FlowResult<float>(flowB);
-
-            return _flowRepo.AddFlow(flowB);
-        }
-        public FlowResult addC(FlowResult A, FlowResult B)
-        {
-            Flow<float> flowC = new Flow<float>("C", new List<Operation<float>>()
-                {
-                    new SubflowOperation<float,int>((FlowResult<int>)A,(float a,int b)=>{return a+b; }),
-                    new SubflowOperation<float,float>((FlowResult<float>)B, FuncFloatFloat.Plus),
-                });
-            var resC = new FlowResult<float>(flowC);
-
-            return _flowRepo.AddFlow(flowC);
-        }
-        #endregion
-
         #region test - emulator
         public Node TestNode()
         {
@@ -1097,47 +1044,6 @@ namespace MainNode.Logic.Compile
             //set.Arguments.Bools.Add(new ValueDo<bool>("c", false));
 
             return new EndPointDo[] { get, set };
-        }
-        #endregion
-
-        #region merge flow
-        public void testMerge()
-        {
-            var a = new ValueDo<int>("a", 1);
-
-            var A = addA(a);
-            var B = addB();
-            var C = mergeAB(A, B);
-
-            var res = C.Value;
-
-            _flowRepo.Run();
-            a.Value = 4;
-            _flowRepo.Run();
-            res = C.Value;
-
-            var D = addD(C);
-            res = D.Value;
-        }
-        public FlowResult mergeAB(FlowResult A, FlowResult B)
-        {
-            Flow<bool> flowC = new Flow<bool>("C", new List<Operation<bool>>()
-                {
-                    new MergeflowOperation<int, float, bool>((FlowResult<int>)A, (FlowResult<float>)B, (a, b) => { return a > b; })
-            });
-            var resC = new FlowResult<bool>(flowC);
-            return _flowRepo.AddFlow(flowC);
-        }
-        public FlowResult addD(FlowResult C)
-        {
-            Flow<bool> flowD = new Flow<bool>("D", new List<Operation<bool>>()
-                {
-                    new SubflowOperation<bool,bool>((FlowResult<bool>)C,FuncBoolBool.Or),
-                    new Operation<bool>(true, FuncBoolBool.And),
-                });
-            var resD = new FlowResult<bool>(flowD);
-
-            return _flowRepo.AddFlow(flowD);
         }
         #endregion
     }
