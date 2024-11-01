@@ -23,6 +23,17 @@ namespace MainNode.ViewModels
             _loopCompiler = loopCompiler;
 
             _loopExecutor.LoopFinished += _loopExecutor_LoopFinished;
+
+            /*
+            var n = loopCompiler.TestNode();
+            _nodeRepo.Nodes.Add(n);            
+
+            _loopCompiler.Compile("node0.setValues.a=node0.getValuesG.a+2");
+            _loopCompiler.Compile("float C=node0.getValuesG.a+2.0");
+            _loopCompiler.Compile("int D4=node0.getValuesG.a+2");
+
+            _loopCompiler.Compile("bool E6=true|!node0.getValuesG.c");
+            */
         }
 
         #region nodes

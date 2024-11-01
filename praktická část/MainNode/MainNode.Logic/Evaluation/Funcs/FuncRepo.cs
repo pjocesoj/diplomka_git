@@ -21,7 +21,8 @@ namespace MainNode.Logic.Evaluation.Funcs
             FunctionsT.Add((typeof(int), typeof(int), "+"), new Func<int, int, int>((a, b) => a + b));
             FunctionsT.Add((typeof(int), typeof(int), "-"), new Func<int, int, int>((a, b) => a - b));
             FunctionsT.Add((typeof(int), typeof(int), "*"), new Func<int, int, int>((a, b) => a * b));
-            FunctionsT.Add((typeof(int), typeof(int), "/"), new Func<int, int, float>((a, b) => a / (float)b));
+            FunctionsT.Add((typeof(int), typeof(int), "/"), new Func<int, int, int>((a, b) => a / b));
+            //FunctionsT.Add((typeof(int), typeof(int), "/"), new Func<int, int, float>((a, b) => (float)a / (float)b));
 
             FunctionsT.Add((typeof(float), typeof(int), "+"), new Func<float, int, float>((a, b) => a + b));
             FunctionsT.Add((typeof(float), typeof(int), "-"), new Func<float, int, float>((a, b) => a - b));
