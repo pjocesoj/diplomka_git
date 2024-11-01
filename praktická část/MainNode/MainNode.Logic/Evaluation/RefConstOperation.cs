@@ -13,7 +13,7 @@ namespace MainNode.Logic.Evaluation
             Const = valC;
             Func = func;
         }
-        public override T Execute(T b)
+        public override T Execute(T a)
         {
             return Func(Ref.Value, Const);
         }

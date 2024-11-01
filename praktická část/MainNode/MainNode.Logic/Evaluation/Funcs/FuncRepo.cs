@@ -8,24 +8,20 @@ namespace MainNode.Logic.Evaluation.Funcs
         public FuncRepo()
         {
             #region init
-            //FunctionsT.Add((typeof(int), typeof(int), "0"), new Func<int, int, int>((a, b) => b));
-            //FunctionsT.Add((typeof(float), typeof(float), "0"), new Func<float, float, float>((a, b) => b));
-            //FunctionsT.Add((typeof(bool), typeof(bool), "0"), new Func<bool, bool, bool>((a, b) => b));
+            FunctionsT.Add((typeof(int), typeof(int), "0"), new Func<int, int, int>((a, b) => b));
+            FunctionsT.Add((typeof(float), typeof(float), "0"), new Func<float, float, float>((a, b) => b));
+            FunctionsT.Add((typeof(bool), typeof(bool), "0"), new Func<bool, bool, bool>((a, b) => b));
 
-            //kvuli bugu musim doèasnì prohodit
-            FunctionsT.Add((typeof(int), typeof(int), "0"), new Func<int, int, int>((a, b) => a));
-            FunctionsT.Add((typeof(float), typeof(float), "0"), new Func<float, float, float>((a, b) => a));
-            FunctionsT.Add((typeof(bool), typeof(bool), "0"), new Func<bool, bool, bool>((a, b) => a));
 
-            FunctionsT.Add((typeof(float), typeof(int), "0"), new Func<float, int, float>((a, b) => a));
-            FunctionsT.Add((typeof(int), typeof(float), "0"), new Func<int, float, int>((a, b) => a));
+            FunctionsT.Add((typeof(float), typeof(int), "0"), new Func<float, int, float>((a, b) => b));
+            FunctionsT.Add((typeof(int), typeof(float), "0"), new Func<int, float, int>((a, b) => (int)b));
             #endregion
 
             #region + - * /
             FunctionsT.Add((typeof(int), typeof(int), "+"), new Func<int, int, int>((a, b) => a + b));
             FunctionsT.Add((typeof(int), typeof(int), "-"), new Func<int, int, int>((a, b) => a - b));
             FunctionsT.Add((typeof(int), typeof(int), "*"), new Func<int, int, int>((a, b) => a * b));
-            FunctionsT.Add((typeof(int), typeof(int), "/"), new Func<int, int, int>((a, b) => a / b));
+            FunctionsT.Add((typeof(int), typeof(int), "/"), new Func<int, int, float>((a, b) => a / (float)b));
 
             FunctionsT.Add((typeof(float), typeof(int), "+"), new Func<float, int, float>((a, b) => a + b));
             FunctionsT.Add((typeof(float), typeof(int), "-"), new Func<float, int, float>((a, b) => a - b));
@@ -52,13 +48,8 @@ namespace MainNode.Logic.Evaluation.Funcs
             #endregion
 
             #region !
-            //FunctionsT.Add((typeof(bool), typeof(bool), "!"), new Func<bool, bool, bool>((a, b) => !b));
-            //FunctionsT.Add((typeof(bool), typeof(bool), "-"), new Func<bool, bool, bool>((a, b) => !b));
-
-            //kvuli bugu musim doèasnì prohodit
-            FunctionsT.Add((typeof(bool), typeof(bool), "!"), new Func<bool, bool, bool>((a, b) => !a));
-            FunctionsT.Add((typeof(bool), typeof(bool), "-"), new Func<bool, bool, bool>((a, b) => !a));
-
+            FunctionsT.Add((typeof(bool), typeof(bool), "!"), new Func<bool, bool, bool>((a, b) => !b));
+            FunctionsT.Add((typeof(bool), typeof(bool), "-"), new Func<bool, bool, bool>((a, b) => !b));
             #endregion
 
             #region < > == >= <= !=

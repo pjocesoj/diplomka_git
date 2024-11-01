@@ -446,7 +446,7 @@ namespace MainNode.Logic.Compile
             {
                 throw new ApplicationException($"cant get typeB");
             }
-            typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
+            //typeA = (cacheO.CachedValue is Type) ? (Type)cacheO.CachedValue : typeB;
 
             try
             {
@@ -458,6 +458,7 @@ namespace MainNode.Logic.Compile
                 flow = Flow.Create(typeB, $"<flow{_flowRepo.Results.Count}>");
             }
 
+            typeA = flow.getT();
             f = _funcRepo.GetFunction(typeA, typeB, cacheO.Value.ToString());
         }
 
@@ -465,7 +466,7 @@ namespace MainNode.Logic.Compile
         {
             var typeB = value.getT();
             var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
-            if (_stack.Peek().Type == StackValueTypeEnum.OPERATOR)
+            if (_stack.Count > 0 && _stack.Peek().Type == StackValueTypeEnum.OPERATOR)
             {
                 var flow = createOperation(value, cacheO.Value.ToString());
                 createOperation(flow);
@@ -502,6 +503,7 @@ namespace MainNode.Logic.Compile
             }
         }
 
+        #region subflow
         void createOperation(FlowResult A, FlowResult B, string op)
         {
             var typeA = A.getT();
@@ -519,9 +521,11 @@ namespace MainNode.Logic.Compile
             var typeA = A.getT();
             var typeB = B.getT();
 
+            var f0 = _funcRepo.GetFunction(typeA, typeA, "0");
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
             var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+            FuncHelper.AddFuncion(f0, A, A, flow);
             FuncHelper.AddFuncion(f, A, B, flow);
 
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
@@ -531,9 +535,12 @@ namespace MainNode.Logic.Compile
             var typeA = A.getT();
             var typeB = B.getT();
 
+            var help = typeA.DefaultValue();
+            var f0 = _funcRepo.GetFunction(typeA, typeA, "0");
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
             var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+            FuncHelper.AddFuncion(f0, help, A, flow);
             FuncHelper.AddFuncion(f, A, B, flow);
 
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
@@ -543,14 +550,16 @@ namespace MainNode.Logic.Compile
             var typeA = A.getT();
             var typeB = B.getT();
 
+            var f0 = _funcRepo.GetFunction(typeA, typeA, "0");
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
             var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+            FuncHelper.AddFuncion(f0, A, A, flow);
             FuncHelper.AddFuncion(f, A, B, flow);
 
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
         }
-
+        #endregion
         FlowResult createOperation(ValueDo value, string op)
         {
             var typeB = value.getT();
@@ -913,7 +922,7 @@ namespace MainNode.Logic.Compile
         {
             Flow<float> flowC = new Flow<float>("C", new List<Operation<float>>()
                 {
-                    new SubflowOperation<float,int>((FlowResult<int>)A,FuncFloatInt.Plus),
+                    new SubflowOperation<float,int>((FlowResult<int>)A,(float a,int b)=>{return a+b; }),
                     new SubflowOperation<float,float>((FlowResult<float>)B, FuncFloatFloat.Plus),
                 });
             var resC = new FlowResult<float>(flowC);

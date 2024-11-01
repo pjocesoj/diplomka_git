@@ -8,14 +8,22 @@ namespace MainNode.Logic.Compile
         #region value value
         private static void AddFuncion<T, U, V>(Delegate f, ValueDo<T> A, ValueDo<U> B, Flow<V> R) where T : struct where U : struct where V : struct
         {
-            //dočasné řešení než předělám Operatition
             if (typeof(T) == typeof(U) && typeof(U) == typeof(V))
             {
                 var B_t = (ValueDo<T>)(object)B;
                 var R_t = (Flow<T>)(object)R;
                 R_t.Operations.Add(new Operation<T>(B_t, (Func<T, T, T>)f));
             }
-            var func = (Func<T, U, V>)f;
+            else if (typeof(T) == typeof(V))
+            {
+                var B_t = (ValueDo<U>)(object)B;
+                var R_t = (Flow<T>)(object)R;
+                R_t.Operations.Add(new Operation<T, U>(B_t, (Func<T, U, T>)f));
+            }
+            else
+            {
+                throw new ArgumentException("Invalid types");
+            }
         }
         private static void AddFuncion<U, V>(Delegate f, ValueDo A, ValueDo<U> B, Flow<V> R) where U : struct where V : struct
         {
@@ -57,13 +65,15 @@ namespace MainNode.Logic.Compile
         #region value flow
         private static void AddFuncion<T, U, V>(Delegate f, ValueDo<T> A, FlowResult<U> B, Flow<V> R) where T : struct where U : struct where V : struct
         {
-            //dočasné řešení než předělám Operatition
             if (typeof(U) == typeof(V))
             {
                 var R_t = (Flow<T>)(object)R;
-                R_t.Operations.Add(new SubflowOperation<T, U>(B, (Func<U, T, T>)f));
+                R_t.Operations.Add(new SubflowOperation<T, U>(B, (Func<T, U, T>)f));
             }
-            var func = (Func<T, U, V>)f;
+            else
+            {
+                throw new ArgumentException("Invalid types");
+            }
         }
         private static void AddFuncion<U, V>(Delegate f, ValueDo A, FlowResult<U> B, Flow<V> R) where U : struct where V : struct
         {
@@ -147,14 +157,22 @@ namespace MainNode.Logic.Compile
         #region flow value
         private static void AddFuncion<T, U, V>(Delegate f, FlowResult<T> A, ValueDo<U> B, Flow<V> R) where T : struct where U : struct where V : struct
         {
-            //dočasné řešení než předělám Operatition
             if (typeof(T) == typeof(U) && typeof(U) == typeof(V))
             {
                 var B_t = (ValueDo<T>)(object)B;
                 var R_t = (Flow<T>)(object)R;
                 R_t.Operations.Add(new Operation<T>(B_t, (Func<T, T, T>)f));
             }
-            var func = (Func<T, U, V>)f;
+            else if (typeof(T) == typeof(V))
+            {
+                var B_t = (ValueDo<U>)(object)B;
+                var R_t = (Flow<T>)(object)R;
+                R_t.Operations.Add(new Operation<T, U>(B_t, (Func<T, U, T>)f));
+            }
+            else
+            {
+                throw new ArgumentException("Invalid types");
+            }
         }
         private static void AddFuncion<U, V>(Delegate f, FlowResult A, ValueDo<U> B, Flow<V> R) where U : struct where V : struct
         {
