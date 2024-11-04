@@ -9,14 +9,15 @@
             _loopCompiler.Compile("mock.setValues.a=mock.getValuesG.a+1");
 
             // Act
-            var a0 = _mockNode.Set_a;
+            var a0 = _mockNode.Set_a.Value;
             _flowRepo.Run();
-            var a1 = _mockNode.Set_a;
+            var a1 = _mockNode.Set_a.Value;
+            _mockNode.Get_a.Value++;
             _flowRepo.Run();
-            var a2 = _mockNode.Set_a;
+            var a2 = _mockNode.Set_a.Value;
             // Assert
-            Assert.AreEqual(2, a1.Value);
-            Assert.AreEqual(3, a2.Value);
+            Assert.AreEqual(2, a1);
+            Assert.AreEqual(3, a2);
         }
     }
 }
