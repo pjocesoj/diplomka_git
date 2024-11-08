@@ -2,7 +2,8 @@
 
 namespace MainNode.Logic.Test.Compile.Simple.Const;
 
-public partial class LoopCompilerConstTests
+[TestClass]
+public partial class LoopCompilerConstIntTests:LoopCompilerConstTests
 {
     [TestMethod]
     public void III_Plus()

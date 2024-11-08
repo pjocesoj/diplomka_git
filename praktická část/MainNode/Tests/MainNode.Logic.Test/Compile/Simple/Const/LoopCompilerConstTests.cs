@@ -1,5 +1,4 @@
 ﻿using MainNode.Logic.Compile;
-using MainNode.Logic.Do;
 using MainNode.Logic.Evaluation.Funcs;
 
 namespace MainNode.Logic.Test.Compile.Simple.Const;
@@ -7,8 +6,8 @@ namespace MainNode.Logic.Test.Compile.Simple.Const;
 [TestClass]
 public partial class LoopCompilerConstTests
 {
-    private LoopCompiler _loopCompiler;
-    private FlowRepository _flowRepo;
+    protected LoopCompiler _loopCompiler;
+    protected FlowRepository _flowRepo;
 
     [TestInitialize]
     public void Initialize()
