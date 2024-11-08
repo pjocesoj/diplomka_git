@@ -254,7 +254,7 @@ namespace MainNode.Logic.Compile
                 default:
                     throw new ApplicationException($"Unexpected type {eq.Type}");
             }
-            if (c=='(')
+            if (c == '(')
             {
                 subflowStart(c, state, pushType);
                 return;
@@ -572,8 +572,8 @@ namespace MainNode.Logic.Compile
             var A = typeB.DefaultValue();
             FuncHelper.AddFuncion(f, A, value, flow);
 
-            // _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
-            return flow.GetResult();
+            var ret = _flowRepo.AddFlow(flow);
+            return ret;
         }
         FlowResult createOperation(FlowResult value, string op)
         {
@@ -629,7 +629,7 @@ namespace MainNode.Logic.Compile
             var val = validateValue(c, state, pushType);
             var name = $"<{val.Name}>";
             createFlow(val.getT(), name);
-            var res=_flowRepo.GetFlowByName(name);
+            var res = _flowRepo.GetFlowByName(name);
             res.BindOutput(val);
         }
         void addFlowFromName(char c, LCStateEnum state, StackValueTypeEnum? pushType)
