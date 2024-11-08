@@ -1,6 +1,6 @@
 ﻿using MainNode.Logic.Do;
 
-namespace MainNode.Logic.Test.Compile
+namespace MainNode.Logic.Test.Compile.Simple.Const
 {
     public partial class LoopCompilerConstTests
     {

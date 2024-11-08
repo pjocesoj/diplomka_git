@@ -3,7 +3,7 @@ using MainNode.Logic.Do;
 
 namespace MainNode.Logic.Test
 {
-    internal class MockNode
+    public class MockNode
     {
         public Node Node { get; private set; }
 

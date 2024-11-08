@@ -1,6 +1,7 @@
-﻿namespace MainNode.Logic.Test.Compile
+﻿namespace MainNode.Logic.Test.Compile.Simple.Node
 {
-    public partial class LoopCompilerNodeTests
+    [TestClass]
+    public partial class LoopCompilerNodeFloatTests:LoopCompilerNodeTests
     {
         #region plus
         [TestMethod]

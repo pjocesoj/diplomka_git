@@ -1,6 +1,7 @@
-﻿namespace MainNode.Logic.Test.Compile
+﻿namespace MainNode.Logic.Test.Compile.Simple.Node
 {
-    public partial class LoopCompilerNodeTests
+    [TestClass]
+    public partial class LoopCompilerNodeIntTests:LoopCompilerNodeTests
     {
         #region plus
         [TestMethod]
@@ -182,7 +183,7 @@
             var a0 = _mockNode.Set_a.Value;
             _flowRepo.Run();
             var a1 = _mockNode.Set_a.Value;
-            _mockNode.Get_a.Value=2;
+            _mockNode.Get_a.Value = 2;
             _flowRepo.Run();
             var a2 = _mockNode.Set_a.Value;
             // Assert

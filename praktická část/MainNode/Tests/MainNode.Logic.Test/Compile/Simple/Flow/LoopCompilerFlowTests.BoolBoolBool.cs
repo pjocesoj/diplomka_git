@@ -1,8 +1,9 @@
 ﻿using MainNode.Logic.Do;
 
-namespace MainNode.Logic.Test.Compile
+namespace MainNode.Logic.Test.Compile.Simple.Flow
 {
-    public partial class LoopCompilerFlowTests
+    [TestClass]
+    public partial class LoopCompilerFlowBoolTests:LoopCompilerFlowTests
     {
         #region bool + bool
         [TestMethod]

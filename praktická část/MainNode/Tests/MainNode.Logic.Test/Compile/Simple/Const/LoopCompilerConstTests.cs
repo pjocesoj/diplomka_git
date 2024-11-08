@@ -2,10 +2,10 @@
 using MainNode.Logic.Do;
 using MainNode.Logic.Evaluation.Funcs;
 
-namespace MainNode.Logic.Test.Compile;
+namespace MainNode.Logic.Test.Compile.Simple.Const;
 
 [TestClass]
-public partial class LoopCompilerFlowTests
+public partial class LoopCompilerConstTests
 {
     private LoopCompiler _loopCompiler;
     private FlowRepository _flowRepo;
@@ -17,10 +17,6 @@ public partial class LoopCompilerFlowTests
         var nodeRepo = new NodeRepository();
         var funcRepo = new FuncRepo();
         _loopCompiler = new LoopCompiler(_flowRepo, nodeRepo, funcRepo);
-
-        _loopCompiler.Compile("int i=1+2");
-        _loopCompiler.Compile("float f=1.5+0.5");
-        _loopCompiler.Compile("bool b=true+true");
     }
 
 }

@@ -2,7 +2,7 @@
 using MainNode.Logic.Do;
 using MainNode.Logic.Evaluation.Funcs;
 
-namespace MainNode.Logic.Test.Compile;
+namespace MainNode.Logic.Test.Compile.Simple.Const;
 
 [TestClass]
 public class LoopCompilerConstBoolTests

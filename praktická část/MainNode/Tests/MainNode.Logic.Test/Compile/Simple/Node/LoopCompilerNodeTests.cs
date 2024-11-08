@@ -1,15 +1,15 @@
 ﻿using MainNode.Logic.Compile;
 using MainNode.Logic.Evaluation.Funcs;
 
-namespace MainNode.Logic.Test.Compile
+namespace MainNode.Logic.Test.Compile.Simple.Node
 {
     [TestClass]
     public partial class LoopCompilerNodeTests
     {
-        private LoopCompiler _loopCompiler;
-        private FlowRepository _flowRepo;
-        private NodeRepository _nodeRepo;
-        private MockNode _mockNode;
+        protected LoopCompiler _loopCompiler;
+        protected FlowRepository _flowRepo;
+        protected NodeRepository _nodeRepo;
+        protected MockNode _mockNode;
 
         [TestInitialize]
         public void Initialize()
