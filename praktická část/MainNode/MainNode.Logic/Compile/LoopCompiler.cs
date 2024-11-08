@@ -593,6 +593,11 @@ namespace MainNode.Logic.Compile
 
         FlowResult GetFlow(StackValue cache)
         {
+            if(cache.Type==StackValueTypeEnum.UNKNOWN)
+            {
+                resolveUnknown(cache);
+            }
+
             if (cache.Type == StackValueTypeEnum.FLOW)
             {
                 var flow = (FlowResult)cache.CachedValue;
