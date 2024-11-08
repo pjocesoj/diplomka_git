@@ -1,4 +1,4 @@
-﻿namespace MainNode.Logic.Evaluation
+﻿namespace MainNode.Logic.Test.HardcodedFlow
 {
     /// <summary>
     /// float func(int,float)

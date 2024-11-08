@@ -1,7 +1,7 @@
 using MainNode.Communication.Enums;
 using System;
 
-namespace MainNode.Logic.Evaluation.Funcs
+namespace MainNode.Logic.Compile
 {
     public class FuncRepo
     {
@@ -54,10 +54,10 @@ namespace MainNode.Logic.Evaluation.Funcs
             #endregion
 
             #region < > == >= <= !=
-            FunctionsT.Add((typeof(int), typeof(int), "<"), new Func<int, int, bool>((a, b) => a<b));
-            FunctionsT.Add((typeof(int), typeof(float), "<"), new Func<int, float, bool>((a, b) => a<b));
-            FunctionsT.Add((typeof(float), typeof(int), "<"), new Func<float, int, bool>((a, b) => a<b));
-            FunctionsT.Add((typeof(float), typeof(float), "<"), new Func<float, float, bool>((a, b) => a<b));
+            FunctionsT.Add((typeof(int), typeof(int), "<"), new Func<int, int, bool>((a, b) => a < b));
+            FunctionsT.Add((typeof(int), typeof(float), "<"), new Func<int, float, bool>((a, b) => a < b));
+            FunctionsT.Add((typeof(float), typeof(int), "<"), new Func<float, int, bool>((a, b) => a < b));
+            FunctionsT.Add((typeof(float), typeof(float), "<"), new Func<float, float, bool>((a, b) => a < b));
 
             FunctionsT.Add((typeof(int), typeof(int), ">"), new Func<int, int, bool>((a, b) => a > b));
             FunctionsT.Add((typeof(int), typeof(float), ">"), new Func<int, float, bool>((a, b) => a > b));

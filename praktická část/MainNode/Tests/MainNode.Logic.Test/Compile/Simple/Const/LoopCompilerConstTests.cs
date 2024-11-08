@@ -1,5 +1,4 @@
 ﻿using MainNode.Logic.Compile;
-using MainNode.Logic.Evaluation.Funcs;
 
 namespace MainNode.Logic.Test.Compile.Simple.Const;
 

@@ -9,7 +9,6 @@ using MainNode.Logic.Enums;
 using System.Diagnostics;
 using MainNode.Logic.Extentions;
 using System.Globalization;
-using MainNode.Logic.Evaluation.Funcs;
 
 namespace MainNode.Logic.Compile
 {
