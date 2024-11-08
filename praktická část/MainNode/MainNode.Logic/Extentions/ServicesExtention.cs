@@ -1,5 +1,4 @@
 ﻿using MainNode.Logic.Compile;
-using MainNode.Logic.Evaluation.Funcs;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MainNode.Logic.Extentions

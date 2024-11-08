@@ -10,17 +10,18 @@ namespace MainNode.Logic.Test.HardcodedFlow
         {
             var C = mergeAB(A, B);
 
-            var res = (C.Value as ValueDo<bool>).Value;
+            var res = ((ValueDo<bool>)C.Value).Value;
             Assert.AreEqual(false, res);
 
             _flowRepo.Run();
             StartValue.Value = 4;
             _flowRepo.Run();
-            res = (C.Value as ValueDo<bool>).Value;
+            res = ((ValueDo<bool>)C.Value).Value;
             Assert.AreEqual(true, res);
 
             var D = addD(C);
-            res = (D.Value as ValueDo<bool>).Value;
+            res = ((ValueDo<bool>)D.Value).Value;
+
             Assert.AreEqual(true, res);
         }
         public FlowResult mergeAB(FlowResult A, FlowResult B)
