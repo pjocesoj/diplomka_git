@@ -595,7 +595,12 @@ namespace MainNode.Logic.Compile
         {
             if (cache.Type == StackValueTypeEnum.FLOW)
             {
-                return (FlowResult)cache.CachedValue;
+                var flow = (FlowResult)cache.CachedValue;
+                if (flow != null)
+                {
+                    return flow;
+                }
+                return _flowRepo.GetFlowByName(cache.Value.ToString());
             }
             else if (cache.Type == StackValueTypeEnum.VALUE)
             {
