@@ -1,6 +1,3 @@
-using MainNode.Communication.Enums;
-using System;
-
 namespace MainNode.Logic.Compile
 {
     public class FuncRepo
