@@ -254,7 +254,7 @@ namespace MainNode.Logic.Compile
                 default:
                     throw new ApplicationException($"Unexpected type {eq.Type}");
             }
-            if (c=='(')
+            if (c == '(')
             {
                 subflowStart(c, state, pushType);
                 return;
@@ -572,8 +572,8 @@ namespace MainNode.Logic.Compile
             var A = typeB.DefaultValue();
             FuncHelper.AddFuncion(f, A, value, flow);
 
-            // _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
-            return flow.GetResult();
+            var ret = _flowRepo.AddFlow(flow);
+            return ret;
         }
         FlowResult createOperation(FlowResult value, string op)
         {
@@ -627,7 +627,10 @@ namespace MainNode.Logic.Compile
         void addFlowFromValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
             var val = validateValue(c, state, pushType);
-            createFlow(val.getT(), $"<{val.Name}>");
+            var name = $"<{val.Name}>";
+            createFlow(val.getT(), name);
+            var res = _flowRepo.GetFlowByName(name);
+            res.BindOutput(val);
         }
         void addFlowFromName(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
@@ -652,6 +655,7 @@ namespace MainNode.Logic.Compile
             //default
             _stack.Push(new StackValue { Type = StackValueTypeEnum.OPERATOR, Value = new StringBuilder("0"), CachedValue = typeR });
 
+            _flowRepo.AddFlow(flow);
             return flow;
         }
         void saveFlow(char c, LCStateEnum state, StackValueTypeEnum? pushType)
@@ -875,7 +879,7 @@ namespace MainNode.Logic.Compile
             {
                 throw new ApplicationException($"transition function to end is missing");
             }
-            saveFlow(' ', state, null);
+            //saveFlow(' ', state, null);
         }
 
         #region test - emulator
