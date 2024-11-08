@@ -103,4 +103,103 @@ public class LoopCompilerFlowCompareTests : LoopCompilerFlowTests
         Assert.AreEqual(true, E3);
     }
     #endregion
+
+    #region !=
+    [TestMethod]
+    public void COMP_NE_FlowConst()
+    {
+        // Arrange
+        _loopCompiler.Compile("bool NE1=(i!=4)");
+        // Act
+        var NE1 = (_flowRepo.Results.Find(x => x.Name == "NE1").Value as ValueDo<bool>).Value;
+        // Assert
+        Assert.AreEqual(true, NE1);
+    }
+    [TestMethod]
+    public void COMP_NE_ConstFlow()
+    {
+        // Arrange
+        _loopCompiler.Compile("bool NE2=(4!=i)");
+        // Act
+        var NE2 = (_flowRepo.Results.Find(x => x.Name == "NE2").Value as ValueDo<bool>).Value;
+        // Assert
+        Assert.AreEqual(true, NE2);
+    }
+    [TestMethod]
+    public void COMP_NE_FlowFlow()
+    {
+        // Arrange
+        _loopCompiler.Compile("bool NE3=(i!=i)");
+        // Act
+        var NE3 = (_flowRepo.Results.Find(x => x.Name == "NE3").Value as ValueDo<bool>).Value;
+        // Assert
+        Assert.AreEqual(false, NE3);
+    }
+    #endregion
+
+    #region <=
+    [TestMethod]
+    public void COMP_LE_FlowConst()
+    {
+        // Arrange
+        _loopCompiler.Compile("bool LE1=(i<=3)");
+        // Act
+        var LE1 = (_flowRepo.Results.Find(x => x.Name == "LE1").Value as ValueDo<bool>).Value;
+        // Assert
+        Assert.AreEqual(true, LE1);
+    }
+    [TestMethod]
+    public void COMP_LE_ConstFlow()
+    {
+        // Arrange
+        _loopCompiler.Compile("bool LE2=(2<=i)");
+        // Act
+        var LE2 = (_flowRepo.Results.Find(x => x.Name == "LE2").Value as ValueDo<bool>).Value;
+        // Assert
+        Assert.AreEqual(true, LE2);
+    }
+    [TestMethod]
+    public void COMP_LE_FlowFlow()
+    {
+        // Arrange
+        _loopCompiler.Compile("bool LE3=(i<=i)");
+        // Act
+        var LE3 = (_flowRepo.Results.Find(x => x.Name == "LE3").Value as ValueDo<bool>).Value;
+        // Assert
+        Assert.AreEqual(true, LE3);
+    }
+    #endregion
+
+    #region >=
+    [TestMethod]
+    public void COMP_GE_FlowConst()
+    {
+        // Arrange
+        _loopCompiler.Compile("bool GE1=(i>=2)");
+        // Act
+        var GE1 = (_flowRepo.Results.Find(x => x.Name == "GE1").Value as ValueDo<bool>).Value;
+        // Assert
+        Assert.AreEqual(true, GE1);
+    }
+    [TestMethod]
+    public void COMP_GE_ConstFlow()
+    {
+        // Arrange
+        _loopCompiler.Compile("bool GE2=(2>=i)");
+        // Act
+        var GE2 = (_flowRepo.Results.Find(x => x.Name == "GE2").Value as ValueDo<bool>).Value;
+        // Assert
+        Assert.AreEqual(false, GE2);
+    }
+    [TestMethod]
+    public void COMP_GE_FlowFlow()
+    {
+        // Arrange
+        _loopCompiler.Compile("bool GE3=(i>=i)");
+        // Act
+        var GE3 = (_flowRepo.Results.Find(x => x.Name == "GE3").Value as ValueDo<bool>).Value;
+        // Assert
+        Assert.AreEqual(true, GE3);
+    }
+    #endregion
 }
