@@ -19,9 +19,9 @@ namespace MainNode.Logic.Compile
                 {
                     return;
                 }
-                else if (c == '+')
+                else if (pushType == StackValueTypeEnum.OPERATOR)
                 {
-                    AddNewPush(c,state,StackValueTypeEnum.OPERATOR);
+                    AddNewPush(c, state, StackValueTypeEnum.OPERATOR);
                     return;
                 }
                 else
