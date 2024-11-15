@@ -48,11 +48,25 @@ namespace MainNode.Logic.Test.Compile.Multitype.Flow
          }
          */
         [TestMethod]
+        public void F_IF_Minus_Sub()
+        {
+            _loopCompiler.Compile("float B2=f-(i-f)-i");
+            var B2 = (_flowRepo.Results.Find(x => x.Name == "B2").Value as ValueDo<float>).Value;
+            Assert.AreEqual(-2, B2);
+        }
+        [TestMethod]
         public void F_FI_Minus()
         {
             _loopCompiler.Compile("float B2=f-(3.5-2)-i");
             var B2 = (_flowRepo.Results.Find(x => x.Name == "B2").Value as ValueDo<float>).Value;
             Assert.AreEqual(-2.5, B2);
+        }
+        [TestMethod]
+        public void F_FI_Minus_Sub()
+        {
+            _loopCompiler.Compile("float B2=f-(f-i)-i");
+            var B2 = (_flowRepo.Results.Find(x => x.Name == "B2").Value as ValueDo<float>).Value;
+            Assert.AreEqual(0, B2);
         }
     }
 }

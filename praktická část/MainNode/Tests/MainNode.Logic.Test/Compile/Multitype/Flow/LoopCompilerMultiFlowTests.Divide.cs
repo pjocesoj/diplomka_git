@@ -48,12 +48,25 @@ public class LoopCompilerMultiFlowDivideTests : LoopCompilerMultiFlowTests
     }
     */
     [TestMethod]
+    public void F_IF_Divide_Sub()
+    {
+        _loopCompiler.Compile("float B2=f/(i/f)/i");
+        var B2 = (_flowRepo.Results.Find(x => x.Name == "B2").Value as ValueDo<float>).Value;
+        Assert.AreEqual(0.44, B2,0.005);
+    }
+    [TestMethod]
     public void F_FI_Divide()
     {
         _loopCompiler.Compile("float B2=f/(3.5/2)/i");
         var B2 = (_flowRepo.Results.Find(x => x.Name == "B2").Value as ValueDo<float>).Value;
         Assert.AreEqual(0.38, B2,0.001);
     }
-
+    [TestMethod]
+    public void F_FI_Divide_sub()
+    {
+        _loopCompiler.Compile("float B2=f/(f/i)/i");
+        var B2 = (_flowRepo.Results.Find(x => x.Name == "B2").Value as ValueDo<float>).Value;
+        Assert.AreEqual(1, B2, 0.001);
+    }
 
 }
