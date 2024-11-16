@@ -7,7 +7,6 @@ namespace MainNode.Logic.Test.HardcodedFlow
     [TestClass]
     public partial class HardcodedLoopTests
     {
-        private LoopCompiler _loopCompiler;
         private FlowRepository _flowRepo;
 
         private ValueDo<int> StartValue = new ValueDo<int>("a", 1);
