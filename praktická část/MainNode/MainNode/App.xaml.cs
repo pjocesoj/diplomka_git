@@ -31,6 +31,9 @@ namespace MainNode
                      services.AddTransient<NodeViewModel>();
 
                      services.AddTransient<NodeInfoWindow>();
+
+                     services.AddSingleton<FlowEditWindow>();
+                     services.AddSingleton<FlowEditWindowViewModel>();
                  })
                  .Build();
 
@@ -47,7 +50,7 @@ namespace MainNode
             base.OnStartup(e);
         }
 
-        public void ShowWindow<T>(object? viewModel=null) where T : Window
+        public void ShowWindow<T>(object? viewModel = null) where T : Window
         {
             var Form = _host.Services.GetRequiredService<T>();
             Form.Show();
@@ -62,7 +65,7 @@ namespace MainNode
             }
 
             base.OnExit(e);
-        }        
+        }
     }
 
 }

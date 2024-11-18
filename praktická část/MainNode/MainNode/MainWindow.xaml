@@ -31,6 +31,8 @@
                         Foreground="Red"
                         Visibility="{Binding IsLoopRunning}"
                         Command="{Binding StopLoopCommand}"/>
+                <Button Content="edit"
+                        Command="{Binding ShowFlowEditCommand}"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Margin="5">

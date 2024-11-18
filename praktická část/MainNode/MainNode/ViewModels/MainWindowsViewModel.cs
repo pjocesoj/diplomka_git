@@ -97,5 +97,11 @@ namespace MainNode.ViewModels
             OnPropertyChanged(nameof(Nodes));
         }
         #endregion
+
+        [RelayCommand]
+        public async Task ShowFlowEdit()
+        {
+            App.Current.ShowWindow<FlowEditWindow>();
+        }
     }
 }
