@@ -15,8 +15,13 @@ namespace MainNode.Logic.Compile
             if (cache.Type != StackValueTypeEnum.UNKNOWN)
             {
                 //end of stream
-                if (cache.Type == StackValueTypeEnum.FLOW)
+                if (c == ' ')
                 {
+                    return;
+                }
+                else if (pushType == StackValueTypeEnum.OPERATOR)
+                {
+                    AddNewPush(c, state, StackValueTypeEnum.OPERATOR);
                     return;
                 }
                 else

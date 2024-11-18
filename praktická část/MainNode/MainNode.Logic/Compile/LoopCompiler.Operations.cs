@@ -126,11 +126,12 @@ namespace MainNode.Logic.Compile
             var typeA = A.getT();
             var typeB = B.getT();
 
-            var f0 = _funcRepo.GetFunction(typeA, typeA, "0");
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
             var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
-            FuncHelper.AddFuncion(f0, A, A, flow);
+            var f0 = _funcRepo.GetFunction(typeR, typeA, "0");
+            var help = typeR.DefaultValue();
+            FuncHelper.AddFuncion(f0, help, A, flow);
             FuncHelper.AddFuncion(f, A, B, flow);
 
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });
@@ -140,11 +141,11 @@ namespace MainNode.Logic.Compile
             var typeA = A.getT();
             var typeB = B.getT();
 
-            var help = typeA.DefaultValue();
-            var f0 = _funcRepo.GetFunction(typeA, typeA, "0");
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
             var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
+            var help = typeR.DefaultValue();
+            var f0 = _funcRepo.GetFunction(typeR, typeA, "0");
             FuncHelper.AddFuncion(f0, help, A, flow);
             FuncHelper.AddFuncion(f, A, B, flow);
 
@@ -155,11 +156,12 @@ namespace MainNode.Logic.Compile
             var typeA = A.getT();
             var typeB = B.getT();
 
-            var f0 = _funcRepo.GetFunction(typeA, typeA, "0");
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
             var flow = Flow.Create(typeR, $"<subflow{_flowRepo.Results.Count}>");
-            FuncHelper.AddFuncion(f0, A, A, flow);
+            var help = typeR.DefaultValue();
+            var f0 = _funcRepo.GetFunction(typeR, typeA, "0");
+            FuncHelper.AddFuncion(f0, help, A, flow);
             FuncHelper.AddFuncion(f, A, B, flow);
 
             _stack.Push(new StackValue { Type = StackValueTypeEnum.FLOW, CachedValue = flow });

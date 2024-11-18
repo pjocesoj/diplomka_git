@@ -65,6 +65,13 @@ namespace MainNode.Logic.Compile
         #region value flow
         private static void AddFuncion<T, U, V>(Delegate f, ValueDo<T> A, FlowResult<U> B, Flow<V> R) where T : struct where U : struct where V : struct
         {
+            if(typeof(T) != typeof(V))
+            {
+                throw new ArgumentException("Invalid types");
+            }
+            R.Operations.Add(new SubflowOperation<V, U>(B, (Func<V, U, V>)f));
+
+            /*
             if (typeof(U) == typeof(V))
             {
                 var R_t = (Flow<T>)(object)R;
@@ -74,6 +81,7 @@ namespace MainNode.Logic.Compile
             {
                 throw new ArgumentException("Invalid types");
             }
+            */
         }
         private static void AddFuncion<U, V>(Delegate f, ValueDo A, FlowResult<U> B, Flow<V> R) where U : struct where V : struct
         {
