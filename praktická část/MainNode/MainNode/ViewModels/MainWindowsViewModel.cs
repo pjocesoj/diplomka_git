@@ -33,9 +33,7 @@ namespace MainNode.ViewModels
 
         #region nodes
         public NodeListViewModel NodeListViewModel=> _nodeList;
-        public List<NodeViewModel> Nodes => _nodeList.Nodes;
         public void refreshNodes() => _nodeList.refreshNodes();
-        //public void refreshNodes() => OnPropertyChanged(nameof(Nodes));
 
         [RelayCommand]
         public async Task AddNode()
@@ -62,7 +60,6 @@ namespace MainNode.ViewModels
                     MessageBox.Show($"Node {node.Name} failed to load: {error}");
                 }
             }
-            OnPropertyChanged(nameof(Nodes));
             NodeListViewModel.refreshNodes();
         }
 
@@ -103,7 +100,6 @@ namespace MainNode.ViewModels
         }
         private void _loopExecutor_LoopFinished(object? sender, EventArgs e)
         {
-            OnPropertyChanged(nameof(Nodes));
             NodeListViewModel.refreshNodes();
         }
         #endregion

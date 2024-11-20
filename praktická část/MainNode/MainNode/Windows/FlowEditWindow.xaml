@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:MainNode.Controls"
         xmlns:converters="clr-namespace:MainNode.Converters"
         xmlns:viewmodels="clr-namespace:MainNode.ViewModels"
-        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowsViewModel}"
+        d:DataContext="{d:DesignInstance Type=viewmodels:FlowEditWindowViewModel}"
         mc:Ignorable="d"
         Title="FlowEditWindow" Height="450" Width="800">
     <Grid>
@@ -22,7 +22,27 @@
 
         <TabControl Grid.Column="1">
             <TabItem Header="text">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
+                    <ToolBar Grid.Row="0">
+                        <!--
+                        <Button Content="save"/>
+                        <Button Content="load"/>
+                        -->
+                        <Button Content="compile"
+                                Command="{Binding CompileFlowCommand}"/>
+                    </ToolBar>
+
+                    <TextBox Grid.Row="1"
+                             Text="{Binding FlowCode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True"
+                             AcceptsTab="True"
+                             VerticalScrollBarVisibility="Auto" />
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
