@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:MainNode.Controls"
              xmlns:viewmodels="clr-namespace:MainNode.ViewModels"
              xmlns:converters="clr-namespace:MainNode.Converters"
+             d:DataContext="{d:DesignInstance Type=viewmodels:NodeListViewModel}"
              mc:Ignorable="d">
     <UserControl.Resources>
         <converters:NodeStatusConverter x:Key="status"/>

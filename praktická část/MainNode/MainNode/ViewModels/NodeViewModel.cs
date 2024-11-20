@@ -10,15 +10,15 @@ namespace MainNode.ViewModels
     {
         private Node _node;
         private readonly NodeRepository _repo;
-        private readonly MainWindowsViewModel _mainVM;
-        public NodeViewModel(Node node, NodeRepository repo,MainWindowsViewModel main)
+        private readonly NodeListViewModel _nodeList;
+        public NodeViewModel(Node node, NodeRepository repo, NodeListViewModel nodeList)
         {
             _node = node;
             _repo = repo;
             Name = _node.Name;
             Address = _node.Address;
 
-            _mainVM = main;
+            _nodeList = nodeList;
         }
         [ObservableProperty]
         private string _name = "";
@@ -28,12 +28,12 @@ namespace MainNode.ViewModels
 
         public ConnectionStatus ConnectionStatus => _node.ConnectionStatus;
 
-        public List<EndPointViewModel> EndPoints 
+        public List<EndPointViewModel> EndPoints
         {
             get
             {
-                var ret=new List<EndPointViewModel>();
-                foreach(var ep in _node.EndPoints) { ret.Add(new EndPointViewModel(ep)); }
+                var ret = new List<EndPointViewModel>();
+                foreach (var ep in _node.EndPoints) { ret.Add(new EndPointViewModel(ep)); }
                 return ret;
             }
         }
@@ -48,9 +48,9 @@ namespace MainNode.ViewModels
             {
                 await _repo.AddNode(_node);
                 App.Current.ShowWindow<NodeInfoWindow>(this);
-                _mainVM.refreshNodes();
+                _nodeList.refreshNodes();
             }
-            catch(ApplicationException ex) { throw new ApplicationException(ex.Message,ex); }
+            catch (ApplicationException ex) { throw new ApplicationException(ex.Message, ex); }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

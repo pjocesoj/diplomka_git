@@ -13,9 +13,14 @@ namespace MainNode.ViewModels
     {
         private readonly FlowRepository _flowRepo;
         private readonly NodeRepository _nodeRepo;
+        private readonly NodeListViewModel _nodeList;
         private readonly LoopExecutor _loopExecutor;
         private readonly LoopCompiler _loopCompiler;
-        public MainWindowsViewModel(FlowRepository flowRepo, NodeRepository nodeRepo, LoopExecutor loopExecutor, LoopCompiler loopCompiler)
+        public MainWindowsViewModel(FlowRepository flowRepo,
+            NodeRepository nodeRepo,
+            LoopExecutor loopExecutor,
+            LoopCompiler loopCompiler,
+            NodeListViewModel nodeList)
         {
             _flowRepo = flowRepo;
             _nodeRepo = nodeRepo;
@@ -23,11 +28,14 @@ namespace MainNode.ViewModels
             _loopCompiler = loopCompiler;
 
             _loopExecutor.LoopFinished += _loopExecutor_LoopFinished;
+            _nodeList = nodeList;
         }
 
         #region nodes
-        public List<NodeViewModel> Nodes => _nodeRepo.Nodes.Select(x => new NodeViewModel(x, _nodeRepo, this)).ToList();
-        public void refreshNodes() => OnPropertyChanged(nameof(Nodes));
+        public NodeListViewModel NodeListViewModel=> _nodeList;
+        public List<NodeViewModel> Nodes => _nodeList.Nodes;
+        public void refreshNodes() => _nodeList.refreshNodes();
+        //public void refreshNodes() => OnPropertyChanged(nameof(Nodes));
 
         [RelayCommand]
         public async Task AddNode()
@@ -55,6 +63,7 @@ namespace MainNode.ViewModels
                 }
             }
             OnPropertyChanged(nameof(Nodes));
+            NodeListViewModel.refreshNodes();
         }
 
         [RelayCommand]
@@ -95,6 +104,7 @@ namespace MainNode.ViewModels
         private void _loopExecutor_LoopFinished(object? sender, EventArgs e)
         {
             OnPropertyChanged(nameof(Nodes));
+            NodeListViewModel.refreshNodes();
         }
         #endregion
 

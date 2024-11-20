@@ -4,9 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MainNode.Windows"
+        xmlns:controls="clr-namespace:MainNode.Controls"
+        xmlns:converters="clr-namespace:MainNode.Converters"
+        xmlns:viewmodels="clr-namespace:MainNode.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowsViewModel}"
         mc:Ignorable="d"
         Title="FlowEditWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <controls:NodeListView
+            DataContext="{Binding NodeListViewModel}"
+            Grid.Column="0"/>
+
+        <TabControl Grid.Column="1">
+            <TabItem Header="text">
+
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

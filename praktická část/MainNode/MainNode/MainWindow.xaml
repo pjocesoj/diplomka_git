@@ -41,7 +41,9 @@
                 <Button Content="add" Command="{Binding AddNodeCommand}"/>
             </StackPanel>
 
-            <controls:NodeListView Grid.Row="2"/>
+            <controls:NodeListView
+                DataContext="{Binding NodeListViewModel}"
+                Grid.Row="2"/>
 
         </Grid>
     </Grid>
