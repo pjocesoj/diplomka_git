@@ -35,7 +35,7 @@ namespace MainNode.ViewModels
             _flowRepo.Clear();
             try
             {
-                _loopCompiler.Compile(FlowCode);
+                _loopCompiler.CompileMultyLine(FlowCode);
             }
             catch (Exception e)
             {
