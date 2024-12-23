@@ -16,9 +16,20 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <controls:NodeListView
-            DataContext="{Binding NodeListViewModel}"
-            Grid.Column="0"/>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <controls:NodeListView
+                DataContext="{Binding NodeListViewModel}"
+                Grid.Row="0"/>
+
+            <controls:FlowListView
+                DataContext="{Binding FlowListViewModel}"
+                Grid.Row="1"/>
+        </Grid>
 
         <TabControl Grid.Column="1">
             <TabItem Header="text">
