@@ -18,6 +18,8 @@
                 <DataTemplate DataType="viewmodels:FlowViewModel">
                     <Button Content="{Binding Name}"
                             BorderBrush="{Binding Type,Converter={StaticResource typeColor}}"
+                            BorderThickness="5"
+                            Foreground="{Binding Type,Converter={StaticResource typeColor}}"
                             Command="{Binding ShowInfoCommand}"
                             Margin="0"/>
                 </DataTemplate>

@@ -16,12 +16,12 @@ namespace MainNode.ViewModels
         {
             _flow = flow;
             _repo = repo;
-
             _flowList = flowList;
         }
         public string Name =>_flow.Name;
 
         public Type Type => _flow.getT();
+
 
         [RelayCommand]
         public async Task ShowInfo()
