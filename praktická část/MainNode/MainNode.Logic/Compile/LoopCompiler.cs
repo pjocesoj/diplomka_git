@@ -303,6 +303,24 @@ namespace MainNode.Logic.Compile
             }
             //saveFlow(' ', state, null);
         }
-        
+        public void CompileMultyLine(string input)
+        {
+            var lines = input.Split(new string[] { Environment.NewLine, ";" }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                var line = lines[i];
+                line=line.TrimStart();
+                try
+                {
+                    Compile(line);
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException($"Error in line {i}:\n {ex.Message}", ex);
+                }
+            }
+        }
+
+
     }
 }

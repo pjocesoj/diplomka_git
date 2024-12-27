@@ -131,7 +131,7 @@ namespace NodeEmulator
             {
                    new ValueDo<int>() { Name = "a", Type = ValType.INT,Value=1 },
                    new ValueDo<float>() { Name = "b", Type = ValType.FLOAT,Value=1 },
-                   new ValueDo<bool>() { Name = "C", Type = ValType.BOOL,Value=true },
+                   new ValueDo<bool>() { Name = "c", Type = ValType.BOOL,Value=true },
             };
             var args = new ValueArgDto[]
             {

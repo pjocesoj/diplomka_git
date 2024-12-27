@@ -1,0 +1,60 @@
+﻿<Window x:Class="MainNode.Windows.FlowEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MainNode.Windows"
+        xmlns:controls="clr-namespace:MainNode.Controls"
+        xmlns:converters="clr-namespace:MainNode.Converters"
+        xmlns:viewmodels="clr-namespace:MainNode.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:FlowEditWindowViewModel}"
+        mc:Ignorable="d"
+        Title="FlowEditWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <controls:NodeListView
+                DataContext="{Binding NodeListViewModel}"
+                Grid.Row="0"/>
+
+            <controls:FlowListView
+                DataContext="{Binding FlowListViewModel}"
+                Grid.Row="1"/>
+        </Grid>
+
+        <TabControl Grid.Column="1">
+            <TabItem Header="text">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <ToolBar Grid.Row="0">
+                        <!--
+                        <Button Content="save"/>
+                        <Button Content="load"/>
+                        -->
+                        <Button Content="compile"
+                                Command="{Binding CompileFlowCommand}"/>
+                    </ToolBar>
+
+                    <TextBox Grid.Row="1"
+                             Text="{Binding FlowCode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True"
+                             AcceptsTab="True"
+                             VerticalScrollBarVisibility="Auto" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
