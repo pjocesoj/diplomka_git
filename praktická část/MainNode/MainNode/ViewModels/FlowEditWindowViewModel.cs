@@ -14,17 +14,22 @@ namespace MainNode.ViewModels
     public partial class FlowEditWindowViewModel : ObservableObject
     {
         private readonly NodeListViewModel _nodeList;
+        private readonly FlowListViewModel _flowList;
         private readonly FlowRepository _flowRepo;
-        private readonly NodeRepository _nodeRepo;
         private readonly LoopCompiler _loopCompiler;
-        public FlowEditWindowViewModel(NodeListViewModel nodeList, FlowRepository flowRepo, NodeRepository nodeRepo, LoopCompiler loopCompiler)
+        public FlowEditWindowViewModel(
+            NodeListViewModel nodeList,
+            FlowRepository flowRepo,
+            FlowListViewModel flowList,
+            LoopCompiler loopCompiler)
         {
             _nodeList = nodeList;
+            _flowList = flowList;
             _flowRepo = flowRepo;
-            _nodeRepo = nodeRepo;
             _loopCompiler = loopCompiler;
         }
         public NodeListViewModel NodeListViewModel => _nodeList;
+        public FlowListViewModel FlowListViewModel => _flowList;
 
         [ObservableProperty]
         private string _flowCode = "";
@@ -42,6 +47,7 @@ namespace MainNode.ViewModels
             {
                 MessageBox.Show(e.Message);
             }
+            _flowList.refreshFlows();
         }
 
     }
