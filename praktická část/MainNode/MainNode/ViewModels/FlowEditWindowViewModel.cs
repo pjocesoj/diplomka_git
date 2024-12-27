@@ -36,6 +36,7 @@ namespace MainNode.ViewModels
             try
             {
                 _loopCompiler.CompileMultyLine(FlowCode);
+                MessageBox.Show("compiled successfully");
             }
             catch (Exception e)
             {
