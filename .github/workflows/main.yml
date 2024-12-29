@@ -1,0 +1,124 @@
+name: Main Workflow
+
+on:
+    push:
+      branches: [ "main" ]
+    pull_request:
+      branches: [ "main" ]
+
+jobs:
+
+  changed-files:
+    runs-on: ubuntu-latest
+
+    outputs:
+      # reference: https://github.com/tj-actions/changed-files#outputs-
+      Teoreticka: ${{ steps.changed-files.outputs.Teoreticka_any_modified == 'true' }}
+      MainNode: ${{ steps.changed-files.outputs.MainNode_any_modified == 'true' }}
+      ESP: ${{ steps.changed-files.outputs.ESP_any_modified == 'true' }}
+      Emulator: ${{ steps.changed-files.outputs.Emulator_any_modified == 'true' }}
+
+ 
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: Get relevant files changed per group
+        id: changed-files
+        uses: tj-actions/changed-files@v45
+        with:
+          files_yaml: |
+            Teoreticka:
+              - 'teoreticka_cast/**'
+            MainNode:
+              - 'prakticka_cast/MainNode/**'
+            ESP:
+              - 'prakticka_cast/ESP/**'
+            Emulator:
+              - 'prakticka_cast/NodeEmulator/**'
+
+  teoreticka_cast:
+      needs: [changed-files]
+      if: ${{ needs.changed-files.outputs.Teoreticka == 'true' }}
+      
+      uses: ./.github/workflows/teoreticka-cast.yml
+      with:
+        branch: 'main'
+
+  main_node:
+     needs: [changed-files]
+     if: ${{ needs.changed-files.outputs.MainNode == 'true' }}
+     
+     uses: ./.github/workflows/mainnode.yml
+     with:
+       branch: 'main'
+
+  esp:
+    needs: [changed-files]
+    if: ${{ needs.changed-files.outputs.ESP == 'true' }}
+    
+    uses: ./.github/workflows/esp.yml
+    #with:
+    #  key: 'your-key-value'
+    #  branch: 'main'
+
+  node_emulator:
+    needs: [changed-files]
+    if: ${{ needs.changed-files.outputs.Emulator == 'true' }}
+    
+    uses: ./.github/workflows/nodeemulator.yml
+    #with:
+    #  key: 'your-key-value'
+    #  branch: 'main'
+
+  final-job:
+    needs: [teoreticka_cast, main_node, esp, node_emulator]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: download md artifact
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+            name: md-artifact
+            path: ./output
+
+      - name: download main node artifact
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+            name: main-exe-artifact
+            path: ./output
+
+      - name: download emulator artifact
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+            name: emulator-exe-artifact
+            path: ./output
+
+      - name: Display the workspace path
+        run: |
+            cd ./output
+            ls
+
+      - name: git status
+        run: |
+            git status
+            git pull
+            git status
+
+      - name: prepaire Commit
+        run: |
+              git config --local user.email "action@github.com"
+              git config --local user.name "GitHub Action"       
+              git add .
+              git status
+
+      - name: Commit
+        run: |
+          git status
+          git commit -m "Add generated file to repository"
