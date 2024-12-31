@@ -1,14 +1,19 @@
 name: Main Workflow
 
 on:
-    push:
-      branches: [ "main" ]
+#    push:
+#      branches: [ "main" ]
     pull_request:
-      branches: [ "main" ]
+#      branches: [ "main" ]
+       types: [closed]
+    pull_request_review: 
+      types: [submitted]
+    workflow_dispatch:
 
 jobs:
 
   changed-files:
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     outputs:
@@ -39,45 +44,48 @@ jobs:
 
   teoreticka_cast:
       needs: [changed-files]
-      if: ${{ needs.changed-files.outputs.Teoreticka == 'true' }}
-      
+      if: ${{ needs.changed-files.outputs.Teoreticka == 'true' || github.event_name == 'workflow_dispatch'}}     
       uses: ./.github/workflows/teoreticka-cast.yml
-      with:
-        branch: 'main'
 
   main_node:
      needs: [changed-files]
-     if: ${{ needs.changed-files.outputs.MainNode == 'true' }}
-     
+     if: ${{ needs.changed-files.outputs.MainNode == 'true' || github.event_name == 'workflow_dispatch'}}    
      uses: ./.github/workflows/mainnode.yml
-     with:
-       branch: 'main'
+#     with:
+#       branch: 'main'
 
   esp:
     needs: [changed-files]
-    if: ${{ needs.changed-files.outputs.ESP == 'true' }}
-    
+    if: ${{ needs.changed-files.outputs.ESP == 'true' || github.event_name == 'workflow_dispatch'}}   
     uses: ./.github/workflows/esp.yml
-    #with:
-    #  key: 'your-key-value'
-    #  branch: 'main'
 
   node_emulator:
     needs: [changed-files]
-    if: ${{ needs.changed-files.outputs.Emulator == 'true' }}
-    
+    if: ${{ needs.changed-files.outputs.Emulator == 'true' || github.event_name == 'workflow_dispatch' }}    
     uses: ./.github/workflows/nodeemulator.yml
-    #with:
-    #  key: 'your-key-value'
-    #  branch: 'main'
 
   final-job:
     needs: [teoreticka_cast, main_node, esp, node_emulator]
-    if: always()
+    if: always() && needs.changed-files.result == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Determine event type and branch 
+        id: branch-info 
+        run: |
+         if [ "${{ github.event_name }}" == "push" ] || [ "${{ github.event_name }}" == "workflow_dispatch" ]; then 
+            echo "Push event detected." 
+            echo "Branch name: ${{ github.ref_name }}" 
+            echo "::set-output name=branch::${{ github.ref_name }}" 
+         elif [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "Pull request event detected." 
+            echo "Destination branch (base): ${{ github.base_ref }}" 
+            echo "::set-output name=branch::${{ github.base_ref }}" 
+          else 
+            echo "Unknown event: ${{ github.event_name }}"
+          fi
 
       - name: download md artifact
         continue-on-error: true
@@ -108,7 +116,7 @@ jobs:
       - name: git status
         run: |
             git status
-            git pull
+            git pull origin ${{ steps.branch-info.outputs.branch }}
             git status
 
       - name: prepaire Commit
@@ -122,3 +130,9 @@ jobs:
         run: |
           git status
           git commit -m "Add generated file to repository"
+
+      - name: author
+        run: echo "Commit author= ${{ github.event.commits[0].author.name }}"
+
+      - name: push
+        run: git push --set-upstream origin ${{ steps.branch-info.outputs.branch }}

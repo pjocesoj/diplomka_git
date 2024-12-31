@@ -2,10 +2,10 @@ name: MainNode Workflow
 
 on:
   workflow_call:
-    inputs:
-      branch:
-        required: true
-        type: string
+#    inputs:
+#      branch:
+#        required: true
+#        type: string
 
 jobs:
   build:

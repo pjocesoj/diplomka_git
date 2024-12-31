@@ -2,10 +2,6 @@ name: Teoretická Část Workflow
 
 on:
   workflow_call:
-    inputs:
-      branch:
-        required: true
-        type: string
 
 jobs:
   build:
@@ -18,7 +14,7 @@ jobs:
 #        run: ./.github/workflows/DocxToMd2_1 -i ${{ github.workspace }}/teoreticka_cast/sablona-dp-tf-jednostranna.docx -o ./.github/workflows/output.md
 
       - name: test file
-        run: echo "Your text here" > ./.github/workflows/output.md
+        run: echo "updated at ${{ github.event.repository.updated_at}}" > ./.github/workflows/output.md
       
       - name: upload md
         uses: actions/upload-artifact@v4
