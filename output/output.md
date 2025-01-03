@@ -252,7 +252,7 @@ Souhrn práce (cca 15 řádek textu).
 
 
 
-**Design and implementation of a control system on a ****WiFi**** network**
+**Design and implementation of a control system on a WiFi network**
 
 
 
@@ -428,7 +428,9 @@ text
 
 ## MVVM
 
-Text
+Je nástupcem MVC a MVP
+
+
 
 # Hlavní uzel
 
