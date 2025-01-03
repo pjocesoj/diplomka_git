@@ -1,0 +1,23 @@
+name: Teoretická Část Workflow
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: exe
+        run: ./.github/workflows/DocxToMd2_1 -i ${{ github.workspace }}/teoreticka_cast/sablona-dp-tf-jednostranna.docx -o ./.github/workflows/output.md
+
+#      - name: test file
+#        run: echo "updated at ${{ github.event.repository.updated_at}}" > ./.github/workflows/output.md
+      
+      - name: upload md
+        uses: actions/upload-artifact@v4
+        with:
+          name: md-artifact
+          path: ./.github/workflows/output.md

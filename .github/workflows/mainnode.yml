@@ -1,0 +1,44 @@
+name: MainNode Workflow
+
+on:
+  workflow_call:
+#    inputs:
+#      branch:
+#        required: true
+#        type: string
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+#      - name: Restore dependencies
+#        run: |
+#          cd ./prakticka_cast/MainNode
+#          dotnet restore
+
+#      - name: Build
+#        run: dotnet build --no-restore
+
+      - name: Publish application
+        run: |
+          cd ./prakticka_cast/MainNode
+          dotnet publish ./MainNode -r win-x64 -c Release -o ./published-app -p:PublishSingleFile=true --self-contained false
+
+      - name: Display the workspace path
+        run: |
+            cd ./prakticka_cast/MainNode/published-app
+            dir
+
+      - name: upload publish
+        uses: actions/upload-artifact@v4
+        with:
+          name: main-exe-artifact
+          path: ./prakticka_cast/MainNode/published-app/MainNode.exe

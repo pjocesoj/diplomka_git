@@ -1,0 +1,138 @@
+name: Main Workflow
+
+on:
+#    push:
+#      branches: [ "main" ]
+    pull_request:
+#      branches: [ "main" ]
+       types: [closed]
+    pull_request_review: 
+      types: [submitted]
+    workflow_dispatch:
+
+jobs:
+
+  changed-files:
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+
+    outputs:
+      # reference: https://github.com/tj-actions/changed-files#outputs-
+      Teoreticka: ${{ steps.changed-files.outputs.Teoreticka_any_modified == 'true' }}
+      MainNode: ${{ steps.changed-files.outputs.MainNode_any_modified == 'true' }}
+      ESP: ${{ steps.changed-files.outputs.ESP_any_modified == 'true' }}
+      Emulator: ${{ steps.changed-files.outputs.Emulator_any_modified == 'true' }}
+
+ 
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: Get relevant files changed per group
+        id: changed-files
+        uses: tj-actions/changed-files@v45
+        with:
+          files_yaml: |
+            Teoreticka:
+              - 'teoreticka_cast/**'
+            MainNode:
+              - 'prakticka_cast/MainNode/**'
+            ESP:
+              - 'prakticka_cast/ESP/**'
+            Emulator:
+              - 'prakticka_cast/NodeEmulator/**'
+
+  teoreticka_cast:
+      needs: [changed-files]
+      if: ${{ needs.changed-files.outputs.Teoreticka == 'true' || github.event_name == 'workflow_dispatch'}}     
+      uses: ./.github/workflows/teoreticka-cast.yml
+
+  main_node:
+     needs: [changed-files]
+     if: ${{ needs.changed-files.outputs.MainNode == 'true' || github.event_name == 'workflow_dispatch'}}    
+     uses: ./.github/workflows/mainnode.yml
+#     with:
+#       branch: 'main'
+
+  esp:
+    needs: [changed-files]
+    if: ${{ needs.changed-files.outputs.ESP == 'true' || github.event_name == 'workflow_dispatch'}}   
+    uses: ./.github/workflows/esp.yml
+
+  node_emulator:
+    needs: [changed-files]
+    if: ${{ needs.changed-files.outputs.Emulator == 'true' || github.event_name == 'workflow_dispatch' }}    
+    uses: ./.github/workflows/nodeemulator.yml
+
+  final-job:
+    needs: [teoreticka_cast, main_node, esp, node_emulator]
+    if: always() && needs.changed-files.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Determine event type and branch 
+        id: branch-info 
+        run: |
+         if [ "${{ github.event_name }}" == "push" ] || [ "${{ github.event_name }}" == "workflow_dispatch" ]; then 
+            echo "Push event detected." 
+            echo "Branch name: ${{ github.ref_name }}" 
+            echo "::set-output name=branch::${{ github.ref_name }}" 
+         elif [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "Pull request event detected." 
+            echo "Destination branch (base): ${{ github.base_ref }}" 
+            echo "::set-output name=branch::${{ github.base_ref }}" 
+          else 
+            echo "Unknown event: ${{ github.event_name }}"
+          fi
+
+      - name: pull
+        run: |
+              git status
+              git pull origin ${{ steps.branch-info.outputs.branch }}
+              git status
+
+      - name: download md artifact
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+            name: md-artifact
+            path: ./output
+
+      - name: download main node artifact
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+            name: main-exe-artifact
+            path: ./output
+
+      - name: download emulator artifact
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+            name: emulator-exe-artifact
+            path: ./output
+
+      - name: Display the workspace path
+        run: |
+            cd ./output
+            ls
+
+      - name: prepaire Commit
+        run: |
+              git config --local user.email "action@github.com"
+              git config --local user.name "GitHub Action"       
+              git add .
+              git status
+
+      - name: Commit
+        run: |
+          git status
+          git commit -m "Add generated file to repository"
+
+      - name: author
+        run: echo "Commit author= ${{ github.event.commits[0].author.name }}"
+
+      - name: push
+        run: git push --set-upstream origin ${{ steps.branch-info.outputs.branch }}
