@@ -380,7 +380,7 @@ Soupis a definování zkratek (vyskytuje-li se jich v textu velké množství)
 
 Text text text text text text text text text text text text text text text text text text text text text text text.
 
-Test test test
+Test test test test
 
 # Cíl práce a metodika
 
