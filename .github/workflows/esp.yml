@@ -1,0 +1,14 @@
+name: ESP Workflow
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run ESP Job
+        run: echo "no pipeline implemented"
