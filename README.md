@@ -15,20 +15,20 @@ zobrazující plnění plánu
 [Commit graph](https://github.com/pjocesoj/diplomka_git/network) zobrazující historii změn
 
 ## teoretická část
-samotná práce se nachází ve složce [teoretická část](https://github.com/pjocesoj/diplomka_git/tree/main/teoretick%C3%A1%20%C4%8D%C3%A1st)
+samotná práce se nachází ve složce [teoretická část](https://github.com/pjocesoj/diplomka_git/tree/main/teoreticka_cast)
 
 ## praktická část
 realizace je tvořena několika částmi
 
-[hlavní uzel (C#)](https://github.com/pjocesoj/diplomka_git/tree/main/praktick%C3%A1%20%C4%8D%C3%A1st/MainNode)
+[hlavní uzel (C#)](https://github.com/pjocesoj/diplomka_git/tree/main/prakticka_cast/MainNode)
 
-[emulovaný uzel (C#)](https://github.com/pjocesoj/diplomka_git/tree/main/praktick%C3%A1%20%C4%8D%C3%A1st/NodeEmulator)
+[emulovaný uzel (C#)](https://github.com/pjocesoj/diplomka_git/tree/main/prakticka_cast/NodeEmulator)
 
-[ESP8266 (C++)](https://github.com/pjocesoj/diplomka_git/tree/main/praktick%C3%A1%20%C4%8D%C3%A1st/ESP)
+[ESP8266 (C++)](https://github.com/pjocesoj/diplomka_git/tree/main/prakticka_cast/ESP)
 (nutno v secret.h přepsat placeholdery)<br/>
-[node1](https://github.com/pjocesoj/diplomka_git/tree/main/praktick%C3%A1%20%C4%8D%C3%A1st/ESP/src/Node1)
+[node1](https://github.com/pjocesoj/diplomka_git/tree/main/prakticka_cast/ESP/src/Node1)
 /
-[node2](https://github.com/pjocesoj/diplomka_git/tree/main/praktick%C3%A1%20%C4%8D%C3%A1st/ESP/src/Node2)
+[node2](https://github.com/pjocesoj/diplomka_git/tree/main/prakticka_cast/ESP/src/Node2)
 (prepinani pomocí define na začátku \src\Node.h)
 
 
