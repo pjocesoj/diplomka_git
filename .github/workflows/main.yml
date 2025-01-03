@@ -87,6 +87,12 @@ jobs:
             echo "Unknown event: ${{ github.event_name }}"
           fi
 
+      - name: pull
+        run: |
+              git status
+              git pull origin ${{ steps.branch-info.outputs.branch }}
+              git status
+
       - name: download md artifact
         continue-on-error: true
         uses: actions/download-artifact@v4
@@ -112,12 +118,6 @@ jobs:
         run: |
             cd ./output
             ls
-
-      - name: git status
-        run: |
-            git status
-            git pull origin ${{ steps.branch-info.outputs.branch }}
-            git status
 
       - name: prepaire Commit
         run: |
