@@ -10,8 +10,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 7.0.x
+          
       - name: exe
-        run: ./.github/workflows/DocxToMd2_1 -i ${{ github.workspace }}/teoreticka_cast/sablona-dp-tf-jednostranna.docx -o ./.github/workflows/output.md
+        run: ./.github/workflows/DocxToMd2_1 -i ${{ github.workspace }}/teoreticka_cast/xnovm288_DP.docx -o ./.github/workflows/output.md
 
 #      - name: test file
 #        run: echo "updated at ${{ github.event.repository.updated_at}}" > ./.github/workflows/output.md
