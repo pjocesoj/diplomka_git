@@ -34,5 +34,10 @@ realizace je tvořena několika částmi
 
 *odkaz na ostatní bude přidán v budoucnu
 
+## pipeline
+tento repozitář má pipeline (Github Actions), který pod profilem *actions-user* po schválení pull requestu provádí commit obsahující výstup změněných částí do složky **output**
 
+- exe hlavního uzlu
+- exe emulovaného uzlu (běží na portu 8080)
+- md verze wordu (docx není plaintext a tudíž na něj nefunguje diff)
 
