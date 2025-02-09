@@ -1,4 +1,5 @@
 ﻿using MainNode.Logic.Compile;
+using MainNode.Logic.Interfaces;
 
 namespace MainNode.Logic.Test.Compile.Simple.Flow;
 
@@ -6,14 +7,14 @@ namespace MainNode.Logic.Test.Compile.Simple.Flow;
 public partial class LoopCompilerFlowTests
 {
     protected LoopCompiler _loopCompiler;
-    protected FlowRepository _flowRepo;
+    protected IFlowRepository _flowRepo;
 
     [TestInitialize]
     public void Initialize()
     {
-        _flowRepo = new FlowRepository();
-        var nodeRepo = new NodeRepository();
-        var funcRepo = new FuncRepo();
+        _flowRepo = TestDependencyResolver.Resolve<IFlowRepository>();
+        var nodeRepo = TestDependencyResolver.Resolve<INodeRepository>();
+        var funcRepo = TestDependencyResolver.Resolve<FuncRepo>();
         _loopCompiler = new LoopCompiler(_flowRepo, nodeRepo, funcRepo);
 
         _loopCompiler.Compile("int i=1+2");

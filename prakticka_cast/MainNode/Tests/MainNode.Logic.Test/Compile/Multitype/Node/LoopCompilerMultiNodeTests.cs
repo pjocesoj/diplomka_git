@@ -1,4 +1,5 @@
 ﻿using MainNode.Logic.Compile;
+using MainNode.Logic.Interfaces;
 
 namespace MainNode.Logic.Test.Compile.Multitype.Node
 {
@@ -6,16 +7,16 @@ namespace MainNode.Logic.Test.Compile.Multitype.Node
     public partial class LoopCompilerMultiNodeTests
     {
         protected LoopCompiler _loopCompiler;
-        protected FlowRepository _flowRepo;
-        protected NodeRepository _nodeRepo;
+        protected IFlowRepository _flowRepo;
+        protected INodeRepository _nodeRepo;
         protected MockNode _mockNode;
 
         [TestInitialize]
         public void Initialize()
         {
-            _flowRepo = new FlowRepository();
-            _nodeRepo = new NodeRepository();
-            var funcRepo = new FuncRepo();
+            _flowRepo = TestDependencyResolver.Resolve<IFlowRepository>();
+            _nodeRepo = TestDependencyResolver.Resolve<INodeRepository>();
+            var funcRepo = TestDependencyResolver.Resolve<FuncRepo>();
             _loopCompiler = new LoopCompiler(_flowRepo, _nodeRepo, funcRepo);
 
             var comm = new Communication.HttpNodeCommunication();//dočasně než udělám mock komunikace
