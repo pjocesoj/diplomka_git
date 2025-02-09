@@ -18,10 +18,10 @@ namespace MainNode.Logic.Compile
     public partial class LoopCompiler
     {
         private IFlowRepository _flowRepo = new FlowRepository();
-        private NodeRepository _nodeRepo = new NodeRepository();
+        private INodeRepository _nodeRepo = new NodeRepository();
         private FuncRepo _funcRepo = new FuncRepo();
 
-        public LoopCompiler(IFlowRepository flowRepo, NodeRepository nodeRepo, FuncRepo funcRepo)
+        public LoopCompiler(IFlowRepository flowRepo, INodeRepository nodeRepo, FuncRepo funcRepo)
         {
             _flowRepo = flowRepo;
             _nodeRepo = nodeRepo;

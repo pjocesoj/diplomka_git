@@ -14,12 +14,13 @@ namespace MainNode.ViewModels
     public partial class MainWindowsViewModel : ObservableObject
     {
         private readonly IFlowRepository _flowRepo;
-        private readonly NodeRepository _nodeRepo;
+        private readonly INodeRepository _nodeRepo;
         private readonly NodeListViewModel _nodeList;
         private readonly LoopExecutor _loopExecutor;
         private readonly LoopCompiler _loopCompiler;
-        public MainWindowsViewModel(IFlowRepository flowRepo,
-            NodeRepository nodeRepo,
+        public MainWindowsViewModel(
+            IFlowRepository flowRepo,
+            INodeRepository nodeRepo,
             LoopExecutor loopExecutor,
             LoopCompiler loopCompiler,
             NodeListViewModel nodeList)

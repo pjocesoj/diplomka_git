@@ -4,6 +4,7 @@ using MainNode.Communication.Helpers;
 using MainNode.Communication.Interfaces;
 using MainNode.Logic.Do;
 using MainNode.Logic.Extentions;
+using MainNode.Logic.Interfaces;
 using System.Text.Json.Serialization;
 
 namespace MainNode.Logic
@@ -23,7 +24,7 @@ namespace MainNode.Logic
             }
         }
 
-        public string Name { get; set; } = $"node{NodeRepository.Count}";
+        public string Name { get; set; } = $"node{INodeRepository.Count}";
 
         private string _address;
         /// <summary>

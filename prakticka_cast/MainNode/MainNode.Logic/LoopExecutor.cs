@@ -10,7 +10,7 @@ namespace MainNode.Logic
     public class LoopExecutor
     {
         private readonly IFlowRepository _flowRepo;
-        private readonly NodeRepository _nodeRepo;
+        private readonly INodeRepository _nodeRepo;
 
         public event EventHandler<EventArgs> LoopFinished;
         public bool IsRunning { get; private set; } = false;
@@ -22,7 +22,7 @@ namespace MainNode.Logic
         public int Period { get; set; } = 1000;
         private Timer _timer;
         private bool _lock = false;
-        public LoopExecutor(IFlowRepository flowRepo, NodeRepository nodeRepo)
+        public LoopExecutor(IFlowRepository flowRepo, INodeRepository nodeRepo)
         {
             _flowRepo = flowRepo;
             _nodeRepo = nodeRepo;
