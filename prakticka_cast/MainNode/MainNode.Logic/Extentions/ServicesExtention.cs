@@ -1,4 +1,6 @@
 ﻿using MainNode.Logic.Compile;
+using MainNode.Logic.Repos;
+using MainNode.Logic.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MainNode.Logic.Extentions
@@ -10,7 +12,7 @@ namespace MainNode.Logic.Extentions
             MainNode.Communication.Extentions.ServicesExtention.Komunikace(services);
             services.AddTransient<Node>();
             services.AddSingleton<NodeRepository>();
-            services.AddSingleton<FlowRepository>();
+            services.AddSingleton<IFlowRepository,FlowRepository>();
             services.AddSingleton<LoopExecutor>();
             services.AddSingleton<LoopCompiler>();
             services.AddSingleton<FuncRepo>();

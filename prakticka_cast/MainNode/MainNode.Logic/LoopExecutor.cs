@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using MainNode.Logic.Enums;
+using MainNode.Logic.Interfaces;
 
 namespace MainNode.Logic
 {
@@ -8,7 +9,7 @@ namespace MainNode.Logic
     /// </summary>
     public class LoopExecutor
     {
-        private readonly FlowRepository _flowRepo;
+        private readonly IFlowRepository _flowRepo;
         private readonly NodeRepository _nodeRepo;
 
         public event EventHandler<EventArgs> LoopFinished;
@@ -21,7 +22,7 @@ namespace MainNode.Logic
         public int Period { get; set; } = 1000;
         private Timer _timer;
         private bool _lock = false;
-        public LoopExecutor(FlowRepository flowRepo, NodeRepository nodeRepo)
+        public LoopExecutor(IFlowRepository flowRepo, NodeRepository nodeRepo)
         {
             _flowRepo = flowRepo;
             _nodeRepo = nodeRepo;

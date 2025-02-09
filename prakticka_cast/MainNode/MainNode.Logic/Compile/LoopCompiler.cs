@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
 using MainNode.Logic.Enums;
 using System.Diagnostics;
 using MainNode.Logic.Extentions;
-using System.Globalization;
+using MainNode.Logic.Repos;
+using MainNode.Logic.Interfaces;
 
 namespace MainNode.Logic.Compile
 {
@@ -17,11 +17,11 @@ namespace MainNode.Logic.Compile
     /// </summary>
     public partial class LoopCompiler
     {
-        private FlowRepository _flowRepo = new FlowRepository();
+        private IFlowRepository _flowRepo = new FlowRepository();
         private NodeRepository _nodeRepo = new NodeRepository();
         private FuncRepo _funcRepo = new FuncRepo();
 
-        public LoopCompiler(FlowRepository flowRepo, NodeRepository nodeRepo, FuncRepo funcRepo)
+        public LoopCompiler(IFlowRepository flowRepo, NodeRepository nodeRepo, FuncRepo funcRepo)
         {
             _flowRepo = flowRepo;
             _nodeRepo = nodeRepo;

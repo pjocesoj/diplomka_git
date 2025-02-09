@@ -6,17 +6,19 @@ using System.Windows;
 using Microsoft.Win32;
 using System.IO;
 using MainNode.Logic.Compile;
+using MainNode.Logic.Repos;
+using MainNode.Logic.Interfaces;
 
 namespace MainNode.ViewModels
 {
     public partial class MainWindowsViewModel : ObservableObject
     {
-        private readonly FlowRepository _flowRepo;
+        private readonly IFlowRepository _flowRepo;
         private readonly NodeRepository _nodeRepo;
         private readonly NodeListViewModel _nodeList;
         private readonly LoopExecutor _loopExecutor;
         private readonly LoopCompiler _loopCompiler;
-        public MainWindowsViewModel(FlowRepository flowRepo,
+        public MainWindowsViewModel(IFlowRepository flowRepo,
             NodeRepository nodeRepo,
             LoopExecutor loopExecutor,
             LoopCompiler loopCompiler,

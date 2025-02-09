@@ -1,13 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using MainNode.Logic;
 using MainNode.Logic.Evaluation;
+using MainNode.Logic.Interfaces;
 
 namespace MainNode.ViewModels
 {
     public partial class FlowListViewModel:ObservableObject
     {
-        private readonly FlowRepository _FlowRepo;
-        public FlowListViewModel(FlowRepository flowRepo)
+        private readonly IFlowRepository _FlowRepo;
+        public FlowListViewModel(IFlowRepository flowRepo)
         {
             _FlowRepo = flowRepo;
         }
