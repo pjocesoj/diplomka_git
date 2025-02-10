@@ -13,7 +13,7 @@ namespace MainNode.Logic.Extentions
             services.AddTransient<Node>();
             services.AddSingleton<INodeRepository,NodeRepository>();
             services.AddSingleton<IFlowRepository,FlowRepository>();
-            services.AddSingleton<LoopExecutor>();
+            services.AddSingleton<ILoopExecutor,LoopExecutor>();
             services.AddSingleton<LoopCompiler>();
             services.AddSingleton<FuncRepo>();
         }

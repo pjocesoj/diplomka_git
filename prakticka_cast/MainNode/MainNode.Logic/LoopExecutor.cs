@@ -7,7 +7,7 @@ namespace MainNode.Logic
     /// <summary>
     /// objekt zajišťující běh uživatelem zadané smyčky
     /// </summary>
-    public class LoopExecutor
+    public class LoopExecutor : ILoopExecutor
     {
         private readonly IFlowRepository _flowRepo;
         private readonly INodeRepository _nodeRepo;

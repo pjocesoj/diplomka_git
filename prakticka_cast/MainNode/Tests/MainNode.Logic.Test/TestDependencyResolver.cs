@@ -19,7 +19,7 @@ namespace MainNode.Logic.Test
                      services.AddTransient<Node>();
                      services.AddTransient<INodeRepository, NodeRepository>();
                      services.AddTransient<IFlowRepository, FlowRepository>();
-                     services.AddTransient<LoopExecutor>();
+                     services.AddTransient<ILoopExecutor,LoopExecutor>();
                      services.AddTransient<LoopCompiler>();
                      services.AddTransient<FuncRepo>();
                  })

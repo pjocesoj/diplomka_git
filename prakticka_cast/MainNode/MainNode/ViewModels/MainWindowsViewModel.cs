@@ -6,7 +6,6 @@ using System.Windows;
 using Microsoft.Win32;
 using System.IO;
 using MainNode.Logic.Compile;
-using MainNode.Logic.Repos;
 using MainNode.Logic.Interfaces;
 
 namespace MainNode.ViewModels
@@ -16,12 +15,12 @@ namespace MainNode.ViewModels
         private readonly IFlowRepository _flowRepo;
         private readonly INodeRepository _nodeRepo;
         private readonly NodeListViewModel _nodeList;
-        private readonly LoopExecutor _loopExecutor;
+        private readonly ILoopExecutor _loopExecutor;
         private readonly LoopCompiler _loopCompiler;
         public MainWindowsViewModel(
             IFlowRepository flowRepo,
             INodeRepository nodeRepo,
-            LoopExecutor loopExecutor,
+            ILoopExecutor loopExecutor,
             LoopCompiler loopCompiler,
             NodeListViewModel nodeList)
         {
