@@ -11,6 +11,10 @@ namespace MainNode.Logic.Test
     {
         private static readonly IHost _host;
 
+        /// <summary>
+        /// aby se nemusel vytvářet pro každý test nový je static <br/>
+        /// to sebou nese problém že service nemohou být singleton
+        /// </summary>
         static TestDependencyResolver()
         {
             _host = Host.CreateDefaultBuilder()
@@ -20,7 +24,7 @@ namespace MainNode.Logic.Test
                      services.AddTransient<INodeRepository, NodeRepository>();
                      services.AddTransient<IFlowRepository, FlowRepository>();
                      services.AddTransient<ILoopExecutor,LoopExecutor>();
-                     services.AddTransient<LoopCompiler>();
+                     //services.AddTransient<ILoopCompiler,LoopCompiler>();
                      services.AddTransient<FuncRepo>();
                  })
                  .Build();

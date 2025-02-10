@@ -15,7 +15,7 @@ namespace MainNode.Logic.Compile
     /// <summary>
     /// překládá uživatelem zadaný vstup do podoby, kterou lze vykonat
     /// </summary>
-    public partial class LoopCompiler
+    public partial class LoopCompiler : ILoopCompiler
     {
         private IFlowRepository _flowRepo = new FlowRepository();
         private INodeRepository _nodeRepo = new NodeRepository();
@@ -309,7 +309,7 @@ namespace MainNode.Logic.Compile
             for (int i = 0; i < lines.Length; i++)
             {
                 var line = lines[i];
-                line=line.TrimStart();
+                line = line.TrimStart();
                 try
                 {
                     Compile(line);

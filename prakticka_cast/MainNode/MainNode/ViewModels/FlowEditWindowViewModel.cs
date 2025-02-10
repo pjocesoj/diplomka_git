@@ -14,12 +14,12 @@ namespace MainNode.ViewModels
         private readonly NodeListViewModel _nodeList;
         private readonly FlowListViewModel _flowList;
         private readonly IFlowRepository _flowRepo;
-        private readonly LoopCompiler _loopCompiler;
+        private readonly ILoopCompiler _loopCompiler;
         public FlowEditWindowViewModel(
             NodeListViewModel nodeList,
             IFlowRepository flowRepo,
             FlowListViewModel flowList,
-            LoopCompiler loopCompiler)
+            ILoopCompiler loopCompiler)
         {
             _nodeList = nodeList;
             _flowList = flowList;

@@ -6,7 +6,7 @@ namespace MainNode.Logic.Test.Compile.Simple.Flow;
 [TestClass]
 public partial class LoopCompilerFlowTests
 {
-    protected LoopCompiler _loopCompiler;
+    protected ILoopCompiler _loopCompiler;
     protected IFlowRepository _flowRepo;
 
     [TestInitialize]

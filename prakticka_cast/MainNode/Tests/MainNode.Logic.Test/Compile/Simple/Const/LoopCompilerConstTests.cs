@@ -6,7 +6,7 @@ namespace MainNode.Logic.Test.Compile.Simple.Const;
 [TestClass]
 public partial class LoopCompilerConstTests
 {
-    protected LoopCompiler _loopCompiler;
+    protected ILoopCompiler _loopCompiler;
     protected IFlowRepository _flowRepo;
 
     [TestInitialize]

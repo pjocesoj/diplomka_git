@@ -6,7 +6,7 @@ namespace MainNode.Logic.Test.Compile.Multitype.Const;
 [TestClass]
 public class LoopCompilerMultiConstTests
 {
-    protected LoopCompiler _loopCompiler;
+    protected ILoopCompiler _loopCompiler;
     protected IFlowRepository _flowRepo;
 
     [TestInitialize]

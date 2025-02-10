@@ -6,7 +6,7 @@ namespace MainNode.Logic.Test.Compile.Multitype.Node
     [TestClass]
     public partial class LoopCompilerMultiNodeTests
     {
-        protected LoopCompiler _loopCompiler;
+        protected ILoopCompiler _loopCompiler;
         protected IFlowRepository _flowRepo;
         protected INodeRepository _nodeRepo;
         protected MockNode _mockNode;

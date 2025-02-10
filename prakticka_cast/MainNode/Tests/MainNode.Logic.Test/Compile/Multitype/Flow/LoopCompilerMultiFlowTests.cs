@@ -6,7 +6,7 @@ namespace MainNode.Logic.Test.Compile.Multitype.Flow;
 [TestClass]
 public class LoopCompilerMultiFlowTests
 {
-    protected LoopCompiler _loopCompiler;
+    protected ILoopCompiler _loopCompiler;
     protected IFlowRepository _flowRepo;
 
     [TestInitialize]
