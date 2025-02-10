@@ -1,8 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MainNode.Logic;
 using MainNode.Logic.Evaluation;
-using MainNode.Windows;
+using MainNode.Logic.Interfaces;
 using System.Windows;
 
 namespace MainNode.ViewModels
@@ -10,9 +9,9 @@ namespace MainNode.ViewModels
     public partial class FlowViewModel : ObservableObject
     {
         private FlowResult _flow;
-        private readonly FlowRepository _repo;
+        private readonly IFlowRepository _repo;
         private readonly FlowListViewModel _flowList;
-        public FlowViewModel(FlowResult flow, FlowRepository repo, FlowListViewModel flowList)
+        public FlowViewModel(FlowResult flow, IFlowRepository repo, FlowListViewModel flowList)
         {
             _flow = flow;
             _repo = repo;

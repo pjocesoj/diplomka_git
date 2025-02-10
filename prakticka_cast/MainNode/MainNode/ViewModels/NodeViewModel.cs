@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MainNode.Logic;
+using MainNode.Logic.Interfaces;
 using MainNode.Windows;
 using System.Windows;
 
@@ -9,9 +10,9 @@ namespace MainNode.ViewModels
     public partial class NodeViewModel : ObservableObject
     {
         private Node _node;
-        private readonly NodeRepository _repo;
+        private readonly INodeRepository _repo;
         private readonly NodeListViewModel _nodeList;
-        public NodeViewModel(Node node, NodeRepository repo, NodeListViewModel nodeList)
+        public NodeViewModel(Node node, INodeRepository repo, NodeListViewModel nodeList)
         {
             _node = node;
             _repo = repo;

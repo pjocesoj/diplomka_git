@@ -1,10 +1,10 @@
-﻿using MainNode.Logic.Do;
-using MainNode.Logic.Enums;
+﻿using MainNode.Logic.Enums;
 using MainNode.Logic.Evaluation;
+using MainNode.Logic.Interfaces;
 
-namespace MainNode.Logic
+namespace MainNode.Logic.Repos
 {
-    public class FlowRepository
+    public class FlowRepository : IFlowRepository
     {
         public List<FlowResult> Results { get; private set; } = new List<FlowResult>();
         //public Dictionary<Node, List<EndPointDo>> Inputs { get; private set; } = new Dictionary<Node, List<EndPointDo>>();

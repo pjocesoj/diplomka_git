@@ -1,13 +1,11 @@
 ﻿using MainNode.Logic.Compile;
-using MainNode.Logic;
-using System;
-using System.Collections.Generic;
+
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows;
+using MainNode.Logic.Interfaces;
 
 namespace MainNode.ViewModels
 {
@@ -15,13 +13,13 @@ namespace MainNode.ViewModels
     {
         private readonly NodeListViewModel _nodeList;
         private readonly FlowListViewModel _flowList;
-        private readonly FlowRepository _flowRepo;
-        private readonly LoopCompiler _loopCompiler;
+        private readonly IFlowRepository _flowRepo;
+        private readonly ILoopCompiler _loopCompiler;
         public FlowEditWindowViewModel(
             NodeListViewModel nodeList,
-            FlowRepository flowRepo,
+            IFlowRepository flowRepo,
             FlowListViewModel flowList,
-            LoopCompiler loopCompiler)
+            ILoopCompiler loopCompiler)
         {
             _nodeList = nodeList;
             _flowList = flowList;

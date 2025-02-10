@@ -1,9 +1,10 @@
 ﻿using MainNode.Exceptions;
+using MainNode.Logic.Interfaces;
 using System.Text.Json;
 
-namespace MainNode.Logic
+namespace MainNode.Logic.Repos
 {
-    public class NodeRepository
+    public class NodeRepository : INodeRepository
     {
         public static int Count { get; private set; } = 0;
         public List<Node> Nodes { get; private set; } = new List<Node>();

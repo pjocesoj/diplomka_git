@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using MainNode.Logic;
+using MainNode.Logic.Interfaces;
 
 namespace MainNode.ViewModels
 {
     public partial class NodeListViewModel:ObservableObject
     {
-        private readonly NodeRepository _nodeRepo;
-        public NodeListViewModel(NodeRepository nodeRepo)
+        private readonly INodeRepository _nodeRepo;
+        public NodeListViewModel(INodeRepository nodeRepo)
         {
             _nodeRepo = nodeRepo;
         }
