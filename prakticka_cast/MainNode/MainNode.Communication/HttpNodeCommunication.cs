@@ -87,7 +87,7 @@ namespace MainNode.Communication
             if (args == null) { return string.Empty; }
 
             StringBuilder sb = new StringBuilder("?");
-            char name = 'a';//pro snížení množství dat použit 1 písmený název (node zná pořadí)
+            char name = 'a';//pro snížení množství dat použit 1 písmenný název (node zná pořadí)
             foreach (var v in args.Ints) { sb.Append($"{name++}={v}"); }
             foreach (var v in args.Floats) { sb.Append($"{name++}={v}"); }
             foreach (var v in args.Bools) { sb.Append($"{name++}={v}"); }
