@@ -5,7 +5,7 @@
 #include <type_traits>
 #include <stdexcept>
 
-// serializace si neumi poradit s generikou kdyz je ctrida rozdelena na .h a .cpp
+// serializace si neumi poradit s generikou kdyz je trida rozdelena na .h a .cpp
 template <class T>
 class ValueDto
 {
