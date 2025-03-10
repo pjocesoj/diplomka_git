@@ -88,7 +88,7 @@ namespace MainNode.Logic
         }
         public async Task GetAllValues()
         {
-            var gets = Array.FindAll(EndPoints, (x => x.Type == EndpointType.GET));
+            var gets = Array.FindAll(EndPoints, (x => x.Type == EndPointType.GET));
             foreach (var get in gets)
             {
                 await GetValues(get);
