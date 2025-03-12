@@ -24,7 +24,7 @@
             return $"{typeof(T).Name} {Name}";
         }
 
-        public override Type getT()
+        public override Type GetT()
         {
             return typeof(T);
         }
@@ -34,6 +34,6 @@
     {
         public string? Name { get; set; } = "val";
 
-        public abstract Type getT();
+        public abstract Type GetT();
     }
 }
