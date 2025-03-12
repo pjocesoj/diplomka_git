@@ -124,19 +124,6 @@ namespace MainNode.Communication
                 throw;
             }
         }
-        public async Task<bool> SetValues(EndPointPath path, ValuesDto vals)
-        {
-            string url = $"http://{Address}{path.Path}";
-            try
-            {
-                var ret = await postAsync<ValuesDto>(url, vals);
-                return true;
-                //return ret;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
+
     }
 }

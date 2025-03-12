@@ -95,18 +95,6 @@ namespace MainNode.Logic
             }
         }
 
-        public async Task SetValues(EndPointDo EP)
-        {
-            try
-            {
-                bool ok = await _comm.SetValues(EP.Path, Mapper.Map(EP.Arguments));
-            }
-            catch (Exception e)
-            {
-                ConnectionStatus.Failure(e.Message, EP);
-            }
-        }
-
         /// <summary>
         /// pro pomalé endpointy, které mohou běžet během iterace smyčky <br/>
         /// načte hodnoty, ale neprovede aktualizaci, aby nenarušil integritu výpočtu
