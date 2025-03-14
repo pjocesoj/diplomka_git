@@ -23,8 +23,8 @@ namespace MainNode.Logic.Test.HardcodedFlow
         {
             Flow<float> flowC = new Flow<float>("C", new List<Operation<float>>()
             {
-                new SubflowOperation<float,int>((FlowResult<int>)A,(float a,int b)=>{return a+b; }),
-                new SubflowOperation<float,float>((FlowResult<float>)B, FuncFloatFloat.Plus)
+                new SubFlowOperation<float,int>((FlowResult<int>)A,(float a,int b)=>{return a+b; }),
+                new SubFlowOperation<float,float>((FlowResult<float>)B, FuncFloatFloat.Plus)
             });
             var resC = new FlowResult<float>(flowC);
 

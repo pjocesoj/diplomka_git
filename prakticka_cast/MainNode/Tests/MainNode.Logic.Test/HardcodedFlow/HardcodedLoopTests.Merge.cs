@@ -37,7 +37,7 @@ namespace MainNode.Logic.Test.HardcodedFlow
         {
             Flow<bool> flowD = new Flow<bool>("D", new List<Operation<bool>>()
                 {
-                    new SubflowOperation<bool,bool>((FlowResult<bool>)C,FuncBoolBool.Or),
+                    new SubFlowOperation<bool,bool>((FlowResult<bool>)C,FuncBoolBool.Or),
                     new Operation<bool>(true, FuncBoolBool.And),
                 });
             var resD = new FlowResult<bool>(flowD);

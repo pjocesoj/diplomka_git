@@ -2,12 +2,12 @@
 
 namespace MainNode.Logic.Evaluation
 {
-    public class MergeflowOperation<T, U,V> : Operation<V> where T : struct where U : struct where V : struct
+    public class MergeFlowOperation<T, U, V> : Operation<V> where T : struct where U : struct where V : struct
     {
-        public FlowResult<T> FlowA { get; set; }
-        public FlowResult<U> FlowB { get; set; }
-        public new Func<T, U, V> Func { get; set; }
-        public MergeflowOperation(FlowResult<T> A,FlowResult<U> B, Func<T, U, V> func)
+        public FlowResult<T> FlowA { get; protected set; }
+        public FlowResult<U> FlowB { get; protected set; }
+        public new Func<T, U, V> Func { get; protected set; }
+        public MergeFlowOperation(FlowResult<T> A, FlowResult<U> B, Func<T, U, V> func)
         {
             FlowA = A;
             FlowB = B;
@@ -22,7 +22,7 @@ namespace MainNode.Logic.Evaluation
         {
             var a = FlowA.Value;
             var b = FlowB.Value;
-            return Func(a.Value,b.Value);
+            return Func(a.Value, b.Value);
         }
     }
 }
