@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using MainNode.Logic.Enums;
 using System.Diagnostics;
-using MainNode.Logic.Extentions;
+using MainNode.Logic.Extensions;
 using MainNode.Logic.Repos;
 using MainNode.Logic.Interfaces;
 

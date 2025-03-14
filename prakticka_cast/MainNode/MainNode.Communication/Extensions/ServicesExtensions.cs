@@ -1,9 +1,9 @@
 ﻿using MainNode.Communication.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MainNode.Communication.Extentions
+namespace MainNode.Communication.Extensions
 {
-    public static class ServicesExtention
+    public static class ServicesExtensions
     {
         public static void Komunikace(this IServiceCollection services)
         {

@@ -1,7 +1,7 @@
 ﻿using MainNode.Logic.Do;
 using MainNode.Logic.Enums;
 using MainNode.Logic.Evaluation;
-using MainNode.Logic.Extentions;
+using MainNode.Logic.Extensions;
 
 namespace MainNode.Logic.Compile
 {

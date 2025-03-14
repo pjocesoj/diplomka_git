@@ -1,8 +1,8 @@
 ﻿using MainNode.Logic.Do;
 
-namespace MainNode.Logic.Extentions
+namespace MainNode.Logic.Extensions
 {
-    public static class ValueExtentions
+    public static class ValueExtensions
     {
         public static ValueDo GetValueByname(this ValuesDo values, string name)
         {

@@ -1,6 +1,6 @@
 ﻿using MainNode.Communication.Dto;
 using MainNode.Logic.Do;
-using MainNode.Logic.Extentions;
+using MainNode.Logic.Extensions;
 
 namespace MainNode.Logic
 {

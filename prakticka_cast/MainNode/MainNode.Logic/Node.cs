@@ -3,7 +3,7 @@ using MainNode.Communication.Enums;
 using MainNode.Communication.Helpers;
 using MainNode.Communication.Interfaces;
 using MainNode.Logic.Do;
-using MainNode.Logic.Extentions;
+using MainNode.Logic.Extensions;
 using MainNode.Logic.Interfaces;
 using System.Text.Json.Serialization;
 

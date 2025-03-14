@@ -1,4 +1,4 @@
-﻿using MainNode.Extentions;
+﻿using MainNode.Extensions;
 using MainNode.ViewModels;
 using MainNode.Windows;
 using Microsoft.Extensions.DependencyInjection;

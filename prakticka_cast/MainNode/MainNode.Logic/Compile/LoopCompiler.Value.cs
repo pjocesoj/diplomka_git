@@ -1,6 +1,6 @@
 ﻿using MainNode.Logic.Do;
 using MainNode.Logic.Enums;
-using MainNode.Logic.Extentions;
+using MainNode.Logic.Extensions;
 using System.Globalization;
 
 namespace MainNode.Logic.Compile
