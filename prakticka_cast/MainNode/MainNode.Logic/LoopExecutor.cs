@@ -61,7 +61,7 @@ namespace MainNode.Logic
             var normal = _flowRepo.Inputs[EnpointLoadTypeEnum.NORMAL];
             foreach (var ep in normal)
             {
-                await ep.getValues();
+                await ep.GetValues();
             }
             var slow = _flowRepo.Inputs[EnpointLoadTypeEnum.SLOW];
             foreach (var ep in slow)
@@ -75,7 +75,7 @@ namespace MainNode.Logic
             var normal = _flowRepo.Inputs[EnpointLoadTypeEnum.NORMAL];
             foreach (var ep in normal)
             {
-                await ep.getValues();
+                await ep.GetValues();
             }
         }
     }

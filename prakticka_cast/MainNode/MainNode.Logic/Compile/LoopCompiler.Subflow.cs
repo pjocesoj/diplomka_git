@@ -209,7 +209,7 @@ namespace MainNode.Logic.Compile
             var R = (Flow)cacheR.CachedValue;
 
             var typeR = R.getT();
-            var f = _funcRepo.GetFunction(typeR, sub.getT(), cacheO.Value.ToString());
+            var f = _funcRepo.GetFunction(typeR, sub.GetT(), cacheO.Value.ToString());
 
             //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
             var A = typeR.DefaultValue();

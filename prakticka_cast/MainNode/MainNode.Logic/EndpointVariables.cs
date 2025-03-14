@@ -40,7 +40,7 @@ namespace MainNode.Logic
             IsActual = true;
         }
 
-        public async Task getValues()
+        public async Task GetValues()
         {
             await Node.GetValues(EndPoint);
         }
