@@ -66,7 +66,7 @@ namespace MainNode.Logic
             var slow = _flowRepo.Inputs[EnpointLoadTypeEnum.SLOW];
             foreach (var ep in slow)
             {
-                if (ep.Loaded) { _ = ep.UpdateValues(); }
+                if (ep.Loaded) { ep.UpdateValues(); }
                 if (!ep.Loading) { _ = ep.Load(); }
             }
         }

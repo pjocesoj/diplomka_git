@@ -30,7 +30,7 @@ namespace MainNode.Logic
             Loading = false;
         }
 
-        public async Task UpdateValues()
+        public void UpdateValues()
         {
             if (_data == null) { return; }
             EndPoint.Values.Ints.CopyValues(_data.Ints);
