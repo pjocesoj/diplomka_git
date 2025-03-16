@@ -32,16 +32,15 @@ namespace MainNode.Logic.Compile
         #region finite automata
         private Stack<StackValue> _stack = new Stack<StackValue>();
         private TransitionFunc[,] _table;
-        private int _subflowCounter = 0;
+        private int _subFlowCounter = 0;
         private void InitTable()
         {
-            //char[] chars = { 'Ø', 'A', '0', '.', '(', ')', '+', '-', '*', '/', '<', '>', '=' };
             string[] chars = { "Ø", "A-Z<br/>a-z", "0-9", ".", "(", ")", "+-*/", "&\\|", "!", "<", ">", "=", " " };
 
             string[] states = { "Ø", "N", "E", "V", "+", "-", "*", "/", "<", ">", "=", ">=", "<=" };
-            int numberOfstates = Enum.GetValues(typeof(LCStateEnum)).Length;
+            int numberOfStates = Enum.GetValues(typeof(LCStateEnum)).Length;
 
-            _table = new TransitionFunc[chars.Length, numberOfstates];
+            _table = new TransitionFunc[chars.Length, numberOfStates];
 
             //nemohu určit jestli je to node, subflow nebo true/false
             _table[getId('a'), (int)LCStateEnum.NULL] = new TransitionFunc(LCStateEnum.UNKNOWN, AddChar, StackValueTypeEnum.UNKNOWN);
@@ -303,7 +302,7 @@ namespace MainNode.Logic.Compile
             }
             //saveFlow(' ', state, null);
         }
-        public void CompileMultyLine(string input)
+        public void CompileMultiLine(string input)
         {
             var lines = input.Split(new string[] { Environment.NewLine, ";" }, StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < lines.Length; i++)

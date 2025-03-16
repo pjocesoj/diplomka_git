@@ -9,12 +9,12 @@ namespace MainNode.Logic.Compile
     {
         void subflowStart(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            _subflowCounter++;
+            _subFlowCounter++;
             _stack.Push(new StackValue { Type = StackValueTypeEnum.SUBFLOW_START });
         }
         void subflowEnd(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            _subflowCounter--;
+            _subFlowCounter--;
 
             if (_stack.Count < 4)
             {
@@ -196,7 +196,7 @@ namespace MainNode.Logic.Compile
 
         private void addSubflow()
         {
-            if (_subflowCounter > 0)
+            if (_subFlowCounter > 0)
             {
                 throw new NotImplementedException("at this moment subflow inside subflow is not allowed");
             }

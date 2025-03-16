@@ -113,7 +113,7 @@ namespace MainNode.Logic.Compile
         }
         private void addValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            if (_subflowCounter > 0 && state != LCStateEnum.SUBFLOW)
+            if (_subFlowCounter > 0 && state != LCStateEnum.SUBFLOW)
             {
                 AddChar(c, state, pushType);
                 return;
