@@ -28,7 +28,7 @@ namespace MainNode.Logic.Test.HardcodedFlow
         {
             Flow<bool> flowC = new Flow<bool>("C", new List<Operation<bool>>()
                 {
-                    new MergeflowOperation<int, float, bool>((FlowResult<int>)A, (FlowResult<float>)B, (a, b) => { return a > b; })
+                    new MergeFlowOperation<int, float, bool>((FlowResult<int>)A, (FlowResult<float>)B, (a, b) => { return a > b; })
             });
             var resC = new FlowResult<bool>(flowC);
             return _flowRepo.AddFlow(flowC);
