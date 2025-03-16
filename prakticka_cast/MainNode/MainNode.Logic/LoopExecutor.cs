@@ -72,7 +72,8 @@ namespace MainNode.Logic
         }
         private async Task writeData()
         {
-            var normal = _flowRepo.Inputs[EnpointLoadTypeEnum.NORMAL];
+            var normal = _flowRepo.Outputs[EnpointLoadTypeEnum.NORMAL];
+            //var normal = _flowRepo.Inputs[EnpointLoadTypeEnum.NORMAL];
             foreach (var ep in normal)
             {
                 await ep.GetValues();

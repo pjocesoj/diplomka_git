@@ -140,7 +140,8 @@ namespace MainNode.Logic.Compile
         {
             var cacheV = PopValue(StackValueTypeEnum.VALUE);
             var ret = validateValue(cacheV);
-            addInputOutput(c);
+            addInputOutput(state == LCStateEnum.EQUALS_SIGN ? '=' : c);
+            //addInputOutput(c);
             return ret;
         }
         private ValueDo validateValue(StackValue cacheV)
