@@ -64,5 +64,12 @@ namespace MainNode.ViewModels
         {
             App.Current.ShowWindow<NodeInfoWindow>(this);
         }
+
+        /*
+        partial void OnAddressChanged(string value)
+        {
+            _node.Address = value;
+        }
+        */
     }
 }

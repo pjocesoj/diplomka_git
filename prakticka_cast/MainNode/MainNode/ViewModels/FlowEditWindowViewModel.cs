@@ -45,7 +45,7 @@ namespace MainNode.ViewModels
             {
                 MessageBox.Show(e.Message);
             }
-            _flowList.refreshFlows();
+            _flowList.RefreshFlows();
         }
 
     }

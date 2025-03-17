@@ -13,13 +13,6 @@ namespace MainNode.ViewModels
         }
         public List<FlowViewModel> Flows => _FlowRepo.Results.Select(x => new FlowViewModel(x, _FlowRepo, this)).ToList();
 
-        /*
-        public List<FlowViewModel> Ints => _FlowRepo.Results
-                    .Where(x => x is FlowResult<int>)
-                    .Select(x => new FlowViewModel(x, _FlowRepo, this))
-                    .ToList();
-        */
-
-        public void refreshFlows() => OnPropertyChanged(nameof(Flows));
+        public void RefreshFlows() => OnPropertyChanged(nameof(Flows));
     }
 }

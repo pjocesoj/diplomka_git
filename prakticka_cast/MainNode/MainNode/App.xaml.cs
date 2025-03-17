@@ -33,7 +33,7 @@ namespace MainNode
                      services.AddTransient<NodeInfoWindow>();
                      services.AddSingleton<NodeListViewModel>();
 
-                     services.AddSingleton<FlowViewModel>();
+                     services.AddTransient<FlowViewModel>();
                      services.AddSingleton<FlowListViewModel>();
 
                      services.AddSingleton<FlowEditWindow>();
