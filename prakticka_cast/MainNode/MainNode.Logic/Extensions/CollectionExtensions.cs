@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MainNode.Logic.Extentions
+namespace MainNode.Logic.Extensions
 {
-    public static class CollectionExtentions
+    public static class CollectionExtensions
     {
         public static void CopyValues<T>(this IEnumerable<ValueDo<T>> dest, IEnumerable<T> src)
         {

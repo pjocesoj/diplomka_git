@@ -5,11 +5,11 @@ namespace MainNode.Logic.Evaluation
 {
     public class FlowMerge<T,U,V>:FlowResult<V> where T : struct where U : struct where V : struct
     {
-        public MergeflowOperation<T,U,V> Operation { get; }
+        public MergeFlowOperation<T,U,V> Operation { get; }
 
         public FlowMerge(FlowResult<T> A, FlowResult<U> B, Func<T, U, V> func):base(null)
         {
-            Operation = new MergeflowOperation<T, U, V>(A, B, func);
+            Operation = new MergeFlowOperation<T, U, V>(A, B, func);
             _valueDo = new ValueDo<V>($"{A.Flow.Name}_{B.Flow.Name}_out", default);
         }
 

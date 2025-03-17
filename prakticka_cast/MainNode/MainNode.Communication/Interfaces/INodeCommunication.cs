@@ -10,6 +10,5 @@ namespace MainNode.Communication.Interfaces
 
         Task<EndPointDto[]?> GetEndPoints();
         Task<ValuesDto?> GetValues(EndPointPath path,int? delay, ValuesDto? args = null);
-        Task<bool> SetValues(EndPointPath path, ValuesDto vals);
     }
 }

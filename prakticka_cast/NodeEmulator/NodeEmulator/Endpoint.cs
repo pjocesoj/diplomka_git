@@ -30,7 +30,7 @@ namespace NodeEmulator
 
         public Control View { get; set; }
 
-        public Endpoint(HttpMethodEnum http,EndpointType type, string url, ValueDto[] vals, ValueArgDto[] args, int? delay=null)
+        public Endpoint(HttpMethodEnum http,EndPointType type, string url, ValueDto[] vals, ValueArgDto[] args, int? delay=null)
         {
             Info = new EndPointDto()
             {

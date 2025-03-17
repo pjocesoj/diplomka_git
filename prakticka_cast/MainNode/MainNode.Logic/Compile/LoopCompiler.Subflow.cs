@@ -1,7 +1,7 @@
 ﻿using MainNode.Logic.Do;
 using MainNode.Logic.Enums;
 using MainNode.Logic.Evaluation;
-using MainNode.Logic.Extentions;
+using MainNode.Logic.Extensions;
 
 namespace MainNode.Logic.Compile
 {
@@ -9,12 +9,12 @@ namespace MainNode.Logic.Compile
     {
         void subflowStart(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            _subflowCounter++;
+            _subFlowCounter++;
             _stack.Push(new StackValue { Type = StackValueTypeEnum.SUBFLOW_START });
         }
         void subflowEnd(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
-            _subflowCounter--;
+            _subFlowCounter--;
 
             if (_stack.Count < 4)
             {
@@ -196,7 +196,7 @@ namespace MainNode.Logic.Compile
 
         private void addSubflow()
         {
-            if (_subflowCounter > 0)
+            if (_subFlowCounter > 0)
             {
                 throw new NotImplementedException("at this moment subflow inside subflow is not allowed");
             }
@@ -209,7 +209,7 @@ namespace MainNode.Logic.Compile
             var R = (Flow)cacheR.CachedValue;
 
             var typeR = R.getT();
-            var f = _funcRepo.GetFunction(typeR, sub.getT(), cacheO.Value.ToString());
+            var f = _funcRepo.GetFunction(typeR, sub.GetT(), cacheO.Value.ToString());
 
             //místo T nemohu použít proměnnou Type a explicitně rozepisovat všechny možné kombinace by bylo na dlouho
             var A = typeR.DefaultValue();

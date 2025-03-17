@@ -1,6 +1,6 @@
 ﻿using MainNode.Logic.Do;
 using MainNode.Logic.Evaluation;
-using MainNode.Logic.Extentions;
+using MainNode.Logic.Extensions;
 
 namespace MainNode.Logic.Compile
 {
@@ -35,7 +35,7 @@ namespace MainNode.Logic.Compile
 
         void createOperation(ValueDo value)
         {
-            var typeB = value.getT();
+            var typeB = value.GetT();
             var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
             if (_stack.Count > 0 && _stack.Peek().Type == StackValueTypeEnum.OPERATOR)
             {
@@ -55,7 +55,7 @@ namespace MainNode.Logic.Compile
         }
         void createOperation(FlowResult value)
         {
-            var typeB = value.getT();
+            var typeB = value.GetT();
             var cacheO = PopValue(StackValueTypeEnum.OPERATOR);
             if (_stack.Peek().Type == StackValueTypeEnum.OPERATOR)
             {
@@ -76,7 +76,7 @@ namespace MainNode.Logic.Compile
 
         FlowResult createOperation(ValueDo value, string op)
         {
-            var typeB = value.getT();
+            var typeB = value.GetT();
 
             var f = _funcRepo.GetFunction(typeB, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
@@ -91,7 +91,7 @@ namespace MainNode.Logic.Compile
         }
         FlowResult createOperation(FlowResult value, string op)
         {
-            var typeB = value.getT();
+            var typeB = value.GetT();
 
             var f = _funcRepo.GetFunction(typeB, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
@@ -111,8 +111,8 @@ namespace MainNode.Logic.Compile
          */
         void createOperation(FlowResult A, FlowResult B, string op)
         {
-            var typeA = A.getT();
-            var typeB = B.getT();
+            var typeA = A.GetT();
+            var typeB = B.GetT();
 
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
@@ -123,8 +123,8 @@ namespace MainNode.Logic.Compile
         }
         void createOperation(ValueDo A, FlowResult B, string op)
         {
-            var typeA = A.getT();
-            var typeB = B.getT();
+            var typeA = A.GetT();
+            var typeB = B.GetT();
 
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
@@ -138,8 +138,8 @@ namespace MainNode.Logic.Compile
         }
         void createOperation(FlowResult A, ValueDo B, string op)
         {
-            var typeA = A.getT();
-            var typeB = B.getT();
+            var typeA = A.GetT();
+            var typeB = B.GetT();
 
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();
@@ -153,8 +153,8 @@ namespace MainNode.Logic.Compile
         }
         void createOperation(ValueDo A, ValueDo B, string op)
         {
-            var typeA = A.getT();
-            var typeB = B.getT();
+            var typeA = A.GetT();
+            var typeB = B.GetT();
 
             var f = _funcRepo.GetFunction(typeA, typeB, op);
             var typeR = f.GetType().GetGenericArguments().Last();

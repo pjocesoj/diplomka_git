@@ -69,7 +69,7 @@ namespace MainNode.Logic.Compile
             {
                 throw new ArgumentException("Invalid types");
             }
-            R.Operations.Add(new SubflowOperation<V, U>(B, (Func<V, U, V>)f));
+            R.Operations.Add(new SubFlowOperation<V, U>(B, (Func<V, U, V>)f));
 
             /*
             if (typeof(U) == typeof(V))
@@ -123,7 +123,7 @@ namespace MainNode.Logic.Compile
         #region flow flow
         private static void AddFuncion<T, U, V>(Delegate f, FlowResult<T> A, FlowResult<U> B, Flow<V> R) where T : struct where U : struct where V : struct
         {
-            R.Operations.Add(new MergeflowOperation<T, U, V>(A, B, (Func<T, U, V>)f));
+            R.Operations.Add(new MergeFlowOperation<T, U, V>(A, B, (Func<T, U, V>)f));
         }
         private static void AddFuncion<U, V>(Delegate f, FlowResult A, FlowResult<U> B, Flow<V> R) where U : struct where V : struct
         {

@@ -19,7 +19,7 @@ namespace MainNode.ViewModels
         }
         public string Name =>_flow.Name;
 
-        public Type Type => _flow.getT();
+        public Type Type => _flow.GetT();
 
 
         [RelayCommand]

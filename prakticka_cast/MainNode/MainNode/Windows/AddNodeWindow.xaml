@@ -6,6 +6,7 @@
         xmlns:controls="clr-namespace:MainNode.Controls"
         xmlns:viewmodels="clr-namespace:MainNode.ViewModels"
         xmlns:local="clr-namespace:MainNode.Windows"
+        d:DataContext="{d:DesignInstance Type=viewmodels:NodeViewModel}"
         mc:Ignorable="d"
         Title="AddNodeWindow" Height="450" Width="400">
 

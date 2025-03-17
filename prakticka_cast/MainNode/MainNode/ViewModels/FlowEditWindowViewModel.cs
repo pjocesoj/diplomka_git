@@ -38,14 +38,14 @@ namespace MainNode.ViewModels
             _flowRepo.Clear();
             try
             {
-                _loopCompiler.CompileMultyLine(FlowCode);
+                _loopCompiler.CompileMultiLine(FlowCode);
                 MessageBox.Show("compiled successfully");
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
-            _flowList.refreshFlows();
+            _flowList.RefreshFlows();
         }
 
     }

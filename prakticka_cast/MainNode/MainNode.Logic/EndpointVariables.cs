@@ -1,6 +1,6 @@
 ﻿using MainNode.Communication.Dto;
 using MainNode.Logic.Do;
-using MainNode.Logic.Extentions;
+using MainNode.Logic.Extensions;
 
 namespace MainNode.Logic
 {
@@ -30,7 +30,7 @@ namespace MainNode.Logic
             Loading = false;
         }
 
-        public async Task UpdateValues()
+        public void UpdateValues()
         {
             if (_data == null) { return; }
             EndPoint.Values.Ints.CopyValues(_data.Ints);
@@ -40,7 +40,7 @@ namespace MainNode.Logic
             IsActual = true;
         }
 
-        public async Task getValues()
+        public async Task GetValues()
         {
             await Node.GetValues(EndPoint);
         }

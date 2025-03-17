@@ -3,7 +3,7 @@ using MainNode.Communication.Enums;
 using MainNode.Communication.Helpers;
 using MainNode.Communication.Interfaces;
 using MainNode.Logic.Do;
-using MainNode.Logic.Extentions;
+using MainNode.Logic.Extensions;
 using MainNode.Logic.Interfaces;
 using System.Text.Json.Serialization;
 
@@ -88,22 +88,10 @@ namespace MainNode.Logic
         }
         public async Task GetAllValues()
         {
-            var gets = Array.FindAll(EndPoints, (x => x.Type == EndpointType.GET));
+            var gets = Array.FindAll(EndPoints, (x => x.Type == EndPointType.GET));
             foreach (var get in gets)
             {
                 await GetValues(get);
-            }
-        }
-
-        public async Task SetValues(EndPointDo EP)
-        {
-            try
-            {
-                bool ok = await _comm.SetValues(EP.Path, Mapper.Map(EP.Arguments));
-            }
-            catch (Exception e)
-            {
-                ConnectionStatus.Failure(e.Message, EP);
             }
         }
 

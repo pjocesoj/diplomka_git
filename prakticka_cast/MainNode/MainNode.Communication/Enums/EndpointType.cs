@@ -3,7 +3,7 @@
 namespace MainNode.Communication.Enums;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum EndpointType
+public enum EndPointType
 {
     GET,
     SET

@@ -9,7 +9,7 @@ namespace MainNode.Logic.Compile
     internal class TransitionFunc
     {
         public LCStateEnum Next { get; set; }
-        public Action<char,LCStateEnum, StackValueTypeEnum?> Func { get; set; }
+        public Action<char, LCStateEnum, StackValueTypeEnum?> Func { get; set; }
 
         public StackValueTypeEnum? PushValue { get; set; }
         public TransitionFunc(LCStateEnum next, Action<char, LCStateEnum, StackValueTypeEnum?> func, StackValueTypeEnum? pushValue)

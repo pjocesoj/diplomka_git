@@ -1,4 +1,4 @@
-﻿using MainNode.Extentions;
+﻿using MainNode.Extensions;
 using MainNode.ViewModels;
 using MainNode.Windows;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,7 +33,7 @@ namespace MainNode
                      services.AddTransient<NodeInfoWindow>();
                      services.AddSingleton<NodeListViewModel>();
 
-                     services.AddSingleton<FlowViewModel>();
+                     services.AddTransient<FlowViewModel>();
                      services.AddSingleton<FlowListViewModel>();
 
                      services.AddSingleton<FlowEditWindow>();

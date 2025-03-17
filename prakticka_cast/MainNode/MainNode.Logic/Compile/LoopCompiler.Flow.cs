@@ -10,7 +10,7 @@ namespace MainNode.Logic.Compile
         {
             var val = validateValue(c, state, pushType);
             var name = $"<{val.Name}>";
-            createFlow(val.getT(), name);
+            createFlow(val.GetT(), name);
             var res = _flowRepo.GetFlowByName(name);
             res.BindOutput(val);
         }

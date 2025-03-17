@@ -35,7 +35,7 @@ namespace MainNode.Logic
             }
         }
         /// <summary>
-        /// vsechny chyby co nastaly
+        /// všechny chyby co nastaly
         /// </summary>
         public List<ErrorData> Fails { get; private set; } = new List<ErrorData>();
 

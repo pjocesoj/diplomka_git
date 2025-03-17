@@ -3,13 +3,13 @@ using MainNode.Logic.Repos;
 using MainNode.Logic.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MainNode.Logic.Extentions
+namespace MainNode.Logic.Extensions
 {
-    public static class ServicesExtention
+    public static class ServicesExtensions
     {
         public static void Logika(this IServiceCollection services)
         {
-            MainNode.Communication.Extentions.ServicesExtention.Komunikace(services);
+            MainNode.Communication.Extensions.ServicesExtensions.Komunikace(services);
             services.AddTransient<Node>();
             services.AddSingleton<INodeRepository, NodeRepository>();
             services.AddSingleton<IFlowRepository, FlowRepository>();

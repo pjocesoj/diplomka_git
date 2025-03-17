@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace MainNode.Extentions
+namespace MainNode.Extensions
 {
-    public static class ServicesExtentions
+    public static class ServicesExtensions
     {
         public static void AddServices(this IServiceCollection services)
         {
-            MainNode.Logic.Extentions.ServicesExtention.Logika(services);
+            MainNode.Logic.Extensions.ServicesExtensions.Logika(services);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MainNode.Logic.Extentions;
+using MainNode.Logic.Extensions;
 using MainNode.Logic.Interfaces;
 using MainNode.Logic.Repos;
 using Microsoft.Extensions.Hosting;

@@ -26,7 +26,7 @@ namespace MainNode.Logic.Evaluation
                 _valueDo = Flow.Output;
             }
         }
-        public override Type getT() => typeof(T);
+        public override Type GetT() => typeof(T);
         public override ValueDo<T> Value
         {
             get
@@ -68,7 +68,7 @@ namespace MainNode.Logic.Evaluation
     {
         public abstract string Name { get; }
         public abstract ValueDo Value { get; }
-        public abstract Type getT();
+        public abstract Type GetT();
 
         public abstract void NewIteration();
         public abstract void BindOutput(ValueDo bind);

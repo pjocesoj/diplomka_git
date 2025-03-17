@@ -25,7 +25,7 @@ namespace MainNode.Logic.Repos
             }
             catch (ApplicationException ex) { throw new ApplicationException(ex.Message, ex); }
             catch (CommunicationException ex) { throw new CommunicationException("cant access node", ex); }
-            catch (InvalidDataException ex) { throw new InvalidDataException("cant read recaived data", ex); }
+            catch (InvalidDataException ex) { throw new InvalidDataException("cant read received data", ex); }
             catch (Exception ex) { throw new Exception(ex.Message, ex); }
 
             if (node.EndPoints.Length == 0) { throw new NoEndPointException("no endpoints"); }
