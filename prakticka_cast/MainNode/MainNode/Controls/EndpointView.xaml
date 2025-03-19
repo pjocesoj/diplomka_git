@@ -50,7 +50,7 @@
             <!--#endregion-->
             <!--#region arguments-->
             <Border Background="White" Grid.Row="1" Grid.Column="1">
-                <Label Content="values"
+                <Label Content="arguments"
                        Padding="0"
                        HorizontalAlignment="Center"/>
             </Border>

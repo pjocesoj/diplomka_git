@@ -50,9 +50,10 @@ namespace MainNode.Logic
             _flowRepo.Run();
             await writeData();
             Iteration++;
+            _iterationStopwatch.Stop();
+
             LoopFinished?.Invoke(this, new EventArgs());
 
-            _iterationStopwatch.Stop();
             Debug.WriteLine($"Iteration {Iteration} took {_iterationStopwatch.ElapsedMilliseconds} ms");
             _lock = false;
         }
@@ -77,6 +78,12 @@ namespace MainNode.Logic
             foreach (var ep in normal)
             {
                 await ep.GetValues();
+            }
+            var slow = _flowRepo.Outputs[EnpointLoadTypeEnum.SLOW];
+            foreach (var ep in slow)
+            {
+                if (ep.Loaded) { ep.UpdateValues(); }
+                if (!ep.Loading) { _ = ep.Load(); }
             }
         }
     }
