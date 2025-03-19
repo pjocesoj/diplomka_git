@@ -3,7 +3,7 @@
 #include "HardwareSerial.h"
 #include "../Lib/EndPointDto.h"
 #include "../../global.h"
-#include "../../SharedHttpEndpoints.h"
+#include "../SharedHttpEndpoints.h"
 #include "../../helpers.h"
 #include "../Abstract/Deserializer.h"
 #include "../Abstract/CommunicationHandler.h"

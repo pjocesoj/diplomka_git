@@ -1,10 +1,10 @@
 #include "SharedHttpEndpoints.h"
 
-#include "global.h"
-#include "src/Abstract/Serializer.h"
-#include "src/Abstract/Logger.h"
-#include "src/Abstract/Arduino/LoggerExtend.h"
-#include "src/Abstract/CommunicationHandler.h"
+#include "../global.h"
+#include "Abstract/Serializer.h"
+#include "Abstract/Logger.h"
+#include "Abstract/Arduino/LoggerExtend.h"
+#include "Abstract/CommunicationHandler.h"
 
 
 

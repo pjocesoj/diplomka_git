@@ -5,7 +5,7 @@
 #include "secret.h" //git update-index --assume-unchanged secret.h
 #include "helpers.h"
 #include "global.h" //global var
-#include "SharedHttpEndpoints.h"
+#include "src/SharedHttpEndpoints.h"
 #include "src/Node.h"
 
 #include "src/Abstract/CommunicationHandler.h"
