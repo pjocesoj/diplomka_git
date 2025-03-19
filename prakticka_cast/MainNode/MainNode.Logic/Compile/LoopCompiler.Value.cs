@@ -139,11 +139,12 @@ namespace MainNode.Logic.Compile
         private ValueDo validateValue(char c, LCStateEnum state, StackValueTypeEnum? pushType)
         {
             var cacheV = PopValue(StackValueTypeEnum.VALUE);
-            var ret = validateValue(cacheV);
-            addInputOutput(c);
+            var ret = validateValue(cacheV, state);
+            addInputOutput(state == LCStateEnum.EQUALS_SIGN ? '=' : c);
+            //addInputOutput(c);
             return ret;
         }
-        private ValueDo validateValue(StackValue cacheV)
+        private ValueDo validateValue(StackValue cacheV, LCStateEnum state)
         {
             ValueDo val = null;
 
@@ -156,7 +157,14 @@ namespace MainNode.Logic.Compile
                 var cacheEp = PopValue(StackValueTypeEnum.ENDPOINT);
                 var ep = (EndPointDo)cacheEp.CachedValue;
 
-                val = ep.Values.GetValueByname(cacheV.Value.ToString());
+                if (state == LCStateEnum.EQUALS_SIGN)
+                {
+                    val = ep.Arguments.GetValueByname(cacheV.Value.ToString());
+                }
+                else
+                {                 
+                    val = ep.Values.GetValueByname(cacheV.Value.ToString());
+                }
             }
             else
             {
