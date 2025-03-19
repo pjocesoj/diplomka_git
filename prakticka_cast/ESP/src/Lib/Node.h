@@ -3,7 +3,7 @@
 #ifndef NODE_H_
 #define NODE_H_
 
-#include "Lib/EndPointDto.h"
+#include "EndPointDto.h"
 
 /**
  * @brief inicializace nodu (pridani endpointu)
