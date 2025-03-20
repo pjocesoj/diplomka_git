@@ -37,7 +37,7 @@ void setup()
 
 void loop()
 {
-  communicationHandler.loop();
+  communicationHandler.Loop();
 }
 
 /**
@@ -48,7 +48,7 @@ __attribute__((weak)) void WaitToConnect()
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(500);
-    Serial.println("Connecting..");
+    Serial.println("Connecting...");
   }
 }
 

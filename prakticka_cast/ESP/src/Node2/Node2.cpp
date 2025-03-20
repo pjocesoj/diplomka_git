@@ -36,7 +36,7 @@ void setValues()
     Serial.println("setValue");
 
 char body[512];
-    int bl = communicationHandler.getBody(body, 512);
+    int bl = communicationHandler.GetBody(body, 512);
     Deserialize(body, _set);
 
     printEndpoint(_set);

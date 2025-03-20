@@ -27,7 +27,7 @@ void handleRootPath()
     Log(head);
 
     char body[512];
-    int bl = communicationHandler.getBody(body,512);
+    int bl = communicationHandler.GetBody(body,512);
     Log(body);
 
     communicationHandler.SendOk("hello world");
