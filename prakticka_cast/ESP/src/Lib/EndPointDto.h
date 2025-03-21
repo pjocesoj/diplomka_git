@@ -28,9 +28,13 @@ public:
   EndPointType Type = EndPointType::EP_TYPE_GET;
   const char *URL = "GetVal";
 
-  std::vector<ValueDto<int> *> Ints;
-  std::vector<ValueDto<float> *> Floats;
-  std::vector<ValueDto<bool> *> Bools;
+  std::vector<ValueDto<int> *> Val_Ints;
+  std::vector<ValueDto<float> *> Val_Floats;
+  std::vector<ValueDto<bool> *> Val_Bools;
+
+  std::vector<ValueDto<int> *> Arg_Ints;
+  std::vector<ValueDto<float> *> Arg_Floats;
+  std::vector<ValueDto<bool> *> Arg_Bools;
 
   std::optional<int> Delay;
 

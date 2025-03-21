@@ -37,9 +37,9 @@ void getDhtValuesNew()
 	float humid = _dhtWrapper.GetHumid();
 	long age = _dhtWrapper.GetDataAge();
 
-	_dhtNew->Floats[0]->Value = temp;
-	_dhtNew->Floats[1]->Value = humid;
-	_dhtNew->Ints[0]->Value = age;
+	_dhtNew->Val_Floats[0]->Value = temp;
+	_dhtNew->Val_Floats[1]->Value = humid;
+	_dhtNew->Val_Ints[0]->Value = age;
 
 	sendEndpointValues(_dhtNew);
 
@@ -53,9 +53,9 @@ void getDhtValuesAny()
 	float humid = _dhtWrapper.GetHumid();
 	long age = _dhtWrapper.GetDataAge();
 
-	_dhtAny->Floats[0]->Value = temp;
-	_dhtAny->Floats[1]->Value = humid;
-	_dhtAny->Ints[0]->Value = age;
+	_dhtAny->Val_Floats[0]->Value = temp;
+	_dhtAny->Val_Floats[1]->Value = humid;
+	_dhtAny->Val_Ints[0]->Value = age;
 
 	sendEndpointValues(_dhtAny);
 
@@ -64,9 +64,9 @@ void getDhtValuesAny()
 EndPointDto *create_getDhtNew()
 {
 	_dhtNew = new EndPointDto(GET, "/getDhtValuesNew", 2100);
-	_dhtNew->Floats.push_back(new ValueDto<float>("temp", 0));
-	_dhtNew->Floats.push_back(new ValueDto<float>("humid", 0));
-	_dhtNew->Ints.push_back(new ValueDto<int>("age", 0));
+	_dhtNew->Val_Floats.push_back(new ValueDto<float>("temp", 0));
+	_dhtNew->Val_Floats.push_back(new ValueDto<float>("humid", 0));
+	_dhtNew->Val_Ints.push_back(new ValueDto<int>("age", 0));
 
 	endpoints.push_back(_dhtNew);
 
@@ -76,9 +76,9 @@ EndPointDto *create_getDhtNew()
 EndPointDto *create_getDhtAny()
 {
 	_dhtAny = new EndPointDto(GET, "/getDhtValuesAny");
-	_dhtAny->Floats.push_back(new ValueDto<float>("temp", 0));
-	_dhtAny->Floats.push_back(new ValueDto<float>("humid", 0));
-	_dhtAny->Ints.push_back(new ValueDto<int>("age", 0));
+	_dhtAny->Val_Floats.push_back(new ValueDto<float>("temp", 0));
+	_dhtAny->Val_Floats.push_back(new ValueDto<float>("humid", 0));
+	_dhtAny->Val_Ints.push_back(new ValueDto<int>("age", 0));
 
 	endpoints.push_back(_dhtAny);
 

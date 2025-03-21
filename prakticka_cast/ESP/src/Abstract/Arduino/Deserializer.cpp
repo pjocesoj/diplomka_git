@@ -10,7 +10,7 @@ void Deserialize(const char* json, EndPointDto *ep)
   int j=0;
   for(int i : array1)   
   {
-    ep->Ints[j]->Value=i;
+    ep->Arg_Ints[j]->Value=i;
     j++;
   }
 
@@ -18,7 +18,7 @@ void Deserialize(const char* json, EndPointDto *ep)
   j=0;
   for(float i : array2) 
   {
-    ep->Floats[j]->Value=i;
+    ep->Arg_Floats[j]->Value=i;
     j++;
   }
 
@@ -26,7 +26,7 @@ void Deserialize(const char* json, EndPointDto *ep)
   j=0;
   for(bool i : array3) 
   {
-    ep->Bools[j]->Value=i;
+    ep->Arg_Bools[j]->Value=i;
     j++;
   }
 }

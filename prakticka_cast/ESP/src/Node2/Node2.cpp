@@ -21,8 +21,8 @@ void getValues()
 EndPointDto *test_get()
 {
     EndPointDto *e1 = new EndPointDto(GET, "/getValues");
-    e1->Ints.push_back(new ValueDto<int>("a", 10));
-    e1->Ints.push_back(new ValueDto<int>("b", 20));
+    e1->Val_Ints.push_back(new ValueDto<int>("a", 10));
+    e1->Val_Ints.push_back(new ValueDto<int>("b", 20));
     endpoints.push_back(e1);
 
     communicationHandler.StartListening(e1->URL, getValues);
@@ -46,10 +46,10 @@ char body[512];
 EndPointDto *test_set()
 {
     EndPointDto *e2 = new EndPointDto(POST, "/setValues", EP_TYPE_SET);
-    e2->Ints.push_back(new ValueDto<int>("a", 1));
-    e2->Ints.push_back(new ValueDto<int>("b", 2));
-    e2->Floats.push_back(new ValueDto<float>("c", 3.14));
-    e2->Bools.push_back(new ValueDto<bool>("B1", true));
+    e2->Arg_Ints.push_back(new ValueDto<int>("a", 1));
+    e2->Arg_Ints.push_back(new ValueDto<int>("b", 2));
+    e2->Arg_Floats.push_back(new ValueDto<float>("c", 3.14));
+    e2->Arg_Bools.push_back(new ValueDto<bool>("B1", true));
     endpoints.push_back(e2);
     communicationHandler.StartListening(e2->URL, setValues);
     _set = e2;
