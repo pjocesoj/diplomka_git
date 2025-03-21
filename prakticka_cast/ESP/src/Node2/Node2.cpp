@@ -45,7 +45,7 @@ char body[512];
 }
 EndPointDto *test_set()
 {
-    EndPointDto *e2 = new EndPointDto(POST, "/setValues");
+    EndPointDto *e2 = new EndPointDto(POST, "/setValues", EP_TYPE_SET);
     e2->Ints.push_back(new ValueDto<int>("a", 1));
     e2->Ints.push_back(new ValueDto<int>("b", 2));
     e2->Floats.push_back(new ValueDto<float>("c", 3.14));

@@ -87,6 +87,7 @@ void Serialize(EndPointDto *ep,JsonObject &jsonObject)
 {
     jsonObject["HTTP"] = ep->HTTP;
     jsonObject["URL"] = ep->URL;
+    jsonObject["Type"] = ep->Type;
 
     if (ep->Delay.has_value())
     {
@@ -115,6 +116,7 @@ void SerializeInfo(EndPointDto *ep,JsonObject &jsonObject)
 {
     jsonObject["HTTP"] = ep->HTTP;
     jsonObject["URL"] = ep->URL;
+    jsonObject["Type"] = ep->Type;
 
     if (ep->Delay.has_value())
     {

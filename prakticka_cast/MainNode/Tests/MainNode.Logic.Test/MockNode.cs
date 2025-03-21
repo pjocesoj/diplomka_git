@@ -40,7 +40,7 @@ namespace MainNode.Logic.Test
             var get = new EndPointDo
             {
                 Path = new Communication.Dto.HttpEndPointPath() { Path = "/getValuesG" },
-                Type = Communication.Enums.EndPointType.GET,
+                Type = Communication.Enums.EndPointType.EP_TYPE_GET,
                 Values = new ValuesDo(),
                 Arguments = new ValuesDo()
             };
@@ -82,7 +82,7 @@ namespace MainNode.Logic.Test
             var slow = new EndPointDo
             {
                 Path = new Communication.Dto.HttpEndPointPath() { Path = "/slow" },
-                Type = Communication.Enums.EndPointType.GET,
+                Type = Communication.Enums.EndPointType.EP_TYPE_GET,
                 Values = new ValuesDo(),
                 Arguments = new ValuesDo(),
                 Delay = 1100

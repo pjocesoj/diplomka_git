@@ -12,4 +12,9 @@ typedef enum
 	BOOL,
 	FLOAT
 } ValTypeEnum;
+
+typedef enum{
+	EP_TYPE_GET,
+	EP_TYPE_SET
+}EndPointType;
 #endif
