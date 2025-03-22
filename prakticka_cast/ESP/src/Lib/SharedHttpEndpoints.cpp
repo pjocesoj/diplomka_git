@@ -1,10 +1,10 @@
 #include "SharedHttpEndpoints.h"
 
-#include "global.h"
-#include "src/Abstract/Serializer.h"
-#include "src/Abstract/Logger.h"
-#include "src/Abstract/Arduino/LoggerExtend.h"
-#include "src/Abstract/CommunicationHandler.h"
+#include "../../global.h"
+#include "../Abstract/Serializer.h"
+#include "../Abstract/Logger.h"
+//#include "../Abstract/Arduino/LoggerExtend.h"
+#include "../Abstract/CommunicationHandler.h"
 
 
 
@@ -27,7 +27,7 @@ void handleRootPath()
     Log(head);
 
     char body[512];
-    int bl = communicationHandler.getBody(body,512);
+    int bl = communicationHandler.GetBody(body,512);
     Log(body);
 
     communicationHandler.SendOk("hello world");

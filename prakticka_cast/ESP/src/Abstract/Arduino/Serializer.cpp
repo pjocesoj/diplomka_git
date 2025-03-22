@@ -87,6 +87,7 @@ void Serialize(EndPointDto *ep,JsonObject &jsonObject)
 {
     jsonObject["HTTP"] = ep->HTTP;
     jsonObject["URL"] = ep->URL;
+    jsonObject["Type"] = ep->Type;
 
     if (ep->Delay.has_value())
     {
@@ -94,19 +95,36 @@ void Serialize(EndPointDto *ep,JsonObject &jsonObject)
     }
 
     JsonArray vals = jsonObject["Vals"].to<JsonArray>();
-    for (auto &obj : ep->Ints)
+    for (auto &obj : ep->Val_Ints)
     {
         JsonObject nestedJsonObject = vals.add<JsonObject>();
         Serialize(obj,nestedJsonObject);
     }
-    for (auto &obj : ep->Floats)
+    for (auto &obj : ep->Val_Floats)
     {
         JsonObject nestedJsonObject = vals.add<JsonObject>();
         Serialize(obj,nestedJsonObject);
     }
-    for (auto &obj : ep->Bools)
+    for (auto &obj : ep->Val_Bools)
     {
         JsonObject nestedJsonObject = vals.add<JsonObject>();
+        Serialize(obj,nestedJsonObject);
+    }
+
+    JsonArray Args = jsonObject["Args"].to<JsonArray>();
+    for (auto &obj : ep->Arg_Ints)
+    {
+        JsonObject nestedJsonObject = Args.add<JsonObject>();
+        Serialize(obj,nestedJsonObject);
+    }
+    for (auto &obj : ep->Arg_Floats)
+    {
+        JsonObject nestedJsonObject = Args.add<JsonObject>();
+        Serialize(obj,nestedJsonObject);
+    }
+    for (auto &obj : ep->Arg_Bools)
+    {
+        JsonObject nestedJsonObject = Args.add<JsonObject>();
         Serialize(obj,nestedJsonObject);
     }
 }
@@ -115,6 +133,7 @@ void SerializeInfo(EndPointDto *ep,JsonObject &jsonObject)
 {
     jsonObject["HTTP"] = ep->HTTP;
     jsonObject["URL"] = ep->URL;
+    jsonObject["Type"] = ep->Type;
 
     if (ep->Delay.has_value())
     {
@@ -122,19 +141,36 @@ void SerializeInfo(EndPointDto *ep,JsonObject &jsonObject)
     }
 
     JsonArray vals = jsonObject["Vals"].to<JsonArray>();
-    for (auto &obj : ep->Ints)
+    for (auto &obj : ep->Val_Ints)
     {
         JsonObject nestedJsonObject = vals.add<JsonObject>();
         SerializeInfo(obj,nestedJsonObject);
     }
-    for (auto &obj : ep->Floats)
+    for (auto &obj : ep->Val_Floats)
     {
         JsonObject nestedJsonObject = vals.add<JsonObject>();
         SerializeInfo(obj,nestedJsonObject);
     }
-    for (auto &obj : ep->Bools)
+    for (auto &obj : ep->Val_Bools)
     {
         JsonObject nestedJsonObject = vals.add<JsonObject>();
+        SerializeInfo(obj,nestedJsonObject);
+    }
+
+    JsonArray Args = jsonObject["Args"].to<JsonArray>();
+    for (auto &obj : ep->Arg_Ints)
+    {
+        JsonObject nestedJsonObject = Args.add<JsonObject>();
+        SerializeInfo(obj,nestedJsonObject);
+    }
+    for (auto &obj : ep->Arg_Floats)
+    {
+        JsonObject nestedJsonObject = Args.add<JsonObject>();
+        SerializeInfo(obj,nestedJsonObject);
+    }
+    for (auto &obj : ep->Arg_Bools)
+    {
+        JsonObject nestedJsonObject = Args.add<JsonObject>();
         SerializeInfo(obj,nestedJsonObject);
     }
 }
@@ -142,17 +178,17 @@ void SerializeInfo(EndPointDto *ep,JsonObject &jsonObject)
 void SerializeValue(EndPointDto *ep,JsonObject &jsonObject)
 {
     JsonArray ints = jsonObject["Ints"].to<JsonArray>();
-    for (auto &obj : ep->Ints)
+    for (auto &obj : ep->Val_Ints)
     {
         ints.add(obj->Value);
     }
     JsonArray floats = jsonObject["Floats"].to<JsonArray>();
-    for (auto &obj : ep->Floats)
+    for (auto &obj : ep->Val_Floats)
     {
         floats.add(obj->Value);
     }
     JsonArray bools = jsonObject["Bools"].to<JsonArray>();
-    for (auto &obj : ep->Bools)
+    for (auto &obj : ep->Val_Bools)
     {
         bools.add(obj->Value);
     }

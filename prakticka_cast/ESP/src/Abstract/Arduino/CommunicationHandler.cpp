@@ -23,12 +23,18 @@ void CommunicationHandler::SendError(const char* data)
     server.send(500, "text/plain", data);
 }
 
-void CommunicationHandler::loop()
+void CommunicationHandler::Loop()
 {
     server.handleClient();
 }
 
-int CommunicationHandler::getBody(char* ret, int size)
+/**
+ * @brief ziska telo dotazu <br/>
+ * na konec bufferu dodava \0
+ * @param ret buffer pro ulozeni dat
+ * @param size velikost bufferu
+ */
+int CommunicationHandler::GetBody(char* ret, int size)
 {
     String body = server.arg("plain");
 
@@ -41,6 +47,8 @@ int CommunicationHandler::getBody(char* ret, int size)
 /**
  * @brief ziska headery z requestu <br/>
  * vraci pouze Authorization + If-None-Match ostatni musim rict explicitně
+ * @param ret buffer pro ulozeni dat
+ * @param size velikost bufferu
  */
 int CommunicationHandler::HeaderList(char*ret, int size)
 {

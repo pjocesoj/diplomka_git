@@ -5,8 +5,8 @@
 #include "secret.h" //git update-index --assume-unchanged secret.h
 #include "helpers.h"
 #include "global.h" //global var
-#include "SharedHttpEndpoints.h"
-#include "src/Node.h"
+#include "src/Lib/SharedHttpEndpoints.h"
+#include "src/Lib/Node.h"
 
 #include "src/Abstract/CommunicationHandler.h"
 
@@ -37,7 +37,7 @@ void setup()
 
 void loop()
 {
-  communicationHandler.loop();
+  communicationHandler.Loop();
 }
 
 /**
@@ -48,7 +48,7 @@ __attribute__((weak)) void WaitToConnect()
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(500);
-    Serial.println("Connecting..");
+    Serial.println("Connecting...");
   }
 }
 
