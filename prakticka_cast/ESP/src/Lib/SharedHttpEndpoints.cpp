@@ -3,7 +3,7 @@
 #include "../../global.h"
 #include "../Abstract/Serializer.h"
 #include "../Abstract/Logger.h"
-#include "../Abstract/Arduino/LoggerExtend.h"
+//#include "../Abstract/Arduino/LoggerExtend.h"
 #include "../Abstract/CommunicationHandler.h"
 
 
