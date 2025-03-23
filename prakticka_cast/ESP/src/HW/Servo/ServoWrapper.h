@@ -1,6 +1,8 @@
 #ifndef SERVO_WRAP_H_
 #define SERVO_WRAP_H_
 
+#include <Servo.h>
+
 class ServoWrapper
 {
 public:
@@ -10,8 +12,7 @@ public:
     int GetAngle();
 
 private:
-    int _angle = 0;
-
+    Servo _servo;  
 };
 
 #endif
