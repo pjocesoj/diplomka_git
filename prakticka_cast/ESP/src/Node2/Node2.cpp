@@ -1,6 +1,5 @@
 #include "../Lib/Node.h"
 
-#include "HardwareSerial.h"
 #include "../Lib/EndPointDto.h"
 #include "../../global.h"
 #include "../Lib/SharedHttpEndpoints.h"
