@@ -1,36 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="MainNode.Logic.Compile.FuncHelper" Collapsed="true">
-    <Position X="18.25" Y="9.25" Width="3" />
+    <Position X="21.25" Y="5.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Compile\FuncHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Compile.FuncRepo" Collapsed="true">
-    <Position X="21.75" Y="9.25" Width="1.5" />
+  <Class Name="MainNode.Logic.Compile.FuncRepo">
+    <Position X="23.75" Y="14.75" Width="4.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAgAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Compile\FuncRepo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Compile.LoopCompiler" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="18.5" Y="7" Width="1.5" />
+  <Class Name="MainNode.Logic.Compile.LoopCompiler" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="6.5" Width="6.5" />
     <TypeIdentifier>
       <HashCode>AoCAACAAAAAUAgCWAABAAAUAAwoDCAAQAICAAAgABNA=</HashCode>
       <FileName>Compile\LoopCompiler.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="MainNode.Logic.Compile.StackValue" Collapsed="true">
-    <Position X="21.75" Y="12.25" Width="1.5" />
+  <Class Name="MainNode.Logic.Compile.StackValue">
+    <Position X="19.75" Y="14.75" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
       <FileName>Compile\StackValue.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Compile.TransitionFunc" Collapsed="true">
-    <Position X="21.75" Y="11.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Compile.TransitionFunc">
+    <Position X="19.75" Y="12.5" Width="7.75" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQA=</HashCode>
       <FileName>Compile\TransitionFunc.cs</FileName>
@@ -193,7 +193,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MainNode.Logic.LoopExecutor" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="20.25" Y="7" Width="1.5" />
+    <Position X="22" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIABAAACAwAAQgAAAAQCgAAAACAAAAIIAAAAAAAAI=</HashCode>
       <FileName>LoopExecutor.cs</FileName>
@@ -221,15 +221,15 @@
       <FileName>Interfaces\IFlowRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="MainNode.Logic.Interfaces.ILoopCompiler" Collapsed="true">
-    <Position X="18.5" Y="8" Width="1.5" />
+  <Interface Name="MainNode.Logic.Interfaces.ILoopCompiler">
+    <Position X="27.75" Y="12.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAEA=</HashCode>
       <FileName>Interfaces\ILoopCompiler.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="MainNode.Logic.Interfaces.ILoopExecutor" Collapsed="true">
-    <Position X="20.25" Y="8" Width="1.5" />
+    <Position X="22" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAACAAAAQAAAAAQAAAAAACAAAAIAAAAAAAAAI=</HashCode>
       <FileName>Interfaces\ILoopExecutor.cs</FileName>
@@ -242,8 +242,8 @@
       <FileName>Interfaces\INodeRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Enum Name="MainNode.Logic.Compile.StackValueTypeEnum" Collapsed="true">
-    <Position X="21.75" Y="10.75" Width="1.5" />
+  <Enum Name="MainNode.Logic.Compile.StackValueTypeEnum">
+    <Position X="28.5" Y="14" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEABABgAAAAQgAAAAAAAAAAAAAAAAAAAAAJKA=</HashCode>
       <FileName>Enums\StackValueTypeEnum.cs</FileName>
@@ -263,8 +263,8 @@
       <FileName>Enums\EnpointLoadTypeEnum.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="MainNode.Logic.Enums.LCStateEnum" Collapsed="true">
-    <Position X="21.75" Y="10" Width="1.5" />
+  <Enum Name="MainNode.Logic.Enums.LCStateEnum">
+    <Position X="30.25" Y="14" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgAFAAAAAAAQgAAAAABAAAAIAAAACAAAAAJIA=</HashCode>
       <FileName>Enums\LCStateEnum.cs</FileName>
