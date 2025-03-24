@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="MainNode.Controls.EndpointView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\EndpointView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainNode.Controls.FlowListView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\FlowListView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainNode.Controls.LabelTextBoxControl" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="0.5" Width="6.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAgAAAgAAAAQAAAAABAAAIAAAIAAEAA=</HashCode>
+      <FileName>Controls\LabelTextBoxControl.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainNode.Controls.NodeListView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\NodeListView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainNode.Converters.BoolNotConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\BoolNotConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainNode.Converters.NodeStatusConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\NodeStatusConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainNode.Converters.TypeColorConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\TypeColorConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainNode.Converters.VisibleNotConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\VisibleNotConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainNode.Extensions.ServicesExtensions" Collapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\ServicesExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.ViewModels.EndPointViewModel">
+    <Position X="12" Y="0.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAgAEAAAAA=</HashCode>
+      <FileName>ViewModels\EndPointViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.ViewModels.FlowEditWindowViewModel">
+    <Position X="8.75" Y="16.75" Width="8.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAAAAQAAAAgAQAgIAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>ViewModels\FlowEditWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.ViewModels.FlowListViewModel">
+    <Position X="8.75" Y="4.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>ViewModels\FlowListViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.ViewModels.FlowViewModel">
+    <Position X="12" Y="4.25" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAwgQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\FlowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.ViewModels.MainWindowsViewModel">
+    <Position X="8.75" Y="11.75" Width="8.75" />
+    <TypeIdentifier>
+      <HashCode>AKAEAAEAAAAQgEAgAAAAAIAgAAAAAAAAAIEAAAQIBAA=</HashCode>
+      <FileName>ViewModels\MainWindowsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.ViewModels.NodeListViewModel">
+    <Position X="8.5" Y="8.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAgAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\NodeListViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.ViewModels.NodeViewModel">
+    <Position X="11.75" Y="7.75" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIBAAAAAASAAABAAAQAAAAAAAAAAAAAEACEAAAAA=</HashCode>
+      <FileName>ViewModels\NodeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Windows.AddNodeWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="8.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Windows\AddNodeWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainNode.Windows.FlowEditWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="18.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Windows\FlowEditWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainNode.Windows.NodeInfoWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="9.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Windows\NodeInfoWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainNode.App">
+    <Position X="0.75" Y="4.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>oAAAAAAAAAAAAAAAAACAAAAAAAAQAAAAAAAABABAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="13.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

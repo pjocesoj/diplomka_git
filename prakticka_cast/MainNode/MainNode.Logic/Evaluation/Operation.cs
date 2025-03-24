@@ -21,8 +21,8 @@ namespace MainNode.Logic.Evaluation
         }
         public virtual T Execute(T a)
         {
-            if (Ref != null) { return Func(a,Ref.Value); }
-            return Func(a,Const!);
+            if (Ref != null) { return Func(a, Ref.Value); }
+            return Func(a, Const!);
         }
     }
     public class Operation<T, U> : Operation<T>

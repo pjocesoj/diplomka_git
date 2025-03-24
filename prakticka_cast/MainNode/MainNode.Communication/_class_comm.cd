@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="MainNode.Communication.Dto.EndPointDto">
+    <Position X="3.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAQAAAAACAIAAAAAQAAAAAEAAA=</HashCode>
+      <FileName>Dto\EndPointDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Dto.HttpEndPointPath">
+    <Position X="11.5" Y="4" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dto\HttpEndPointPath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Dto.ValueArgDto">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAEAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dto\ValueArgDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Dto.ValueDto">
+    <Position X="5.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Dto\ValueDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Dto.ValuesDto">
+    <Position X="4" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAQAAAAgAAA=</HashCode>
+      <FileName>Dto\ValuesDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Extensions.ServicesExtensions">
+    <Position X="6.75" Y="5.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\ServicesExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Helpers.CommunicationTypeResolver">
+    <Position X="11.5" Y="0.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\CommunicationTypeResolver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Interfaces.EndPointPath">
+    <Position X="16.5" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\EndPointPath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.HttpNodeCommunication" BaseTypeListCollapsed="true">
+    <Position X="16.5" Y="0.5" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAIAAAAAAAAFAAAAAAAAAAAAACAAACQAQAACA=</HashCode>
+      <FileName>HttpNodeCommunication.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="MainNode.Communication.Interfaces.INodeCommunication">
+    <Position X="11.5" Y="1.75" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAACAAACQAQAAAA=</HashCode>
+      <FileName>Interfaces\INodeCommunication.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="MainNode.Communication.Enums.EndPointType">
+    <Position X="1.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\EndpointType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MainNode.Communication.Enums.HttpMethodEnum">
+    <Position X="1.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\HttpMethodEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MainNode.Communication.Enums.ValType">
+    <Position X="1.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgAAAAAIAAAAAA=</HashCode>
+      <FileName>Enums\ValType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
