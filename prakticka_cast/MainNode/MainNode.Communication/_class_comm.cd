@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MainNode.Communication.Dto.EndPointDto" Collapsed="true">
+    <Position X="9.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAQAAAAACAIAAAAAQAAAAAEAAA=</HashCode>
+      <FileName>Dto\EndPointDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Dto.HttpEndPointPath" Collapsed="true">
+    <Position X="2.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dto\HttpEndPointPath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Dto.ValueArgDto" Collapsed="true">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAEAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dto\ValueArgDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Dto.ValueDto" Collapsed="true">
+    <Position X="5.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Dto\ValueDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Dto.ValuesDto" Collapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAQAAAAgAAA=</HashCode>
+      <FileName>Dto\ValuesDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Extensions.ServicesExtensions" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\ServicesExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Helpers.CommunicationTypeResolver" Collapsed="true">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\CommunicationTypeResolver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.Interfaces.EndPointPath" Collapsed="true">
+    <Position X="2.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\EndPointPath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainNode.Communication.HttpNodeCommunication" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAIAAAAAAAAFAAAAAAAAAAAAACAAACQAQAACA=</HashCode>
+      <FileName>HttpNodeCommunication.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="MainNode.Communication.Interfaces.INodeCommunication" Collapsed="true">
+    <Position X="7.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAACAAACQAQAAAA=</HashCode>
+      <FileName>Interfaces\INodeCommunication.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="MainNode.Communication.Enums.EndPointType" Collapsed="true">
+    <Position X="7.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\EndpointType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MainNode.Communication.Enums.HttpMethodEnum" Collapsed="true">
+    <Position X="9.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\HttpMethodEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MainNode.Communication.Enums.ValType" Collapsed="true">
+    <Position X="11.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgAAAAAIAAAAAA=</HashCode>
+      <FileName>Enums\ValType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
