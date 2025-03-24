@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="MainNode.Logic.Compile.FuncHelper" Collapsed="true">
-    <Position X="11.25" Y="1.5" Width="1.5" />
+    <Position X="18.25" Y="9.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Compile\FuncHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MainNode.Logic.Compile.FuncRepo" Collapsed="true">
-    <Position X="13" Y="1.5" Width="1.5" />
+    <Position X="21.75" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAgAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Compile\FuncRepo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MainNode.Logic.Compile.LoopCompiler" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="14.75" Y="1.5" Width="1.5" />
+    <Position X="18.5" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AoCAACAAAAAUAgCWAABAAAUAAwoDCAAQAICAAAgABNA=</HashCode>
       <FileName>Compile\LoopCompiler.cs</FileName>
@@ -23,248 +23,248 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="MainNode.Logic.Compile.StackValue" Collapsed="true">
-    <Position X="16.5" Y="2.5" Width="1.5" />
+    <Position X="21.75" Y="12.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
       <FileName>Compile\StackValue.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MainNode.Logic.Compile.TransitionFunc" Collapsed="true">
-    <Position X="9.5" Y="3.5" Width="1.5" />
+    <Position X="21.75" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQA=</HashCode>
       <FileName>Compile\TransitionFunc.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Do.EndPointDo" Collapsed="true">
-    <Position X="13" Y="0.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Do.EndPointDo">
+    <Position X="4.25" Y="24.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAIAAAAIQAgAAAAAAA=</HashCode>
       <FileName>Do\EndPointDo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Do.ValueArgDo&lt;T&gt;" Collapsed="true">
-    <Position X="4" Y="6.25" Width="1.5" />
+  <Class Name="MainNode.Logic.Do.ValueArgDo&lt;T&gt;">
+    <Position X="7" Y="21.25" Width="6" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAABAAAAAAEAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Do\ValueArgDo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Do.ValueDo&lt;T&gt;" Collapsed="true">
-    <Position X="4" Y="4.75" Width="1.5" />
+  <Class Name="MainNode.Logic.Do.ValueDo&lt;T&gt;">
+    <Position X="4" Y="21.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAACAAQgAAAAAAA=</HashCode>
       <FileName>Do\ValueDo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Do.ValueDo" Collapsed="true">
-    <Position X="4" Y="3.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Do.ValueDo">
+    <Position X="0.75" Y="21.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAQAAAAAAAA=</HashCode>
       <FileName>Do\ValueDo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Do.ValuesDo" Collapsed="true">
-    <Position X="13" Y="3.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Do.ValuesDo">
+    <Position X="0.5" Y="24.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAEAAAAAAAQAAAAgAAA=</HashCode>
       <FileName>Do\valuesDo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Evaluation.Flow&lt;T&gt;" Collapsed="true">
-    <Position X="7" Y="4.75" Width="1.5" />
+  <Class Name="MainNode.Logic.Evaluation.Flow&lt;T&gt;">
+    <Position X="3.75" Y="10.75" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAAAAAAAAAAIAgAAAAAAAAAAAEAAAAAEAAI=</HashCode>
       <FileName>Evaluation\Flow.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Evaluation.Flow" Collapsed="true">
-    <Position X="7" Y="3.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Evaluation.Flow">
+    <Position X="0.5" Y="10.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAEAAAEAAAAAEAAI=</HashCode>
       <FileName>Evaluation\Flow.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Evaluation.FlowMerge&lt;T, U, V&gt;" Collapsed="true">
-    <Position X="1" Y="6.25" Width="1.5" />
+  <Class Name="MainNode.Logic.Evaluation.FlowMerge&lt;T, U, V&gt;">
+    <Position X="7.25" Y="6.75" Width="4.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAA=</HashCode>
       <FileName>Evaluation\FlowMerge.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Evaluation.FlowResult&lt;T&gt;" Collapsed="true">
-    <Position X="1" Y="4.75" Width="1.5" />
+  <Class Name="MainNode.Logic.Evaluation.FlowResult&lt;T&gt;">
+    <Position X="3.75" Y="6.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAAAAAABAAAQAgASAAAAAAACAAAQgAAAAAAA=</HashCode>
       <FileName>Evaluation\FlowResult.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Evaluation.FlowResult" Collapsed="true">
-    <Position X="1" Y="3.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Evaluation.FlowResult">
+    <Position X="0.5" Y="6.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAACCAAAAAAABBAAAAAAASABAAAAAAAAAQgAAAAAAA=</HashCode>
       <FileName>Evaluation\FlowResult.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Evaluation.MergeFlowOperation&lt;T, U, V&gt;" Collapsed="true">
-    <Position X="5.75" Y="1.75" Width="1.5" />
+  <Class Name="MainNode.Logic.Evaluation.MergeFlowOperation&lt;T, U, V&gt;">
+    <Position X="8.5" Y="3.5" Width="5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAACQAAAAAABAAAAAAAAAAAAABAAAAAAA=</HashCode>
       <FileName>Evaluation\MergeflowOperation.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Evaluation.Operation&lt;T&gt;" Collapsed="true">
-    <Position X="3.5" Y="0.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Evaluation.Operation&lt;T&gt;">
+    <Position X="4.5" Y="0.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgQAAAAgAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
       <FileName>Evaluation\Operation.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Evaluation.Operation&lt;T, U&gt;" Collapsed="true">
-    <Position X="1.25" Y="1.75" Width="1.5" />
+  <Class Name="MainNode.Logic.Evaluation.Operation&lt;T, U&gt;">
+    <Position X="0.5" Y="3.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgQAAAAgAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
       <FileName>Evaluation\Operation.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Evaluation.SubFlowOperation&lt;T, U&gt;" Collapsed="true">
-    <Position X="3.5" Y="1.75" Width="1.5" />
+  <Class Name="MainNode.Logic.Evaluation.SubFlowOperation&lt;T, U&gt;">
+    <Position X="4.25" Y="3.5" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAgAAAABAAAAAAA=</HashCode>
       <FileName>Evaluation\SubflowOperation.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Extensions.CollectionExtensions" Collapsed="true">
-    <Position X="9.5" Y="0.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Extensions.CollectionExtensions">
+    <Position X="20.75" Y="4" Width="6" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
       <FileName>Extensions\CollectionExtensions.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MainNode.Logic.Extensions.ServicesExtensions" Collapsed="true">
-    <Position X="14.75" Y="2.5" Width="1.5" />
+    <Position X="11" Y="24.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Extensions\ServicesExtensions.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Extensions.ValueExtensions" Collapsed="true">
-    <Position X="11.25" Y="3.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Extensions.ValueExtensions">
+    <Position X="20.75" Y="2.5" Width="4.25" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Extensions\ValueExtensions.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Repos.FlowRepository" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="9.5" Y="1.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Repos.FlowRepository" BaseTypeListCollapsed="true">
+    <Position X="18.75" Y="17.75" Width="5.5" />
     <TypeIdentifier>
       <HashCode>BAAAAAAAAAABBACACAAAAAAAGAAAAAAAAAAAAABAAAI=</HashCode>
       <FileName>Repos\FlowRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="MainNode.Logic.Repos.NodeRepository" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="13" Y="2.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Repos.NodeRepository" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="14.25" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAkAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQIAAA=</HashCode>
       <FileName>Repos\NodeRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="MainNode.Logic.ConnectionStatus" Collapsed="true">
-    <Position X="11.25" Y="0.5" Width="1.5" />
+  <Class Name="MainNode.Logic.ConnectionStatus">
+    <Position X="6.5" Y="17" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAQAQAAEAAAABCAAAAAAAAAACgAAAAiAAAACAAAAAAA=</HashCode>
       <FileName>ConnectionStatus.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.EndpointVariables" Collapsed="true">
-    <Position X="14.75" Y="0.5" Width="1.5" />
+  <Class Name="MainNode.Logic.EndpointVariables">
+    <Position X="1" Y="17" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAJAEASBAAAAAAAIAAAAAAAAAAAAQAAAEAAAA=</HashCode>
       <FileName>EndpointVariables.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.ErrorData" Collapsed="true">
-    <Position X="16.5" Y="0.5" Width="1.5" />
+  <Class Name="MainNode.Logic.ErrorData">
+    <Position X="10.5" Y="17" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAAAQA=</HashCode>
       <FileName>ErrorData.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MainNode.Logic.LoopExecutor" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="16.5" Y="1.5" Width="1.5" />
+    <Position X="20.25" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIABAAACAwAAQgAAAAQCgAAAACAAAAIIAAAAAAAAI=</HashCode>
       <FileName>LoopExecutor.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="MainNode.Logic.Mapper" Collapsed="true">
-    <Position X="9.5" Y="2.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Mapper">
+    <Position X="19.25" Y="21.5" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAABAAAAAAAAAIAAAAAAAAACAAQAAAAAAAAAA=</HashCode>
       <FileName>Mapper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MainNode.Logic.Node" Collapsed="true">
-    <Position X="11.25" Y="2.5" Width="1.5" />
+  <Class Name="MainNode.Logic.Node">
+    <Position X="15.25" Y="21.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>CEAAAQAAIAAAQAAAAAAAAAQAAAAAAgACAAAASEQAAAA=</HashCode>
       <FileName>Node.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="MainNode.Logic.Interfaces.IFlowRepository" Collapsed="true">
-    <Position X="9.5" Y="4.75" Width="1.5" />
+  <Interface Name="MainNode.Logic.Interfaces.IFlowRepository">
+    <Position X="13.75" Y="17.75" Width="4.75" />
     <TypeIdentifier>
       <HashCode>BAAAAAAAAAABBACACAAAAAAAGAAAAAAAAAAAAABAAAI=</HashCode>
       <FileName>Interfaces\IFlowRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="MainNode.Logic.Interfaces.ILoopCompiler" Collapsed="true">
-    <Position X="11.25" Y="4.75" Width="1.5" />
+    <Position X="18.5" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAEA=</HashCode>
       <FileName>Interfaces\ILoopCompiler.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="MainNode.Logic.Interfaces.ILoopExecutor" Collapsed="true">
-    <Position X="13" Y="4.75" Width="1.5" />
+    <Position X="20.25" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAACAAAAQAAAAAQAAAAAACAAAAIAAAAAAAAAI=</HashCode>
       <FileName>Interfaces\ILoopExecutor.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="MainNode.Logic.Interfaces.INodeRepository" Collapsed="true">
-    <Position X="14.75" Y="4.75" Width="1.5" />
+  <Interface Name="MainNode.Logic.Interfaces.INodeRepository">
+    <Position X="0.75" Y="14.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAkAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQIAAA=</HashCode>
       <FileName>Interfaces\INodeRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="MainNode.Logic.Compile.StackValueTypeEnum" Collapsed="true">
-    <Position X="14.75" Y="5.75" Width="1.5" />
+    <Position X="21.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEABABgAAAAQgAAAAAAAAAAAAAAAAAAAAAJKA=</HashCode>
       <FileName>Enums\StackValueTypeEnum.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="MainNode.Logic.Enums.ConnectionStatusEnum" Collapsed="true">
-    <Position X="9.5" Y="5.75" Width="1.5" />
+  <Enum Name="MainNode.Logic.Enums.ConnectionStatusEnum">
+    <Position X="4.25" Y="17" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAABABAAAAAAAAAAAAAAAAAAkAABAAAAAAAAAAA=</HashCode>
       <FileName>Enums\ConnectionStatusEnum.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="MainNode.Logic.Enums.EnpointLoadTypeEnum" Collapsed="true">
-    <Position X="11.25" Y="5.75" Width="1.5" />
+  <Enum Name="MainNode.Logic.Enums.EnpointLoadTypeEnum">
+    <Position X="8.25" Y="24.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Enums\EnpointLoadTypeEnum.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="MainNode.Logic.Enums.LCStateEnum" Collapsed="true">
-    <Position X="13" Y="5.75" Width="1.5" />
+    <Position X="21.75" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgAFAAAAAAAQgAAAAABAAAAIAAAACAAAAAJIA=</HashCode>
       <FileName>Enums\LCStateEnum.cs</FileName>
