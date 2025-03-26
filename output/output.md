@@ -46,31 +46,7 @@ Martin Novák
 
 
 
-© 2024 ČZU v Praze!!!
-
-
-
-Místo tohoto textu vložte PŘEDNÍ stranu zadání práce, které si můžete vyexportovat do PDF v IS.CZU.cz, pokud již máte schválené zadání i děkanem TF.
-
-
-
-!!!
-
-!!!
-
-
-
-Místo tohoto textu vložte ZADNÍ stranu zadání práce, které si můžete vyexportovat do PDF v IS.CZU.cz, pokud již máte schválené zadání i děkanem TF.
-
-
-
-V případě, že Vaše zadání je na více než 2 strany, vložte i další strany.
-
-
-
-!!!
-
-
+© 2025 ČZU v Praze---img------img---
 
 
 
@@ -128,7 +104,7 @@ V případě, že Vaše zadání je na více než 2 strany, vložte i další s
 
 
 
-Prohlašuji, že svou diplomovou práci "Návrh a realizace kontrolního systému na WiFi síti" jsem vypracoval(a) samostatně pod vedením vedoucího diplomové práce a s použitím odborné literatury a dalších informačních zdrojů, které jsou citovány v práci a uvedeny v seznamu použitých zdrojů na konci práce. Jako autor(ka) uvedené diplomové práce dále prohlašuji, že jsem v souvislosti s jejím vytvořením neporušil autorská práva třetích osob.
+Prohlašuji, že svou diplomovou práci "Návrh a realizace kontrolního systému na WiFi síti" jsem vypracoval samostatně pod vedením vedoucího diplomové práce a s použitím odborné literatury a dalších informačních zdrojů, které jsou citovány v práci a uvedeny v seznamu použitých zdrojů na konci práce. Jako autor uvedené diplomové práce dále prohlašuji, že jsem v souvislosti s jejím vytvořením neporušil autorská práva třetích osob.
 
  
 
@@ -252,7 +228,7 @@ Souhrn práce (cca 15 řádek textu).
 
 
 
-**Design and implementation of a control system on a WiFi network**
+**Design and implementation of a control system on a ****WiFi**** network**
 
 
 
@@ -430,15 +406,17 @@ Soupis a definování zkratek (vyskytuje-li se jich v textu velké množství)
 
 Text text text text text text text text text text text text text text text text text text text text text text text.
 
+
+
 # Cíl práce a metodika
 
 ## Cíl práce
 
-Text…
+Cílem diplomové práce je provedení analýzy zavedení kontrolního systému na Wi-Fi síti. Výstupem práce bude návrh a realizace struktury zařízení, které bude obsahovat prvky kontroly komunikace jednotlivých připojených uzlů a na základě nastavených pravidel a přijatých dat bude provádět vyhodnocení.
 
 ## Metodika
 
-Text…
+Prostudování hardwarových a softwarových možností řešení. Navržení několika variant provedení úlohy. Výběr nejvhodnější varianty s kritickým hodnocením návrhu. Specifikace funkcí systému podle cílů práce.
 
 
 
@@ -446,13 +424,13 @@ Text…
 
 ## OSI model
 
-OSI (Open System Interconnection) model je teoretickým modelem vyvinutým v roce 1984 mezinárodní organizací pro standardizaci (ISO), definující protokoly pro komunikaci různých zařízení na síti. Jedná se o sedmivrstvou architekturu (viz kapitola 3.6.2), která je vyobrazena na Obr. 1 během posílání HTTP (viz kapitola 3.2.5) dotazu. Výhodou je nezávislost jednotlivých vrstev na konkrétní implementaci ostatních, což usnadňuje případný vývoj nových technologií. Dále se snáze hledá příčina problémů s připojením. Ovšem v praxi se spíše využívá model TCP/IP (Transmission Control Protocol/Internet Protocol) slučující první a druhou vrstvu do síťového rozhraní a pátou až sedmou do aplikační vrstvy. Oproti OSI je postaven na reálných komunikačních protokolech používaných v síťových prvcích. [1–4]
+Model OSI (Open System Interconnection) je teoretickým modelem vyvinutým v roce 1984 mezinárodní organizací pro standardizaci (ISO), definující protokoly pro komunikaci různých zařízení na síti. Jedná se o sedmivrstvou architekturu (viz kapitola 3.6.2), která je vyobrazena na Obr. 1 během posílání HTTP (viz kapitola 3.2.5) dotazu. Výhodou je nezávislost jednotlivých vrstev na konkrétní implementaci ostatních, což usnadňuje případný vývoj nových technologií. Dále se snáze hledá příčina problémů s připojením. Ovšem v praxi se spíše využívá model TCP/IP (Transmission Control Protocol/Internet Protocol) slučující první a druhou vrstvu do síťového rozhraní a pátou až sedmou do aplikační vrstvy. Oproti OSI je postaven na reálných komunikačních protokolech používaných v síťových prvcích. [1–4]
 
 
 
 ---img---
 
-Obr. 1-OSI model[5]
+Obr. 1 OSI model[5]
 
 ### Fyzická vrstva
 
@@ -464,23 +442,23 @@ Tato vrstva je zodpovědná za kódování a dekódování přenášených dat n
 
 ---img---
 
-Obr. 2-typy topologií[6]
+Obr. 2 Typy topologií[6]
 
 ### Linková vrstva
 
 Tato vrstva je zodpovědná za to, aby data dorazili do správného koncového zařízení. Kromě toho kontrolují, že data dorazili bez chyb. Toho je docíleno tím, že jsou data zabalena do rámce začínající adresou koncového zařízení a končící výsledkem CRC (cyclical redundancy checking) algoritmu. K adresaci zařízení využívá MAC (media access control) adresy. Dále tato vrstva má na starosti řízení datového toku, což zahrnuje určování velikosti jednotlivých rámců a určení, které zařízení momentálně řídí komunikaci.[1, 3, 7]
 
-CRC je algoritmus sloužící k detekci chyb během datového přenosu. Při odesílání je z dat vytvořen kontrolní součet o fixní velikosti. Po přijetí dat je postup zopakován a výsledek je porovnán s přijatou hodnotou. Pokud jsou shodné, byl přenos úspěšný. K výpočtu je využíváno dělení binárních polynomů. Mezi hlavní výhody této metody patří snadná implementace a rychlost výpočtu. Dále dokáže detekovat jak náhodné chyby, tak shluky chyb. Tato metoda je oblíbená pro svou robustnost a vysokou přesnost. Nevýhodou je, že se jednou pouze o detekční mechanismus, ale ne o sebe opravný kód. Množství chyb, které je možné detekovat, je určen zvoleným charakteristickým polynomem.[8]
+Algoritmus CRC slouží k detekci chyb během datového přenosu. Při odesílání je z dat vytvořen kontrolní součet o fixní velikosti. Po přijetí dat je postup zopakován a výsledek je porovnán s přijatou hodnotou. Pokud jsou shodné, byl přenos úspěšný. K výpočtu je využíváno dělení binárních polynomů. Mezi hlavní výhody této metody patří snadná implementace a rychlost výpočtu. Dále dokáže detekovat jak náhodné chyby, tak shluky chyb. Tato metoda je oblíbená pro svou robustnost a vysokou přesnost. Nevýhodou je, že se jednou pouze o detekční mechanismus, ale ne o sebe opravný kód. Množství chyb, které je možné detekovat, je určen zvoleným charakteristickým polynomem.[8]
 
-Podoba rámce a velikost jeho datové část je dána použitou fyzickou vrstvou (viz Obr. 3). Pro metalické kabely se datová část pohybuje od čtyřiceti šesti do patnácti set bytů, zatím co pro Wi-Fi se rozmezí pohybuje od nuly do dvou tisíc tří set dvanácti bytů. Rozdělením paketů ze síťové vrstvy (viz kap. 3.1.3) na menší části se snižuje pravděpodobnost kolize na přenosovém mediu.[9]
+Podoba rámce a velikost jeho datové část je dána použitou fyzickou vrstvou (Obr. 3). Pro metalické kabely se datová část pohybuje od čtyřiceti šesti do patnácti set bytů, zatím co pro Wi-Fi se rozmezí pohybuje od nuly do dvou tisíc tří set dvanácti bytů. Rozdělením paketů ze síťové vrstvy (viz kap. 3.1.3) na menší části se snižuje pravděpodobnost kolize na přenosovém mediu.[9]
 
 ---img---
 
-Obr. 3 rámec 802.3 vs 802.11[9]
+Obr. 3 Rámec 802.3 vs 802.11[9]
 
 ### **Síťová **vrstva
 
-Úkolem této vrstvy je dostat data z jednoho zařízení do jiného, aniž by se tato zařízení musela nacházet ve stejné síti. Kromě toho také hledá nejkratší cestu, kterou paket musí urazit, aby se dostal do cílové destinace. K adresaci na této vrstvě se nejčastěji využívá IPv4 (Internet Protocol version 4), ale existují i jiné alternativy. Na této vrstvě pracují routery a switche. [1, 3, 4]
+Úkolem této vrstvy je dostat data z jednoho zařízení do jiného, aniž by se tato zařízení musela nacházet ve stejné síti. Kromě toho také hledá nejkratší cestu, kterou paket musí urazit, aby se dostal do cílové destinace. K adresaci na této vrstvě se nejčastěji využívá IPv4 (Internet Protocol version 4), ale existují i jiné alternativy. Na této vrstvě pracují routery a switche. [1, 3, 4]
 
 ### **Transportní **vrstva
 
@@ -506,27 +484,27 @@ Protokol je sada pravidel, definující strukturu přenášených dat a průběh
 
 ### IP
 
-IP (Internet Protocol) je protokol třetí vrstvy (viz kap. 3.1.3) OSI modelu, sloužící k směrování packetů napříč sítí. Pro tento účel slouží IP adresa, která je pro každé zařízení připojené do dané síti unikátní. V současné době se jako adresa stále využívá IPv4 s dvě na třicátou druhou možných adres tedy přibližně čtyři miliardy, které jsou zapisována jako čtveřice čísel v rozsahu 0-255 oddělené tečkou. Od roku 1998 je hotový protokol IPv6 s dvě na sto dvacátou osmou adres, což je přibližně tři sta čtyřicet sextilionů. IPv6 adresa je zapsaná jako osm hexadecimálních čísel v rozsahu 0000-FFFF oddělených dvojtečkou. Ačkoliv s počtem adres je problém již tři desetiletí, změna stále neproběhla, protože by bylo nutné nahradit celou infrastrukturu, což je velice nákladné. [12, 13]
+Protokol IP (Internet Protocol) fungující na třetí vrstvě (viz kap. 3.1.3) OSI modelu, sloužící k směrování packetů napříč sítí. Pro tento účel slouží IP adresa, která je pro každé zařízení připojené do dané síti unikátní. V současné době se jako adresa stále využívá IPv4 s dvě na třicátou druhou možných adres tedy přibližně čtyři miliardy, které jsou zapisována jako čtveřice čísel v rozsahu 0-255 oddělené tečkou. Od roku 1998 je hotový protokol IPv6 s dvě na sto dvacátou osmou adres, což je přibližně tři sta čtyřicet sextilionů. IPv6 adresa je zapsaná jako osm hexadecimálních čísel v rozsahu 0000-FFFF oddělených dvojtečkou. Ačkoliv s počtem adres je problém již tři desetiletí, změna stále neproběhla, protože by bylo nutné nahradit celou infrastrukturu, což je velice nákladné. [12, 13]
 
 Aby mohl internet dále fungovat bylo potřeba udělat opatření, které sníží počet potřebných adres na internetu. Tím že seznamu všech možných adres část vyhradí se pro podsítě, se umožňující, aby se tyto adresy opakovali. K určení, zda jsou zařízení ve stejné podsíti, slouží masky, které v binárním zápisu mají v místě, kde se musí shodovat jedničku a v části adresy určující konkrétní zařízení nulu. Routery a modemy mají dvě adresy. Jednu pro vnitřní síť (obvykle značenou jako LAN = Local Area Network) a jednu pro vnější síť (obvykle značenou jako WAN = Wide Area Network). Přijde-li packet s adresou odpovídající masce vnitřní sítě, je přesměrován do zařízení nacházejícího se ve stejné síti. V opačném případě je pomocí NAT (Network Address Translation) nahrazena adresa zařízení ve vnitřní síti na vnější adresu routeru a paket je odeslán mimo lokální síť. Kromě umožnění připojení více zařízení, než kolik je IPv4 adres zvyšuje NAT bezpečnost sítě. Jelikož všechna zařízení jsou na WAN viditelná pod jednou adresou, je pro útočníky obtížné zjistit podobu vnitřní sítě. [14, 15]
 
 ### **DHCP**
 
-DHCP (Dynamic Host Configuration Protocol) umožňuje automatickou konfiguraci IP adres v síti. Bez DHCP by bylo nutné manuálně přidávat a odebírat zařízení ze seznamu adres a na zařízení nastavovat adresu brány (lokální IP adresa routeru), masku sítě a zajistit že adresa zařízení je v síti unikání. DHCP má k dispozici seznam dostupných adres, které přiřazuje nově připojeným zařízením. Když se zařízení odpojí je adresa opět dostupná a je možné ji přiřadit jinému zařízení. Jelikož je proces automatizovaný je eliminována lidská chyba a je usnadněna správa sítě. [16]
+Protokol DHCP (Dynamic Host Configuration Protocol) umožňuje automatickou konfiguraci IP adres v síti. Bez DHCP by bylo nutné manuálně přidávat a odebírat zařízení ze seznamu adres a na zařízení nastavovat adresu brány (lokální IP adresa routeru), masku sítě a zajistit že adresa zařízení je v síti unikání. DHCP má k dispozici seznam dostupných adres, které přiřazuje nově připojeným zařízením. Když se zařízení odpojí je adresa opět dostupná a je možné ji přiřadit jinému zařízení. Jelikož je proces automatizovaný je eliminována lidská chyba a je usnadněna správa sítě. [16]
 
 
 
-### UD**P**
+### UDP
 
-UDP (User Datagram Protocol) je jeden ze dvou hlavních protokolů čtvrté vrstvy (viz kap. 3.1.4) OSI modelu, sloužících ke komunikaci na síti. Má velice jednoduchý princip, kdy pakety pošle do cílové destinace bez navazování spojení, či ověřování, že všechny dorazily v pořádku. Je vhodný především v situacích, kdy je důležitější rychlost než spolehlivost, nebo když se nehodí očekávat odpověď. Typickým příklad použití je přehrávání audia a videa, video hovory a online hry, kdy opakované vysílání ztracených paketů již nemá smysl. Aplikace ovšem musí počítat se situacemi, kdy některé z paketů budou ztraceny, duplikovány, nebo dorazí v jiném pořadí, než byly odeslány. [17]
+Jeden ze dvou hlavních protokolů čtvrté vrstvy (viz kap. 3.1.4) OSI modelu je UDP (User Datagram Protocol), sloužících ke komunikaci na síti. Má velice jednoduchý princip, kdy pakety pošle do cílové destinace bez navazování spojení, či ověřování, že všechny dorazily v pořádku. Je vhodný především v situacích, kdy je důležitější rychlost než spolehlivost, nebo když se nehodí očekávat odpověď. Typickým příklad použití je přehrávání audia a videa, video hovory a online hry, kdy opakované vysílání ztracených paketů již nemá smysl. Aplikace ovšem musí počítat se situacemi, kdy některé z paketů budou ztraceny, duplikovány, nebo dorazí v jiném pořadí, než byly odeslány. [17]
 
 ### TCP
 
-TPC (Transmission Control Protocol) je druhým z hlavních protokolů čtvrté vrstvy OSI modelu. Na rozdíl od UDP je zde zajištěno, že když pakety dorazí ve špatném pořadí budou seřazeny správně. V případě, kdy je paket ztracen, požádá o opakované poslání konkrétního paketu. Před zahájením komunikace je navázáno spojení pomocí třístupňového ověření (anglicky Three-way handshake) kdy, jak je vidět na Obr. 4 jedna strana žádá o navázání spojení, druhá potvrdí žádost a současně požádá o spojení, které první strana potvrdí. Toto je provedeno pomocí bitů *SYN* a *ACK* v TCP hlavičce (viz Obr. 5), kde datová část bývá obvykle prázdná. Jakmile je navázáno spojení začíná odesílající strana posílat pakety, po jejich obdržení přijímající strana pošle potvrzení. Pokud do stanovené doby nedorazí potvrzení, předpokládá se, že byl paket ztracen a je zopakování jeho odeslání. Obdrží-li příjemci paket s vyšším číslem, než které očekává pošle potvrzení očekávaného, čímž dá odesilateli najevo, že má špatné pořadí a potřebuje znovu poslat chybějící. Příjemce si může podle pořadových čísel obdržené pakety seřadit do správného pořadí a rozeznat duplicity. Pokud chce jedna ze stran spojení ukončit, zopakuje podobný postup jako při navazování spojení, ale místo *SYN* je v logické jedničce bit *FIN*.[18, 19]
+Druhým z hlavních protokolů čtvrté vrstvy OSI modelu je TPC (Transmission Control Protocol). Na rozdíl od UDP je zde zajištěno, že když pakety dorazí ve špatném pořadí budou seřazeny správně. V případě, kdy je paket ztracen, požádá o opakované poslání konkrétního paketu. Před zahájením komunikace je navázáno spojení pomocí třístupňového ověření (anglicky Three-way handshake) kdy, jak je vidět na Obr. 4 jedna strana žádá o navázání spojení, druhá potvrdí žádost a současně požádá o spojení, které první strana potvrdí. Toto je provedeno pomocí bitů *SYN* a *ACK* v TCP hlavičce (viz Obr. 5), kde datová část bývá obvykle prázdná. Jakmile je navázáno spojení začíná odesílající strana posílat pakety, po jejich obdržení přijímající strana pošle potvrzení. Pokud do stanovené doby nedorazí potvrzení, předpokládá se, že byl paket ztracen a je zopakování jeho odeslání. Obdrží-li příjemci paket s vyšším číslem, než které očekává pošle potvrzení očekávaného, čímž dá odesilateli najevo, že má špatné pořadí a potřebuje znovu poslat chybějící. Příjemce si může podle pořadových čísel obdržené pakety seřadit do správného pořadí a rozeznat duplicity. Pokud chce jedna ze stran spojení ukončit, zopakuje podobný postup jako při navazování spojení, ale místo *SYN* je v logické jedničce bit *FIN*.[18, 19]
 
 ---img---
 
-Obr. 4 třístupňové ověřování [18]
+Obr. 4 Třístupňové ověřování [18]
 
 ---img---
 
@@ -534,11 +512,11 @@ Obr. 5 TCP hlavička [18]
 
 ### HTTP a HTTPS
 
-HTTP (Hypertext Transfer Protocol) je protokolem sedmé vrstvy (kap. 3.1.7) OSI modelu, který je základem výměny dat na internetu. Jedná se klient-server protokol, kdy klient pošle požadavek na server, který ho zpracuje a pošle zpět odpověď. Byl vyvinut počátkem devadesátých let dvacátého století jako rozšířitelný protokol, což kromě umožňuje kromě textu posílat i obrázky, videa a další datové soubory. Nové funkce lze snadnou doplnit přidáním nového atributu do hlavičky dotazu. HTTP je bez stavový protokol, ale umožňuje využít cookies soubory, které jsou uloženy u klienta a v případě potřeby mohou být přiloženy k dotazu. Ke komunikaci se využívá TCP (kap 3.2.4) protokol, kvůli vytváření spojení. [20] 
+Protokol HTTP (Hypertext Transfer Protocol) fungující na sedmé vrstvě (kap. 3.1.7) OSI modelu je základem výměny dat na internetu. Jedná se klient-server protokol, kdy klient pošle požadavek na server, který ho zpracuje a pošle zpět odpověď. Byl vyvinut počátkem devadesátých let dvacátého století jako rozšířitelný protokol, což kromě umožňuje kromě textu posílat i obrázky, videa a další datové soubory. Nové funkce lze snadnou doplnit přidáním nového atributu do hlavičky dotazu. HTTP je bez stavový protokol, ale umožňuje využít cookies soubory, které jsou uloženy u klienta a v případě potřeby mohou být přiloženy k dotazu. Ke komunikaci se využívá TCP (kap 3.2.4) protokol, kvůli vytváření spojení. [20] 
 
 Mezi klientem a serverem mohou být proxy servery, které dotazy pouze přeposílají, nebo mají jednu či více funkcí. První možnou funkcí je cache, která má uložené odpovědi pro časté dotazy, takže není potřeba zatěžovat server [21]. Druhou je odfiltrování potencionálně škodlivých dotazů. Třetí možnou funkcí je load balancing, kdy klient volá proxy server, který pak podle vytížení jednotlivých serverů zvolí, na který z nich bude dotaz přeposlán, například podle lokace nebo zajištění rovnoměrného rozložení zátěže [22]. Čtvrtou funkcí je autorizace dotazů, aby se ke zdrojům nedostala neoprávněná osoba. Poslední z běžně využívaných funkcí je logování dotazů, které mohou být zpětně použity k analýze. [20]
 
-HTTP/1.1 a starší verze jsou v podobě která je čitelná pro lidi. Od verze HTTP/2.0 jsou zprávy zabaleny do rámců, které umožňují kompresy a multiplexing. Struktura zprávy se liší v závislosti na tom, zda se jedná o dotaz, nebo odpověď (viz Obr. 6 a Obr. 7). U dotazu je nutné uvést o jaká metoda se provést. Nejběžnější jsou GET pro načtení dat a POST pro odeslání dat v těle dotazu. Cesta adresa od kořenového adresáře k zdroji nebo endpointu, o který klient žádá. Hlavička obsahuje dodatečné informace pro server, jako je například autorizace, očekávaný jazyk, způsob kódování a další. Obdobný význam má hlavička odpovědi pro klienta, ale místo metody a cesty obsahuje status kód a zprávy. Kód je tříciferné číslo, u něhož stovky určují kategorii a zbylé dvě číslice konkrétní stav. Jednička jsou informační zprávy, ale nejsou využívány tak často jako ostatní. Dvojka na začátku znamená, že dotaz byl v pořádku zpracován. Trojka znače přesměrování dotazu jinam. Čtyřka znamená chybu na straně klienta, zatímco pětka je chyba na straně serveru. [20, 23, 24]
+Verze HTTP/1.1 a starší jsou v podobě která je čitelná pro lidi. Od verze HTTP/2.0 jsou zprávy zabaleny do rámců, které umožňují kompresy a multiplexing. Struktura zprávy se liší v závislosti na tom, zda se jedná o dotaz, nebo odpověď (viz Obr. 6 a Obr. 7). U dotazu je nutné uvést o jaká metoda se provést. Nejběžnější jsou GET pro načtení dat a POST pro odeslání dat v těle dotazu. Cesta adresa od kořenového adresáře k zdroji nebo endpointu, o který klient žádá. Hlavička obsahuje dodatečné informace pro server, jako je například autorizace, očekávaný jazyk, způsob kódování a další. Obdobný význam má hlavička odpovědi pro klienta, ale místo metody a cesty obsahuje status kód a zprávy. Kód je tříciferné číslo, u něhož stovky určují kategorii a zbylé dvě číslice konkrétní stav. Jednička jsou informační zprávy, ale nejsou využívány tak často jako ostatní. Dvojka na začátku znamená, že dotaz byl v pořádku zpracován. Trojka znače přesměrování dotazu jinam. Čtyřka znamená chybu na straně klienta, zatímco pětka je chyba na straně serveru. [20, 23, 24]
 
 
 
@@ -547,7 +525,7 @@ HTTP/1.1 a starší verze jsou v podobě která je čitelná pro lidi. Od verze
 
 
 
-Jelikož HTTP je nešifrované, je možné komunikaci odchytit a přečíst si obsah. Z tohoto důvodu bylo vytvořeno HTTPS (Hypertext Transfer Protocol Secure), které využívá SSL/TLS (Secure Sockets Layer/Transport Layer Security), jenž jsou založeno na asymetrické kryptografii, kdy data zašifrovaná pomocí veřejného klíče mohou být dešifrována pouze soukromím klíčem [25]. Aby bylo možné navázat spojení musí server mít platní certifikát vystavený nezávislou certifikační agenturou. V opačném případě klient ukončí komunikaci. Během navazování spojení je proveden TLS handshake, který ve verzi 1.2 probíhá tak, že klient pošle serveru seznam podporovaných šifer a server odpoví co během komunikace budou používat. Obě tyto zprávy obsahují náhodné číslo, které druhá strana použije k vygenerování klíče například pomocí RSA nebo Diffie-Hellman algoritmu. Toto číslo dále brání útočníkovi použití zprávy odchycené v minulosti. Server poté pošle svůj certifikát obsahující veřejný klíč a klientovu zprávu zašifrovanou soukromým klíčem. Klient použije veřejný klíč certifikační agentury, která měla certifikát vydat k ověření jeho pravosti. Poté klíčem serveru dešifruje zprávu, čímž ověří že odesilatel disponuje příslušným soukromím klíčem. Server dále pošle zprávu, kterou oznamuje, že poslal všechny potřebné údaje. Klient pošle svůj premaster secret, oznámení konce nešifrované komunikace a zašifrované shrnutí dosavadní komunikace. Server také pošle zašifrované shrnutí. Pokud se tyto dvě shrnutí liší, znamená to, že někdo sedí uprostřed a další komunikace není bezpečná. Od této chvíle může probíhat bezpečná komunikace. TLS 1.3 tuto výměnu zkracuje a zakazuje použití šifer, které již byly prolomeny, ale mnoho serverů a klientů stále využívá TLS 1.2, které je zpětně kompatibilní se staršími verzemi. [26–31]
+Jelikož HTTP je nešifrované, je možné komunikaci odchytit a přečíst si obsah. Z tohoto důvodu bylo vytvořeno HTTPS (Hypertext Transfer Protocol Secure), které využívá SSL/TLS (Secure Sockets Layer/Transport Layer Security), jenž jsou založeno na asymetrické kryptografii, kdy data zašifrovaná pomocí veřejného klíče mohou být dešifrována pouze soukromím klíčem [25]. Aby bylo možné navázat spojení musí server mít platní certifikát vystavený nezávislou certifikační agenturou. V opačném případě klient ukončí komunikaci. Během navazování spojení je proveden TLS handshake, který ve verzi 1.2 probíhá tak, že klient pošle serveru seznam podporovaných šifer a server odpoví co během komunikace budou používat. Obě tyto zprávy obsahují náhodné číslo, které druhá strana použije k vygenerování klíče například pomocí RSA nebo Diffie-Hellman algoritmu. Toto číslo dále brání útočníkovi použití zprávy odchycené v minulosti. Server poté pošle svůj certifikát obsahující veřejný klíč a klientovu zprávu zašifrovanou soukromým klíčem. Klient použije veřejný klíč certifikační agentury, která měla certifikát vydat k ověření jeho pravosti. Poté klíčem serveru dešifruje zprávu, čímž ověří že odesilatel disponuje příslušným soukromím klíčem. Server dále pošle zprávu, kterou oznamuje, že poslal všechny potřebné údaje. Klient pošle svůj premaster secret, oznámení konce nešifrované komunikace a zašifrované shrnutí dosavadní komunikace. Server také pošle zašifrované shrnutí. Pokud se tyto dvě shrnutí liší, znamená to, že někdo sedí uprostřed a další komunikace není bezpečná. Od této chvíle může probíhat bezpečná komunikace. TLS 1.3 tuto výměnu zkracuje a zakazuje použití šifer, které již byly prolomeny, ale mnoho serverů a klientů stále využívá TLS 1.2, které je zpětně kompatibilní se staršími verzemi. [26–31]
 
 
 
@@ -563,37 +541,37 @@ Za běhu programu jsou situace, kde je třeba objekty v paměti uložit či př
 
 Data je možné přenášet a ukládat v binární nebo textové podobě. Při použití binární podoby je zpracování rychlejší, ale obsah je pro člověka nečitelný a všechny zúčastněné strany musí znát význam jednotlivých bitů. Textová podoba je čitelná pro všechny, což umožňuje snadnou editaci a jednodušší hledání příčin chyb, protože si programátor může lehce ověřit, zda mají data očekávanou podobu. Nevýhodou je nutná konverze do příslušných datových typů. [33]
 
-### **XML**
+### XML
 
-XML (eXtensible Markup Language) je značkovací jazyk, popisující strukturu dat. Oproti některým jiným značkovacím jazykům neobsahuje informaci o jejich významu. Význam musí znát aplikace, což znamená, že XML vytvořený jedním programem, může být pro jiný nečitelný. Na Obr. 9 je ukázka XML s kolekcí psů. Dokumenty obvykle začínají nepovinou značkou obsahující verzi a kódování. Veškerý obsah musí být zabalen do jednoho kořenového prvku. Jednotlivé značky mohou být rozšířeny o atributy obsahující doplňující informace o textu, který je jimi ohraničen. Nejčastěji se jedná o identifikátory nebo vzhled. Hodnoty jsou zapisovány do uvozovek. XML a značkovací jazyky na něm založené podporují komentáře, které jsou při zpracování ignorovány. Dále je možné přidat sekci *CDATA*, jejíž obsah je ponechán nezměněn, což je využíváno, pokud je třeba uložit text obsahující značkovací jazyk, který byl jinak zpracován. [33]
+Značkovací jazyk XML (eXtensible Markup Language) popisuje strukturu dat. Oproti některým jiným značkovacím jazykům neobsahuje informaci o jejich významu. Ten musí znát aplikace, což znamená, že XML vytvořený jedním programem, může být pro jiný nečitelný. Na Obr. 9 je ukázka XML s kolekcí psů. Dokumenty obvykle začínají nepovinou značkou obsahující verzi a kódování. Veškerý obsah musí být zabalen do jednoho kořenového prvku. Jednotlivé značky mohou být rozšířeny o atributy obsahující doplňující informace o textu, který je jimi ohraničen. Nejčastěji se jedná o identifikátory nebo vzhled. Hodnoty jsou zapisovány do uvozovek. XML a značkovací jazyky na něm založené podporují komentáře, které jsou při zpracování ignorovány. Dále je možné přidat sekci *CDATA*, jejíž obsah je ponechán nezměněn, což je využíváno, pokud je třeba uložit text obsahující značkovací jazyk, který byl jinak zpracován. [33]
 
-Při zpracování XML jsou rozlišovány dva základní typy. SAX (Simple API for XML) projde dokument pouze jednou a v závislosti na právě přečtené značce vyvolá příslušnou událost. Tento přístup vyžaduje méně paměti, ale aplikace si musí pamatovat vztahy mezi jednotlivými daty. Oproti tomu DOM (Document Object Model) uchovává celý dokument ve stromové struktuře. Tento přístup potřebuje více paměti, ale kdykoli se dá přistoupit k jakémukoliv prvku včetně jeho kontextu. DOM je využíván například u webových stránek, ODF (OpenDocument Format používaný v OpenOffice), Open XML (využívaný v Microsoft Office od verze 2007), SVG (Scalable Vector Graphics) nebo .NET aplikacích využívajících XAML (Extensible Application Markup Language). [34]
-
-
+Při zpracování XML jsou rozlišovány dva základní typy. SAX (Simple API for XML) projde dokument pouze jednou a v závislosti na právě přečtené značce vyvolá příslušnou událost. Tento přístup vyžaduje méně paměti, ale aplikace si musí pamatovat vztahy mezi jednotlivými daty. Oproti tomu DOM (Document Object Model) uchovává celý dokument ve stromové struktuře. Tento přístup potřebuje více paměti, ale kdykoli se dá přistoupit k jakémukoliv prvku včetně jeho kontextu. DOM je využíván například u webových stránek, ODF (OpenDocument Format používaný v OpenOffice), Open XML (využívaný v Microsoft Office od verze 2007), SVG (Scalable Vector Graphics) nebo .NET aplikacích využívajících XAML (Extensible Application Markup Language). [34]
 
 
 
-Obr. 9 příklad XML
+
+
+Obr. 9 Příklad XML
 
 ### JSON
 
-JSON (JavaScript Object Notation) vznikl původně pro převod objektů v JavaScript do textového řetězce. JSON podporuje pouze základní datové typy jako jsou textové řetězce, čísla, logické hodnoty a objekty, či pole z těchto typů sestavené. V případě potřeby je možné do objektu vnořit další objekt. Zápis je tvořen páry skládajících se z názvu a hodnoty oddělených dvojtečkou. jednotlivé páry jsou od sebe odděleny čárkou. Veškerý obsah musí být obalen složenými závorkami označující objekt, nebo hranatými závorkami značící kolekci. JSON byl implementován mnoha jazyky jako jsou například C, C++, C#, Java, Python a mnoho dalších. Navzdory svému názvu není závislí na konkrétním jazyku, což ho dělá ideální volbou pro sdílení dat mezi programy napsaných v různých technologiích. Za nevýhodu by se dalo označit nemožnost používat komentáře. Na Obr. 10 je příklad zápisu kolekce psů. [35, 36]
+Formát JSON (JavaScript Object Notation) vznikl původně pro převod objektů v JavaScript do textového řetězce. JSON podporuje pouze základní datové typy jako jsou textové řetězce, čísla, logické hodnoty a objekty, či pole z těchto typů sestavené. V případě potřeby je možné do objektu vnořit další objekt. Zápis je tvořen páry skládajících se z názvu a hodnoty oddělených dvojtečkou. jednotlivé páry jsou od sebe odděleny čárkou. Veškerý obsah musí být obalen složenými závorkami označující objekt, nebo hranatými závorkami značící kolekci. JSON byl implementován mnoha jazyky jako jsou například C, C++, C#, Java, Python a mnoho dalších. Navzdory svému názvu není závislí na konkrétním jazyku, což ho dělá ideální volbou pro sdílení dat mezi programy napsaných v různých technologiích. Za nevýhodu by se dalo označit nemožnost používat komentáře. Na Obr. 10 je příklad zápisu kolekce psů. [35, 36]
 
 
 
 
 
-Obr. 10 příklad JSON
+Obr. 10 Příklad JSON
 
 ### CSV
 
-CSV (Comma-Separated Values) je formát používaný k ukládání tabulek. Jedná se o jednoduchý a hojně rozšířený formát pro import a export dat. Každý řádek textu odpovídá jednomu řádku v tabulce. Jak název napovídá sloupce jsou většinou oddělovány čárkou, ale v některý případech (například kvůli českým desetinným číslům s desetinou čárkou místo tečky jako se používá v angličtině) je nutné použít jiný oddělovací znak (obvykle středník nebo svislítko) [37]. První řádek se většinou využívá k pojmenování jednotlivých sloupců. Na Obr. 11 je příklad z tabulky psů. Oproti ostatním formátům má výhodu v menší velikosti, neboť význam hodnoty je definován pouze jednou nikoli pro každou instanci. Toto sebou ovšem nese nevýhodu, že jeden soubor může obsahovat pouze záznamy stejného typu, jelikož v opačném případě se nebudou shodovat sloupečky. CSV má nezastupitelné využití při exportu dat z databází a v situacích kdy se předpokládá, že data budou zpracovávána uživatelem například pomocí nástrojů jako je Microsoft Excel. [38]
+Formát CSV (Comma-Separated Values) je používaný k ukládání tabulek. Jedná se o jednoduchý a hojně rozšířený formát pro import a export dat. Každý řádek textu odpovídá jednomu řádku v tabulce. Jak název napovídá sloupce jsou většinou oddělovány čárkou, ale v některý případech (například kvůli českým desetinným číslům s desetinou čárkou místo tečky jako se používá v angličtině) je nutné použít jiný oddělovací znak (obvykle středník nebo svislítko) [37]. První řádek se většinou využívá k pojmenování jednotlivých sloupců. Na Obr. 11 je příklad z tabulky psů. Oproti ostatním formátům má výhodu v menší velikosti, neboť význam hodnoty je definován pouze jednou nikoli pro každou instanci. Toto sebou ovšem nese nevýhodu, že jeden soubor může obsahovat pouze záznamy stejného typu, jelikož v opačném případě se nebudou shodovat sloupečky. CSV má nezastupitelné využití při exportu dat z databází a v situacích kdy se předpokládá, že data budou zpracovávána uživatelem například pomocí nástrojů jako je Microsoft Excel. [38]
 
 
 
 
 
-Obr. 11 příklad CSV
+Obr. 11 Příklad CSV
 
 ## Wi-Fi
 
@@ -601,7 +579,7 @@ Wi-Fi je uživatelsky přívětivější název pro bezdrátovou síťovou techn
 
 
 
-Tab. 1 verze Wi-Fi [39, 42]
+Tab. 1 Verze Wi-Fi [39, 42]
 
 | standart | Wi-Fi | rok | Frekvence [GHz] | Přenosová rychlost (teoretická) | Šířka kanálu [MHz] | 
 |-|-|-|-|-|-|
@@ -623,24 +601,24 @@ Wi-Fi má v daném frekvenčním pásmu vymezený určitý rozsah frekvencí, k
 
 ---img---
 
-Obr. 12 překryv kanálů 2,4 GHz [43]
+Obr. 12 Překryv kanálů 2,4 GHz [43]
 
 
 
 K realizace bezdrátové sítě neboli WLAN (Wireless Local Area Network) je potřeba zařízení nazývané AP (Access Point). Jedná se zařízení vysílající bezdrátový signál, který mohou zachytit koncová zařízení (označovaná jako stanice či zkráceně STA) v dosahu. K připojení do této sítě je potřeba znát SSID (Service Set IDentifier) a heslo (pokud není síť nezaheslovaná). SSID je možné zadat ručně, pokud ho uživatel zná předem, nebo ho získat ze speciálních paketů nazývaných beacon (někdy také SSID broadcast), které AP pravidelně vysílá na všech kanálech. Obvykle bývá součástí routeru, ale může se jednat i o samostatné zařízení. Síť může být tvořena jedním či více AP, která jsou propojena kabelem. [45, 46]
 
-Oproti rámce pro Ethernet (IEEE 802.3), kterému k úspěšnému doručení stačí pouze dvě MAC adresy (viz Obr. 3), obsahuje Wi-Fi rámec (jehož podoba je detailněji popsána na Obr. 13) čtyři adresy. O jejich významu rozhodují devátý a desátý bit hlavičky, které obsahující informaci o směru toku dat (viz Obr. 14). V závislosti na situaci se může jednat o MAC adresu zařízení, nebo BSSID (Basic Service Set IDentifier) sítě vysílané určitým AP (viz Tab. 2). Rámce mohou mít několik významů, které určují třetí až osmí bit hlavičky. Bit *More Frag* slouží jako indikátor, zda byl paket rozdělen na více rámců (viz Kap. 3.1.2). IEEE 802.11 obsahuje také úsporný režim, kdy koncové zařízení vypne napájení antény za účelem úspory energie. V případě změny tohoto stavu posílá koncové zařízení AP rámec, který neobsahuje žádná data. Bit *Pwr Mg**m**t* říká, zda po odvysílání tohoto rámce bude zařízení aktivní, nebo úsporném režimu. S tím souvisí i další bit určující, zda má být rámec odvysílán, nebo uložen do doby, než bude cílové zařízení probuzeno. [47]
+Oproti rámce pro Ethernet (IEEE 802.3), kterému k úspěšnému doručení stačí pouze dvě MAC adresy (viz Obr. 3), obsahuje Wi-Fi rámec (jehož podoba je detailněji popsána na Obr. 13) čtyři adresy. O jejich významu rozhodují devátý a desátý bit hlavičky, které obsahující informaci o směru toku dat (viz Obr. 14). V závislosti na situaci se může jednat o MAC adresu zařízení, nebo BSSID (Basic Service Set IDentifier) sítě vysílané určitým AP (viz Tab. 2). Rámce mohou mít několik významů, které určují třetí až osmí bit hlavičky. Bit *More **Frag* slouží jako indikátor, zda byl paket rozdělen na více rámců (viz Kap. 3.1.2). IEEE 802.11 obsahuje také úsporný režim, kdy koncové zařízení vypne napájení antény za účelem úspory energie. V případě změny tohoto stavu posílá koncové zařízení AP rámec, který neobsahuje žádná data. Bit *Pwr** **Mg**m**t* říká, zda po odvysílání tohoto rámce bude zařízení aktivní, nebo úsporném režimu. S tím souvisí i další bit určující, zda má být rámec odvysílán, nebo uložen do doby, než bude cílové zařízení probuzeno. [47]
 
 
 
 
 
-| ---img---<br>Obr. 13 rámec Wi-Fi [47] | ---img---<br>Obr. 14 význam DS bitů [47] | 
+| ---img---<br>Obr. 13 Rámec Wi-Fi [47] | ---img---<br>Obr. 14 Význam DS bitů [47] | 
 |-|-|
 
 
 
-Tab. 2 význam adres v Wi-Fi rámci [47]
+Tab. 2 Význam adres v Wi-Fi rámci [47]
 
 | To DS | From DS | ADR 1 | ADR 2 | ADR 3 | ADR 4 | Situace na Obr. 14 | 
 |-|-|-|-|-|-|-|
@@ -657,15 +635,15 @@ Od 802.11ax se pro zjednodušení pro koncové uživatele místo značení verze
 
 ### QAM
 
-QAM (Quadrature Amplitude Modulation) je způsob, jak do bezdrátového signálu zakódovat více informací. Tato modulace mění amplitudu a fázi signálu. Během modulace jsou data rozdělena na polovinu. Obě tyto části jsou modulovány pomocí sinusoid, které jsou vůči sobě posunuty o devadesát stupňů (viz Obr. 15). Polovina obsahující LSB (Least Significant Bit) nemá fázové posunutí a označuje se proto jako I (In phase). Polovina obsahující MSB (Most Significant Bit) se označuje jako Q (Quadrature). Obě tyto sinusoidy jsou poté sečteny, čímž je získán výsledný signál k odvysílání (viz Obr. 17). Možné stavy se dají znázornit pomocí dvourozměrného grafu, kde na ose x je I a na ose y je Q (viz Obr. 16). Množství možných hodnot je přímo v názvu použité modulace. Například 256-QAM znamená, že signál může nabývat dvě stě padesát šest různých stavů, tedy přenáší osm bitů. Z tohoto značení je výjimkou QPSK, který odpovídá 4-QAM. Ovšem s vyšším počtem možných stavů se zvyšuje také jejich hustota, což znamená že v případě rušení nemusí být symbol správně rozpoznán. Proto vyšší QAM je možné použít pouze na kratší vzdálenosti.[51]
+Modulace QAM (Quadrature Amplitude Modulation) je způsob, jak do bezdrátového signálu zakódovat více informací. Tato modulace mění amplitudu a fázi signálu. Během modulace jsou data rozdělena na polovinu. Obě tyto části jsou modulovány pomocí sinusoid, které jsou vůči sobě posunuty o devadesát stupňů (viz Obr. 15). Polovina obsahující LSB (Least Significant Bit) nemá fázové posunutí a označuje se proto jako I (In phase). Polovina obsahující MSB (Most Significant Bit) se označuje jako Q (Quadrature). Obě tyto sinusoidy jsou poté sečteny, čímž je získán výsledný signál k odvysílání (viz Obr. 17). Možné stavy se dají znázornit pomocí dvourozměrného grafu, kde na ose x je I a na ose y je Q (viz Obr. 16). Množství možných hodnot je přímo v názvu použité modulace. Například 256-QAM znamená, že signál může nabývat dvě stě padesát šest různých stavů, tedy přenáší osm bitů. Z tohoto značení je výjimkou QPSK, který odpovídá 4-QAM. Ovšem s vyšším počtem možných stavů se zvyšuje také jejich hustota, což znamená že v případě rušení nemusí být symbol správně rozpoznán. Proto vyšší QAM je možné použít pouze na kratší vzdálenosti.[51]
 
 
 
 ---img---
 
-Obr. 15 schéma QAM modulátoru [51]
+Obr. 15 Schéma QAM modulátoru [51]
 
-| <br>---img---<br>Obr. 16 graf 16-QAM [51] | <br>---img---<br>Obr. 17 signál 16-QAM [52] | 
+| <br>---img---<br>Obr. 16 Graf 16-QAM [51] | <br>---img---<br>Obr. 17 Signál 16-QAM [52] | 
 |-|-|
 
 
@@ -678,7 +656,7 @@ Jelikož data nejsou data vysílána do zařízení přímo, ale je možné je z
 
 Jedná se o metody používané k snížení vlivu rušení a zvýšení bezpečnosti bezdrátově přenášených signálů. Základem je výzkum z roku 1941, ve které se herečka Hedy Lamarr a pianista George Antheil snažili najít způsob, jak zabránit rušení signálu pro radiem řízená torpéda. Americká armáda toto řešení však odmítla. Dnes je využíváno pro Wi-Fi, Bluetooth, mobilní sítě a GPS (Global Positioning System). Hlavní myšlenkou je rozprostřít signál přes více frekvencí, díky čemuž je potřeba menší energie, neboť v případě interference nejsou ovlivněny všechny a není tedy nutné, aby byl signál silnější než šum. S tím souvisí složitější odposlech komunikace, protože bez znalosti příslušných frekvencí se signál od šumu nedá odlišit (platí obzvláště pro DSSS). Toto navíc umožňuje ve stejném frekvenčním pásmu vysílat více signálů. [44, 55]
 
-DSSS (Direct Sequence Spread Spectrum) kombinuje data s pseudonáhodným kódem o vyšší frekvenci, než jsou data. Jednotlivé hodnoty tohoto kódu se nazývají chipy. Jeden bit je přenášen pomocí jedenácti chipů, které jsou s daty zkombinovány pomocí funkce XOR (viz Obr. 18). oproti ostatním spektrálním rozprostření má výhodu vyšší odolnosti proti šumu, ale za cenu potřeby širšího frekvenční pásma, kvůli čemuž má méně dostupných kanálů. [44, 55]
+Metoda rozprostření DSSS (Direct Sequence Spread Spectrum) kombinuje data s pseudonáhodným kódem o vyšší frekvenci, než jsou data. Jednotlivé hodnoty tohoto kódu se nazývají chipy. Jeden bit je přenášen pomocí jedenácti chipů, které jsou s daty zkombinovány pomocí funkce XOR (viz Obr. 18). oproti ostatním spektrálním rozprostření má výhodu vyšší odolnosti proti šumu, ale za cenu potřeby širšího frekvenční pásma, kvůli čemuž má méně dostupných kanálů. [44, 55]
 
 
 
@@ -686,7 +664,7 @@ DSSS (Direct Sequence Spread Spectrum) kombinuje data s pseudonáhodným kódem
 
 Obr. 18 DSSS [55]
 
-FHSS (Frequency-Hopping Spread Spectrum) je možné použít jako alternativu k DSSS, či je zkombinovat dohromady. Oproti DSSS nemanipuluje přímo s daty, ale provádí skoky mezi sedmdesáti osmy frekvenčními pásmy (viz Obr. 19). Jelikož každých pár bitů mění frekvenci, útočník tak není schopen zachytit celou zprávu. V případě rušení v daném rozsahu, může díky úzkým kanálům stále využívat ty, které nejsou rušené. Má menší datovou propustnost, protože na přeskok potřebuje více času. [44, 55]
+Metoda FHSS (Frequency-Hopping Spread Spectrum) je možné použít jako alternativu k DSSS, či je zkombinovat dohromady. Oproti DSSS nemanipuluje přímo s daty, ale provádí skoky mezi sedmdesáti osmy frekvenčními pásmy (viz Obr. 19). Jelikož každých pár bitů mění frekvenci, útočník tak není schopen zachytit celou zprávu. V případě rušení v daném rozsahu, může díky úzkým kanálům stále využívat ty, které nejsou rušené. Má menší datovou propustnost, protože na přeskok potřebuje více času. [44, 55]
 
 ---img---
 
@@ -704,7 +682,7 @@ Obr. 20 OFDM přijímač [57]
 
 ### **MIMO**
 
-MIMO (Multiple-Input Multiple-Output) je mechanismus umožňující v jeden okamžik na straně vysílače i přijímače využit více antén. Poprvé bylo představeno v 802.11n jako SU-MIMO (Single User MIMO). podobně jako jeho předchůdci, kdy pouze jedna ze stran měla dvě antény (viz Obr. 21), sloužilo k vyšší spolehlivosti. SU-MIMO využívá všechny antény pro stejný signál, tudíž má přijímač více informací umožňující vyčistit data od šumu, nebo pokud má vyšší šanci obdržet data, je-li signál rušen či odražen od překážky. Dále může být anténa navíc být využita k zvýšení rychlosti přenosu tím, že jsou data rozdělena na více částí a každá poslána jako samostatný signál. S příchodem 802.11ac byl tento mechanismus rozvinut do podoby MU-MIMO (Multi User MIMO) umožňující každé anténě AP komunikovat s jiným zařízením. Počet souběžných komunikací je limitován schopnostmi AP. Tento údaj je vyjadřován pomocí *MxN*, kde M je počet antén pro vysílání a N je počet antén pro příjem. Obvykle umí jedna anténa plnit obě funkce. [58–60]
+Mechanismus MIMO (Multiple-Input Multiple-Output) umožňuje v jeden okamžik na straně vysílače i přijímače využit více antén. Poprvé bylo představeno v 802.11n v podobě SU-MIMO (Single User MIMO). podobně jako jeho předchůdci, kdy pouze jedna ze stran měla dvě antény (viz Obr. 21), sloužilo k vyšší spolehlivosti. SU-MIMO využívá všechny antény pro stejný signál, tudíž má přijímač více informací umožňující vyčistit data od šumu, nebo pokud má vyšší šanci obdržet data, je-li signál rušen či odražen od překážky. Dále může být anténa navíc být využita k zvýšení rychlosti přenosu tím, že jsou data rozdělena na více částí a každá poslána jako samostatný signál. S příchodem 802.11ac byl tento mechanismus rozvinut do podoby MU-MIMO (Multi User MIMO) umožňující každé anténě AP komunikovat s jiným zařízením. Počet souběžných komunikací je limitován schopnostmi AP. Tento údaj je vyjadřován pomocí *MxN*, kde M je počet antén pro vysílání a N je počet antén pro příjem. Obvykle umí jedna anténa plnit obě funkce. [58–60]
 
 
 
@@ -720,19 +698,15 @@ Mikroprocesor je označení integrovaného obvodu obsahující vykonávající a
 
 SoC (System-On-Chip) je integrovaný obvod obsahující všechny základní části počítače v jednom pouzdře. Tyto čipy obsahují procesor, cache, paměť a vstupně výstupní obvody. Toto umožňuje zjednodušení výroby a tím snížení nákladů. Dále zařízení využívající SoC mohou mít menší rozměry a spotřebu než ta používající více čipů. Často je využívána Von Neumannova architektura, kdy jsou instrukce i data umístěna do jedné paměti, která je přímo adresována CPU a označuje se jako primární nebo hlavní paměť. [61]
 
-Mikrokontrolery neboli jednočipové počítače, často zkracované jako MCU (MicroController Unit), jsou speciální případem SoC, jenž nevyužívají externí DRAM (Dynamic Random Access Memory). Většinu vstupně výstupních obvodů a ROM (Read Only Memory) s programem, jenž mají vykonávat, obsahují přímo v sobě. Ke své funkci potřebují pouze zdroj hodinového signálu a napájení (viz Obr. 23). Ve většině případů obsahují časovače a převodníky analogového signálu na digitální (ADC = Analog-to-Digital Converter). Kromě těchto základních obvodů jsou typicky vybaveny sběrnicemi (např. I2C, SPI a další) umožňujícími připojit složitější sensory, kterým nestačí pouze logická hodnota či napětí v rozmezí 0–3 V. Díky těmto vlastnostem jsou ideální pro úlohy vyžadující zpracování signálů v reálném čase. [61, 64]
-
-
-
-
+Mikrokontrolery neboli jednočipové počítače, často zkracované jako MCU (MicroController Unit), jsou speciální případem SoC, jenž nevyužívají externí DRAM (Dynamic Random Access Memory). Většinu vstupně výstupních obvodů a ROM (Read Only Memory) s programem, jenž mají vykonávat, obsahují přímo v sobě. Ke své funkci potřebují pouze zdroj hodinového signálu a napájení (viz Obr. 23). Ve většině případů obsahují časovače a převodníky analogového signálu na digitální (ADC = Analog-to-Digital Converter). Kromě těchto základních obvodů jsou typicky vybaveny sběrnicemi (např. I2C, SPI a další) umožňujícími připojit složitější sensory, Které nepoužívají pouze jednu logickou hodnotu, či napětí v rozmezí 0-3 V, ale komunikují pomocí zpráv tvořených jedním či více bajtů. Díky těmto vlastnostem jsou ideální pro úlohy vyžadující zpracování signálů v reálném čase. [61, 64]
 
 ---img---
 
-Obr. 22 struktura jednoduchého mikropočítače [61]
+Obr. 22 Struktura jednoduchého mikropočítače [61]
 
 ---img---
 
-Obr. 23 struktura mikrokontroleru [61]
+Obr. 23 Struktura mikrokontroleru [61]
 
 ### ****ESP8266****
 
@@ -742,18 +716,18 @@ ESP8266EX od společnosti Espressif je SoC s QFN32-pin pouzdrem o rozměrech 5x
 
 ---img---
 
-Obr. 24 blokový diagram ESP8266EX [65]
+Obr. 24 Blokový diagram ESP8266EX [65]
 
-Nejčastěji se dají ESP8266EX sehnat již umístěny na desce tištěných spojů společně s anténou, oscilátorem a FLASH pamětí (viz Obr. 25 a Příloha 2). Krystal oscilátoru může mít frekvenci 40, 26 nebo 24 MHz. Moduly se vyrábí v několika provedeních lišících se rozměry, počtem vyvedených pinů a anténou (viz Obr. 26), z čehož jsou nejpopulárnější ESP-01 a ESP-12E. K jejich popularitě výrazně přispívá nízká cena, Wi-Fi a kompatibilita s Arduinem. [66, 67]
+Nejčastěji se dají ESP8266EX sehnat již umístěny na desce plošných spojů společně s anténou, oscilátorem a FLASH pamětí (viz Obr. 25 a Příloha 2). Krystal oscilátoru může mít frekvenci 40, 26 nebo 24 MHz. Moduly se vyrábí v několika provedeních lišících se rozměry, počtem vyvedených pinů a anténou (viz Obr. 26), z čehož jsou nejpopulárnější ESP-01 a ESP-12E. K jejich popularitě výrazně přispívá nízká cena, Wi-Fi a kompatibilita s Arduinem. [66, 67]
 
 
 
-| ---img---<br>Obr. 25 ESP-WROOM-S2 [67] | ---img---<br>Obr. 26 verze modulů [66]<br> | 
+| ---img---<br>Obr. 25 ESP-WROOM-S2 [67] | ---img---<br>Obr. 26 Verze modulů [66]<br> | 
 |-|-|
 
 
 
-Pro snazší použití jsou moduly připájeny k vývojovým deskám. Ty jsou vybaveny USB konektorem pro nahrávání kódu a napájení. Mezi nejoblíbenější patří NodeMCU využívající ESP-12E. Ten dává programátorovi k dispozici 4 MB FLASH paměti, ADC a jedenáct GPIO. K nahrání kódu do paměti jsou využívány čipy CP2101 nebo CH340. Příloha 1 vyobrazuje jaké funkce mají jednotlivé piny této desky. [66]
+Pro snazší použití jsou moduly připájeny k vývojovým deskám. Ty jsou vybaveny USB konektorem pro nahrávání kódu a napájení. Mezi nejoblíbenější patří NodeMCU využívající ESP-12E. Ten dává programátorovi k dispozici 4 MB FLASH paměti, ADC a jedenáct GPIO. K nahrání kódu jsou využívány převodníky USB-UART CP2101 nebo CH340. Příloha 1 vyobrazuje jaké funkce mají jednotlivé piny této desky. [66]
 
 
 
@@ -799,19 +773,19 @@ Nejstarším z těchto návrhových vzorů je MVC (Model-View-Controller). Mode
 
 ---img---
 
-Obr. 27 datový tok MVC [79]
+Obr. 27 Datový tok MVC [79]
 
 Většinu problémů MVC řeší MVP (Model-View-Presenter), kde view a model nekomunikují napřímo, ale přes presenter jako prostředníka (viz Obr. 28). Oproti MVC zde na uživatelské akce reaguje view, které informaci předává presenteru. Ten při vracení aktualizovaných dat z modelu může provést další zpracování. Díky většímu oddělení jednotlivých částí usnadňuje testování a úpravy.[79, 80] 
 
 ---img---
 
-Obr. 28 datový tok MVP [79]
+Obr. 28 Datový tok MVP [79]
 
-MVVM (Model-View-ViewModel) je podobný MVP, ale view neobsahuje žádnou logiku a pouze vykresluje data, která dostane z viewModelu. Svůj obsah aktualizuje na základě eventu OnPropertyChanged (viz Obr. 29). Většina logiky se nachází ve viewModelu, který má také na starosti stav aplikace. Tento přístup umožňuje, aby více view bylo navázáno na jeden viewModel. Oproti svým předchůdcům je MVVM modulárnější, testovatelnější a snáze škálovatelný. Avšak za cenu vyšší komplexity tříd.[79, 80]
+&ensp;Vzor MVVM (Model-View-ViewModel) je podobný MVP, ale view neobsahuje žádnou logiku a pouze vykresluje data, která dostane z viewModelu. Svůj obsah aktualizuje na základě eventu OnPropertyChanged (viz Obr. 29). Většina logiky se nachází ve viewModelu, který má také na starosti stav aplikace. Tento přístup umožňuje, aby více view bylo navázáno na jeden viewModel. Oproti svým předchůdcům je MVVM modulárnější, testovatelnější a snáze škálovatelný. Avšak za cenu vyšší komplexity tříd.[79, 80]
 
 ---img---
 
-Obr. 29 datový tok MVVM [79]
+Obr. 29 Datový tok MVVM [79]
 
 
 
@@ -825,7 +799,7 @@ Praktickou částí této práce je návrh a realizace řešení, které by umo�
 
 ---img---
 
-Obr. 30 sekvenční diagram: obecná komunikace s více hlavními uzly
+Obr. 30 Sekvenční diagram: obecná komunikace s více hlavními uzly
 
 Při realizaci je využívána abstrakce a není spoléháno na funkce specifické pro použité technologie, díky čemuž je snazší případná migrace. Dále je kladen důraz na modularitu, aby v případě že aktuální řešení nevyhovuje potřebám konkrétní úlohy bylo snadné danou část jednoduše nahradit bez ovlivnění zbytku systému.
 
@@ -837,7 +811,7 @@ Z důvodů jako jsou například množství přenášených dat a princip fungo
 
 ---img---
 
-Obr. 31 sekvenční diagram: přidání uzlu
+Obr. 31 Sekvenční diagram: přidání uzlu
 
 
 
@@ -861,7 +835,7 @@ Pro komunikaci s uzly slouží třídy plnící funkci DTO (viz Kap. 3.6.4), je
 
 ---img---
 
-Obr. 32 diagram tříd MainNode.Communication.Dto a MainNode.Communication.Enums
+Obr. 32 Diagram tříd MainNode.Communication.Dto a MainNode.Communication.Enums
 
 
 
@@ -877,7 +851,7 @@ Třída *ValueDto* obsahuje informace o jednotlivých hodnotách endpointu. Skl�
 
 ---img---
 
-Obr. 33 diagram tříd INodeCommunication
+Obr. 33 Diagram tříd INodeCommunication
 
 *HttpNodeCommunication* je implementací (viz Obr. 33) právě popsaného rozhraní, které slouží ke komunikaci pomocí HTTP protokolu a dříve popsaných DTO objektů. K tomu využívá instanci třídy *System.Net.Http.HttpClient*, jenž je vytvořena v metodě *Init* s hodnotou *Timeout* nastavenou na deset hodin, aby bylo zajištěno, že bude delší nejpomalejší endpoint. Bylo vycházeno z předpokladu, že uzly budou posílat hodnoty v intervalech které se pohybují v řádek minut, až milisekund.
 
@@ -905,7 +879,7 @@ DO na této vrstvě jsou reprezentací DTO z komunikační vrstvy (viz 4.1.1.1)
 
 ---img---
 
-Obr. 34 diagram tříd ValueDo a potomci
+Obr. 34 Diagram tříd ValueDo a potomci
 
 
 
@@ -915,29 +889,29 @@ Základem je abstraktní třída *ValueDo* (viz Obr. 34) a její stejnojmenný g
 
 ---img---
 
-Obr. 35 diagram tříd EndPointDo
+Obr. 35 Diagram tříd EndPointDo
 
 
 
-Třída *ValuesDo* (Obr. 35) obsahuje informaci o aktuálních hodnotách endpointu. K tomu jí slouží listy *ValueDo<int>*, *ValueDo<float>* a *ValueDo<bool>*. Při načtení nových dat je aktualizována hodnota *Value* všech elementů v těchto kolekcích. Pro účely výpisu se zde nachází metoda *ToStringListShort*, jež zavolá *ToStringShort* nad každým elementem ve výše zmíněných kolekcích a jejich výsledky spojí do listu textových řetězců.
+Třída *ValuesDo* (Obr. 35) obsahuje informaci o aktuálních hodnotách endpointu. K tomu jí slouží listy *ValueDo**<**int**>*, *ValueDo**<**float**>* a *ValueDo**<**bool**>*. Při načtení nových dat je aktualizována hodnota *Value* všech elementů v těchto kolekcích. Pro účely výpisu se zde nachází metoda *ToStringListShort*, jež zavolá *ToStringShort* nad každým elementem ve výše zmíněných kolekcích a jejich výsledky spojí do listu textových řetězců.
 
 Třída *EndPointDo* (Obr. 35) uchovává informace o jednotlivých endpointech uzlu. Cesta potřebná k jeho zavolání je uložena ve vlastnosti *Path* typu *EndPointPath*, která slouží jako abstrakce komunikační vrstvy (viz Kap. 4.1.1.1). hodnoty a argumenty jsou reprezentovány instancemi třídy *ValuesDo*. Vlastnosti *Type* a *Delay* jsou identické s *EndPointDto*.
 
 #### ConnectionStatus
 
-Třída *ConnectionStatus* (viz Obr. 36) slouží k sledování stavu spojení s uzlem. K jeho reprezentaci slouží *ConnectionStatusEnum* jenž může nabývat hodnot *GOOD*, *WITH_PROBLEMS*, *LOST*, *RECOVERING* a *UNKNOWN*. Při vytváření instance pomocí konstruktoru jsou nastaveny bezznaménkové celočíselné hodnoty *maxFails* a *recoveryThreshold*. První je počet neúspěšných pokusů v řadě, kdy se ze spojení s problémy stává ztracené spojení. Druhý je kolikrát v řadě musí být volání úspěšné, aby se ze zotavujícího spojení stalo opět dobré. V případě, že neexistují žádané informace o těchto hodnotách je stav neznámí, což nastává jen v případě načtení uloženého uzlu. Dojde-li k chybnému spojení, je do listu typu *ErrorData* přidán nový objekt, jenž obsahuje informaci o času, volaném endpointu a z jakého důvodu k chybě došlo.
+Třída *ConnectionStatus* (viz Obr. 36) slouží k sledování stavu spojení s uzlem. K jeho reprezentaci slouží *ConnectionStatusEnum* jenž může nabývat hodnot *GOOD*, *WITH_PROBLEMS*, *LOST*, *RECOVERING* a *UNKNOWN*. Při vytváření instance pomocí konstruktoru jsou nastaveny bezznaménkové celočíselné hodnoty *maxFails* a *recoveryThreshold*. První je počet neúspěšných pokusů v řadě, kdy se ze spojení s problémy stává ztracené spojení. Druhý je kolikrát v řadě musí být volání úspěšné, aby se ze zotavujícího spojení stalo opět dobré. V případě, že neexistují žádané informace o těchto hodnotách je stav neznámí, což nastává jen v případě načtení uloženého uzlu. Dojde-li k chybnému spojení, je do listu typu *ErrorData* přidán nový objekt, jenž obsahuje informaci o času, volaném endpointu a z jakého důvodu k chybě došlo.
 
 
 
 ---img---
 
-Obr. 36 diagram tříd ConnectionStatus
+Obr. 36 Diagram tříd ConnectionStatus
 
 #### Node
 
 ---img---
 
-Obr. 37 diagram tříd Node
+Obr. 37 Diagram tříd Node
 
 
 
@@ -957,7 +931,7 @@ Pro volání pomalých endpointů, tedy těch, jenž mají nenulovou vlastnost *
 
 ---img---
 
-Obr. 38 diagram tříd EdpointVariables
+Obr. 38 Diagram tříd EdpointVariables
 
 Účelem této třídy (Obr. 38) je sledovat aktualitu hodnot a sledovat stav načítání v případě endpointů na jejichž odpověď se čeká jednu či více iterací vyhodnocovací smyčky. Dále je takto nevolat endpointy jenž jsou v uzlu sice dostupné, ale k řešení požadované úlohy jsou nepotřebné a jejich volání by pouze prodloužilo načítací proces, zvýšilo množství dat, které je potřeba přenést a uzel by musel vynaložit energii na zpracování dotazu, což je problematické obzvláště v případě bateriového provozu. 
 
@@ -971,11 +945,11 @@ Aby bylo možno dynamicky měnit vyhodnocovanou logiku na základě uživatelsk�
 
 ---img---
 
-Obr. 39 diagram tříd Operation
+Obr. 39 Diagram tříd Operation
 
 ---img---
 
-Obr. 40 kód metody Execute
+Obr. 40 Kód metody Execute
 
 Základní třída očekává, že trojice výsledek, levá a pravá hodnota jsou stejného datového typu. V závislosti na tom, která z vlastností je null dosadí hodnoty do delegáta a vrátí výsledek. Její stejnojmenný potomek má stejné chování, ale pravá hodnota od znaménka je jiného datové typu. Aby nedocházelo k nejasnostem, zda využít vlastnost rodiče nebo potomka, je využita schopnost jazyka C# přidáním klíčového slova *new* v definici překrýt stejnojmennou vlastnost rodiče.
 
@@ -983,35 +957,35 @@ K vytvoření datového toku hodnot slouží instance generické třídy *Flow*
 
 ---img---
 
-Obr. 41 diagram tříd Flow
+Obr. 41 Diagram tříd Flow
 
 ---img---
 
-Obr. 42 diagram tříd FlowResult
+Obr. 42 Diagram tříd FlowResult
 
-Stejně jako v případě *Flow* je *FlowResult* generická třída s negenerickou abstraktní rodičovskou třídou. Booleovská hodnota Finished vyjadřuje, zda v této iteraci již byl provedeno vyhodnocení datového toku. Jeho výsledek je uložen v proměnné. Pokud při zavolaní konstruktoru *Flow*, pro který je instance vytvářena nemá nastavenou instanci *ValueDo*, kam bude vkládat výsledek, je vytvořena nová, jenž má stejné jméno jako datový tok, ale na konec je doplněno _out. V opačném případě je pouze uložena reference na tento objekt. K získání výsledku slouží vlastnost *Value*, která obsahuje pouze get. Pokud v této iteraci již došlo k vyhodnocení, je rovnou vrácen výsledek. V opačném případě je provedeno vyhodnocení. Poté jsou nastaveny hodnoty *Finished*, *IsActual* a *_lastRun*. Poslední dvě zmíněné jsou využity v případě, kdy je pomocí vlastnosti *RunFrequency* nastaveno, aby vyhodnocení bylo prováděno jednou za určitý časový úsek. V takovém případě IsActual slouží jako indikátor, že výsledek nepochází z této iterace. Na začátku nové iterace vyhodnocovací smyčky je zavolána metoda *NewIteration*, která na základě aktuálního času, *_lastRun* a *RunFrequency*, jejíž výchozí hodnota je 0 µs, nastavuje hodnoty *IsActual* a *Finished*. V případě že datový tok je současně výstupem systému, je použita metoda *BindOutput*, jenž nahradí vlastnost *Flow.Output *hodnotou endpointu.
+Stejně jako v případě *Flow* je *FlowResult* generická třída s negenerickou abstraktní rodičovskou třídou. Booleovská hodnota Finished vyjadřuje, zda v této iteraci již byl provedeno vyhodnocení datového toku. Jeho výsledek je uložen v proměnné. Pokud při zavolaní konstruktoru *Flow*, pro který je instance vytvářena nemá nastavenou instanci *ValueDo*, kam bude vkládat výsledek, je vytvořena nová, jenž má stejné jméno jako datový tok, ale na konec je doplněno _out. V opačném případě je pouze uložena reference na tento objekt. K získání výsledku slouží vlastnost *Value*, která obsahuje pouze get. Pokud v této iteraci již došlo k vyhodnocení, je rovnou vrácen výsledek. V opačném případě je provedeno vyhodnocení. Poté jsou nastaveny hodnoty *Finished*, *IsActual* a *_**lastRun*. Poslední dvě zmíněné jsou využity v případě, kdy je pomocí vlastnosti *RunFrequency* nastaveno, aby vyhodnocení bylo prováděno jednou za určitý časový úsek. V takovém případě IsActual slouží jako indikátor, že výsledek nepochází z této iterace. Na začátku nové iterace vyhodnocovací smyčky je zavolána metoda *NewIteration*, která na základě aktuálního času, *_**lastRun* a *RunFrequency*, jejíž výchozí hodnota je 0 µs, nastavuje hodnoty *IsActual* a *Finished*. V případě že datový tok je současně výstupem systému, je použita metoda *BindOutput*, jenž nahradí vlastnost *Flow.Output** *hodnotou endpointu.
 
 Pro využití výsledku z datového toku v jiném slouží třída *SubFlowOperation*, která je potomkem *Operation*. její konstruktor přijímá *FlowResult* a *S**ystem.Func*, jehož levá hodnota a výsledek musí být stejného datového typu. Při výpočtu jako hodnotu na pravé straně operátoru využívá *FlowResult.Value*.
 
-Speciálním případem je *MergeFlowOperation* sloužící k sloučení výsledků dvou datových toků. Oproti ostatním potomkům *Operation* výsledek, levá a pravá strana mohou být rozdílných datových typů. Ačkoliv metoda *Execute* má parametr, je zde pouze kvůli dědičnosti, ale k výpočtu není využit. Aby bylo možné tento výsledek použít pro výpočet, je potřeba současně použít instanci třídy *FlowMerge*, jenž je potomkem *FlowResult*. V konstruktoru je vytvořena na základě dvou *FlowResult* a* System.Func* vytvořena instance *MergeFlowOperation*. Vlastnost *Value* vypadá téměř totožně jako v rodičovské třídě, ale místo datového toku je zde vyhodnocována operace.
+Speciálním případem je *MergeFlowOperation* sloužící k sloučení výsledků dvou datových toků. Oproti ostatním potomkům *Operation* výsledek, levá a pravá strana mohou být rozdílných datových typů. Ačkoliv metoda *Execute* má parametr, je zde pouze kvůli dědičnosti, ale k výpočtu není využit. Aby bylo možné tento výsledek použít pro výpočet, je potřeba současně použít instanci třídy *FlowMerge*, jenž je potomkem *FlowResult*. V konstruktoru je vytvořena na základě dvou *FlowResult* a* **System.Func* vytvořena instance *MergeFlowOperation*. Vlastnost *Value* vypadá téměř totožně jako v rodičovské třídě, ale místo datového toku je zde vyhodnocována operace.
 
 #### NodeRepository
 
 Třída *NodeRepository* implementující rozhraní *INodeRepository* (viz Obr. 43), čímž je snížena závislost vyšší vrstvy na konkrétní implementaci, slouží jako globální úložiště instancí třídy *Node*. Očekává se, že tato třída bude využívána jako singleton. Jádrem této třídy je kolekce *Nodes*, obsahující seznam všech uzlů připojených do systému. Pro přidání nového uzlu slouží asynchronní metoda *AddNode*, jejímž parametrem je přidávaný uzel. Než dojde k přidání, je ověřena nenulovost adresy a jména. Jelikož je jméno využíváno jako identifikátor při zadávání logiky, musí být unikátní. Pokud je některý z těchto požadavků nesplněn, je vyhozena výjimka *System.ArgumentException* s odpovídajícím chybovou zprávou. V opačném případě je zavolána metoda *GetEndPoints*, aby bylo možné získat seznam dostupných endpointů. Po jejím dokončení je pomocí *GetAllValues* ověřena jejich dostupnost (viz Kap. 4.1.2.3). V případě, že je seznam prázdný, je vyhozena výjimka *MainNode.Exceptions.NoEndPointException*, protože nemá smysl přidával uzel, který nejde zavolat. Pouze pokud nedošlo k žádnému problému je uzel přidán a změněna hodnota počítadla. Jelikož je počet uzlů použit jako výchozí název uzlu, jedná se o statickou hodnotu, jenž není součástí instance. Toto je z důvodu předcházení cyklických referencí. 
 
-Pro Uložení seznamu slouží metoda *SaveNodes*, vracející serializovanou kolekci uzlů. Třída neřeší ukládání sama, protože *MainNode.Logic* je knihovnou a může být implementována v různých typech aplikace včetně webových. Z tohoto důvodu je zde řešena pouze serializace a deserializace, ale práce s perzistentním úložištěm je přenecháno vyšší vrstvě. Obdobně metoda *LoadNodes* má jako parametr textový řetězec ve formátu JSON. Po deserializaci na *List<Node>* se pokusí pomocí metody *AddNode* tyto uzly přidat. V případě neúspěchu je přidá do *Dictionary<Node, string>*, který je návratovou hodnotou této metody. Klíčem záznamu je přidávaný uzel a hodnotou je chybová hláška, proč se přidání nezdařilo.
+Pro Uložení seznamu slouží metoda *SaveNodes*, vracející serializovanou kolekci uzlů. Třída neřeší ukládání sama, protože *MainNode.Logic* je knihovnou a může být implementována v různých typech aplikace včetně webových. Z tohoto důvodu je zde řešena pouze serializace a deserializace, ale práce s perzistentním úložištěm je přenecháno vyšší vrstvě. Obdobně metoda *LoadNodes* má jako parametr textový řetězec ve formátu JSON. Po deserializaci na *List<**Node>* se pokusí pomocí metody *AddNode* tyto uzly přidat. V případě neúspěchu je přidá do *Dictionary**<**Node, **string**>*, který je návratovou hodnotou této metody. Klíčem záznamu je přidávaný uzel a hodnotou je chybová hláška, proč se přidání nezdařilo.
 
 ---img---
 
-Obr. 43 diagram tříd NodeRepository
+Obr. 43 Diagram tříd NodeRepository
 
 #### FlowRepository
 
-Třída *FlowRepository* implementující rozhraní *IFlowRepository* (viz Obr. 44) uchovává všechny datové toky, vstupy a výstupy potřebné k realizaci dané úlohy na jednom místě. Jednotlivé datové toky jsou ve formě *FlowResult* (viz Kap. 4.1.2.5) uloženy v kolekci *Results*. Pro uložení vstupních a výstupných hodnot slouží kolekce Inputs a Outputs, jenž jsou typu *Dictionary<EnpointLoadTypeEnum, List<EndpointVariables>>*. Klíčem je enum určující, zda se jedná o klasický endpoint, nebo o pomalý, jehož odpověď může trvat několik iterací vyhodnocovací smyčky. Hodnotami jsou kolekce *EndpointVariables* (viz Kap. 4.1.2.4) řešící aktualizaci hodnot.
+Třída *FlowRepository* implementující rozhraní *IFlowRepository* (viz Obr. 44) uchovává všechny datové toky, vstupy a výstupy potřebné k realizaci dané úlohy na jednom místě. Jednotlivé datové toky jsou ve formě *FlowResult* (viz Kap. 4.1.2.5) uloženy v kolekci *Results*. Pro uložení vstupních a výstupných hodnot slouží kolekce Inputs a Outputs, jenž jsou typu *Dictionary**<**EnpointLoadTypeEnum**, List<**EndpointVariables**>>*. Klíčem je enum určující, zda se jedná o klasický endpoint, nebo o pomalý, jehož odpověď může trvat několik iterací vyhodnocovací smyčky. Hodnotami jsou kolekce *EndpointVariables* (Kap. 4.1.2.4) řešící aktualizaci hodnot.
 
 ---img---
 
-Obr. 44 diagram tříd FlowRepository
+Obr. 44 Diagram tříd FlowRepository
 
 K přidání nového datového toku slouží metoda *AddFlow* s parametrem typu *Flow*, která pomocí *GetResult* vytvoří instanci *FlowResult* a přidá ji do kolekce. Aby bylo možné využít tuto hodnotu jako referenci pro další výpočet, je tato instance současně také vrácena. Pro přidání vstupů a výstupů slouží metody *AddInput* a *AddOutput*, které jsou téměř identické, ale pracují s jinými kolekcemi. Podle toho, zda je hodnota *Delay* *null* či nikoli, je instance přidána do seznamu normálních nebo pomalých volání.
 
@@ -1025,13 +999,13 @@ Pro zpracování uživatelem zadaného textového řetězce do podoby, kterou je
 
 ---img---
 
-Obr. 45 diagram tříd stavový automat
+Obr. 45 Diagram tříd stavový automat
 
 Zásobník obsahuje objekty typu *StackValue* skládající se z dosud přečtených znaků, StackValueTypeEnum a cache. Enum určuje o jakou hodnotu se jedná (např. konstanta, jméno, uzlu, ...). Pro zaznamenání znaků je využit System.Text.StringBuilder, jenž je schopný dynamicky rozšiřovat svůj obsah bez zbytečného kopírování paměťových bloků, čímž je výrazně ušetřen čas procesoru. Cache je typu *nullable Object* a je využita v případě, že je z přečteného slova je možné vytvořit objekt, ale bez znalosti následujícího ho není možné dále zpracovat. Takovým případem může být přečtení hodnoty ednpointu, ale neznalost operátoru a druhé hodnoty potřebné k vytvoření operace.
 
-Matice reprezentující stavoví automat je dvourozměrné pole *TransitionFunc*, jehož indexy jsou právě čtený znak převeden na číslo pomocí metody *getId* a enum *LCStateEnum* reprezentující stavy (viz Příloha 4 obsahující tabulku přechodů). Třída *TransitionFunc* reprezentuje přechodovou funkci a obsahuje následující stav, delegáta *System.Action<char,** **LCStateEnum, StackValueTypeEnum?>*, jenž bude proveden při přechodu do nového stavu a jaký typ záznamu bude přidán do zásobníku. Parametry delegáta jsou aktuální znak a stav společně s typem záznamu, jenž je součástí objektu reprezentující přechodovou funkci. Tato hodnota je potřebná, protože metody, na něž se delegáti odkazují, nejsou součástí této třídy.
+Matice reprezentující stavoví automat je dvourozměrné pole *TransitionFunc*, jehož indexy jsou právě čtený znak převeden na číslo pomocí metody *getId* a enum *LCStateEnum* reprezentující stavy (viz Příloha 4 obsahující tabulku přechodů). Třída *TransitionFunc* reprezentuje přechodovou funkci a obsahuje následující stav, delegáta *System.Action**<**char**,** **LCStateEnum**, **StackValueTypeEnum**?>*, jenž bude proveden při přechodu do nového stavu a jaký typ záznamu bude přidán do zásobníku. Parametry delegáta jsou aktuální znak a stav společně s typem záznamu, jenž je součástí objektu reprezentující přechodovou funkci. Tato hodnota je potřebná, protože metody, na něž se delegáti odkazují, nejsou součástí této třídy.
 
-Delegáti *System.Func* používaní v instancích *Operation* jsou bráni z *FuncRepo*, kde se nachází v *Dictionary<(Type, Type, string), Delegate>*, jenž je naplněn v konstruktoru. Klíčem je trojice datových typů obou hodnot a textové podoby operátoru. Třetí hodnotou je textový řetězec místo znaku, kvůli logickým operátorům, jenž jsou tvořeny dvěma znaky. Hodnota je definována pomocí lambda výrazů. K přistupování ke kolekci slouží metoda *GetFunction*, která v případě neexistujícího klíče vyhodí výjimku se zprávou obsahující informaci, která trojice nebyla nalezena.
+Delegáti *System.Func* používaní v instancích *Operation* jsou bráni z *FuncRepo*, kde se nachází v *Dictionary**<**(Type, Type, **string**), **Delegate**>*, jenž je naplněn v konstruktoru. Klíčem je trojice datových typů obou hodnot a textové podoby operátoru. Třetí hodnotou je textový řetězec místo znaku, kvůli logickým operátorům, jenž jsou tvořeny dvěma znaky. Hodnota je definována pomocí lambda výrazů. K přistupování ke kolekci slouží metoda *GetFunction*, která v případě neexistujícího klíče vyhodí výjimku se zprávou obsahující informaci, která trojice nebyla nalezena.
 
 Samotný převod logiky z textového řetězce na datové toky probíhá v instanci třídy *LoopCompiler* (viz Příloha 3), která je pro vyšší přehlednost rozdělena na více souborů, jenž mezi názvem třídy a koncovkou mají jakou část převodu řeší. V konstruktoru je zavolána metoda *InitTable*, která naplní tabulku přechodových funkcí. Pro zahájení převodu je zavolána metoda *Compile*, která zpracuje jeden datový tok. Ten může obsahovat další vnořené toky ohraničené závorkou, ale na ně se uživatel nebude moci odkazovat. Aby bylo možné zadat více datový toků, je nutné použít metodu *CompileMultiLine*, která textový řetězec rozdělí podle středníků a nových řádků. Dojde-li k chybě vyhodí *System.ApplicationException* se zprávou obsahující index datového toku a text výjimky, kterou současné vloží jako *innerException*, aby bylo možné dohledat příčinu jejího vzniku. Na začátku kompilace je vymazán zásobník a na jeho vrchol je vložen inicializační operátor, neboť kvůli principu vyhodnocování (viz Kap. 4.1.2.5) musí být první operací ekvivalent *0+b*. Poté se projde pomocí smyčky for celý textový řetězec. For byl zvolen místo foreach proto, aby bylo možné v chybové hlášce přesně určit místo, kde nastal problém. Na základě indexu vráceného metodou *getId* a číselného vyjádření *LCStateEnum*, který popisuje aktuální stav konečného automatu, je z tabulky získána přechodová funkce. V případě, že tato hodnota není zadána, je vyhozena *System.ApplicationException* oznamující uživateli že v tomto místě není takovýto znak očekáván a je poznačeno místo v řetězci kde se právě nachází. V opačném případě je provedena metoda, na niž ukazuje delegát a aktualizován stav konečného automatu. Po skončení smyčky je provedena funkce, jenž se v tabulce nachází na souřadnici označenou prázdným znakem a aktuálním stavem.
 
@@ -1041,7 +1015,7 @@ Instance třídy LoopExecutor (Obr. 46) je zodpovědná za provádění vyhodnoc
 
 ---img---
 
-Obr. 46 diagram tříd LoopExecutor
+Obr. 46 Diagram tříd LoopExecutor
 
 ### Uživatelské rozhraní
 
@@ -1059,7 +1033,7 @@ Pro lepší čitelnost XAML definujících vzhled oken a možnost znovu použite
 
 ---img---
 
-Obr. 47 diagram tříd EndPointViewModel
+Obr. 47 Diagram tříd EndPointViewModel
 
 *FlowListView* (vlevo dole na Obr. 52) je určen k zobrazení seznamu datových toků. Ty jsou reprezentovány třídou *FlowViewModel*, jenž má jméno a datový typ výstupní hodnoty. Tyto objekty se nachází v kolekci *Flows* uvnitř singleton instance *FlowListViewModel* (viz Obr. 48). Ta je vytvářena ze seznamu ve *FlowRepository* (viz Kap. 4.1.2.7) buď při prvním zavolání nebo jako reakce na použití metody *RefreshFlows*. K zobrazení je využíván *ListView* naplněný *Buttony*, jejichž barva textu a ohraničení je nastavena na základě datového typu a *TypeColorConverter*.
 
@@ -1067,7 +1041,7 @@ Obr. 47 diagram tříd EndPointViewModel
 
 ---img---
 
-Obr. 48 diagram tříd FlowViewModel
+Obr. 48 Diagram tříd FlowViewModel
 
 *NodeListView* (vlevo nahoře na Obr. 52 a vlevo uprostřed na Obr. 54) složí k zobrazení připojených uzlů a jejich stavu. Má stejné rozložení jako *FlowViewModel*, ale tlačítko je celé podbarvené podle *NodeStatusConverter* a hodnoty *ConnectionStatus* nacházející se v *NodeViewModel** *(viz Kap. 4.1.3.2 a Obr. 49). Při kliknutí je proveden *ShowInfoCommand*, jenž otevře nové okno *NodeInfoWindow*.
 
@@ -1075,7 +1049,7 @@ Obr. 48 diagram tříd FlowViewModel
 
 ---img---
 
-Obr. 49 diagram tříd NodeViewModel
+Obr. 49 Diagram tříd NodeViewModel
 
 #### Okna
 
@@ -1083,7 +1057,7 @@ NodeInfoWindow (Obr. 50) slouží k zobrazení informací o uzlu. Jeho ViewMode
 
 ---img---
 
-Obr. 50 okno s informacemi o uzlu
+Obr. 50 Okno s informacemi o uzlu
 
 
 
@@ -1093,7 +1067,7 @@ Obr. 50 okno s informacemi o uzlu
 
 ---img---
 
-Obr. 51 okno pro vložení nového uzlu
+Obr. 51 Okno pro vložení nového uzlu
 
 
 
@@ -1103,11 +1077,11 @@ Pro zadávání logiky* *se využívá okno *FlowEditWindow* (Obr. 52) jenž vyu
 
 ---img---
 
-Obr. 52 okno pro zadávání logiky
+Obr. 52 Okno pro zadávání logiky
 
 ---img---
 
-Obr. 53 diagram tříd FlowEditViewModel
+Obr. 53 Diagram tříd FlowEditViewModel
 
 *MainWindow* (Obr. 54 a Obr. 55) je úvodní obrazovkou aplikace. Momentálně je využíváno pouze menu na levém okraji a zbytek je nevyužit. Zde se nachází dva *StackPanely* a* **NodeListView*. První obsahuje tlačítka „start“ a „stop“ ovládající vyhodnocovací smyčku. Jejich viditelnost se mění podle hodnoty vlastnosti *IsLoopRunning* a za běhu aplikace je vidět právě jedno. Pod nimi se nachází tlačítko „edit“ otevírající okno *FlowEditWindow*. Druhý panel obstarává uzly a obsahuje tlačítka pro načtení a uložení uzlů z disku a pro přidání nového, které otevírá okno *AddNodeWindow*. Stav připojených uzlů je aktualizován pomocí metody, jenž je napojena na událost vyvolanou ukončením vyhodnocovací smyčky.
 
@@ -1115,11 +1089,11 @@ Obr. 53 diagram tříd FlowEditViewModel
 
 ---img---
 
-Obr. 54 úvodní obrazovka
+Obr. 54 Úvodní obrazovka
 
 ---img---
 
-Obr. 55 diagram tříd MainWindowViewModel
+Obr. 55 Diagram tříd MainWindowViewModel
 
 ## Uzly
 
@@ -1137,17 +1111,17 @@ Tato složka obsahuje hlavičkové soubory fungující jako rozhraní. Nachází
 
 Aby bylo možné měnit způsob komunikace s uzlem je definována třída *CommunicationHandler*. Metoda *StartListening* slouží k přidání reakce na specifikovaný endpoint. Parametry jsou cesta a ukazatel na funkci, jenž se má zavolat jako reakce na jeho obdržení. K odeslání odpovědi slouží metody *SendOk* a *SendError* jejímž parametrem je textový řetězec. Při přijetí dotazu s argumenty, je využita metoda *G**etBody*, která má jako parametry buffer a jeho velikost. Pro zpracování přijatých dotazů slouží metoda *Loop*, jenž je volána z nekonečné smyčky v *main*, které odpovídá Arduino funkce *loop*. V případě ESP je implementací využívána instance třídy ESP8266WebServer [85]. Jedná se o HTTP server poslouchající na portu 80, který je spuštěn v konstruktoru *CommunicationHandler*.
 
-Jelikož každá platforma má vlastní knihovny pro serializaci a deserializaci, byla i pro tuto logiku vytvořena abstrakce, která je pro vyšší přehlednost rozdělena na dva soubory. Protože pří kompilaci C++ jsou hlavičkové soubory zkopírovány do cpp soborů, jenž jsou kompilovány samostatně, je nutné jednoznačně určit datový typ využívaný v dané situaci [86]. Z tohoto důvodu nebylo možné pro serializaci *ValueDto* využít generické funkce a místo toho jsou deklarovány pro každý ze tří podporovaných datových typů samostatně. V závislosti na množství potřebných dat jsou pro hodnoty a endpointy definovány funkce* **Serialize*, *SerializeInfo* a *SerializeValue*. První vypisuje veškeré údaje a je využívána pro logování. Druhá vytváří odpověď pro endpoint *getInfo*. Poslední se používá při dotazu na hodnoty uzlu. Všechny tři právě popsané funkce mají jako parametry ukazatel na instanci *EndPointDto*, buffer a jeho velikost pro serializaci ednpointu a ukazatel na ValueDto pro hodnoty. Pro serializaci celé kolekce je využívána *SerializeEndpoints*. Při přijetí dotazu, jenž obsahuje argumenty, je použita funkce *Deserialize* jejíž parametry jsou *const char** obsahující JSON a ukazatel na *EndPointDto*, kam se mají hodnoty zapsat. Arduino implementace využívá knihovnu *ArduinoJson* ve verzi 7.1.0 [87, 88]. 
+Jelikož každá platforma má vlastní knihovny pro serializaci a deserializaci, byla i pro tuto logiku vytvořena abstrakce, která je pro vyšší přehlednost rozdělena na dva soubory. Protože pří kompilaci C++ jsou hlavičkové soubory zkopírovány do cpp soborů, jenž jsou kompilovány samostatně, je nutné jednoznačně určit datový typ využívaný v dané situaci [86]. Z tohoto důvodu nebylo možné pro serializaci *ValueDto* využít generické funkce a místo toho jsou deklarovány pro každý ze tří podporovaných datových typů samostatně. V závislosti na množství potřebných dat jsou pro hodnoty a endpointy definovány funkce* **Serialize*, *SerializeInfo* a *SerializeValue*. První vypisuje veškeré údaje a je využívána pro logování. Druhá vytváří odpověď pro endpoint *getInfo*. Poslední se používá při dotazu na hodnoty uzlu. Všechny tři právě popsané funkce mají jako parametry ukazatel na instanci *EndPointDto*, buffer a jeho velikost pro serializaci ednpointu a ukazatel na ValueDto pro hodnoty. Pro serializaci celé kolekce je využívána *SerializeEndpoints*. Při přijetí dotazu, jenž obsahuje argumenty, je použita funkce *Deserialize* jejíž parametry jsou *const** **char**** obsahující JSON a ukazatel na *EndPointDto*, kam se mají hodnoty zapsat. Arduino implementace využívá knihovnu *ArduinoJson* ve verzi 7.1.0 [87, 88]. 
 
-Aby bylo možné provádět analýzu v případě chyby, je nutné za běhu programu někam zaznamenávat stavové informace. K tomu slouží funkce *Log* deklarované v hlavičkovém souboru *Logger.h*, které mají jako parametr buď *const char** nebo buffer a počet znaků. Pro využití v souborech specifický pro Arduino jsou tyto dvě funkce deklarovány v *LoggerExtend.h* také jako String. Implementací je výpis do terminálu pomocí sériové linky.
+Aby bylo možné provádět analýzu v případě chyby, je nutné za běhu programu někam zaznamenávat stavové informace. K tomu slouží funkce *Log* deklarované v hlavičkovém souboru *Logger.h*, které mají jako parametr buď *const** **char**** nebo buffer a počet znaků. Pro využití v souborech specifický pro Arduino jsou tyto dvě funkce deklarovány v *LoggerExtend.h* také jako String. Implementací je výpis do terminálu pomocí sériové linky.
 
 #### Lib
 
 V této složce se nachází soubory využívající pouze C++ a hlavičkové soubory z ostatních složek, jenž vytváří abstrakci nad platformě závislých knihovnách. Jedná se především o DTO se strukturou odpovídající těm v hlavním uzlu (viz Kap. 4.1.1.1) a logiku potřebnou ke komunikaci s ním.
 
-Generická třída *ValueDto* má konstruktor s *const char** *name*, jenž slouží k identifikaci hodnoty v hlavním uzlu či jiné aplikaci načítající hodnoty z tohoto uzlu, a generickou *val*, jenž obsahuje uloženou hodnotu. Metoda *GetType* vracející *ValTypeEnum* je využívána při volání endpointu *getInfo*. Ke své činnosti využívá podmínky obsahující *constexpr is_same_v*, což je výraz porovnávající dva datové typy, jenž je vyhodnocen již během kompilace. Tato funkce vyžaduje kompilátor podporující C++14 nebo novější. Pokud se jedná o jiný datový typ, než je povolený, vyhodí výjimku *runtime_error*.
+Generická třída *ValueDto* má konstruktor s *const** **char**** *name*, jenž slouží k identifikaci hodnoty v hlavním uzlu či jiné aplikaci načítající hodnoty z tohoto uzlu, a generickou *val*, jenž obsahuje uloženou hodnotu. Metoda *GetType* vracející *ValTypeEnum* je využívána při volání endpointu *getInfo*. Ke své činnosti využívá podmínky obsahující *constexpr** **is_same_v*, což je výraz porovnávající dva datové typy, jenž je vyhodnocen již během kompilace. Tato funkce vyžaduje kompilátor podporující C++14 nebo novější. Pokud se jedná o jiný datový typ, než je povolený, vyhodí výjimku *runtime_error*.
 
-Třída *EndPointDto* obsahuje informace o endpointu. Pro zaznamenání adresy je využívána proměnná *const char* URL*. Aby bylo možné při zavolání *getInfo* sdělit jaká HTTP metoda má být použita, je třeba zadat hodnotu *HttpEnum*. Jelikož C++ nevyžaduje název enum před jeho hodnotou, bylo před využitím již existujícího enum upřednostněno vytvoření vlastního, neboť by při změně knihovny nebo migraci na jinou technologii mohlo docházet k nečekanému chování, z důvodu rozdílného pořadí hodnot nebo konfliktu s jinou knihovnou. Pokud je k zpracování dotazu více času, je zadána hodnota *Delay*, která zpracovávající aplikaci říká, kdy se ještě nejedná o chybu spojení. Tento údaj je deklarován jako *optional<int>*, čímž je umožněno, aby jinak hodnotový datový typ neměl zadanou hodnotu. Aby hlavní uzel či jiná aplikace pracující s tímto uzlem věděla, zda se jedná o vstupní či výstupní endpoint, je definován enum *EndPointType*. Pro uložení hodnot a argumentů složí *vectory*. Na rozdíl od hlavního uzlu je zde k dispozici omezené množství paměti, takže zde nejsou kolekce hodnot podle účelu sloučeny do dvou objektů, ale nachází se přímo v *EndPointDto* rozlišeny prefixem *Val_* nebo *Arg_*. Kromě bezparametrického konstruktoru má třída dva parametrické, lišící se parametrem *delay*. Povinnými hodnotami jsou HTTP metoda a URL adresa. Nepovinným údajem je EndPointType, jenž v případě nevyplnění má hodnotu *EP_TYPE_GET*, znamenající, že endpoint slouží k získání hodnot.
+Třída *EndPointDto* obsahuje informace o endpointu. Pro zaznamenání adresy je využívána proměnná *const** **char*** URL*. Aby bylo možné při zavolání *getInfo* sdělit jaká HTTP metoda má být použita, je třeba zadat hodnotu *HttpEnum*. Jelikož C++ nevyžaduje název enum před jeho hodnotou, bylo před využitím již existujícího enum upřednostněno vytvoření vlastního, neboť by při změně knihovny nebo migraci na jinou technologii mohlo docházet k nečekanému chování, z důvodu rozdílného pořadí hodnot nebo konfliktu s jinou knihovnou. Pokud je k zpracování dotazu více času, je zadána hodnota *Delay*, která zpracovávající aplikaci říká, kdy se ještě nejedná o chybu spojení. Tento údaj je deklarován jako *optional**<**int**>*, čímž je umožněno, aby jinak hodnotový datový typ neměl zadanou hodnotu. Aby hlavní uzel či jiná aplikace pracující s tímto uzlem věděla, zda se jedná o vstupní či výstupní endpoint, je definován enum *EndPointType*. Pro uložení hodnot a argumentů složí *vectory*. Na rozdíl od hlavního uzlu je zde k dispozici omezené množství paměti, takže zde nejsou kolekce hodnot podle účelu sloučeny do dvou objektů, ale nachází se přímo v *EndPointDto* rozlišeny prefixem *Val_* nebo *Arg_*. Kromě bezparametrického konstruktoru má třída dva parametrické, lišící se parametrem *delay*. Povinnými hodnotami jsou HTTP metoda a URL adresa. Nepovinným údajem je EndPointType, jenž v případě nevyplnění má hodnotu *EP_TYPE_GET*, znamenající, že endpoint slouží k získání hodnot.
 
 Hlavičkový soubor *Node.h* obsahuje deklarace funkcí *NodeInit* a *printEndpoint*.* **NodeInit* slouží k definici endpointů specifických pro daný uzel a nachází se v souborech pro konkrétní uzel umístěných ve složkách o úroveň výše. Který z nich bude kompilován se vybírá na základě definice nacházející se na začátku *Node.h* a preprocesorů. Funkce *printEndpoint* je využívána jako kontrola při vytvoření nového endpointu a je definována v souboru *NodeShared.cpp* tak, že provede serializaci veškerých údajů a zapíše je do logu.
 
@@ -1155,7 +1129,7 @@ Pár hlavičkové souboru a zdrojového kódu *SharedHttpEndpoints* obsahují p�
 
 ### Uzel 1
 
-První realizovaný uzel je vybaven sensorem DHT11 a monochromatickým OLED displejem. DHT11 od společnosti Adafruit je levný teploměr a vlhkoměr komunikující pomocí protokolu 1wire. Ačkoliv se s přesností teploty ± 2 °C jedná spíše o orientační hodnotu, byl tento sensor ponechán pro své dynamické vlastnosti. Jelikož je po odečtení hodnoty potřeba počkat dalších 2000 ms, než je možno získat další, slouží tento sensor jako ukázka, jak si hlavní uzel poradí s pomalu odpovídajícím uzlem. Pro komunikaci jsou využívány knihovny *DHT sensor library* a *Adafruit Unified Sensor**[89, 90]*. Bílý monochromatický OLED displej s rozlišením 128x64 px je řízen čipem SSD1306, který umožňuje komunikaci pomocí I2C. Pro ovládání jsou využívány knihovny *Adafruit GFX Library* a *Adafruit_SSD1306* [91, 92]. [93–95]
+První realizovaný uzel je vybaven sensorem DHT11 a monochromatickým OLED displejem. DHT11 od společnosti Adafruit je levný teploměr a vlhkoměr komunikující pomocí protokolu 1wire. Ačkoliv se s přesností teploty ± 2 °C jedná spíše o orientační hodnotu, byl tento sensor ponechán pro své dynamické vlastnosti. Jelikož je po odečtení hodnoty potřeba počkat dalších 2000 ms, než je možno získat další, slouží tento sensor jako ukázka, jak si hlavní uzel poradí s pomalu odpovídajícím uzlem. Pro komunikaci jsou využívány knihovny *DHT sensor **library* a *Adafruit** **Unified** Sensor**[89, 90]*. Bílý monochromatický OLED displej s rozlišením 128x64 px je řízen čipem SSD1306, který umožňuje komunikaci pomocí I2C. Pro ovládání jsou využívány knihovny *Adafruit** GFX **Library* a *Adafruit_SSD1306* [91, 92]. [93–95]
 
 Pro abstrakci uvnitř *Node1.**cpp* byla vytvořena třída *DhtWrapper*. Kromě snazší přenositelnosti je důvodem k abstrakci fakt, že knihovna po dobu 2000 ms od posledního čtení vrací stejnou hodnotu, ale časové razítko není zvenčí dostupné. Pro získání hodnot slouží metoda* **ReadRaw*, jenž získá teplotu a vlhkost ihned po sobě a uloží je do proměnných. Poté porovná své časové razítko a pokud uplynul daný limit, aktualizuje ho. Pro přístup k takto přečteným hodnotám slouží metody *GetTemp* a *GetHumid* a *GetDataAge*. Pokud je potřeba aby data byla aktuální, je zavolána metoda *WaitForNewestData*, která počká do uplynutí zbývajícího času a poté teprve proběhne četní.
 
@@ -1402,19 +1376,19 @@ Odkazovaný seznam příloh
 
 ---img---
 
-Příloha 1 piny NodeMCU [96]
+Příloha 1 Piny NodeMCU [96]
 
 ---img---
 
-Příloha 2 schéma zapojení ESP8266EX [67]
+Příloha 2 Schéma zapojení ESP8266EX [67]
 
 ---img---
 
-Příloha 3 diagram tříd LoopCompiler
+Příloha 3 Diagram tříd LoopCompiler
 
 ---img---
 
-Příloha 4 tabulka stavů konečného automatu
+Příloha 4 Tabulka stavů konečného automatu
 
 
 
