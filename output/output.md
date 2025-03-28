@@ -280,103 +280,95 @@ Anglický překlad českého souhrnu
 
 ## 3.1&ensp;OSI model&ensp;3
 
-### 3.1.1&ensp;Fyzická vrstva&ensp;3
+### 3.1.1&ensp;Fyzická vrstva&ensp;4
 
 ### 3.1.2&ensp;Linková vrstva&ensp;4
 
 ### 3.1.3&ensp;Síťová vrstva&ensp;5
 
-### 3.1.4&ensp;Transportní vrstva&ensp;5
+### 3.1.4&ensp;Transportní vrstva&ensp;6
 
-### 3.1.5&ensp;Relační Vrstva&ensp;5
+### 3.1.5&ensp;Relační Vrstva&ensp;6
 
-### 3.1.6&ensp;Prezentační vrstva&ensp;5
+### 3.1.6&ensp;Prezentační vrstva&ensp;6
 
 ### 3.1.7&ensp;Aplikační vrstva&ensp;6
 
-## 3.2&ensp;Protokoly&ensp;6
+## 3.2&ensp;Protokoly&ensp;7
 
-### 3.2.1&ensp;IP&ensp;6
+### 3.2.1&ensp;IP&ensp;7
 
-### 3.2.2&ensp;DHCP&ensp;6
+### 3.2.2&ensp;DHCP&ensp;8
 
-### 3.2.3&ensp;UDP&ensp;7
+### 3.2.3&ensp;UDP&ensp;8
 
-### 3.2.4&ensp;TCP&ensp;7
+### 3.2.4&ensp;TCP&ensp;8
 
-### 3.2.5&ensp;HTTP a HTTPS&ensp;8
+### 3.2.5&ensp;HTTP a HTTPS&ensp;9
 
-## 3.3&ensp;Datové formáty&ensp;10
+## 3.3&ensp;Datové formáty&ensp;12
 
-### 3.3.1&ensp;XML&ensp;10
+### 3.3.1&ensp;XML&ensp;12
 
-### 3.3.2&ensp;JSON&ensp;11
+### 3.3.2&ensp;JSON&ensp;13
 
-### 3.3.3&ensp;CSV&ensp;12
+### 3.3.3&ensp;CSV&ensp;14
 
-## 3.4&ensp;Wi-Fi&ensp;12
+## 3.4&ensp;Wi-Fi&ensp;14
 
-### 3.4.1&ensp;QAM&ensp;15
+### 3.4.1&ensp;QAM&ensp;18
 
-### 3.4.2&ensp;Šifrování komunikace&ensp;16
+### 3.4.2&ensp;Šifrování komunikace&ensp;19
 
-### 3.4.3&ensp;Spektrální rozprostření&ensp;16
+### 3.4.3&ensp;Spektrální rozprostření&ensp;20
 
-### 3.4.4&ensp;OFDM&ensp;18
+### 3.4.4&ensp;OFDM&ensp;22
 
-### 3.4.5&ensp;MIMO&ensp;18
+### 3.4.5&ensp;MIMO&ensp;22
 
-## 3.5&ensp;Jednočipové počítače&ensp;19
+## 3.5&ensp;Jednočipové počítače&ensp;23
 
-### 3.5.1&ensp;ESP8266&ensp;20
+### 3.5.1&ensp;ESP8266&ensp;25
 
-## 3.6&ensp;Návrhové a architektonické vzory&ensp;22
+## 3.6&ensp;Návrhové a architektonické vzory&ensp;26
 
-### 3.6.1&ensp;Zapouzdření&ensp;22
+### 3.6.1&ensp;Zapouzdření&ensp;27
 
-### 3.6.2&ensp;N-vrstvá architektura&ensp;22
+### 3.6.2&ensp;N-vrstvá architektura&ensp;27
 
-### 3.6.3&ensp;Dependency injection&ensp;22
+### 3.6.3&ensp;Dependency injection&ensp;27
 
-### 3.6.4&ensp;Data Transfer Object (DTO)&ensp;23
+### 3.6.4&ensp;Data Transfer Object (DTO)&ensp;28
 
-### 3.6.5&ensp;MVVM&ensp;23
+### 3.6.5&ensp;MVVM&ensp;29
 
-# **4&ensp;**Vlastní řešení&ensp;26
+# **4&ensp;**Vlastní řešení&ensp;31
 
-## 4.1&ensp;Hlavní uzel&ensp;27
+## 4.1&ensp;Hlavní uzel&ensp;32
 
-### 4.1.1&ensp;Komunikační vrstva&ensp;27
+### 4.1.1&ensp;Komunikační vrstva&ensp;33
 
-### 4.1.2&ensp;Logická vrstva&ensp;29
+### 4.1.2&ensp;Logická vrstva&ensp;36
 
-### 4.1.3&ensp;Uživatelské rozhraní&ensp;40
+### 4.1.3&ensp;Uživatelské rozhraní&ensp;49
 
-## 4.2&ensp;Uzly&ensp;44
+## 4.2&ensp;Uzly&ensp;55
 
-### 4.2.1&ensp;Společná část&ensp;45
+### 4.2.1&ensp;Společná část&ensp;56
 
-### 4.2.2&ensp;Uzel 1&ensp;47
+### 4.2.2&ensp;Uzel 1&ensp;59
 
-### 4.2.3&ensp;Uzel 2&ensp;47
+### 4.2.3&ensp;Uzel 2&ensp;60
 
-### 4.2.4&ensp;Uzel 3&ensp;47
+### 4.2.4&ensp;Uzel 3&ensp;60
 
-# **5&ensp;**Výsledky a diskuse&ensp;48
+# **5&ensp;**Výsledky a diskuse&ensp;61
 
-## 5.1&ensp;Podkapitola úroveň 2&ensp;48
+# Závěr&ensp;62
 
-### 5.1.1&ensp;Podkapitola úroveň 3&ensp;48
+# **6&ensp;**Seznam použitých zdrojů&ensp;i
 
-### 5.1.2&ensp;Podkapitola úroveň 3&ensp;48
-
-## 5.2&ensp;Podkapitola úroveň 2&ensp;48
-
-# **6&ensp;**Závěr&ensp;49
-
-# **7&ensp;**Seznam použitých zdrojů&ensp;i
-
-# **8&ensp;**Přílohy&ensp;viii
+# **7&ensp;**Přílohy&ensp;viii
 
 
 
@@ -702,7 +694,7 @@ Mikroprocesor je označení integrovaného obvodu obsahující vykonávající a
 
 SoC (System-On-Chip) je integrovaný obvod obsahující všechny základní části počítače v jednom pouzdře. Tyto čipy obsahují procesor, cache, paměť a vstupně výstupní obvody. Toto umožňuje zjednodušení výroby a tím snížení nákladů. Dále zařízení využívající SoC mohou mít menší rozměry a spotřebu než ta používající více čipů. Často je využívána Von Neumannova architektura, kdy jsou instrukce i data umístěna do jedné paměti, která je přímo adresována CPU a označuje se jako primární nebo hlavní paměť. [61]
 
-Mikrokontrolery neboli jednočipové počítače, často zkracované jako MCU (MicroController Unit), jsou speciální případem SoC, jenž nevyužívají externí DRAM (Dynamic Random Access Memory). Většinu vstupně výstupních obvodů a ROM (Read Only Memory) s programem, jenž mají vykonávat, obsahují přímo v sobě. Ke své funkci potřebují pouze zdroj hodinového signálu a napájení (viz Obr. 23). Ve většině případů obsahují časovače a převodníky analogového signálu na digitální (ADC = Analog-to-Digital Converter). Kromě těchto základních obvodů jsou typicky vybaveny sběrnicemi (např. I2C, SPI a další) umožňujícími připojit složitější sensory, Které nepoužívají pouze jednu logickou hodnotu, či napětí v rozmezí 0-3 V, ale komunikují pomocí zpráv tvořených jedním či více bajtů. Díky těmto vlastnostem jsou ideální pro úlohy vyžadující zpracování signálů v reálném čase. [61, 64]
+Mikrokontrolery neboli jednočipové počítače, často zkracované jako MCU (MicroController Unit), jsou speciální případem SoC, jenž nevyužívají externí DRAM (Dynamic Random Access Memory). Většinu vstupně výstupních obvodů a ROM (Read Only Memory) s programem, jenž mají vykonávat, obsahují přímo v sobě. Ke své funkci potřebují pouze zdroj hodinového signálu a napájení (viz Obr. 23). Ve většině případů obsahují časovače a převodníky analogového signálu na digitální (ADC = Analog-to-Digital Converter). Kromě těchto základních obvodů jsou typicky vybaveny sběrnicemi (např. I2C, SPI a další) umožňujícími připojit sensory, které nepoužívají pouze jednu logickou hodnotu, či napětí v rozmezí 0-3 V, ale komunikují pomocí zpráv tvořených jedním či více bajtů. Díky těmto vlastnostem jsou ideální pro úlohy vyžadující zpracování signálů v reálném čase. [61, 64]
 
 ---img---
 
@@ -1153,21 +1145,13 @@ text
 
 # Výsledky a diskuse
 
-## Podkapitola úroveň 2
+Z existujících řešení je této práci nejpodobnější Node-RED. Jedná se o událostmi řízenou Node.js aplikaci [96, 97]. Hlavním rozdílem ve fungování je způsob komunikace. V případě Node-RED vyhodnocení větve datové toku začíná při obdržení zprávy z periferního zařízení, zatímco v řešení realizované touto prací se hlavní uzel na hodnoty aktivně ptá. To umožňuje existenci dvou souběžně běžících systémů sdílející stejnou periferii bez nutnosti vytvářet server. Toto je výhodné především pro technicky méně zdatné uživatele, kterým stačí pouze stáhnout a spustit exe soubor. Další výhodou je větší versatilita uživatelského rozhraní, jelikož díky vrstvenému modelu je možné vytvořit nové, aniž by to ovlivnilo logiku aplikace.
 
-Text…
+Je-li potřeba aby logika byla vykonávána na jednočipovém počítači, který oproti klasickému osobnímu počítači může fungovat na baterii po dobu několika měsíců, je možné Node-RED spustit na Raspberry Pi nebo BeagleBone [98]. Na tytéž vývojové desky je možné s pomocí knihovny *.NET **IoT* nasadit i *MainNode* vytvořený v této práci [99]. Dále je dostupný také *.NET nanoFramework*, jenž umožňuje spouštět kód napsaný v .NET na méně výkonných čipech jako jsou ESP32 a STM32F429, avšak kvůli hardwarovému omezení nepodporuje všechny funkce [100, 101]. Řešení bylo navrženo tak, aby bylo možné bez zásahů do logiky ho z C# přepsat do C++. Pokud při realizaci nebyla udělána chyba, mělo by se jednat pouze o rozdíl v syntaxi (např. vlastnosti a lambda výrazy).
 
-### Podkapitola úroveň 3
+Řešení vytvořeno v této práci momentálně nenabízí pokročilé funkce jako Node-RED. Přidání vlastních funkcí vyžaduje zásah do *LoopCompiler*. Ačkoliv pro data není vytvořena vizualizace, logická vrstva poskytuje dostatek dat, aby bylo možné ji doplnit. Přidání nového komunikačního protokolu do tohoto řešení je oproti Node-RED jednodušší [102, 103].
 
-Text…
 
-### Podkapitola úroveň 3
-
-Text…
-
-## Podkapitola úroveň 2
-
-Text…
 
 # Závěr
 
@@ -1359,9 +1343,9 @@ Text…
 
 [90] adafruit/DHT-sensor-library: Arduino library for DHT11, DHT22, etc Temperature & Humidity Sensors [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/DHT-sensor-library
 
-[91] adafruit/Adafruit-GFX-Library: Adafruit GFX graphics core Arduino library, this is the „core" class that all our other graphics libraries derive from [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/Adafruit-GFX-Library
+[91] adafruit/Adafruit-GFX-Library: Adafruit GFX graphics core Arduino library, this is the „core" class that all our other graphics libraries derive from. GitHub [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/Adafruit-GFX-Library
 
-[92] adafruit/Adafruit_SSD1306: Arduino library for SSD1306 monochrome 128x64 and 128x32 OLEDs [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/Adafruit_SSD1306
+[92] adafruit/Adafruit_SSD1306: Arduino library for SSD1306 monochrome 128x64 and 128x32 OLEDs. GitHub [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/Adafruit_SSD1306
 
 [93] Overview | DHT11, DHT22 and AM2302 Sensors | Adafruit Learning System [online]. [vid. 2025-03-24]. Dostupné z: https://learn.adafruit.com/dht
 
@@ -1369,7 +1353,23 @@ Text…
 
 [95] OLED displej 0,96 palce. GME [online]. nedatováno [vid. 2025-03-24]. Dostupné z: https://img.gme.cz/files/eshop_data/eshop_data/9/772-153/dsh.772-153.1.pdf
 
-[96] ESP8266 Pinout Reference: How To Use ESP8266 GPIO Pins [online]. [vid. 2025-03-19]. Dostupné z: https://electropeak.com/learn/esp8266-pinout-reference-how-to-use-esp8266-gpio-pins/
+[96] Low-code programming for event-driven applications : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/
+
+[97] Running Node-RED locally : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/getting-started/local
+
+[98] Getting Started : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/getting-started/
+
+[99] iot/Documentation/README.md at main · dotnet/iot · GitHub. GitHub [online]. [vid. 2025-03-28]. Dostupné z: https://github.com/dotnet/iot/blob/main/Documentation/README.md
+
+[100] NANOFRAMEWORK. GitHub - nanoframework/Home: :house: The landing page for .NET nanoFramework repositories. GitHub [online]. [vid. 2025-03-28]. Dostupné z: https://github.com/nanoframework/Home
+
+[101] MICROSOFT IOT DEVELOPERS a LAURENT ELLERBACH. IoT Show: An introduction to .NET nanoFramework - YouTube. Youtube [online]. [vid. 2025-03-28]. Dostupné z: https://www.youtube.com/watch?v=TLYqRdmmj5k
+
+[102] Packaging : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/creating-nodes/packaging
+
+[103] Creating your first node : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/creating-nodes/first-node
+
+[104] ESP8266 Pinout Reference: How To Use ESP8266 GPIO Pins [online]. [vid. 2025-03-19]. Dostupné z: https://electropeak.com/learn/esp8266-pinout-reference-how-to-use-esp8266-gpio-pins/
 
 
 # Přílohy
@@ -1380,7 +1380,7 @@ Odkazovaný seznam příloh
 
 ---img---
 
-Příloha 1 Piny NodeMCU [96]
+Příloha 1 Piny NodeMCU [104]
 
 ---img---
 
