@@ -1314,25 +1314,29 @@ Jsou definovány endpointy *getDhtValuesNew* a *getDhtValuesAny*, které vrací 
 
 ### Uzel 2
 
-Druhý realizovaný uzel je vybaven servomotorem SG-90 s úhlem otočení 180°, jenž je napájen 5 V [98]. Tento modul má simulovat otevírání ventilu, ale nebyl k němu připevněn žádný předmět. K ovládání byla použita ESP8266 implementace Arduino knihovny *Servo** *[100]. Ta na základě zadaného úhlu generuje PWM signál potřebný k dosažení požadované polohy.
+Druhý realizovaný uzel je vybaven servomotorem SG-90 s úhlem otočení 180°, jenž je napájen 5 V [98]. Tento modul má simulovat otevírání ventilu, ale nebyl k němu připevněn žádný předmět. K ovládání byla použita ESP8266 implementace Arduino knihovny *Servo** *[99]. Ta na základě zadaného úhlu generuje PWM signál potřebný k dosažení požadované polohy.
 
-Pro abstrakci v kódu uzlu byla vytvořena třída *ServoWrapper*, jenž skryje platformě závislý kód. Její konstruktor přijímá pin, kam je servomotor připojen, a vytváří instanci třídy knihovny. Má metody *SetAngle* a *G**etAngle*, jenž obalují volání *write* a *read*.
+Pro abstrakci v kódu uzlu byla vytvořena třída *ServoWrapper*, jenž skryje platformě závislý kód. Její konstruktor přijímá pin, kam je servomotor připojen, a vytváří instanci třídy knihovny. Má metody *SetAngle* a *GetAngle*, jenž obalují volání *write* a *read*.
 
 Pro nastavení úhlu natočení servomotoru slouží endpoint *setAngle*, který je typu *EP_TYPE_SET*. Má celočíselný Argument *angle* a vrací odpověď obsahující hodnotu *deg*. Ta slouží pro kontrolu a jedná se o skutečnou hodnotu úhlu v době poslání odpovědi. Druhým endpointem je getAngle, který vrací také hodnotu *deg*, ale oproti předchozímu slouží pouze k získání hodnoty. 
 
-
-
-
-
-
-
 ### Uzel 3
 
-text
+Text
+
+## Pomocné projekty
+
+Kromě těchto dvou právě popsaných hlavních částí během vývoje vznikly další dva pomocné projekty, které nejsou součást zadání a jejich účel je usnadnit vývoj. Prvním je *NodeEmulator*, který napodobuje chování uzlů. Druhým je *MainNode.Logic.Test*, jehož úkolem je jedním kliknutím ověřit, že pro daný vstup bude mít aplikace očekávaný výstup.
+
+*NodeEmulator* je WinForm aplikace, jejímž úkolem je umožnění testování logiky v okamžiku, kdy není možné použít fyzický uzel. Toto je výhodné například v okamžiku, kdy ještě žádný neexistuje nebo se nachází mimo dosah programátora. Projekt má závislost na knihovně *MainNode.Communication*, čímž je zajištěna shodná podoba DTO jako má hlavní uzel. Veškerá logika je zapsána přímo v kódu a ke spuštění není potřeba žádný zásah uživatele. Hodnoty endpointů jsou zobrazeny v okně, kde je možné je měnit. K tomuto virtuálnímu uzlu je možné přistupovat z portu 8080.
+
+*MainNode.Logic.Test* je projekt typu MSTest a slouží k testování scénářů v logické vrstvě. Momentálně je vytvořeno omezené množství testů, jenž se zaměřují na chová třídy *LoopCompiler*. Tyto testy ověřují, zda pro různé kombinace datových typů, operací, konstant a referencí bude po spuštění datových toků navrácena správná hodnota. Názvy testovacích metod mají na začátku první písmena datových typů. Následuje podtržítko a zkoušená operace. Název končí informacemi o tom, zda jsou hodnoty konstanty, reference nebo další datové toky.
+
+
 
 # Výsledky a diskuse
 
-Z existujících řešení je této práci nejpodobnější Node-RED. Jedná se o událostmi řízenou Node.js aplikaci [99, 101]. Hlavním rozdílem ve fungování je způsob komunikace. V případě Node-RED vyhodnocení větve datové toku začíná při obdržení zprávy z periferního zařízení, zatímco v řešení realizované touto prací se hlavní uzel na hodnoty aktivně ptá. To umožňuje existenci dvou souběžně běžících systémů sdílející stejnou periferii bez nutnosti vytvářet server. Toto je výhodné především pro technicky méně zdatné uživatele, kterým stačí pouze stáhnout a spustit exe soubor. Další výhodou je větší versatilita uživatelského rozhraní, jelikož díky vrstvenému modelu je možné vytvořit nové, aniž by to ovlivnilo logiku aplikace.
+Z existujících řešení je této práci nejpodobnější Node-RED. Jedná se o událostmi řízenou Node.js aplikaci [100, 101]. Hlavním rozdílem ve fungování je způsob komunikace. V případě Node-RED vyhodnocení větve datové toku začíná při obdržení zprávy z periferního zařízení, zatímco v řešení realizované touto prací se hlavní uzel na hodnoty aktivně ptá. To umožňuje existenci dvou souběžně běžících systémů sdílející stejnou periferii bez nutnosti vytvářet server. Toto je výhodné především pro technicky méně zdatné uživatele, kterým stačí pouze stáhnout a spustit exe soubor. Další výhodou je větší versatilita uživatelského rozhraní, jelikož díky vrstvenému modelu je možné vytvořit nové, aniž by to ovlivnilo logiku aplikace.
 
 Je-li potřeba aby logika byla vykonávána na jednočipovém počítači, který oproti klasickému osobnímu počítači může fungovat na baterii po dobu několika měsíců, je možné Node-RED spustit na Raspberry Pi nebo BeagleBone [102]. Na tytéž vývojové desky je možné s pomocí knihovny *.NET **IoT* nasadit i *MainNode* vytvořený v této práci [103]. Dále je dostupný také *.NET nanoFramework*, jenž umožňuje spouštět kód napsaný v .NET na méně výkonných čipech jako jsou ESP32 a STM32F429, avšak kvůli hardwarovému omezení nepodporuje všechny funkce [104, 105]. Řešení bylo navrženo tak, aby bylo možné bez zásahů do logiky ho z C# přepsat do C++. Pokud při realizaci nebyla udělána chyba, mělo by se jednat pouze o rozdíl v syntaxi (např. vlastnosti a lambda výrazy).
 
@@ -1548,9 +1552,9 @@ Text…
 
 [98] SG-90 servomotor 9g. GME [online]. [vid. 2025-03-28]. Dostupné z: https://www.gme.cz/v/1497888/sg-90-servomotor-9g
 
-[99] Low-code programming for event-driven applications : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/
+[99] Arduino/libraries/Servo/src at master · esp8266/Arduino. GitHub [online]. [vid. 2025-03-28]. Dostupné z: https://github.com/esp8266/Arduino/tree/master/libraries/Servo/src
 
-[100] Arduino/libraries/Servo/src at master · esp8266/Arduino. GitHub [online]. [vid. 2025-03-28]. Dostupné z: https://github.com/esp8266/Arduino/tree/master/libraries/Servo/src
+[100] Low-code programming for event-driven applications : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/
 
 [101] Running Node-RED locally : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/getting-started/local
 
