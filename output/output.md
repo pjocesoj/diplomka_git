@@ -502,6 +502,7 @@ Tab. 2 Význam adres v Wi-Fi rámci [49]&ensp;17
 | ADC | Analog-to-Digital Converter | 
 | API | Application Programming Interface | 
 | BSSID | Basic Service Set IDentifier | 
+| CI/CD | Continuous Integration / Continuous Delivery | 
 | CPU | Central Processing Unit | 
 | CSV | Comma-Separated Values | 
 | CVE | Common Vulnerabilities and Exposures | 
@@ -575,7 +576,7 @@ Tab. 2 Význam adres v Wi-Fi rámci [49]&ensp;17
 
 V době stále rozrůstajícího se počtu chytrých zařízení, která jsou připojena k internetu nebo počítači, roste také zájem uživatelů o automatizaci různých procesů. Může se jednat například o automatizaci v rámci domácnosti nebo nějakého výrobního procesu. Komplikací je, že mnoho těchto zařízení se nachází ekosystémech, které nejsou vzájemně kompatibilní. Tato práce se snaží vytvořit modulární řídící systém, který jednak umožňuje připojit zařízení vytvořena pomocí přiložené knihovny, ale také programátorům umožňuje vytvořit modul pro přidání zařízení z již existujícího ekosystému. 
 
-V teoretické časti budou popsány jednotlivé vrstvy OSI modelu, jenž slouží k popisu síťové komunikace. Dále budou vysvětleny nejdůležitější síťové protokoly a formáty používané k posílání dat. Poté budou popsány principy funkce komunikace ve Wi-Fi síti. Nakonec budou vysvětleny programátorské techniky související s touto prací.
+V teoretické časti budou popsány jednotlivé vrstvy OSI modelu, jenž slouží k popisu síťové komunikace. Dále budou vysvětleny nejdůležitější síťové protokoly a formáty používané k posílání dat. Poté budou popsány principy funkce komunikace ve Wi-Fi síti. Následuje vysvětlení dělení obvodů s vysokým stupněm integrace a představení čipu ESP8266. Nakonec budou vysvětleny programátorské techniky související s touto prací.
 
 Praktická část se skládá ze dvou hlavních oblastí. První je hlavní uzel, se kterým uživatel interaguje a jenž řídí komunikaci a vyhodnocování zadané logiky. Při návrhu této části bude kladen důraz především na modulárnost, aby bylo možné jednotlivé moduly nahradit bez ovlivnění zbytku systému. Druhou oblastí jsou jednotlivé uzly sloužící jako vstupy a výstupy systému. Tato oblast je tvořena logikou společnou pro všechny uzly a vytvořením vzorových implementací.
 
@@ -1348,9 +1349,17 @@ Je-li potřeba aby logika byla vykonávána na jednočipovém počítači, kter�
 
 # Závěr
 
-Text…
+Byl vysvětlen význam jednotlivých vrstev OSI modelu během síťové komunikace a byly popsány nejdůležitější protokoly, které jsou t ní používány. Poté byl vysvětlen rozdíl mezi bitovým a textovým formátem dat a struktura XML, JSON a CSV. Oblast síťové komunikace byla uzavřena vysvětlením principu funkce Wi-Fi, včetně její stručné historie a rozdílů mezi jednotlivými generacemi. Také byl ukázán rozdíl mezi rámců IEEE 802.3 (Ethernet) a IEEE 802.11 (Wi-Fi).
 
+Teoretická část pokračovala vysvětlením pojmů mikroprocesor, SoC a mikrokontroler. Dále byl představen čip ESP8266, jeho moduly a vývojová deska NodeMCU. Teorie byla zakončena vysvětlením programovacích technik, jenž souvisí s touto prací.
 
+Praktickou část tvoří hlavní uzel, sdílený kód pro uzly realizované pomocí ESP8266, vzorové implementace těchto uzlů a pomocné projekty sloužící pro testování. 
+
+Hlavní uzel je realizován jako vrstvený model skládající se ze dvou knihoven a uživatelského rozhraní v podobě WPF aplikace. Jeho účelem je interakce s uživatelem a vykonávání vyhodnocovací smyčky na základě zadané logiky. Vstupem jsou hodnoty získané z ostatních uzlů a po dokončení jsou hodnoty poslány uzlům s akčním členem. Jelikož byl použit vrstvený model, je možné jednotlivé části nahradit bez ovlivnění zbytku aplikace. Současně je řešení navrženo tak, aby bylo možné využít více protokolů současně.
+
+Uzly realizované pomocí ESP8266 mohou fungovat jako vstupní, výstupní nebo oboje současně. Při programování bylo využito Arduino IDE, jenž poskytuje abstrakci od práce s registry daného čipu. Jelikož ne všichni výrobci mají plnou podporu všech funkcí, byla pomocí hlavičkových souborů vytvořena abstrakce, aby kód šlo použít i pro tyto čipy. ESP8266 implementace využívá HTTP server s endpointy pro potřebné operace. Každý uzel má vlastní soubor obsahující definice těchto endpointů. Pro volbu, který soubor bude použit, slouží definice a na ní navázaný preprocesor.
+
+Kvůli nečekaným komplikacím nebyly implementovány všechny plánované funkce, jako je vizualizace a automatické znovu připojení v případě ztráty spojení. Kromě těchto funkcí je do budoucna plánováno přidat mechanismy, řešící situace, kdy se systém dostane do nežádoucího stavu. Dále je zamýšleno přidat možnost definovat vlastní znovupoužitelné funkce a zadávat logiku pomocí grafického rozhraní, aby bylo řeší více přístupné technicky méně zdatným uživatelům. Do komunikační vrstvy je plánováno přidat podporu dalších protokolů a API pro chytrou domácnost (např. Samsung SmartThings [108]). Jak bylo v této práci několikrát zmíněno, počítá se spuštěním hlavního uzlu na jednočipovém počítači. Pro tuto úlohu jsou zvažovány vývojové desky STM32F429 Discovery s grafickým displejem [110] a dvoujádrové Nucleo STM32H755 s Ethernet rozhraním [111]. Testovaní bude postupně rozšířeno i na další třídy. Plánuje se zapojit *NodeEmulator* a zprovoznit kompletní CI/CD pipeline.
 
 
 
@@ -1570,7 +1579,13 @@ Text…
 
 [107] Creating your first node : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/creating-nodes/first-node
 
-[108] ESP8266 Pinout Reference: How To Use ESP8266 GPIO Pins [online]. [vid. 2025-03-19]. Dostupné z: https://electropeak.com/learn/esp8266-pinout-reference-how-to-use-esp8266-gpio-pins/
+[108] API | Developer Documentation | SmartThings [online]. [vid. 2025-03-29]. Dostupné z: https://developer.smartthings.com/docs/api/public
+
+[109] ESP8266 Pinout Reference: How To Use ESP8266 GPIO Pins [online]. [vid. 2025-03-19]. Dostupné z: https://electropeak.com/learn/esp8266-pinout-reference-how-to-use-esp8266-gpio-pins/
+
+[110] 32F429IDISCOVERY - Discovery kit with STM32F429ZI MCU * New order code STM32F429I-DISC1 (replaces STM32F429I-DISCO) - STMicroelectronics [online]. [vid. 2025-03-29]. Dostupné z: https://www.st.com/en/evaluation-tools/32f429idiscovery.html
+
+[111] NUCLEO-H755ZI-Q - STM32 Nucleo-144 development board with STM32H755ZI MCU, SMPS, supports Arduino, ST Zio and morpho connectivity - STMicroelectronics [online]. [vid. 2025-03-29]. Dostupné z: https://www.st.com/en/evaluation-tools/nucleo-h755zi-q.html
 
 
 # 
@@ -1589,7 +1604,7 @@ Příloha 4 Tabulka stavů konečného automatu&ensp;iv
 
 ---img---
 
-Příloha 1 Piny NodeMCU [108]
+Příloha 1 Piny NodeMCU [109]
 
 ---img---
 
