@@ -94,23 +94,19 @@ Martin Novák
 
 
 
-
-
-
-
-
-
 **Čestné prohlášení**
 
 
 
 Prohlašuji, že svou diplomovou práci "Návrh a realizace kontrolního systému na WiFi síti" jsem vypracoval samostatně pod vedením vedoucího diplomové práce a s použitím odborné literatury a dalších informačních zdrojů, které jsou citovány v práci a uvedeny v seznamu použitých zdrojů na konci práce. Jako autor uvedené diplomové práce dále prohlašuji, že jsem v souvislosti s jejím vytvořením neporušil autorská práva třetích osob.
 
+Prohlašuji, že jsem nástroje AI využil v souladu s vnitřními předpisy univerzity a principy akademické integrity a etiky. Na využití těchto nástrojů v práci vhodným způsobem odkazuji.
+
  
 
 
 
-V Praze dne datum odevzdání                    ___________________________
+V Praze dne 31.3.2025                    ___________________________
 
 
 
@@ -198,7 +194,7 @@ V Praze dne datum odevzdání                    ___________________________
 
 
 
-Rád(a) bych touto cestou poděkoval(a) jméno vedoucího, případně dalších osob, a informace, za co děkujete.
+Rád(a) bych touto cestou poděkoval(a) vedoucímu diplomové práce doc. Ing. Miloslavovi Lindovi, Ph.D. za vedení, užitečné rady, a především za trpělivost. Dále bych chtěl poděkovat své rodině za podporu při psaní této práce.
 
 
 
@@ -220,11 +216,11 @@ Návrh a realizace kontrolního systému na WiFi síti
 
 
 
-Souhrn práce (cca 15 řádek textu).
+Tato diplomová práce se zabývá navržením a následnou realizací kontrolního systému, jenž je provozován na Wi-Fi síti. Ten je tvořen hlavním uzlem interagujícím s uživatelem a uzly, které k sobě mají připojeny sensory, akční členy nebo obojí. Hlavní uzel je vytvořen jako počítačový program s vrstvenou architekturou, čím je umožněna modularita a nahrazení části, která nevyhovuje potřebám řešené úlohy. Dále je možné bez ovlivnění zbylé části kódu nahradit komunikační třídu za jinou. Uzly jsou realizovány pomocí vývojových desek NodeMCU pro ESP2688 12E. Kód využívá Arduino knihoven a obsahuje abstrakci, aby bylo možné řešení migrovat na jinou platformu. Ke komunikaci je využíván protokol HTTP a data ve formátu JSON. Při návrhu byl kladen důraz na modularitu a možnost provozovat více systémů současně.
 
 
 
-**Klíčová slova:** klíčová slova (cca 10)
+**Klíčová slova:** ESP, Wi-Fi, komunikace, síť, bezpečnost, C#, JSON, vrstvená architektura, OSI, SoC
 
 
 
@@ -236,11 +232,11 @@ Souhrn práce (cca 15 řádek textu).
 
 
 
-Anglický překlad českého souhrnu
+This diploma thesis deals with the design and subsequent implementation of a control system that operates on a Wi-Fi network. It consists of a main node interacting with the user and nodes that have sensors, actuators or both connected to them. The main node is created as a computer program with a layered architecture, which allows modularity and the replacement of a part that does not meet the needs of the task being solved. It is also possible to replace the communication class with another without affecting the rest of the code. The nodes are implemented using NodeMCU development boards for ESP2688 12E. The code uses Arduino libraries and contains abstraction to allow the solution to migrate to another platform. Communication is based on the HTTP protocol and JSON data format. The design emphasized modularity and the ability to operate multiple systems simultaneously.
 
 
 
-**Keywords**: klíčová slova anglicky 
+**Keywords**: ESP, Wi-Fi, Communication, network, security, C#, JSON, layered architecture, OSI, SoC 
 
 
 
@@ -348,25 +344,23 @@ Anglický překlad českého souhrnu
 
 ### 4.1.2&ensp;Logická vrstva&ensp;37
 
-### 4.1.3&ensp;Uživatelské rozhraní&ensp;52
+### 4.1.3&ensp;Uživatelské rozhraní&ensp;51
 
-## 4.2&ensp;Uzly&ensp;57
+## 4.2&ensp;Uzly&ensp;56
 
-### 4.2.1&ensp;Společná část&ensp;58
+### 4.2.1&ensp;Společná část&ensp;57
 
-### 4.2.2&ensp;Uzel 1&ensp;61
+### 4.2.2&ensp;Uzel 1&ensp;60
 
-### 4.2.3&ensp;Uzel 2&ensp;62
+### 4.2.3&ensp;Uzel 2&ensp;61
 
-### 4.2.4&ensp;Uzel 3&ensp;62
+## 4.3&ensp;Pomocné projekty&ensp;61
 
-## 4.3&ensp;Pomocné projekty&ensp;62
+# **5&ensp;**Výsledky a diskuse&ensp;63
 
-# **5&ensp;**Výsledky a diskuse&ensp;64
+# **6&ensp;**Závěr&ensp;64
 
-# **6&ensp;**Závěr&ensp;65
-
-# **7&ensp;**Seznam použitých zdrojů&ensp;67
+# **7&ensp;**Seznam použitých zdrojů&ensp;66
 
 # **8&ensp;**Přílohy&ensp;i
 
@@ -402,35 +396,35 @@ Obr. 13 Rámec Wi-Fi [56]&ensp;17
 
 Obr. 14 Význam DS bitů [56]&ensp;17
 
-Obr. 15 Schéma QAM modulátoru [60]&ensp;19
+Obr. 15 Schéma QAM modulátoru [61]&ensp;19
 
-Obr. 16 Graf 16-QAM [60]&ensp;19
+Obr. 16 Graf 16-QAM [61]&ensp;19
 
-Obr. 17 Signál 16-QAM [61]&ensp;19
+Obr. 17 Signál 16-QAM [62]&ensp;19
 
-Obr. 18 DSSS [64]&ensp;21
+Obr. 18 DSSS [65]&ensp;21
 
-Obr. 19 FHSS [64]&ensp;22
+Obr. 19 FHSS [65]&ensp;22
 
-Obr. 20 OFDM přijímač [67]&ensp;22
+Obr. 20 OFDM přijímač [68]&ensp;22
 
-Obr. 21 SISO, SIMO, MISO, MIMO [70]&ensp;23
+Obr. 21 SISO, SIMO, MISO, MIMO [71]&ensp;23
 
-Obr. 22 Struktura jednoduchého mikropočítače [71]&ensp;25
+Obr. 22 Struktura jednoduchého mikropočítače [72]&ensp;25
 
-Obr. 23 Struktura mikrokontroleru [71]&ensp;25
+Obr. 23 Struktura mikrokontroleru [72]&ensp;25
 
-Obr. 24 Blokový diagram ESP8266EX [75]&ensp;26
+Obr. 24 Blokový diagram ESP8266EX [76]&ensp;26
 
-Obr. 25 ESP-WROOM-S2 [77]&ensp;27
+Obr. 25 ESP-WROOM-S2 [78]&ensp;27
 
-Obr. 26 Verze modulů [76]&ensp;27
+Obr. 26 Verze modulů [77]&ensp;27
 
-Obr. 27 Datový tok MVC [90]&ensp;30
+Obr. 27 Datový tok MVC [91]&ensp;30
 
-Obr. 28 Datový tok MVP [90]&ensp;31
+Obr. 28 Datový tok MVP [91]&ensp;31
 
-Obr. 29 Datový tok MVVM [90]&ensp;31
+Obr. 29 Datový tok MVVM [91]&ensp;31
 
 Obr. 30 Sekvenční diagram: obecná komunikace s více hlavními uzly&ensp;32
 
@@ -458,35 +452,35 @@ Obr. 41 Kód metody Execute&ensp;43
 
 Obr. 42 Diagram tříd Flow&ensp;44
 
-Obr. 43 Diagram tříd FlowResult&ensp;45
+Obr. 43 Diagram tříd FlowResult&ensp;44
 
-Obr. 44 Diagram tříd NodeRepository&ensp;47
+Obr. 44 Diagram tříd NodeRepository&ensp;46
 
 Obr. 45 Diagram tříd FlowRepository&ensp;47
 
-Obr. 46 Diagram tříd stavový automat&ensp;49
+Obr. 46 Diagram tříd stavový automat&ensp;48
 
 Obr. 47 Mapa kódu LoopCompiler&ensp;50
 
 Obr. 48 Diagram tříd LoopExecutor&ensp;51
 
-Obr. 49 Diagram tříd EndPointViewModel&ensp;53
+Obr. 49 Diagram tříd EndPointViewModel&ensp;52
 
 Obr. 50 Diagram tříd FlowViewModel&ensp;53
 
-Obr. 51 Diagram tříd NodeViewModel&ensp;54
+Obr. 51 Diagram tříd NodeViewModel&ensp;53
 
 Obr. 52 Okno s informacemi o uzlu&ensp;54
 
-Obr. 53 Okno pro vložení nového uzlu&ensp;55
+Obr. 53 Okno pro vložení nového uzlu&ensp;54
 
-Obr. 54 Okno pro zadávání logiky&ensp;56
+Obr. 54 Okno pro zadávání logiky&ensp;55
 
-Obr. 55 Diagram tříd FlowEditViewModel&ensp;56
+Obr. 55 Diagram tříd FlowEditViewModel&ensp;55
 
-Obr. 56 Úvodní obrazovka&ensp;57
+Obr. 56 Úvodní obrazovka&ensp;56
 
-Obr. 57 Diagram tříd MainWindowViewModel&ensp;57
+Obr. 57 Diagram tříd MainWindowViewModel&ensp;56
 
 
 
@@ -500,75 +494,78 @@ Tab. 2 Význam adres v Wi-Fi rámci [56]&ensp;18
 
 **Seznam použitých zkratek**
 
-| AP | Access Point | 
-|-|-|
-| ASCII | American Standard Code for Information Interchange | 
 | ADC | Analog-to-Digital Converter | 
+|-|-|
+| AP | Access Point | 
 | API | Application Programming Interface | 
+| ARP | Address Resolution Protocol | 
+| ASCII | American Standard Code for Information Interchange | 
 | BSSID | Basic Service Set IDentifier | 
+| CCK | Complementary Code Keying | 
 | CI/CD | Continuous Integration / Continuous Delivery | 
 | CPU | Central Processing Unit | 
+| CRC | Cyclical Redundancy Checking | 
 | CSV | Comma-Separated Values | 
 | CVE | Common Vulnerabilities and Exposures | 
-| CCK | Complementary Code Keying | 
-| CRC | Cyclical Redundancy Checking | 
-| DTO | Data transfer Object  | 
-| DSSS | Direct-Sequence Spread Spectrum | 
-| DOM | Document Object Model | 
-| DO | Domain Object | 
 | DHCP | Dynamic Host Configuration Protocol | 
+| DO | Domain Object | 
+| DOM | Document Object Model | 
 | DRAM | Dynamic Random Access Memory | 
-| XAML | eXtensible Application Markup Language | 
-| XML | eXtensible Markup Language | 
+| DSSS | Direct-Sequence Spread Spectrum | 
+| DTO | Data transfer Object  | 
 | FHSS | Frequency-Hopping Spread Spectrum | 
 | GPIO | General Purpose Input/Output | 
 | HTTP | Hypertext Transfer Protocol | 
 | HTTPS | Hypertext Transfer Protocol Secure | 
-| IEEE | Institute of Electrical and Electronics Engineers | 
-| IDE | Integrated development environment | 
 | I2C | Inter-lntegrated Circuit | 
-| ISO | International Organization for Standardization | 
+| IDE | Integrated development environment | 
+| IEEE | Institute of Electrical and Electronics Engineers | 
 | IPV4 | Internet Protocol version 4 | 
+| ISO | International Organization for Standardization | 
 | JSON | JavaScript Object Notation | 
+| KRACKs | Key Reinstallation AttaCKs | 
 | LAN | Local Area Network | 
 | LTS | Long Term Support | 
 | MAC | Media Access Control | 
 | MCU | MicroController Unit | 
+| MIMO | Multiple-Input Multiple-Output | 
+| MTU | Maximum transmission unit | 
 | MVC | Model-View-Controller | 
 | MVP | Model-View-Presenter | 
 | MVVM | Model-View-ViewModel | 
-| MIMO | Multiple-Input Multiple-Output | 
 | NAT | Network Address Translation | 
-| OSI | Open System Interconnection | 
 | ODF | OpenDocument Format  | 
-| OLED | organic light-emitting diode | 
-| OFDMA | Orthogonal Frequency Division Multiple Access | 
 | OFDM | Orthogonal Frequency-Division Multiplexing | 
+| OFDMA | Orthogonal Frequency Division Multiple Access | 
+| OLED | organic light-emitting diode | 
+| OSI | Open System Interconnection | 
 | QAM | Quadrature Amplitude Modulation | 
 | ROM | Read Only Memory | 
 | RSA | Rivest–Shamir–Adleman | 
-| SVG | Scalable Vector Graphics | 
-| SSL | Secure Sockets Layer | 
+| SAE | Simultaneous Authentication of Equals | 
+| SoC | System-On-Chip | 
 | SPI | Serial Peripheral Interface | 
 | SSID | Service Set IDentifier | 
-| STS | Short Term Support | 
-| SAE | Simultaneous Authentication of Equals | 
+| SSL | Secure Sockets Layer | 
 | STA | STAtion | 
-| SoC | System-On-Chip | 
+| STS | Short Term Support | 
+| SVG | Scalable Vector Graphics | 
 | TCP | Transmission Control Protocol | 
 | TCP/IP | Transmission Control Protocol/Internet Protocol | 
 | TLS | Transport Layer Security | 
-| URL | uniform resource locator | 
 | UART | universal asynchronous receiver-transmitter | 
-| UWP | Universal Windows Platform | 
 | UDP | User Datagram Protocol | 
+| URL | uniform resource locator | 
+| UWP | Universal Windows Platform | 
 | VLSI | Very large-Scale Integration | 
 | WAN | Wide Area Network | 
-| WPA | Wi-Fi Protected Access | 
-| WinForm | Windows Forms | 
-| WPF | Windows Presentation Foundation | 
 | WEP | Wired Equivalent Privacy | 
+| WinForm | Windows Forms | 
 | WLAN | Wireless Local Area Network | 
+| WPA | Wi-Fi Protected Access | 
+| WPF | Windows Presentation Foundation | 
+| XAML | eXtensible Application Markup Language | 
+| XML | eXtensible Markup Language | 
 
 
 
@@ -1333,10 +1330,6 @@ Pro abstrakci v kódu uzlu byla vytvořena třída *ServoWrapper*, jenž skryje 
 
 Pro nastavení úhlu natočení servomotoru slouží endpoint *setAngle*, který je typu *EP_TYPE_SET*. Má celočíselný Argument *angle* a vrací odpověď obsahující hodnotu *deg*. Ta slouží pro kontrolu a jedná se o skutečnou hodnotu úhlu v době poslání odpovědi. Druhým endpointem je getAngle, který vrací také hodnotu *deg*, ale oproti předchozímu slouží pouze k získání hodnoty. 
 
-### Uzel 3
-
-Text
-
 ## Pomocné projekty
 
 Kromě těchto dvou právě popsaných hlavních částí během vývoje vznikly další dva pomocné projekty, které nejsou součást zadání a jejich účel je usnadnit vývoj. Prvním je *NodeEmulator*, který napodobuje chování uzlů. Druhým je *MainNode.Logic.Test*, jehož úkolem je jedním kliknutím ověřit, že pro daný vstup bude mít aplikace očekávaný výstup.
@@ -1630,9 +1623,9 @@ Kvůli nečekaným komplikacím nebyly implementovány všechny plánované funk
 
 # Přílohy
 
-Příloha 1 Piny NodeMCU [123]&ensp;i
+Příloha 1 Piny NodeMCU [124]&ensp;i
 
-Příloha 2 Schéma zapojení ESP8266EX [77]&ensp;ii
+Příloha 2 Schéma zapojení ESP8266EX [78]&ensp;ii
 
 Příloha 3 Diagram tříd LoopCompiler&ensp;iii
 
