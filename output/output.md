@@ -94,23 +94,19 @@ Martin Novák
 
 
 
-
-
-
-
-
-
 **Čestné prohlášení**
 
 
 
 Prohlašuji, že svou diplomovou práci "Návrh a realizace kontrolního systému na WiFi síti" jsem vypracoval samostatně pod vedením vedoucího diplomové práce a s použitím odborné literatury a dalších informačních zdrojů, které jsou citovány v práci a uvedeny v seznamu použitých zdrojů na konci práce. Jako autor uvedené diplomové práce dále prohlašuji, že jsem v souvislosti s jejím vytvořením neporušil autorská práva třetích osob.
 
+Prohlašuji, že jsem nástroje AI využil v souladu s vnitřními předpisy univerzity a principy akademické integrity a etiky. Na využití těchto nástrojů v práci vhodným způsobem odkazuji.
+
  
 
 
 
-V Praze dne datum odevzdání                    ___________________________
+V Praze dne 31.3.2025                    ___________________________
 
 
 
@@ -198,7 +194,7 @@ V Praze dne datum odevzdání                    ___________________________
 
 
 
-Rád(a) bych touto cestou poděkoval(a) jméno vedoucího, případně dalších osob, a informace, za co děkujete.
+Rád(a) bych touto cestou poděkoval(a) vedoucímu diplomové práce doc. Ing. Miloslavovi Lindovi, Ph.D. za vedení, užitečné rady, a především za trpělivost. Dále bych chtěl poděkovat své rodině za podporu při psaní této práce.
 
 
 
@@ -220,11 +216,11 @@ Návrh a realizace kontrolního systému na WiFi síti
 
 
 
-Souhrn práce (cca 15 řádek textu).
+Tato diplomová práce se zabývá navržením a následnou realizací kontrolního systému, jenž je provozován na Wi-Fi síti. Ten je tvořen hlavním uzlem interagujícím s uživatelem a uzly, které k sobě mají připojeny sensory, akční členy nebo obojí. Hlavní uzel je vytvořen jako počítačový program s vrstvenou architekturou, čím je umožněna modularita a nahrazení části, která nevyhovuje potřebám řešené úlohy. Dále je možné bez ovlivnění zbylé části kódu nahradit komunikační třídu za jinou. Uzly jsou realizovány pomocí vývojových desek NodeMCU pro ESP2688 12E. Kód využívá Arduino knihoven a obsahuje abstrakci, aby bylo možné řešení migrovat na jinou platformu. Ke komunikaci je využíván protokol HTTP a data ve formátu JSON. Při návrhu byl kladen důraz na modularitu a možnost provozovat více systémů současně.
 
 
 
-**Klíčová slova:** klíčová slova (cca 10)
+**Klíčová slova:** ESP, Wi-Fi, komunikace, síť, bezpečnost, C#, JSON, vrstvená architektura, OSI, SoC
 
 
 
@@ -236,11 +232,11 @@ Souhrn práce (cca 15 řádek textu).
 
 
 
-Anglický překlad českého souhrnu
+This diploma thesis deals with the design and subsequent implementation of a control system that operates on a Wi-Fi network. It consists of a main node interacting with the user and nodes that have sensors, actuators or both connected to them. The main node is created as a computer program with a layered architecture, which allows modularity and the replacement of a part that does not meet the needs of the task being solved. It is also possible to replace the communication class with another without affecting the rest of the code. The nodes are implemented using NodeMCU development boards for ESP2688 12E. The code uses Arduino libraries and contains abstraction to allow the solution to migrate to another platform. Communication is based on the HTTP protocol and JSON data format. The design emphasized modularity and the ability to operate multiple systems simultaneously.
 
 
 
-**Keywords**: klíčová slova anglicky 
+**Keywords**: ESP, Wi-Fi, Communication, network, security, C#, JSON, layered architecture, OSI, SoC 
 
 
 
@@ -348,25 +344,23 @@ Anglický překlad českého souhrnu
 
 ### 4.1.2&ensp;Logická vrstva&ensp;37
 
-### 4.1.3&ensp;Uživatelské rozhraní&ensp;52
+### 4.1.3&ensp;Uživatelské rozhraní&ensp;51
 
-## 4.2&ensp;Uzly&ensp;57
+## 4.2&ensp;Uzly&ensp;56
 
-### 4.2.1&ensp;Společná část&ensp;58
+### 4.2.1&ensp;Společná část&ensp;57
 
-### 4.2.2&ensp;Uzel 1&ensp;61
+### 4.2.2&ensp;Uzel 1&ensp;60
 
-### 4.2.3&ensp;Uzel 2&ensp;62
+### 4.2.3&ensp;Uzel 2&ensp;61
 
-### 4.2.4&ensp;Uzel 3&ensp;62
+## 4.3&ensp;Pomocné projekty&ensp;61
 
-## 4.3&ensp;Pomocné projekty&ensp;62
+# **5&ensp;**Výsledky a diskuse&ensp;63
 
-# **5&ensp;**Výsledky a diskuse&ensp;64
+# **6&ensp;**Závěr&ensp;64
 
-# **6&ensp;**Závěr&ensp;65
-
-# **7&ensp;**Seznam použitých zdrojů&ensp;67
+# **7&ensp;**Seznam použitých zdrojů&ensp;66
 
 # **8&ensp;**Přílohy&ensp;i
 
@@ -402,35 +396,35 @@ Obr. 13 Rámec Wi-Fi [56]&ensp;17
 
 Obr. 14 Význam DS bitů [56]&ensp;17
 
-Obr. 15 Schéma QAM modulátoru [60]&ensp;19
+Obr. 15 Schéma QAM modulátoru [61]&ensp;19
 
-Obr. 16 Graf 16-QAM [60]&ensp;19
+Obr. 16 Graf 16-QAM [61]&ensp;19
 
-Obr. 17 Signál 16-QAM [61]&ensp;19
+Obr. 17 Signál 16-QAM [62]&ensp;19
 
-Obr. 18 DSSS [64]&ensp;21
+Obr. 18 DSSS [65]&ensp;21
 
-Obr. 19 FHSS [64]&ensp;22
+Obr. 19 FHSS [65]&ensp;22
 
-Obr. 20 OFDM přijímač [67]&ensp;22
+Obr. 20 OFDM přijímač [68]&ensp;22
 
-Obr. 21 SISO, SIMO, MISO, MIMO [70]&ensp;23
+Obr. 21 SISO, SIMO, MISO, MIMO [71]&ensp;23
 
-Obr. 22 Struktura jednoduchého mikropočítače [71]&ensp;25
+Obr. 22 Struktura jednoduchého mikropočítače [72]&ensp;25
 
-Obr. 23 Struktura mikrokontroleru [71]&ensp;25
+Obr. 23 Struktura mikrokontroleru [72]&ensp;25
 
-Obr. 24 Blokový diagram ESP8266EX [75]&ensp;26
+Obr. 24 Blokový diagram ESP8266EX [76]&ensp;26
 
-Obr. 25 ESP-WROOM-S2 [77]&ensp;27
+Obr. 25 ESP-WROOM-S2 [78]&ensp;27
 
-Obr. 26 Verze modulů [76]&ensp;27
+Obr. 26 Verze modulů [77]&ensp;27
 
-Obr. 27 Datový tok MVC [90]&ensp;30
+Obr. 27 Datový tok MVC [91]&ensp;30
 
-Obr. 28 Datový tok MVP [90]&ensp;31
+Obr. 28 Datový tok MVP [91]&ensp;31
 
-Obr. 29 Datový tok MVVM [90]&ensp;31
+Obr. 29 Datový tok MVVM [91]&ensp;31
 
 Obr. 30 Sekvenční diagram: obecná komunikace s více hlavními uzly&ensp;32
 
@@ -458,35 +452,35 @@ Obr. 41 Kód metody Execute&ensp;43
 
 Obr. 42 Diagram tříd Flow&ensp;44
 
-Obr. 43 Diagram tříd FlowResult&ensp;45
+Obr. 43 Diagram tříd FlowResult&ensp;44
 
-Obr. 44 Diagram tříd NodeRepository&ensp;47
+Obr. 44 Diagram tříd NodeRepository&ensp;46
 
 Obr. 45 Diagram tříd FlowRepository&ensp;47
 
-Obr. 46 Diagram tříd stavový automat&ensp;49
+Obr. 46 Diagram tříd stavový automat&ensp;48
 
 Obr. 47 Mapa kódu LoopCompiler&ensp;50
 
 Obr. 48 Diagram tříd LoopExecutor&ensp;51
 
-Obr. 49 Diagram tříd EndPointViewModel&ensp;53
+Obr. 49 Diagram tříd EndPointViewModel&ensp;52
 
 Obr. 50 Diagram tříd FlowViewModel&ensp;53
 
-Obr. 51 Diagram tříd NodeViewModel&ensp;54
+Obr. 51 Diagram tříd NodeViewModel&ensp;53
 
 Obr. 52 Okno s informacemi o uzlu&ensp;54
 
-Obr. 53 Okno pro vložení nového uzlu&ensp;55
+Obr. 53 Okno pro vložení nového uzlu&ensp;54
 
-Obr. 54 Okno pro zadávání logiky&ensp;56
+Obr. 54 Okno pro zadávání logiky&ensp;55
 
-Obr. 55 Diagram tříd FlowEditViewModel&ensp;56
+Obr. 55 Diagram tříd FlowEditViewModel&ensp;55
 
-Obr. 56 Úvodní obrazovka&ensp;57
+Obr. 56 Úvodní obrazovka&ensp;56
 
-Obr. 57 Diagram tříd MainWindowViewModel&ensp;57
+Obr. 57 Diagram tříd MainWindowViewModel&ensp;56
 
 
 
@@ -500,75 +494,78 @@ Tab. 2 Význam adres v Wi-Fi rámci [56]&ensp;18
 
 **Seznam použitých zkratek**
 
-| AP | Access Point | 
-|-|-|
-| ASCII | American Standard Code for Information Interchange | 
 | ADC | Analog-to-Digital Converter | 
+|-|-|
+| AP | Access Point | 
 | API | Application Programming Interface | 
+| ARP | Address Resolution Protocol | 
+| ASCII | American Standard Code for Information Interchange | 
 | BSSID | Basic Service Set IDentifier | 
+| CCK | Complementary Code Keying | 
 | CI/CD | Continuous Integration / Continuous Delivery | 
 | CPU | Central Processing Unit | 
+| CRC | Cyclical Redundancy Checking | 
 | CSV | Comma-Separated Values | 
 | CVE | Common Vulnerabilities and Exposures | 
-| CCK | Complementary Code Keying | 
-| CRC | Cyclical Redundancy Checking | 
-| DTO | Data transfer Object  | 
-| DSSS | Direct-Sequence Spread Spectrum | 
-| DOM | Document Object Model | 
-| DO | Domain Object | 
 | DHCP | Dynamic Host Configuration Protocol | 
+| DO | Domain Object | 
+| DOM | Document Object Model | 
 | DRAM | Dynamic Random Access Memory | 
-| XAML | eXtensible Application Markup Language | 
-| XML | eXtensible Markup Language | 
+| DSSS | Direct-Sequence Spread Spectrum | 
+| DTO | Data transfer Object  | 
 | FHSS | Frequency-Hopping Spread Spectrum | 
 | GPIO | General Purpose Input/Output | 
 | HTTP | Hypertext Transfer Protocol | 
 | HTTPS | Hypertext Transfer Protocol Secure | 
-| IEEE | Institute of Electrical and Electronics Engineers | 
-| IDE | Integrated development environment | 
 | I2C | Inter-lntegrated Circuit | 
-| ISO | International Organization for Standardization | 
+| IDE | Integrated development environment | 
+| IEEE | Institute of Electrical and Electronics Engineers | 
 | IPV4 | Internet Protocol version 4 | 
+| ISO | International Organization for Standardization | 
 | JSON | JavaScript Object Notation | 
+| KRACKs | Key Reinstallation AttaCKs | 
 | LAN | Local Area Network | 
 | LTS | Long Term Support | 
 | MAC | Media Access Control | 
 | MCU | MicroController Unit | 
+| MIMO | Multiple-Input Multiple-Output | 
+| MTU | Maximum transmission unit | 
 | MVC | Model-View-Controller | 
 | MVP | Model-View-Presenter | 
 | MVVM | Model-View-ViewModel | 
-| MIMO | Multiple-Input Multiple-Output | 
 | NAT | Network Address Translation | 
-| OSI | Open System Interconnection | 
 | ODF | OpenDocument Format  | 
-| OLED | organic light-emitting diode | 
-| OFDMA | Orthogonal Frequency Division Multiple Access | 
 | OFDM | Orthogonal Frequency-Division Multiplexing | 
+| OFDMA | Orthogonal Frequency Division Multiple Access | 
+| OLED | organic light-emitting diode | 
+| OSI | Open System Interconnection | 
 | QAM | Quadrature Amplitude Modulation | 
 | ROM | Read Only Memory | 
 | RSA | Rivest–Shamir–Adleman | 
-| SVG | Scalable Vector Graphics | 
-| SSL | Secure Sockets Layer | 
+| SAE | Simultaneous Authentication of Equals | 
+| SoC | System-On-Chip | 
 | SPI | Serial Peripheral Interface | 
 | SSID | Service Set IDentifier | 
-| STS | Short Term Support | 
-| SAE | Simultaneous Authentication of Equals | 
+| SSL | Secure Sockets Layer | 
 | STA | STAtion | 
-| SoC | System-On-Chip | 
+| STS | Short Term Support | 
+| SVG | Scalable Vector Graphics | 
 | TCP | Transmission Control Protocol | 
 | TCP/IP | Transmission Control Protocol/Internet Protocol | 
 | TLS | Transport Layer Security | 
-| URL | uniform resource locator | 
 | UART | universal asynchronous receiver-transmitter | 
-| UWP | Universal Windows Platform | 
 | UDP | User Datagram Protocol | 
+| URL | uniform resource locator | 
+| UWP | Universal Windows Platform | 
 | VLSI | Very large-Scale Integration | 
 | WAN | Wide Area Network | 
-| WPA | Wi-Fi Protected Access | 
-| WinForm | Windows Forms | 
-| WPF | Windows Presentation Foundation | 
 | WEP | Wired Equivalent Privacy | 
+| WinForm | Windows Forms | 
 | WLAN | Wireless Local Area Network | 
+| WPA | Wi-Fi Protected Access | 
+| WPF | Windows Presentation Foundation | 
+| XAML | eXtensible Application Markup Language | 
+| XML | eXtensible Markup Language | 
 
 
 
@@ -580,9 +577,9 @@ Tab. 2 Význam adres v Wi-Fi rámci [56]&ensp;18
 
 V době stále rozrůstajícího se počtu chytrých zařízení, která jsou připojena k internetu nebo počítači, roste také zájem uživatelů o automatizaci různých procesů. Může se jednat například o automatizaci v rámci domácnosti nebo nějakého výrobního procesu. Komplikací je, že mnoho těchto zařízení se nachází v ekosystémech, které nejsou vzájemně kompatibilní. Tato práce se snaží vytvořit modulární řídící systém, který jednak umožňuje připojit zařízení vytvořena pomocí přiložené knihovny, ale také programátorům umožňuje vytvořit modul pro přidání zařízení z již existujícího ekosystému. 
 
-V teoretické časti budou popsány jednotlivé vrstvy OSI modelu, jenž slouží k popisu síťové komunikace. Dále budou vysvětleny nejdůležitější síťové protokoly a formáty používané k posílání dat. Poté budou popsány principy funkce komunikace ve Wi-Fi síti. Následuje vysvětlení dělení obvodů s vysokým stupněm integrace a představení čipu ESP8266. Nakonec budou vysvětleny programátorské techniky související s touto prací.
+V přehledu řešené problematiky budou popsány jednotlivé vrstvy OSI modelu, jenž slouží k popisu síťové komunikace. Dále budou vysvětleny nejdůležitější síťové protokoly a formáty používané k posílání dat. Poté budou popsány principy funkce komunikace v síti Wi-Fi. Následuje vysvětlení dělení obvodů s vysokým stupněm integrace a představení čipu ESP8266. Nakonec budou vysvětleny programátorské techniky související s touto prací.
 
-Praktická část se skládá ze dvou hlavních oblastí. První je hlavní uzel, se kterým uživatel interaguje a jenž řídí komunikaci a vyhodnocování zadané logiky. Při návrhu této části bude kladen důraz především na modulárnost, aby bylo možné jednotlivé moduly nahradit bez ovlivnění zbytku systému. Druhou oblastí jsou jednotlivé uzly sloužící jako vstupy a výstupy systému. Tato oblast je tvořena logikou společnou pro všechny uzly a vytvořením vzorových implementací.
+Vlastní řešení se skládá ze dvou hlavních oblastí. První je hlavní uzel, se kterým uživatel interaguje a jenž řídí komunikaci a vyhodnocování zadané logiky. Při návrhu této části bude kladen důraz především na modulárnost, aby bylo možné jednotlivé moduly nahradit bez ovlivnění zbytku systému. Druhou oblastí jsou jednotlivé uzly sloužící jako vstupy a výstupy systému. Tato oblast je tvořena logikou společnou pro všechny uzly a vytvořením vzorových implementací.
 
 
 
@@ -608,7 +605,7 @@ Model OSI (Open System Interconnection) je teoretickým modelem vyvinutým v ro
 
 ---img---
 
-Obr. 1 *OSI *model[5]
+Obr. 1 OSI model[5]
 
 ### Fyzická vrstva
 
@@ -640,7 +637,7 @@ Obr. 3 Rámec 802.3 vs 802.11[9]
 
 ### Transportní vrstva
 
-Tato vrstva na straně odesilatele data vyšší vrstvy rozloží na části nazývané segmenty a na straně příjemce opět složí do původní podoby. Součástí tohoto procesu je kontrola, že všechna data dorazila v pořádku a případné opakování komunikace. Použitý protokol a jeho implementace určují, zda se při chybě bude opakovat pouze celý přenos, pouze jeho část nebo bude chyba tolerována. K adrese síťové vrstvy přidává port, který operačnímu systému říká, které aplikaci má přijatá data předat [11]. Tímto je zajištěno, že stejné spojení může být používáno více aplikacemi současně. Transportní vrstva také řídí rychlost přenosu, aby v případě rozdílných rychlostí připojení na straně příjemce a odesilatele, nebyla jedna strana přehlcena. Jsou rozlišovány dva způsoby komunikace. První je bez navázání spojení (Connection-less Service), kdy jsou data rovnou odeslána příjemci. Tento způsob může vést k chybám, neboť zde není mechanismus, jak odesilateli potvrdit doručení. Druhý způsob je před zahájením komunikace navázat spojení mezi komunikujícími uzly (Connection-Oriented Service). Při tomto procesu je vytvořena definovaná trasa, po které budou pakety posílány. Jelikož spolu uzly udržují spojení, je možné dosáhnout vyšší spolehlivost, avšak může vést k větší vytíženosti sítě. [1, 3, 4, 12, 13]
+Tato vrstva na straně odesilatele data vyšší vrstvy rozloží na části nazývané segmenty a na straně příjemce opět složí do původní podoby. Součástí tohoto procesu je kontrola, že všechna data dorazila v pořádku a případné opakování komunikace. Použitý protokol a jeho implementace určují, zda se při chybě bude opakovat celý přenos, pouze jeho část nebo bude chyba tolerována. K adrese síťové vrstvy přidává port, který operačnímu systému říká, které aplikaci má přijatá data předat [11]. Tímto je zajištěno, že stejné spojení může být používáno více aplikacemi současně. Transportní vrstva také řídí rychlost přenosu, aby v případě rozdílných rychlostí připojení na straně příjemce a odesilatele, nebyla jedna strana přehlcena. Jsou rozlišovány dva způsoby komunikace. První je bez navázání spojení (Connection-less Service), kdy jsou data rovnou odeslána příjemci. Tento způsob může vést k chybám, neboť zde není mechanismus, jak odesilateli potvrdit doručení. Druhý způsob je před zahájením komunikace navázat spojení mezi komunikujícími uzly (Connection-Oriented Service). Při tomto procesu je vytvořena definovaná trasa, po které budou pakety posílány. Jelikož spolu uzly udržují spojení, je možné dosáhnout vyšší spolehlivost, avšak může vést k větší vytíženosti sítě. [1, 3, 4, 12, 13]
 
 ### Relační, prezentační a aplikační vrstvy
 
@@ -651,8 +648,6 @@ Z hlediska komunikace se na poslední tři vrstvy OSI modelu dá nahlížet jak
 Úkolem prezentační (někdy nazývané překladová) vrstvy je příprava dat aplikační vrstvy k odeslání na straně odesilatele a následná uvedení do čitelného stavu na straně příjemce. Toto zahrnuje šifrování, kompresy a přizpůsobení datového formátu.[1, 3, 4]
 
 Tato vrstva je nejblíže uživateli a umožňuje aplikacím volat API endpointy. Samotná aplikace není součástí vrstvy, ale poskytuje protokoly umožňující aplikacím komunikovat s ostatními zařízeními na síti. Tím je uživateli přenášet soubory, zprávy, ověřovat zařízení, vzdáleně ovládat jiná zařízení a získávat data z databází. [1, 3, 4]
-
-
 
 ## Protokoly
 
@@ -690,7 +685,7 @@ Protokol HTTP (Hypertext Transfer Protocol), fungující na sedmé vrstvě OSI m
 
 Mezi klientem a serverem mohou být proxy servery, které dotazy pouze přeposílají, nebo mají jednu či více funkcí. První možnou funkcí je cache, která má uložené odpovědi pro časté dotazy, takže není potřeba zatěžovat server [26]. Druhou je odfiltrování potencionálně škodlivých dotazů. Třetí možnou funkcí je load balancing, kdy klient volá proxy server, který pak podle vytížení jednotlivých serverů zvolí, na který z nich bude dotaz přeposlán, například podle lokace nebo zajištění rovnoměrného rozložení zátěže [27]. Čtvrtou funkcí je autorizace dotazů, aby se ke zdrojům nedostala neoprávněná osoba. Poslední z běžně využívaných funkcí je logování dotazů, které mohou být zpětně použity k analýze (např. kvůli optimalizaci nebo při vyšetřování incidentu). [25]
 
-Verze HTTP/1.1 a starší jsou v podobě, která je čitelná pro lidi. Od verze HTTP/2.0 jsou zprávy zabaleny do rámců, které umožňují kompresy a multiplexing. Struktura zprávy se liší v závislosti na tom, zda se jedná o dotaz, nebo odpověď (viz Obr. 6 a Obr. 7). U dotazu je nutné uvést, jaká metoda se má provést. Nejběžnější jsou GET pro načtení dat a POST pro odeslání dat v těle dotazu. Cesta je adresa od kořenového adresáře k zdroji nebo endpointu, o který klient žádá. Hlavička obsahuje dodatečné informace pro server, jako je například autorizace, očekávaný jazyk, způsob kódování a další. Obdobný význam má hlavička odpovědi pro klienta, ale místo metody a cesty obsahuje status kód a zprávy. Kód je tříciferné číslo, u něhož stovky určují kategorii a zbylé dvě číslice konkrétní stav. Jednička jsou informační zprávy, ale nejsou využívány tak často jako ostatní. Dvojka na začátku znamená, že dotaz byl v pořádku zpracován. Trojka značí přesměrování dotazu jinam. Čtyřka znamená chybu na straně klienta, zatímco pětka je chyba na straně serveru. [25, 28, 29]
+Verze HTTP/1.1 a starší jsou v podobě, která je čitelná pro lidi. Od verze HTTP/2.0 jsou zprávy zabaleny do rámců, které umožňují kompresy a multiplexing. Struktura zprávy se liší v závislosti na tom, zda se jedná o dotaz, nebo odpověď (viz Obr. 6 a Obr. 7). U dotazu je nutné uvést, jaká metoda se má provést. Nejběžnější jsou GET pro načtení dat a POST pro odeslání dat v těle dotazu. Cesta je adresa od kořenového adresáře k zdroji nebo endpointu, o který klient žádá. Hlavička obsahuje dodatečné informace pro server, jako je například autorizace, očekávaný jazyk, způsob kódování a další. Obdobný význam má hlavička odpovědi pro klienta, ale místo metody a cesty obsahuje status kód a zprávu. Kód je tříciferné číslo, u něhož stovky určují kategorii a zbylé dvě číslice konkrétní stav. Jednička jsou informační zprávy, ale nejsou využívány tak často jako ostatní. Dvojka na začátku znamená, že dotaz byl v pořádku zpracován. Trojka značí přesměrování dotazu jinam. Čtyřka znamená chybu na straně klienta, zatímco pětka je chyba na straně serveru. [25, 28, 29]
 
 
 
@@ -699,7 +694,7 @@ Verze HTTP/1.1 a starší jsou v podobě, která je čitelná pro lidi. Od verz
 
 
 
-Jelikož HTTP je nešifrované, je možné komunikaci odchytit a přečíst si obsah. Z tohoto důvodu bylo vytvořeno HTTPS (Hypertext Transfer Protocol Secure), které využívá SSL/TLS (Secure Sockets Layer/Transport Layer Security), jenž jsou založeny na asymetrické kryptografii, kdy data zašifrovaná pomocí veřejného klíče, mohou být dešifrována pouze soukromým klíčem [30]. Ačkoli HTTPS vniklo již v roce 1994, bylo využíváno především pro bankovnictví a v roce 2013 ho používala pouze čtvrtina webů. Díky organizacím jako Let’s Encrypt, jež poskytují bezplatné certifikáty, toto číslo v roce 2020 vzrostlo na 80 % a kolem této hodnoty se pohybuje dodnes [31, 32]. Aby bylo možné navázat spojení, musí server mít platný certifikát vystavený nezávislou certifikační agenturou. V opačném případě klient ukončí komunikaci. Během navazování spojení je proveden TLS handshake, který ve verzi 1.2 (viz Obr. 8) probíhá tak, že klient pošle serveru seznam podporovaných šifer a server odpoví, co během komunikace budou používat. Obě tyto zprávy obsahují náhodné číslo, které druhá strana použije k vygenerování klíče, například pomocí RSA nebo Diffie-Hellman algoritmu. Toto číslo dále brání útočníkovi v použití dříve odchycené. Server poté pošle svůj certifikát obsahující veřejný klíč a klientovu zprávu zašifrovanou soukromým klíčem. Klient použije veřejný klíč certifikační agentury, která měla certifikát vydat k ověření jeho pravosti. Poté klíčem serveru dešifruje zprávu, čímž ověří, že odesilatel disponuje příslušným soukromým klíčem. Server dále pošle zprávu, kterou oznamuje, že poslal všechny potřebné údaje. Klient pošle svůj premaster secret, oznámení konce nešifrované komunikace a zašifrované shrnutí dosavadní komunikace. Server také pošle zašifrované shrnutí. Pokud se tyto dvě shrnutí liší, znamená to, že někdo sedí uprostřed a další komunikace není bezpečná. Od této chvíle může probíhat bezpečná komunikace. TLS 1.3 tuto výměnu zkracuje a zakazuje použití šifer, které již byly prolomeny, ale mnoho serverů a klientů stále využívá TLS 1.2, které je zpětně kompatibilní se staršími verzemi. [33–38]
+Jelikož HTTP je nešifrované, je možné komunikaci odchytit a přečíst si obsah. Z tohoto důvodu bylo vytvořeno HTTPS (Hypertext Transfer Protocol Secure), které využívá SSL/TLS (Secure Sockets Layer/Transport Layer Security), jenž jsou založeny na asymetrické kryptografii, kdy data zašifrovaná pomocí veřejného klíče, mohou být dešifrována pouze soukromým klíčem [30]. Ačkoli HTTPS vniklo již v roce 1994, bylo využíváno především pro bankovnictví a v roce 2013 ho používala pouze čtvrtina webů. Díky organizacím jako Let’s Encrypt, jež poskytují bezplatné certifikáty, toto číslo v roce 2020 vzrostlo na 80 % a kolem této hodnoty se pohybuje dodnes [31, 32]. Aby bylo možné navázat spojení, musí server mít platný certifikát vystavený nezávislou certifikační agenturou. V opačném případě klient ukončí komunikaci. Během navazování spojení je proveden TLS handshake, který ve verzi 1.2 (viz Obr. 8) probíhá tak, že klient pošle serveru seznam podporovaných šifer a server odpoví, co během komunikace budou používat. Obě tyto zprávy obsahují náhodné číslo, které druhá strana použije k vygenerování klíče, například pomocí RSA nebo Diffie-Hellman algoritmu. Toto číslo dále brání útočníkovi v použití dříve odchycené komunikace. Server poté pošle svůj certifikát obsahující veřejný klíč a klientovu zprávu zašifrovanou soukromým klíčem. Klient použije veřejný klíč certifikační agentury, která měla certifikát vydat k ověření jeho pravosti. Poté klíčem serveru dešifruje zprávu, čímž ověří, že odesilatel disponuje příslušným soukromým klíčem. Server dále pošle zprávu, kterou oznamuje, že poslal všechny potřebné údaje. Klient pošle svůj premaster secret, oznámení konce nešifrované komunikace a zašifrovaný hash dosavadní komunikace. Server také pošle zašifrovaný hash. Pokud se tyto dvě shrnutí liší, znamená to, že někdo sedí uprostřed a další komunikace není bezpečná. Od této chvíle může probíhat bezpečná komunikace. TLS 1.3 tuto výměnu zkracuje a zakazuje použití šifer, které již byly prolomeny, ale mnoho serverů a klientů stále využívá TLS 1.2, které je zpětně kompatibilní se staršími verzemi. [33–38]
 
 
 
@@ -739,7 +734,7 @@ Obr. 10 Příklad JSON
 
 ### CSV
 
-Formát CSV (Comma-Separated Values) je používaný k ukládání tabulek. Jedná se o jednoduchý a hojně rozšířený formát pro import a export dat. Každý řádek textu odpovídá jednomu řádku v tabulce. Jak název napovídá, sloupce jsou většinou oddělovány čárkou, ale v některý případech je nutné použít jiný oddělovací znak (obvykle středník nebo svislítko). Příkladem takové situace jsou desetinná čísla, kde se v češtině používá desetinný čárka místo tečky, jež se používá v angličtině. [44]. První řádek se většinou využívá k pojmenování jednotlivých sloupců. Na Obr. 11 je příklad z tabulky psů. Oproti ostatním formátům má výhodu v menší velikosti, neboť význam hodnoty je definován pouze jednou, nikoli pro každou instanci. Toto s sebou ovšem nese nevýhodu, že jeden soubor může obsahovat pouze záznamy stejného typu, jelikož v opačném případě se nebudou shodovat sloupečky. CSV má nezastupitelné využití při exportu dat z databází a v situacích, kdy se předpokládá, že data budou zpracovávána uživatelem například pomocí nástrojů jako je Microsoft Excel. [45]
+Formát CSV (Comma-Separated Values) je používaný k ukládání tabulek. Jedná se o jednoduchý a hojně rozšířený formát pro import a export dat. Každý řádek textu odpovídá jednomu řádku v tabulce. Jak název napovídá, sloupce jsou většinou oddělovány čárkou, ale v některý případech je nutné použít jiný oddělovací znak (obvykle středník nebo svislítko). Příkladem takové situace jsou desetinná čísla, kde se v češtině používá desetinný čárka místo tečky, jež se používá v angličtině. [44]. První řádek se většinou využívá k pojmenování jednotlivých sloupců. Na Obr. 11 je příklad z tabulky psů. Oproti ostatním formátům má výhodu v menší velikosti, neboť význam hodnoty je definován pouze jednou, nikoli pro každou instanci. Toto s sebou ovšem nese nevýhodu, že jeden soubor může obsahovat pouze záznamy stejného typu, jelikož v opačném případě se nebudou shodovat sloupce. CSV má nezastupitelné využití při exportu dat z databází a v situacích, kdy se předpokládá, že data budou zpracovávána uživatelem například pomocí nástrojů jako je Microsoft Excel. [45]
 
 
 
@@ -781,18 +776,18 @@ Obr. 12 Překryv kanálů 2,4 GHz [52]
 
 K realizaci bezdrátové sítě neboli WLAN (Wireless Local Area Network) je potřeba zařízení nazývané AP (Access Point). Jedná se zařízení vysílající bezdrátový signál, který mohou zachytit koncová zařízení (označovaná jako stanice či zkráceně STA) v dosahu. K připojení do této sítě je potřeba znát SSID (Service Set IDentifier) a heslo (pokud není síť nezaheslovaná). SSID je možné zadat ručně, pokud ho uživatel zná předem, nebo ho získat ze speciálních paketů nazývaných beacon (někdy také SSID broadcast), které AP pravidelně vysílá na všech kanálech. Obvykle bývá součástí routeru, ale může se jednat i o samostatné zařízení. Síť může být tvořena jedním či více AP, která jsou propojena kabelem. [54, 55]
 
-Oproti rámci pro Ethernet (IEEE 802.3), kterému k úspěšnému doručení stačí pouze dvě MAC adresy (viz Obr. 3), obsahuje Wi-Fi rámec (jehož podoba je detailněji popsána na Obr. 13) čtyři adresy. O jejich významu rozhodují devátý a desátý bit hlavičky, které obsahující informaci o směru toku dat (viz Obr. 14). V závislosti na situaci se může jednat o MAC adresu zařízení, nebo BSSID (Basic Service Set Identifier [57]) sítě vysílané určitým AP (viz Tab. 2). Rámce mohou mít několik významů, které určují třetí až osmý bit hlavičky. Bit *More **Frag* slouží jako indikátor, zda byl paket rozdělen na více rámců (viz Kap. 3.1.2). IEEE 802.11 obsahuje také úsporný režim, kdy koncové zařízení vypne napájení antény za účelem úspory energie. V případě změny tohoto stavu posílá koncové zařízení AP rámec, který neobsahuje žádná data. Bit *Pwr** **Mg**m**t* říká, zda po odvysílání tohoto rámce bude zařízení aktivní, nebo v úsporném režimu. S tím souvisí i další bit určující, zda má být rámec odvysílán, nebo uložen do doby, než bude cílové zařízení probuzeno. [56]
+Oproti rámci pro Ethernet (IEEE 802.3), kterému k úspěšnému doručení stačí pouze dvě MAC adresy (viz Obr. 3), obsahuje Wi-Fi rámec (jehož podoba je detailněji popsána na Obr. 13) čtyři adresy. O jejich významu rozhodují devátý a desátý bit hlavičky, které obsahující informaci o směru toku dat (viz Obr. 14). V závislosti na situaci se může jednat o MAC adresu zařízení, nebo BSSID (Basic Service Set Identifier [56]) sítě vysílané určitým AP (viz Tab. 2). Rámce mohou mít několik významů, které určují třetí až osmý bit hlavičky. Bit *More **Frag* slouží jako indikátor, zda byl paket rozdělen na více rámců (viz Kap. 3.1.2). IEEE 802.11 obsahuje také úsporný režim, kdy koncové zařízení vypne napájení antény za účelem úspory energie. V případě změny tohoto stavu posílá koncové zařízení AP rámec, který neobsahuje žádná data. Bit *Pwr** **Mg**m**t* říká, zda po odvysílání tohoto rámce bude zařízení aktivní, nebo v úsporném režimu. S tím souvisí i další bit určující, zda má být rámec odvysílán, nebo uložen do doby, než bude cílové zařízení probuzeno. [57]
 
 
 
 
 
-| ---img---<br>Obr. 13 Rámec Wi-Fi [56] | ---img---<br>Obr. 14 Význam DS bitů [56] | 
+| ---img---<br>Obr. 13 Rámec Wi-Fi [57] | ---img---<br>Obr. 14 Význam DS bitů [57] | 
 |-|-|
 
 
 
-Tab. 2 Význam adres v Wi-Fi rámci [56]
+Tab. 2 Význam adres v Wi-Fi rámci [57]
 
 | To DS | From DS | ADR 1 | ADR 2 | ADR 3 | ADR 4 | Situace na Obr. 14 | 
 |-|-|-|-|-|-|-|
@@ -846,7 +841,7 @@ Obr. 19 FHSS [65]
 
 ### OFDM
 
-OFDM (Orthogonal Frequency-Division Multiplexing) je způsob, jak vyřešit problém s odrazy signálu, které komplikují rozeznaní jednotlivých bitů, kvůli echu. Data jsou rozdělena mezi více samostatně modulovaných signálů označovaných subcarriers, které jsou voleny tak, aby v momentě, kdy je daná frekvence na vrcholu, byly všechny ostatní v nule. Poté co je provedena modulace, jsou signály sečteny a odeslány pomocí antény. Na straně přijímače je signál pomocí rychlé Fourierovi transformace (FFT = Fast Fourier Transform) opět rozložen a demodulován (viz Obr. 20). [67]
+OFDM (Orthogonal Frequency-Division Multiplexing) je způsob, jak vyřešit problém s odrazy signálu, které komplikují rozeznaní jednotlivých bitů, kvůli echu. Data jsou rozdělena mezi více samostatně modulovaných signálů označovaných jako subcarriers, které jsou voleny tak, aby v momentě, kdy je daná frekvence na vrcholu, byly všechny ostatní v nule. Poté co je provedena modulace, jsou signály sečteny a odeslány pomocí antény. Na straně přijímače je signál pomocí rychlé Fourierovi transformace (FFT = Fast Fourier Transform) opět rozložen a demodulován (viz Obr. 20). [67]
 
 
 
@@ -957,7 +952,7 @@ Většinu problémů MVC řeší MVP (Model-View-Presenter), kde view a model 
 
 Obr. 28 Datový tok MVP [91]
 
-&ensp;Vzor MVVM (Model-View-ViewModel) je podobný MVP, ale view neobsahuje žádnou logiku a pouze vykresluje data, která dostane z ViewModelu. Svůj obsah aktualizuje na základě eventu OnPropertyChanged (viz Obr. 29). Většina logiky se nachází ve ViewModelu, který má také na starosti stav aplikace. Tento přístup umožňuje, aby více view bylo navázáno na jeden ViewModel. Oproti svým předchůdcům je MVVM modulárnější, testovatelnější a snáze škálovatelný. Avšak za cenu vyšší komplexity tříd.[91, 92]
+&ensp;Vzor MVVM (Model-View-ViewModel) je podobný MVP, ale view neobsahuje žádnou logiku a pouze vykresluje data, která dostane z ViewModelu. Svůj obsah aktualizuje na základě eventu OnPropertyChanged (viz Obr. 29). Většina logiky se nachází ve ViewModelu, který má také na starosti stav aplikace. Tento přístup umožňuje, aby více view bylo navázáno na jeden ViewModel. Oproti svým předchůdcům je MVVM modulárnější, testovatelnější a snáze škálovatelný. Avšak za cenu vyšší komplexity tříd. [91, 92]
 
 ---img---
 
@@ -1197,7 +1192,7 @@ Obr. 47 Mapa kódu LoopCompiler
 
 #### LoopExecutor
 
-Instance třídy LoopExecutor (Obr. 48) je zodpovědná za provádění vyhodnocovací smyčky. Při zavolání metody *Start* je změněna hodnota vlastnosti *IsRunning* na *true* a vytvořena nová instance časovače *System.Threading.Timer*, jenž má nulové zpoždění a periodu nastavenou dle hodnoty vlastnosti *Period*, jejíž výchozí hodnota je 1000 ms. Delegát volaný po uplynutí periody je asynchronní metoda *Run*. Na začátku je ověřen zámek, zajišťující, aby nenastala situace, kdy je metoda spuštěna vícekrát. Před začátkem vyhodnocení je počkáno na provedení asynchronní metody *loadData* starající se o načtení aktuálních hodnot z uzlů. Vyhodnocení provedeno pomocí *FIowRepository.Run* (viz Kap. 4.1.2.7). Poté jsou výsledky odeslány do příslušných uzlů pomocí metody *writeData*. Po dokončení je vyvolána událost *LoopFinished*, na kterou se mohou napojit třídy z vyšší vrstvy a reagovat tak na dokončení smyčky. Nakonec je do debug terminálu zapsána informace o délce trvání a uvolněn zámek. Metody *loadData* a *writeData* jsou asynchronní, neboť v nich probíhá volání komunikačních metod, jež ze své podstaty musí být asynchronní, ale průběh metody *Run* je pozastaven, dokud nedoběhnou. Obě metody jsou téměř identické, ale pracují s jinou kolekcí. Normální endpointy jsou aktualizovány okamžitě. V případě pomalých je nejprve ověřeno, zda již uzel odpověděl. Pokud ano, proběhne aktualizace hodnot. Jestliže momentálně neprobíhá načítání nových hodnot, je zahájeno.
+Instance třídy LoopExecutor (Obr. 48) je zodpovědná za provádění vyhodnocovací smyčky. Při zavolání metody *Start* je změněna hodnota vlastnosti *IsRunning* na *true* a vytvořena nová instance časovače *System.Threading.Timer*, jenž má nulové zpoždění a periodu nastavenou dle hodnoty vlastnosti *Period*, jejíž výchozí hodnota je 1000 ms. Delegát volaný po uplynutí periody je asynchronní metoda *Run*. Na začátku je ověřen zámek, zajišťující, aby nenastala situace, kdy je metoda spuštěna vícekrát. Před začátkem vyhodnocení je počkáno na provedení asynchronní metody *loadData* starající se o načtení aktuálních hodnot z uzlů. Vyhodnocení je provedeno pomocí metody *FIowRepository.Run* (viz Kap. 4.1.2.7). Poté jsou výsledky odeslány do příslušných uzlů pomocí metody *writeData*. Po dokončení je vyvolána událost (viz Kap. 3.6.5) *LoopFinished*, na kterou se mohou napojit třídy z vyšší vrstvy a reagovat tak na dokončení smyčky. Nakonec je do debug terminálu zapsána informace o délce trvání a uvolněn zámek. Metody *loadData* a *writeData* jsou asynchronní, neboť v nich probíhá volání komunikačních metod, jež ze své podstaty musí být asynchronní, ale průběh metody *Run* je pozastaven, dokud nedoběhnou. Obě metody jsou téměř identické, ale pracují s jinou kolekcí. Normální endpointy jsou aktualizovány okamžitě. V případě pomalých je nejprve ověřeno, zda již uzel odpověděl. Pokud ano, proběhne aktualizace hodnot. Jestliže momentálně neprobíhá načítání nových hodnot, je zahájeno.
 
 ---img---
 
@@ -1213,7 +1208,7 @@ Pro nejvyšší vrstvu, se kterou interaguje uživatel, byla zvolena desktopová
 
 Pro lepší čitelnost XAML definujících vzhled oken a možnost znovu použitelnosti na více oknech byly grafické prvky, které jsou tvořeny z více elementů nebo obsahují nějakou logiku, vytvořeny jako samostatné komponenty s vlastními ViewModely.
 
-*EndpointView* (na prostředku Obr. 52) sloužící k zobrazení informací o endpointu je tvořen mřížkou s třemi řádky a dvěma sloupci, jež si rozdělí šířku na polovinu. První řádek o výšce 50 px obsahuje *Label*, jehož obsah je navázán na vlastnost *Address* nacházející se v *EndPointViewModel* (Obr. 49) a zabírá dva sloupce. Na druhém řádku se v obou sloupcích nachází kódem zadané popisy sloupců pro hodnoty a argumentu. Poslední řádek zabere veškeré dostupné místo. Zde se nachází *ListView* jejichž zdrojem dat jsou kolekce *Values* a *Arguments*. Ty jsou získány metodou *ValuesDo.ToStringListShort* zavolanou nad příslušnou kolekcí instance třídy *EndPointDo*. Jednotlivé hodnoty jsou zobrazeny pomocí *TextBlock*, která má menší rozměry než *Label*, zabaleném do *Border* se zaoblenými rohy.
+*EndpointView* (na prostředku Obr. 52) sloužící k zobrazení informací o endpointu je tvořen mřížkou s třemi řádky a dvěma sloupci, jež si rozdělí šířku na polovinu. První řádek o výšce 50 px obsahuje *Label*, jehož obsah je navázán na vlastnost *Address* nacházející se v *EndPointViewModel* (Obr. 49) a zabírá dva sloupce. Na druhém řádku se v obou sloupcích nachází kódem zadané popisy sloupců pro hodnoty a argumentu. Poslední řádek zabere veškeré dostupné místo. Zde se nachází *ListView* jejichž zdrojem dat jsou kolekce *Values* a *Arguments*. Ty jsou získány metodou *ValuesDo.ToStringListShort* zavolanou nad příslušnou kolekcí instance třídy *EndPointDo*. Jednotlivé hodnoty jsou zobrazeny pomocí *TextBlock*, která má menší rozměry a paměťovou stopu než *Label* [100, 101], zabaleném do *Border* se zaoblenými rohy.
 
 
 
@@ -1221,7 +1216,7 @@ Pro lepší čitelnost XAML definujících vzhled oken a možnost znovu použite
 
 Obr. 49 Diagram tříd EndPointViewModel
 
-*FlowListView* (vlevo dole na Obr. 54) je určen k zobrazení seznamu datových toků. Ty jsou reprezentovány třídou *FlowViewModel*, jenž má jméno a datový typ výstupní hodnoty. Tyto objekty se nachází v kolekci *Flows* uvnitř singleton instance *FlowListViewModel* (viz Obr. 50). Ta je vytvářena ze seznamu ve *FlowRepository* (viz Kap. 4.1.2.7) buď při prvním zavolání nebo jako reakce na použití metody *RefreshFlows*. K zobrazení je využíván *ListView* naplněný *Buttony*, jejichž barva textu a ohraničení je nastavena na základě datového typu a *TypeColorConverter*.
+*FlowListView* (vlevo dole na Obr. 54) je určen k zobrazení seznamu datových toků. Ty jsou reprezentovány třídou *FlowViewModel*, jenž má jméno a datový typ výstupní hodnoty. Tyto objekty se nachází v kolekci *Flows* uvnitř singleton instance *FlowListViewModel* (viz Obr. 50). Ta je vytvářena ze seznamu nacházejícího se v *FlowRepository* (viz Kap. 4.1.2.7) buď při prvním zavolání nebo jako reakce na použití metody *RefreshFlows*. K zobrazení je využíván *ListView* naplněný *Buttony*, jejichž barva textu a ohraničení je nastavena na základě datového typu a *TypeColorConverter*.
 
 
 
@@ -1295,15 +1290,15 @@ Pro analytické účely jsou během provozu uzlu posílána data na sériovou li
 
 Tato složka obsahuje hlavičkové soubory fungující jako rozhraní. Nachází se zde abstrakce pro komunikaci, logování, serializaci a deserializaci. Soubory *cpp* s implementací pro Arduino se nachází v příslušně pojmenované podsložce. V případě rozšíření řešení o jinou technologii bude přidána nová složka. Jelikož je jen jedna možnost, tak v tento okamžik nejsou použity preprocesory určující, jaká implementace hlavičkových souborů má být využita.
 
-Aby bylo možné měnit způsob komunikace s uzlem je definována třída *CommunicationHandler*. Metoda *StartListening* slouží k přidání reakce na specifikovaný endpoint. Parametry jsou cesta a ukazatel na funkci, jenž se má zavolat jako reakce na jeho obdržení. K odeslání odpovědi slouží metody *SendOk* a *SendError* jejímž parametrem je textový řetězec. Při přijetí dotazu s argumenty, je využita metoda *G**etBody*, která má jako parametry buffer a jeho velikost. Pro zpracování přijatých dotazů slouží metoda *Loop*, jenž je volána z nekonečné smyčky v *main*, které odpovídá Arduino funkce *loop*. V případě ESP je implementací využívána instance třídy ESP8266WebServer [100]. Jedná se o HTTP server poslouchající na portu 80, který je spuštěn v konstruktoru *CommunicationHandler*.
+Aby bylo možné měnit způsob komunikace s uzlem je definována třída *CommunicationHandler*. Metoda *StartListening* slouží k přidání reakce na specifikovaný endpoint. Parametry jsou cesta a ukazatel na funkci, jenž se má zavolat jako reakce na jeho obdržení. K odeslání odpovědi slouží metody *SendOk* a *SendError* jejímž parametrem je textový řetězec. Při přijetí dotazu s argumenty, je využita metoda *G**etBody*, která má jako parametry buffer a jeho velikost. Pro zpracování přijatých dotazů slouží metoda *Loop*, jenž je volána z nekonečné smyčky v *main*, které odpovídá Arduino funkce *loop*. V případě ESP je implementací využívána instance třídy ESP8266WebServer [102]. Jedná se o HTTP server poslouchající na portu 80, který je spuštěn v konstruktoru *CommunicationHandler*.
 
-Jelikož každá platforma má vlastní knihovny pro serializaci a deserializaci, byla i pro tuto logiku vytvořena abstrakce, která je pro vyšší přehlednost rozdělena na dva soubory. Protože pří kompilaci C++ jsou hlavičkové soubory zkopírovány do cpp soborů, jenž jsou kompilovány samostatně, je nutné jednoznačně určit datový typ využívaný v dané situaci [101]. Z tohoto důvodu nebylo možné pro serializaci *ValueDto* využít generické funkce a místo toho jsou deklarovány pro každý ze tří podporovaných datových typů samostatně. V závislosti na množství potřebných dat jsou pro hodnoty a endpointy definovány funkce* **Serialize*, *SerializeInfo* a *SerializeValue*. První vypisuje veškeré údaje a je využívána pro logování. Druhá vytváří odpověď pro endpoint *getInfo*. Poslední se používá při dotazu na hodnoty uzlu. Všechny tři právě popsané funkce mají jako parametry ukazatel na instanci *EndPointDto*, buffer a jeho velikost pro serializaci ednpointu a ukazatel na ValueDto pro hodnoty. Pro serializaci celé kolekce je využívána *SerializeEndpoints*. Při přijetí dotazu, jenž obsahuje argumenty, je použita funkce *Deserialize* jejíž parametry jsou *const** **char**** obsahující JSON a ukazatel na *EndPointDto*, kam se mají hodnoty zapsat. Arduino implementace využívá knihovnu *ArduinoJson* ve verzi 7.1.0 [102, 103]. 
+Jelikož každá platforma má vlastní knihovny pro serializaci a deserializaci, byla i pro tuto logiku vytvořena abstrakce, která je pro vyšší přehlednost rozdělena na dva soubory. Protože pří kompilaci C++ jsou hlavičkové soubory zkopírovány do cpp soborů, jenž jsou kompilovány samostatně, je nutné jednoznačně určit datový typ využívaný v dané situaci [103]. Z tohoto důvodu nebylo možné pro serializaci *ValueDto* využít generické funkce a místo toho jsou deklarovány pro každý ze tří podporovaných datových typů samostatně. V závislosti na množství potřebných dat jsou pro hodnoty a endpointy definovány funkce* **Serialize*, *SerializeInfo* a *SerializeValue*. První vypisuje veškeré údaje a je využívána pro logování. Druhá vytváří odpověď pro endpoint *getInfo*. Poslední se používá při dotazu na hodnoty uzlu. Všechny tři právě popsané funkce mají jako parametry ukazatel na instanci *EndPointDto*, buffer a jeho velikost pro serializaci ednpointu a ukazatel na ValueDto pro hodnoty. Pro serializaci celé kolekce je využívána *SerializeEndpoints*. Při přijetí dotazu, jenž obsahuje argumenty, je použita funkce *Deserialize* jejíž parametry jsou *const** **char**** obsahující JSON a ukazatel na *EndPointDto*, kam se mají hodnoty zapsat. Arduino implementace využívá knihovnu *ArduinoJson* ve verzi 7.1.0 [104, 105]. 
 
-Aby bylo možné provádět analýzu v případě chyby, je nutné za běhu programu někam zaznamenávat stavové informace. K tomu slouží funkce *Log* deklarované v hlavičkovém souboru *Logger.h*, které mají jako parametr buď *const** **char**** nebo buffer a počet znaků. Pro využití v souborech specifický pro Arduino jsou tyto dvě funkce deklarovány v *LoggerExtend.h* také jako String. Implementací je výpis do terminálu pomocí sériové linky.
+Aby bylo možné provádět analýzu v případě chyby, je nutné za běhu programu někam zaznamenávat stavové informace. K tomu slouží funkce *Log* deklarované v hlavičkovém souboru *Logger.h*, které mají jako parametr buď *const** **char**** nebo buffer a počet znaků. Pro využití v souborech specifický pro Arduino jsou tyto dvě funkce deklarovány v *LoggerExtend.h* také jako String. Implementací je výpis do terminálu pomocí sériové linky.
 
 #### Lib
 
-V této složce se nachází soubory využívající pouze C++ a hlavičkové soubory z ostatních složek, jenž vytváří abstrakci nad platformě závislých knihovnách. Jedná se především o DTO se strukturou odpovídající těm v hlavním uzlu (viz Kap. 4.1.1.1) a logiku potřebnou ke komunikaci s ním.
+V této složce se nachází soubory využívající pouze C++ a hlavičkové soubory z ostatních složek, jenž vytváří abstrakci nad platformě závislých knihovnách. Jedná se především o třídy se strukturou odpovídající DTO v hlavním uzlu (viz Kap. 4.1.1.1) a logiku potřebnou ke komunikaci s ním.
 
 Generická třída *ValueDto* má konstruktor s *const** **char**** *name*, jenž slouží k identifikaci hodnoty v hlavním uzlu či jiné aplikaci načítající hodnoty z tohoto uzlu, a generickou *val*, která obsahuje uloženou hodnotu. Metoda *GetType* vracející *ValTypeEnum* je využívána při volání endpointu *getInfo*. Ke své činnosti využívá podmínky obsahující *constexpr** **is_same_v*, což je výraz porovnávající dva datové typy, jenž je vyhodnocen již během kompilace. Tato funkce vyžaduje kompilátor podporující C++14 nebo novější. Pokud se jedná o jiný datový typ, než je povolený, vyhodí výjimku *runtime_error*.
 
@@ -1315,7 +1310,7 @@ Pár hlavičkové souboru a zdrojového kódu *SharedHttpEndpoints* obsahují p�
 
 ### Uzel 1
 
-První realizovaný uzel je vybaven sensorem DHT11 a monochromatickým OLED displejem. DHT11 od společnosti Adafruit je levný teploměr a vlhkoměr komunikující pomocí protokolu 1wire. Ačkoliv se s přesností teploty ± 2 °C jedná spíše o orientační hodnotu, byl tento sensor ponechán pro své dynamické vlastnosti. Jelikož je po odečtení hodnoty potřeba počkat dalších 2000 ms, než je možno získat další, slouží tento sensor jako ukázka, jak si hlavní uzel poradí s pomalu odpovídajícím uzlem. Pro komunikaci jsou využívány knihovny *DHT sensor **library* a *Adafruit** **Unified** Sensor**[104, 105]*. Bílý monochromatický OLED displej s rozlišením 128x64 px je řízen čipem SSD1306, který umožňuje komunikaci pomocí I2C. Pro ovládání jsou využívány knihovny *Adafruit** GFX **Library* a *Adafruit_SSD1306* [106, 107]. [108–110]
+První realizovaný uzel je vybaven sensorem DHT11 a monochromatickým OLED displejem. DHT11 od společnosti Adafruit je levný teploměr a vlhkoměr komunikující pomocí protokolu 1wire. Ačkoliv se s přesností teploty ± 2 °C jedná spíše o orientační hodnotu, byl tento sensor ponechán pro své dynamické vlastnosti. Jelikož je po odečtení hodnoty potřeba počkat dalších 2000 ms, než je možno získat další, slouží tento sensor jako ukázka, jak si hlavní uzel poradí s pomalu odpovídajícím uzlem. Pro komunikaci jsou využívány knihovny *DHT sensor **library* a *Adafruit** **Unified** Sensor**[106, 107]*. Bílý monochromatický OLED displej s rozlišením 128x64 px je řízen čipem SSD1306, který umožňuje komunikaci pomocí I2C. Pro ovládání jsou využívány knihovny *Adafruit** GFX **Library* a *Adafruit_SSD1306* [108, 109]. [110–112]
 
 Pro abstrakci uvnitř *Node1.**cpp* byla vytvořena třída *DhtWrapper*. Kromě snazší přenositelnosti je důvodem k abstrakci fakt, že knihovna po dobu 2000 ms od posledního čtení vrací stejnou hodnotu, ale časové razítko není zvenčí dostupné. Pro získání hodnot slouží metoda* **ReadRaw*, jenž získá teplotu a vlhkost ihned po sobě a uloží je do proměnných. Poté porovná své časové razítko a pokud uplynul daný limit, aktualizuje ho. Pro přístup k takto přečteným hodnotám slouží metody *GetTemp* a *GetHumid* a *GetDataAge*. Pokud je potřeba aby data byla aktuální, je zavolána metoda *WaitForNewestData*, která počká do uplynutí zbývajícího času a poté teprve proběhne četní.
 
@@ -1327,15 +1322,11 @@ Jsou definovány endpointy *getDhtValuesNew* a *getDhtValuesAny*, které vrací 
 
 ### Uzel 2
 
-Druhý realizovaný uzel je vybaven servomotorem SG-90 s úhlem otočení 180°, jenž je napájen 5 V [111]. Tento modul má simulovat otevírání ventilu, ale nebyl k němu připevněn žádný předmět. K ovládání byla použita ESP8266 implementace Arduino knihovny *Servo** *[112]. Ta na základě zadaného úhlu generuje PWM signál potřebný k dosažení požadované polohy.
+Druhý realizovaný uzel je vybaven servomotorem SG-90 s úhlem otočení 180°, jenž je napájen 5 V [113]. Tento modul má simulovat otevírání ventilu, ale nebyl k němu připevněn žádný předmět. K ovládání byla použita ESP8266 implementace Arduino knihovny *Servo** *[114]. Ta na základě zadaného úhlu generuje PWM signál potřebný k dosažení požadované polohy.
 
 Pro abstrakci v kódu uzlu byla vytvořena třída *ServoWrapper*, jenž skryje platformě závislý kód. Její konstruktor přijímá pin, kam je servomotor připojen, a vytváří instanci třídy knihovny. Má metody *SetAngle* a *GetAngle*, jenž obalují volání *write* a *read*.
 
 Pro nastavení úhlu natočení servomotoru slouží endpoint *setAngle*, který je typu *EP_TYPE_SET*. Má celočíselný Argument *angle* a vrací odpověď obsahující hodnotu *deg*. Ta slouží pro kontrolu a jedná se o skutečnou hodnotu úhlu v době poslání odpovědi. Druhým endpointem je getAngle, který vrací také hodnotu *deg*, ale oproti předchozímu slouží pouze k získání hodnoty. 
-
-### Uzel 3
-
-Text
 
 ## Pomocné projekty
 
@@ -1349,11 +1340,11 @@ Kromě těchto dvou právě popsaných hlavních částí během vývoje vznikly
 
 # Výsledky a diskuse
 
-Z existujících řešení je této práci nejpodobnější Node-RED. Jedná se o událostmi řízenou Node.js aplikaci [113, 114]. Hlavním rozdílem ve fungování je způsob komunikace. V případě Node-RED vyhodnocení větve datové toku začíná při obdržení zprávy z periferního zařízení, zatímco v řešení realizované touto prací se hlavní uzel na hodnoty aktivně ptá. To umožňuje existenci dvou souběžně běžících systémů sdílejících stejnou periferii bez nutnosti vytvářet server. Toto je výhodné především pro technicky méně zdatné uživatele, kterým stačí pouze stáhnout a spustit exe soubor. Další výhodou je větší versatilita uživatelského rozhraní, jelikož díky vrstvenému modelu je možné vytvořit nové, aniž by to ovlivnilo logiku aplikace.
+Z existujících řešení je této práci nejpodobnější Node-RED. Jedná se o událostmi řízenou Node.js aplikaci [115, 116]. Hlavním rozdílem ve fungování je způsob komunikace. V případě Node-RED vyhodnocení větve datové toku začíná při obdržení zprávy z periferního zařízení, zatímco v řešení realizované touto prací se hlavní uzel na hodnoty aktivně ptá. To umožňuje existenci dvou souběžně běžících systémů sdílejících stejnou periferii bez nutnosti vytvářet server. Toto je výhodné především pro technicky méně zdatné uživatele, kterým stačí pouze stáhnout a spustit exe soubor. Další výhodou je větší versatilita uživatelského rozhraní, jelikož díky vrstvenému modelu je možné vytvořit nové, aniž by to ovlivnilo logiku aplikace.
 
-Je-li potřeba aby logika byla vykonávána na jednočipovém počítači, který oproti klasickému osobnímu počítači může fungovat na baterii po dobu několika měsíců, je možné Node-RED spustit na Raspberry Pi nebo BeagleBone [115]. Na tytéž vývojové desky je možné s pomocí knihovny *.NET **IoT* nasadit i *MainNode* vytvořený v této práci [116]. Dále je dostupný také *.NET **nanoFramework*, jenž umožňuje spouštět kód napsaný v .NET na méně výkonných čipech jako jsou ESP32 a STM32F429, avšak kvůli hardwarovému omezení nepodporuje všechny funkce [117, 118]. Řešení bylo navrženo tak, aby bylo možné bez zásahů do logiky ho z C# přepsat do C++. Pokud při realizaci nebyla udělána chyba, mělo by se jednat pouze o rozdíl v syntaxi (např. vlastnosti a lambda výrazy).
+Je-li potřeba aby logika byla vykonávána na jednočipovém počítači, který oproti klasickému osobnímu počítači může fungovat na baterii po dobu několika měsíců, je možné Node-RED spustit na Raspberry Pi nebo BeagleBone [117]. Na tytéž vývojové desky je možné s pomocí knihovny *.NET **IoT* nasadit i *MainNode* vytvořený v této práci [118]. Dále je dostupný také *.NET **nanoFramework*, jenž umožňuje spouštět kód napsaný v .NET na méně výkonných čipech jako jsou ESP32 a STM32F429, avšak kvůli hardwarovému omezení nepodporuje všechny funkce [119, 120]. Řešení bylo navrženo tak, aby bylo možné bez zásahů do logiky ho z C# přepsat do C++. Pokud při realizaci nebyla udělána chyba, mělo by se jednat pouze o rozdíl v syntaxi (např. vlastnosti a lambda výrazy).
 
-Řešení vytvořené v této práci momentálně nenabízí pokročilé funkce jako Node-RED. Přidání vlastních funkcí vyžaduje zásah do *LoopCompiler*. Ačkoliv pro data není vytvořena vizualizace, logická vrstva poskytuje dostatek dat, aby bylo možné ji doplnit. Přidání nového komunikačního protokolu do tohoto řešení je oproti Node-RED jednodušší [119, 120].
+Řešení vytvořené v této práci momentálně nenabízí pokročilé funkce jako Node-RED. Přidání vlastních funkcí vyžaduje zásah do *LoopCompiler*. Ačkoliv pro data není vytvořena vizualizace, logická vrstva poskytuje dostatek dat, aby bylo možné ji doplnit. Přidání nového komunikačního protokolu do tohoto řešení je oproti Node-RED jednodušší [121, 122].
 
 
 
@@ -1371,7 +1362,9 @@ Hlavní uzel je realizován jako vrstvený model skládající se ze dvou knihov
 
 Uzly realizované pomocí ESP8266 mohou fungovat jako vstupní, výstupní nebo oboje současně. Při programování bylo využito Arduino IDE, jenž poskytuje abstrakci od práce s registry daného čipu. Jelikož ne všichni výrobci mají plnou podporu všech funkcí, byla pomocí hlavičkových souborů vytvořena abstrakce, aby kód šlo použít i pro tyto čipy. ESP8266 implementace využívá HTTP server s endpointy pro potřebné operace. Každý uzel má vlastní soubor obsahující definice těchto endpointů. Pro volbu, který soubor bude použit, slouží definice a na ní navázaný preprocesor.
 
-Kvůli nečekaným komplikacím nebyly implementovány všechny plánované funkce, jako je vizualizace a automatické znovu připojení v případě ztráty spojení. Kromě těchto funkcí je do budoucna plánováno přidat mechanismy, řešící situace, kdy se systém dostane do nežádoucího stavu. Dále je zamýšleno přidat možnost definovat vlastní znovupoužitelné funkce a zadávat logiku pomocí grafického rozhraní, aby bylo řešení více přístupné technicky méně zdatným uživatelům. Do komunikační vrstvy je plánováno přidat podporu dalších protokolů a API pro chytrou domácnost (např. Samsung SmartThings [121]). Jak bylo v této práci několikrát zmíněno, počítá se spuštěním hlavního uzlu na jednočipovém počítači. Pro tuto úlohu jsou zvažovány vývojové desky STM32F429 Discovery s grafickým displejem [122] a dvoujádrové Nucleo STM32H755 s Ethernet rozhraním [123]. Testování bude postupně rozšířeno i na další třídy. Plánuje se zapojit *NodeEmulator* a zprovoznit kompletní CI/CD pipeline.
+Kvůli nečekaným komplikacím nebyly implementovány všechny plánované funkce, jako je vizualizace a automatické znovu připojení v případě ztráty spojení. Kromě těchto funkcí je do budoucna plánováno přidat mechanismy, řešící situace, kdy se systém dostane do nežádoucího stavu. Dále je zamýšleno přidat možnost definovat vlastní znovupoužitelné funkce a zadávat logiku pomocí grafického rozhraní, aby bylo řešení více přístupné technicky méně zdatným uživatelům. Do komunikační vrstvy je plánováno přidat podporu dalších protokolů a API pro chytrou domácnost (např. Samsung SmartThings [123]). Jak bylo v této práci několikrát zmíněno, počítá se spuštěním hlavního uzlu na jednočipovém počítači. Pro tuto úlohu jsou zvažovány vývojové desky STM32F429 Discovery s grafickým displejem [124] a dvoujádrové Nucleo STM32H755 s Ethernet rozhraním [125]. Testování bude postupně rozšířeno i na další třídy. Plánuje se zapojit *NodeEmulator* a zprovoznit kompletní CI/CD pipeline.
+
+Celá tato práce je dostupná na GitHub. Verze aktuální v době odevzdání se nachází ve větvi *Release_1_0_0* ( https://github.com/pjocesoj/diplomka_git/tree/Release_1_0_0 ). V souboru README.md jsou na začátku rychlé odkazy. Zdrojový kód se nachází ve složce *prakticka_cast*, kde jsou složky pro obě hlavní části a *NodeEmulator*. Ve složce *output* jsou umístěny exe soubory a markdown verze této práce, které jsou vytvářeny automaticky pomocí GitHub Actions.
 
 
 
@@ -1487,9 +1480,9 @@ Kvůli nečekaným komplikacím nebyly implementovány všechny plánované funk
 
 [55] STA Access - NetEngine AR600, AR6100, AR6200, and AR6300 V300R019 CLI-based Configuration Guide - WLAN-FAT AP - Huawei. Huawei [online]. [vid. 2025-02-28]. Dostupné z: https://support.huawei.com/enterprise/en/doc/EDOC1100112363/75acc8a8/sta-access
 
-[56] 802.11 Standards - NetEngine AR600, AR6100, AR6200, and AR6300 V300R019 CLI-based Configuration Guide - WLAN-FAT AP - Huawei. Huawei [online]. [vid. 2025-02-09]. Dostupné z: https://support.huawei.com/enterprise/en/doc/EDOC1100112363/b1db415/80211-standards
+[56] [MS-TCC]: Glossary | Microsoft Learn. Microsoft Learn [online]. [vid. 2025-03-01]. Dostupné z: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-tcc/477dff81-3c9d-4b84-b002-1a9fe7659e0a#gt_59565412-59a1-4e14-862f-28810f583050
 
-[57] [MS-TCC]: Glossary | Microsoft Learn. Microsoft Learn [online]. [vid. 2025-03-01]. Dostupné z: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-tcc/477dff81-3c9d-4b84-b002-1a9fe7659e0a#gt_59565412-59a1-4e14-862f-28810f583050
+[57] 802.11 Standards - NetEngine AR600, AR6100, AR6200, and AR6300 V300R019 CLI-based Configuration Guide - WLAN-FAT AP - Huawei. Huawei [online]. [vid. 2025-02-09]. Dostupné z: https://support.huawei.com/enterprise/en/doc/EDOC1100112363/b1db415/80211-standards
 
 [58] Wi-Fi CERTIFIED 6TM coming in 2019 | Wi-Fi Alliance. Wi-Fi Alliance [online]. [vid. 2025-02-24]. Dostupné z: https://www.wi-fi.org/news-events/newsroom/wi-fi-certified-6-coming-in-2019
 
@@ -1575,74 +1568,94 @@ Kvůli nečekaným komplikacím nebyly implementovány všechny plánované funk
 
 [99] NuGet Gallery | CommunityToolkit.Mvvm 8.2.2. NuGet [online]. [vid. 2025-03-16]. Dostupné z: https://www.nuget.org/packages/CommunityToolkit.Mvvm/8.2.2?_src=template
 
-[100] esp8266/Arduino: ESP8266 core for Arduino. GitHub [online]. [vid. 2025-03-19]. Dostupné z: https://github.com/esp8266/Arduino
+[100] TextBlock Class (System.Windows.Controls) | Microsoft Learn. Microsoft Learn [online]. [vid. 2025-03-31]. Dostupné z: https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.textblock?view=windowsdesktop-9.0
 
-[101] 26.1 — Template classes – Learn C++ [online]. [vid. 2024-09-19]. Dostupné z: https://www.learncpp.com/cpp-tutorial/template-classes/
+[101] Label Class (System.Windows.Controls) | Microsoft Learn. Microsoft Learn [online]. [vid. 2025-03-31]. Dostupné z: https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.label?view=windowsdesktop-9.0
 
-[102] ArduinoJson: Efficient JSON serialization for embedded C++ [online]. [vid. 2025-03-20]. Dostupné z: https://arduinojson.org/?utm_source=meta&utm_medium=library.properties
+[102] esp8266/Arduino: ESP8266 core for Arduino. GitHub [online]. [vid. 2025-03-19]. Dostupné z: https://github.com/esp8266/Arduino
 
-[103] How to upgrade from ArduinoJson 6 to 7 - YouTube [online]. [vid. 2024-07-21]. Dostupné z: https://www.youtube.com/watch?v=eE6_77YIkzI
+[103] 26.1 — Template classes – Learn C++ [online]. [vid. 2024-09-19]. Dostupné z: https://www.learncpp.com/cpp-tutorial/template-classes/
 
-[104] adafruit/Adafruit_Sensor: Common sensor library [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/Adafruit_Sensor
+[104] ArduinoJson: Efficient JSON serialization for embedded C++ [online]. [vid. 2025-03-20]. Dostupné z: https://arduinojson.org/?utm_source=meta&utm_medium=library.properties
 
-[105] adafruit/DHT-sensor-library: Arduino library for DHT11, DHT22, etc Temperature & Humidity Sensors [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/DHT-sensor-library
+[105] How to upgrade from ArduinoJson 6 to 7 - YouTube [online]. [vid. 2024-07-21]. Dostupné z: https://www.youtube.com/watch?v=eE6_77YIkzI
 
-[106] adafruit/Adafruit-GFX-Library: Adafruit GFX graphics core Arduino library, this is the „core" class that all our other graphics libraries derive from. GitHub [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/Adafruit-GFX-Library
+[106] adafruit/Adafruit_Sensor: Common sensor library [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/Adafruit_Sensor
 
-[107] adafruit/Adafruit_SSD1306: Arduino library for SSD1306 monochrome 128x64 and 128x32 OLEDs. GitHub [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/Adafruit_SSD1306
+[107] adafruit/DHT-sensor-library: Arduino library for DHT11, DHT22, etc Temperature & Humidity Sensors [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/DHT-sensor-library
 
-[108] Overview | DHT11, DHT22 and AM2302 Sensors | Adafruit Learning System [online]. [vid. 2025-03-24]. Dostupné z: https://learn.adafruit.com/dht
+[108] adafruit/Adafruit-GFX-Library: Adafruit GFX graphics core Arduino library, this is the „core" class that all our other graphics libraries derive from. GitHub [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/Adafruit-GFX-Library
 
-[109] GM electronic | Modul teploměru a vlhkoměru s DHT11. GME [online]. [vid. 2025-03-24]. Dostupné z: https://www.gme.cz/v/1508421/modul-teplomeru-a-vlhkomeru-s-dht11
+[109] adafruit/Adafruit_SSD1306: Arduino library for SSD1306 monochrome 128x64 and 128x32 OLEDs. GitHub [online]. [vid. 2025-03-24]. Dostupné z: https://github.com/adafruit/Adafruit_SSD1306
 
-[110] OLED displej 0,96 palce. GME [online]. nedatováno [vid. 2025-03-24]. Dostupné z: https://img.gme.cz/files/eshop_data/eshop_data/9/772-153/dsh.772-153.1.pdf
+[110] Overview | DHT11, DHT22 and AM2302 Sensors | Adafruit Learning System [online]. [vid. 2025-03-24]. Dostupné z: https://learn.adafruit.com/dht
 
-[111] SG-90 servomotor 9g. GME [online]. [vid. 2025-03-28]. Dostupné z: https://www.gme.cz/v/1497888/sg-90-servomotor-9g
+[111] GM electronic | Modul teploměru a vlhkoměru s DHT11. GME [online]. [vid. 2025-03-24]. Dostupné z: https://www.gme.cz/v/1508421/modul-teplomeru-a-vlhkomeru-s-dht11
 
-[112] Arduino/libraries/Servo/src at master · esp8266/Arduino. GitHub [online]. [vid. 2025-03-28]. Dostupné z: https://github.com/esp8266/Arduino/tree/master/libraries/Servo/src
+[112] OLED displej 0,96 palce. GME [online]. nedatováno [vid. 2025-03-24]. Dostupné z: https://img.gme.cz/files/eshop_data/eshop_data/9/772-153/dsh.772-153.1.pdf
 
-[113] Low-code programming for event-driven applications : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/
+[113] SG-90 servomotor 9g. GME [online]. [vid. 2025-03-28]. Dostupné z: https://www.gme.cz/v/1497888/sg-90-servomotor-9g
 
-[114] Running Node-RED locally : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/getting-started/local
+[114] Arduino/libraries/Servo/src at master · esp8266/Arduino. GitHub [online]. [vid. 2025-03-28]. Dostupné z: https://github.com/esp8266/Arduino/tree/master/libraries/Servo/src
 
-[115] Getting Started : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/getting-started/
+[115] Low-code programming for event-driven applications : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/
 
-[116] iot/Documentation/README.md at main · dotnet/iot · GitHub. GitHub [online]. [vid. 2025-03-28]. Dostupné z: https://github.com/dotnet/iot/blob/main/Documentation/README.md
+[116] Running Node-RED locally : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/getting-started/local
 
-[117] NANOFRAMEWORK. GitHub - nanoframework/Home: :house: The landing page for .NET nanoFramework repositories. GitHub [online]. [vid. 2025-03-28]. Dostupné z: https://github.com/nanoframework/Home
+[117] Getting Started : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/getting-started/
 
-[118] MICROSOFT IOT DEVELOPERS a LAURENT ELLERBACH. IoT Show: An introduction to .NET nanoFramework - YouTube. Youtube [online]. [vid. 2025-03-28]. Dostupné z: https://www.youtube.com/watch?v=TLYqRdmmj5k
+[118] iot/Documentation/README.md at main · dotnet/iot · GitHub. GitHub [online]. [vid. 2025-03-28]. Dostupné z: https://github.com/dotnet/iot/blob/main/Documentation/README.md
 
-[119] Packaging : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/creating-nodes/packaging
+[119] NANOFRAMEWORK. GitHub - nanoframework/Home: :house: The landing page for .NET nanoFramework repositories. GitHub [online]. [vid. 2025-03-28]. Dostupné z: https://github.com/nanoframework/Home
 
-[120] Creating your first node : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/creating-nodes/first-node
+[120] MICROSOFT IOT DEVELOPERS a LAURENT ELLERBACH. IoT Show: An introduction to .NET nanoFramework - YouTube. Youtube [online]. [vid. 2025-03-28]. Dostupné z: https://www.youtube.com/watch?v=TLYqRdmmj5k
 
-[121] API | Developer Documentation | SmartThings [online]. [vid. 2025-03-29]. Dostupné z: https://developer.smartthings.com/docs/api/public
+[121] Packaging : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/creating-nodes/packaging
 
-[122] 32F429IDISCOVERY - Discovery kit with STM32F429ZI MCU * New order code STM32F429I-DISC1 (replaces STM32F429I-DISCO) - STMicroelectronics [online]. [vid. 2025-03-29]. Dostupné z: https://www.st.com/en/evaluation-tools/32f429idiscovery.html
+[122] Creating your first node : Node-RED. Node-RED [online]. [vid. 2025-03-28]. Dostupné z: https://nodered.org/docs/creating-nodes/first-node
 
-[123] NUCLEO-H755ZI-Q - STM32 Nucleo-144 development board with STM32H755ZI MCU, SMPS, supports Arduino, ST Zio and morpho connectivity - STMicroelectronics [online]. [vid. 2025-03-29]. Dostupné z: https://www.st.com/en/evaluation-tools/nucleo-h755zi-q.html
+[123] API | Developer Documentation | SmartThings [online]. [vid. 2025-03-29]. Dostupné z: https://developer.smartthings.com/docs/api/public
 
-[124] ESP8266 Pinout Reference: How To Use ESP8266 GPIO Pins [online]. [vid. 2025-03-19]. Dostupné z: https://electropeak.com/learn/esp8266-pinout-reference-how-to-use-esp8266-gpio-pins/
+[124] 32F429IDISCOVERY - Discovery kit with STM32F429ZI MCU * New order code STM32F429I-DISC1 (replaces STM32F429I-DISCO) - STMicroelectronics [online]. [vid. 2025-03-29]. Dostupné z: https://www.st.com/en/evaluation-tools/32f429idiscovery.html
+
+[125] NUCLEO-H755ZI-Q - STM32 Nucleo-144 development board with STM32H755ZI MCU, SMPS, supports Arduino, ST Zio and morpho connectivity - STMicroelectronics [online]. [vid. 2025-03-29]. Dostupné z: https://www.st.com/en/evaluation-tools/nucleo-h755zi-q.html
+
+[126] ESP8266 Pinout Reference: How To Use ESP8266 GPIO Pins [online]. [vid. 2025-03-19]. Dostupné z: https://electropeak.com/learn/esp8266-pinout-reference-how-to-use-esp8266-gpio-pins/
 
 
 # 
 
 # Přílohy
 
-Příloha 1 Piny NodeMCU [123]&ensp;i
+Příloha 1 Piny NodeMCU [124]&ensp;i
 
-Příloha 2 Schéma zapojení ESP8266EX [77]&ensp;ii
+Příloha 2 Schéma zapojení ESP8266EX [78]&ensp;ii
 
 Příloha 3 Diagram tříd LoopCompiler&ensp;iii
 
 Příloha 4 Tabulka stavů konečného automatu&ensp;iv
 
+Příloha 5 zdrojový kód MainNode ………………………CD složka prakticka_cast\MainNode
+
+Příloha 6 zdrojový kód NodeEmulator ………………CD složka prakticka_cast\NodeEmulator
+
+Příloha 7 zdrojový kód uzlů ……………………………………CD složka prakticka_cast\ESP
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---img---
 
-Příloha 1 Piny NodeMCU [124]
+Příloha 1 Piny NodeMCU [126]
 
 ---img---
 
