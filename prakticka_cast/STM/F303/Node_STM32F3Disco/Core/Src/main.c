@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "../../../../../Shared/SharedMain.h"
+#include "../../../../../Shared/SharedMain.hpp"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

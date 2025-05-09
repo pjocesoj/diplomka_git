@@ -452,5 +452,6 @@ FodyWeavers.xsd
 *.uvlog
 *.uvmpw
 *.hex
+*.dbgconf.*
 
 prakticka_cast/STM/F303/Node_STM32F3Disco/NODE_STM32F3_disco Debug.launch

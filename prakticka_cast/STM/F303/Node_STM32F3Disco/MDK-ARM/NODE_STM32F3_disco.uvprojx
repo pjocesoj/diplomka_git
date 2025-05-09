@@ -10,8 +10,8 @@
       <TargetName>NODE_STM32F3_disco</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
+      <pCCUsed>6230000::V6.23::ARMCLANG</pCCUsed>
+      <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F303VCTx</Device>
@@ -185,6 +185,8 @@
             <uocXRam>0</uocXRam>
             <RvdsVP>2</RvdsVP>
             <RvdsMve>0</RvdsMve>
+            <RvdsCdeCp>0</RvdsCdeCp>
+            <nBranchProt>0</nBranchProt>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -328,9 +330,9 @@
             <uGnu>1</uGnu>
             <useXO>0</useXO>
             <v6Lang>5</v6Lang>
-            <v6LangP>3</v6LangP>
-            <vShortEn>1</vShortEn>
-            <vShortWch>1</vShortWch>
+            <v6LangP>8</v6LangP>
+            <vShortEn>0</vShortEn>
+            <vShortWch>0</vShortWch>
             <v6Lto>0</v6Lto>
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
@@ -351,7 +353,7 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
-            <uClangAs>0</uClangAs>
+            <ClangAsOpt>4</ClangAsOpt>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -598,14 +600,24 @@
           <GroupName>Shared</GroupName>
           <Files>
             <File>
-              <FileName>SharedMain.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Shared\SharedMain.c</FilePath>
-            </File>
-            <File>
               <FileName>UsbHandler.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Shared\UsbHandler.c</FilePath>
+            </File>
+            <File>
+              <FileName>SharedMain.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\Shared\SharedMain.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Abstract_test</GroupName>
+          <Files>
+            <File>
+              <FileName>a__Serializer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\Shared\a__Serializer.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -628,5 +640,14 @@
     </components>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>NODE_STM32F3_disco</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>
