@@ -436,4 +436,21 @@ FodyWeavers.xsd
 *.cyclo
 *.mk
 
+# MDK-ARM (Keil) files
+*.axf
+*.uvgui.*
+*.uvguix.*
+*.bak
+*.lst
+*.crf
+*.htm
+*.map
+*.dep
+*.lnp
+*.plg
+*.sct
+*.uvlog
+*.uvmpw
+*.hex
+
 prakticka_cast/STM/F303/Node_STM32F3Disco/NODE_STM32F3_disco Debug.launch
