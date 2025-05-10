@@ -17,7 +17,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "main.hpp"
 #include "i2c.h"
 #include "spi.h"
 #include "usb_device.h"
@@ -93,7 +93,7 @@ int main(void)
   MX_SPI1_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-
+	setup();
   /* USER CODE END 2 */
 
   /* Infinite loop */
