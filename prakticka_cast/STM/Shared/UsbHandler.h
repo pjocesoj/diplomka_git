@@ -3,9 +3,21 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include "../F303/Node_STM32F3Disco/USB_DEVICE/App/usbd_cdc_if.h"
 
-void USB_CDC_RxHandler(uint8_t* Buf, uint32_t Len);
+  void USB_CDC_RxHandler(uint8_t *Buf, uint32_t Len);
+  void USB_CDC_Respond(uint8_t *Buf, uint32_t Len);
+
+  void USB_SetCustomHandler(void (*handler)(uint8_t *, uint32_t));
+
+#ifdef __cplusplus
+}
+#endif
 
 /*
 usbd_Cdc_ it.c line 259
