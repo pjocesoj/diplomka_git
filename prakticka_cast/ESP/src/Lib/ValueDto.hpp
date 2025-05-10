@@ -36,7 +36,7 @@ public:
     }
     else
     {
-      throw std::runtime_error("Unsupported type");
+      //throw std::runtime_error("Unsupported type");
     }
   }
 
