@@ -40,12 +40,12 @@
                     </Grid.RowDefinitions>
 
                     <ToolBar Grid.Row="0">
-                        <!--
-                        <Button Content="save"/>
-                        <Button Content="load"/>
-                        -->
                         <Button Content="compile"
                                 Command="{Binding CompileFlowCommand}"/>
+                        <Button Content="save"
+                                Command="{Binding SaveFlowCommand}"/>
+                        <Button Content="load"
+                                Command="{Binding LoadFlowCommand}"/>
                     </ToolBar>
 
                     <TextBox Grid.Row="1"
