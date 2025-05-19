@@ -1,0 +1,3 @@
+float T=dht.getDhtValuesNew.temp
+float H=dht.getDhtValuesNew.humid
+servo.setAngle.angle=T*5
