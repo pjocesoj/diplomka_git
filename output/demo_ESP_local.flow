@@ -1,0 +1,4 @@
+float T=dht.getDhtValuesNew.temp
+float H=dht.getDhtValuesNew.humid
+servo.setAngle.angle=H*2
+local.setValues.C=(local.getValuesG.a<2)&local.getValuesG.d
