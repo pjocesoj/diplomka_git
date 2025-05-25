@@ -1,6 +1,7 @@
 using MainNode.Communication.Dto;
 using MainNode.Communication.Enums;
 using System.Net;
+using System.Reflection;
 using System.Text.Json;
 
 namespace NodeEmulator
@@ -10,6 +11,13 @@ namespace NodeEmulator
         public Form1()
         {
             InitializeComponent();
+
+            var assembly = Assembly.GetExecutingAssembly();
+            using (Stream stream = assembly.GetManifestResourceStream("NodeEmulator.favicon.ico"))
+            {
+                if (stream != null)
+                    this.Icon = new Icon(stream);
+            }
         }
 
         List<Endpoint> _endpoints = new List<Endpoint>();
