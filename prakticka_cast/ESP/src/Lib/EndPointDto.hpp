@@ -1,8 +1,8 @@
 #ifndef EndPointDto_H_
 #define EndPointDto_H_
 
-#include "Enums.h"
-#include "ValueDto.h"
+#include "Enums.hpp"
+#include "ValueDto.hpp"
 #include <vector>
 #include <optional> // optional = nullable
 

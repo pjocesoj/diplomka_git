@@ -1,4 +1,4 @@
-#include "DhtWrapper.h"
+#include "DhtWrapper.hpp"
 
 DhtWrapper::DhtWrapper(uint8_t pin, uint8_t type)
 {

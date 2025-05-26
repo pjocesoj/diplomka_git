@@ -1,7 +1,7 @@
 #ifndef SHARED_HTTP_H_
 #define SHARED_HTTP_H_
 
-#include "EndPointDto.h"
+#include "EndPointDto.hpp"
 
 //void getInfo();
 //void handleRootPath();

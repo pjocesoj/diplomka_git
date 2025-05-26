@@ -1,4 +1,4 @@
-#include "../Serializer.h"
+#include "../Serializer.hpp"
 #include <ArduinoJson.h>
 
 void printJSON(JsonDocument &doc)
