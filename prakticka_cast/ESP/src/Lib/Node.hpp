@@ -1,9 +1,9 @@
-#define NODE2
+#define NODE1
 
 #ifndef NODE_H_
 #define NODE_H_
 
-#include "EndPointDto.h"
+#include "EndPointDto.hpp"
 
 /**
  * @brief inicializace nodu (pridani endpointu)

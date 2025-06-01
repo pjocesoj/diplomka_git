@@ -1,14 +1,14 @@
-#include "../Lib/Node.h"
+#include "../Lib/Node.hpp"
 
 #include "HardwareSerial.h"
-#include "../Lib/EndPointDto.h"
-#include "../../global.h"
-#include "../Lib/SharedHttpEndpoints.h"
-#include "../../helpers.h"
-#include "../Abstract/Deserializer.h"
-#include "../Abstract/CommunicationHandler.h"
+#include "../Lib/EndPointDto.hpp"
+#include "../../global.hpp"
+#include "../Lib/SharedHttpEndpoints.hpp"
+#include "../../helpers.hpp"
+#include "../Abstract/Deserializer.hpp"
+#include "../Abstract/CommunicationHandler.hpp"
 
-#include "../HW/Servo/ServoWrapper.h"
+#include "../HW/Servo/ServoWrapper.hpp"
 
 #ifdef NODE2
 

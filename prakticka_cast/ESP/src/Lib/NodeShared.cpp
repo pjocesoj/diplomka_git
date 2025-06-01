@@ -1,6 +1,6 @@
-#include "Node.h"
-#include "../Abstract/Serializer.h"
-#include "../Abstract/Logger.h"
+#include "Node.hpp"
+#include "../Abstract/Serializer.hpp"
+#include "../Abstract/Logger.hpp"
 
 void printEndpoint(EndPointDto *ep)
 {

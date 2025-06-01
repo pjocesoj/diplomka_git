@@ -1,7 +1,7 @@
 #ifndef Deserializer_H_
 #define Deserializer_H_
 
-#include "../Lib/EndPointDto.h"
+#include "../Lib/EndPointDto.hpp"
 #include "../Lib/ValueDto.hpp"
 
 /**

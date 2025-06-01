@@ -1,7 +1,7 @@
 #ifndef VALUE_H_
 #define VALUE_H_
 
-#include "enums.h"
+#include "enums.hpp"
 #include <type_traits>
 #include <stdexcept>
 

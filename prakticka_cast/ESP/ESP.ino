@@ -2,13 +2,13 @@
 #include "ESP8266HTTPClient.h"
 #include "ESP8266WebServer.h" //https://github.com/esp8266/ESPWebServer/blob/master/src/ESP8266WebServer.h
 #include <ArduinoJson.h>
-#include "secret.h" //git update-index --assume-unchanged secret.h
-#include "helpers.h"
-#include "global.h" //global var
-#include "src/Lib/SharedHttpEndpoints.h"
-#include "src/Lib/Node.h"
+#include "secret.hpp" //git update-index --assume-unchanged secret.h
+#include "helpers.hpp"
+#include "global.hpp" //global var
+#include "src/Lib/SharedHttpEndpoints.hpp"
+#include "src/Lib/Node.hpp"
 
-#include "src/Abstract/CommunicationHandler.h"
+#include "src/Abstract/CommunicationHandler.hpp"
 
 
 //ESP8266WebServer server(80);
