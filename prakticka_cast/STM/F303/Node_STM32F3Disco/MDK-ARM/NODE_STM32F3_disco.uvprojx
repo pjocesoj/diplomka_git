@@ -622,6 +622,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Abstract</GroupName>
+          <Files>
+            <File>
+              <FileName>Serializer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\ESP\src\Abstract\STM\Serializer.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>

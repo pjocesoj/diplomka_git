@@ -3,6 +3,7 @@
         "optional": "cpp",
         "type_traits": "cpp",
         "string": "cpp",
-        "cstdio": "cpp"
+        "cstdio": "cpp",
+        "cstring": "cpp"
     }
 }

@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <cstring>
-#include "../../ESP/src/Abstract/Serializer.h"
+#include "../../ESP/src/Abstract/Serializer.hpp"
 
 template <typename T>
 void Serialize(ValueDto<T>* value, char* buffer, size_t bufferSize) {
@@ -13,7 +13,7 @@ void Serialize(ValueDto<T>* value, char* buffer, size_t bufferSize) {
         "{ \"Type\": \"%d\", \"Name\": \"%s\", \"Value\": \"%d\" }",
         value->GetType(), // Assuming GetType() returns a string or can be converted
         value->Name,     // Assuming Name is a string
-				value->Value
+		value->Value
         //std::to_string(value->Value).c_str() // Convert Value to string
     );
 
