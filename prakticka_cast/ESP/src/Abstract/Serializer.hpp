@@ -1,8 +1,8 @@
 #ifndef Serializer_H_
 #define Serializer_H_
 
-#include "../Lib/EndPointDto.h"
-#include "../Lib/ValueDto.h"
+#include "../Lib/EndPointDto.hpp"
+#include "../Lib/ValueDto.hpp"
 
 //jelikož se každý soubor kompiluje samostatně, musí být datový typ známý předem (generika nejde vytáhnout do cpp)
 //https://www.learncpp.com/cpp-tutorial/template-classes/

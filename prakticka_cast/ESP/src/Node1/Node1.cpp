@@ -1,14 +1,14 @@
-#include "../Lib/Node.h"
+#include "../Lib/Node.hpp"
 
 #include "HardwareSerial.h"
-#include "../Lib/EndPointDto.h"
-#include "../../global.h"
-#include "../Lib/SharedHttpEndpoints.h"
-#include "../../helpers.h"
-#include "../Abstract/CommunicationHandler.h"
+#include "../Lib/EndPointDto.hpp"
+#include "../../global.hpp"
+#include "../Lib/SharedHttpEndpoints.hpp"
+#include "../../helpers.hpp"
+#include "../Abstract/CommunicationHandler.hpp"
 
-#include "../HW/OLED/OLED.h"
-#include "../HW/DHT/DhtWrapper.h"
+#include "../HW/OLED/OLED.hpp"
+#include "../HW/DHT/DhtWrapper.hpp"
 
 #ifdef NODE1
 

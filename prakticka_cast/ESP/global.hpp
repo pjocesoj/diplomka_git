@@ -3,8 +3,8 @@
 
 #include "ESP8266WebServer.h"
 #include <vector>
-#include "src/Lib/EndPointDto.h"
-#include "src/Abstract/CommunicationHandler.h"
+#include "src/Lib/EndPointDto.hpp"
+#include "src/Abstract/CommunicationHandler.hpp"
 
 //extern rika compileru ze definuji jinde
 
